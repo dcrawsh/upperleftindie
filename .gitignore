@@ -4,6 +4,7 @@ out/
 
 .env
 .env*.local
+.enc.local
 
 npm-debug.log*
 yarn-debug.log*
