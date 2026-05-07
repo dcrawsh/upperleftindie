@@ -103,5 +103,104 @@ export const artists: Artist[] = [
         "url": "https://timetheft.bandcamp.com/track/ponyboy"
       }
     ]
+  },
+  {
+    "name": "Bonus Room",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://bonusroomband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0035689173_10.jpg",
+    "bio": "Upcoming Shows - \"BUNK\" EP Release Show!!! November 7th @ Alberta Street Pub with Animal Eyes and Ghost Frog BEN-CHRIS-DERRIN-ERIK-WES Feel good band of the summer. Portland, Oregon ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://bonusroomband.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/bonusroom_band/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Blessed Be",
+        "type": "track",
+        "url": "https://bonusroomband.bandcamp.com/track/blessed-be"
+      },
+      {
+        "title": "Riot Gear",
+        "type": "album",
+        "url": "https://bonusroomband.bandcamp.com/album/riot-gear"
+      },
+      {
+        "title": "Use 2",
+        "type": "track",
+        "url": "https://bonusroomband.bandcamp.com/track/use-2"
+      },
+      {
+        "title": "Phoenix",
+        "type": "track",
+        "url": "https://bonusroomband.bandcamp.com/track/phoenix"
+      },
+      {
+        "title": "Trouble (Uh-Oh)",
+        "type": "track",
+        "url": "https://bonusroomband.bandcamp.com/track/trouble-uh-oh"
+      }
+    ]
+  },
+  {
+    "name": "The Waysides",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://thewaysidesmusic.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0038268184_10.jpg",
+    "bio": "The Waysides write visceral, jangle guitar-infused indie rock that blends lush dream-pop vocals with the raw spirit and DIY ethos of punk. Their sophomore album, Elsewhere, explores the journey through loss and grief, delivering a poignant mix of sorrow, acceptance, and hope, all wrapped in their evocative and electrifying sound. ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thewaysidesmusic.bandcamp.com/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/itsthewaysides"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/the.waysides/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "The Witch (Alternate Version)",
+        "type": "track",
+        "url": "https://thewaysidesmusic.bandcamp.com/track/the-witch-alternate-version"
+      },
+      {
+        "title": "The Witch",
+        "type": "track",
+        "url": "https://thewaysidesmusic.bandcamp.com/track/the-witch"
+      },
+      {
+        "title": "Only Light",
+        "type": "track",
+        "url": "https://thewaysidesmusic.bandcamp.com/track/only-light"
+      },
+      {
+        "title": "Elsewhere",
+        "type": "album",
+        "url": "https://thewaysidesmusic.bandcamp.com/album/elsewhere"
+      },
+      {
+        "title": "Golden One",
+        "type": "track",
+        "url": "https://thewaysidesmusic.bandcamp.com/track/golden-one"
+      },
+      {
+        "title": "Surfacing",
+        "type": "track",
+        "url": "https://thewaysidesmusic.bandcamp.com/track/surfacing"
+      }
+    ]
   }
 ];
