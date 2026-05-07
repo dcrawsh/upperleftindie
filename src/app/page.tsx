@@ -47,6 +47,34 @@ export default function Home() {
             title="Spotify Playlist Embed"
           ></iframe>
         </div>
+        <section className="mt-10 w-full border-t border-ink/10 pt-8">
+          <div className="flex flex-col gap-5 rounded-md border border-ink/10 bg-paper/75 p-5 shadow-soft sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-2">
+              <Image
+                src="/bandcamp-logo.svg"
+                alt="Bandcamp"
+                width={127}
+                height={20}
+                className="h-5 w-auto"
+              />
+              <h2 className="text-xl font-bold text-ink">
+                Support the artists you hear here
+              </h2>
+              <p className="max-w-xl text-sm leading-6 text-ink/65">
+                Listening helps. Buying a download, record, tape, shirt, or
+                weird little run of stickers helps even more.
+              </p>
+            </div>
+            <a
+              href="https://bandcamp.com/discover"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-ink px-6 py-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay"
+            >
+              Dig on Bandcamp
+            </a>
+          </div>
+        </section>
       </div>
     </section>
   );

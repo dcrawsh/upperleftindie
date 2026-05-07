@@ -9,6 +9,7 @@ type FormState = {
   city: string;
   region: string;
   songLink: string;
+  bandCampLink: string;
   socialLink: string;
   notes: string;
   subscribeToNewsletter: boolean;
@@ -21,10 +22,14 @@ const initialFormState: FormState = {
   city: "",
   region: "",
   songLink: "",
+  bandCampLink: "",
   socialLink: "",
   notes: "",
   subscribeToNewsletter: true,
 };
+
+const playlistUrl =
+  "https://open.spotify.com/playlist/3LTI227By7Wt7hGs3mz5hF?si=b0900f7372be4492";
 
 const regionOptions = [
   { label: "Oregon", value: "oregon", state: "OR", country: "US" },
@@ -48,6 +53,7 @@ function getLocationFields(city: string, region: string) {
 export default function SubmissionForm() {
   const [formData, setFormData] = useState(initialFormState);
   const [status, setStatus] = useState("");
+  const [showPlaylistNudge, setShowPlaylistNudge] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [songLinkError, setSongLinkError] = useState("");
 
@@ -95,6 +101,7 @@ export default function SubmissionForm() {
       return;
     }
     setStatus("Sending submission...");
+    setShowPlaylistNudge(false);
     setIsSubmitting(true);
 
     const bodyText = `Artist: ${formData.artistName}
@@ -106,6 +113,7 @@ Region: ${
       "Not provided"
     }
 Song link: ${formData.songLink}
+Bandcamp link: ${formData.bandCampLink || "Not provided"}
 Social link: ${formData.socialLink || "Not provided"}
 
 Notes:
@@ -148,6 +156,9 @@ ${formData.notes || "Not provided"}`;
               ],
               fields: {
                 ...locationFields,
+                ...(formData.bandCampLink.trim()
+                  ? { band_camp: formData.bandCampLink.trim() }
+                  : {}),
                 source_form: "submission-form",
                 role: "artist",
               },
@@ -172,9 +183,11 @@ ${formData.notes || "Not provided"}`;
           ? "Submission sent. We’re excited to give your track a listen and will get to it as soon as we can. Please allow up to two weeks."
           : "Submission sent. We’re excited to give your track a listen and will get to it as soon as we can. Please allow up to two weeks. Newsletter signup could not be completed."
       );
+      setShowPlaylistNudge(true);
       setFormData(initialFormState);
     } catch (error) {
       console.error(error);
+      setShowPlaylistNudge(false);
       setStatus(
         error instanceof Error
           ? error.message
@@ -280,6 +293,18 @@ ${formData.notes || "Not provided"}`;
       </label>
 
       <label className="block space-y-2 text-sm font-bold text-ink/70">
+        Bandcamp link
+        <input
+          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
+          type="url"
+          name="bandCampLink"
+          value={formData.bandCampLink}
+          onChange={handleChange}
+          placeholder="https://yourband.bandcamp.com"
+        />
+      </label>
+
+      <label className="block space-y-2 text-sm font-bold text-ink/70">
         Social or website
         <input
           className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
@@ -330,6 +355,20 @@ ${formData.notes || "Not provided"}`;
       </button>
 
       {status ? <p className="text-sm font-bold text-ink/70">{status}</p> : null}
+      {showPlaylistNudge ? (
+        <p className="text-sm text-ink/65">
+          If you have a minute, please save the playlist on Spotify. It helps the
+          artists you hear here travel a little farther.{" "}
+          <a
+            href={playlistUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold text-ink underline decoration-clay underline-offset-4"
+          >
+            Save Upper Left Indie
+          </a>
+        </p>
+      ) : null}
     </form>
   );
 }
