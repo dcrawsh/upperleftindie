@@ -12,6 +12,7 @@ type FormState = {
   bandCampLink: string;
   socialLink: string;
   notes: string;
+  artistPageConsent: boolean;
   subscribeToNewsletter: boolean;
 };
 
@@ -25,6 +26,7 @@ const initialFormState: FormState = {
   bandCampLink: "",
   socialLink: "",
   notes: "",
+  artistPageConsent: false,
   subscribeToNewsletter: true,
 };
 
@@ -115,6 +117,7 @@ Region: ${
 Song link: ${formData.songLink}
 Bandcamp link: ${formData.bandCampLink || "Not provided"}
 Social link: ${formData.socialLink || "Not provided"}
+Artist page permission: ${formData.artistPageConsent ? "Yes" : "No"}
 
 Notes:
 ${formData.notes || "Not provided"}`;
@@ -325,6 +328,25 @@ ${formData.notes || "Not provided"}`;
           onChange={handleChange}
           placeholder="Tell us anything useful about the artist, scene, release, or context."
         />
+      </label>
+
+      <label className="flex items-start gap-3 rounded-md border border-ink/10 bg-white/70 p-4 text-sm text-ink/70">
+        <input
+          className="mt-1 h-4 w-4 rounded border-ink/20 accent-clay"
+          type="checkbox"
+          name="artistPageConsent"
+          checked={formData.artistPageConsent}
+          onChange={handleChange}
+        />
+        <span>
+          <span className="block font-bold">
+            I’m okay with Upper Left Indie featuring this artist on the site.
+          </span>
+          <span className="mt-1 block text-xs text-ink/55">
+            This may include public Bandcamp details, images, music links, and
+            related social or website links.
+          </span>
+        </span>
       </label>
 
       <label className="flex items-start gap-3 rounded-md border border-ink/10 bg-white/70 p-4 text-sm text-ink/70">

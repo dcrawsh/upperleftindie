@@ -6,6 +6,7 @@
   "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "next dev",
+    "generate:bandcamp-artists": "node scripts/update-bandcamp-artists.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
