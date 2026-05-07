@@ -23,45 +23,43 @@ export type Artist = {
 
 export const artists: Artist[] = [
   {
-    "name": "Candy Cigarettes",
+    "name": "Killmer",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://candycigsmusic.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0041258213_10.jpg",
-    "bio": "Lane Mueller.",
+    "bandcampUrl": "https://killmer.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0035077765_10.jpg",
+    "bio": "Killmer is a 3-piece rock band that packages the intensity of punk rock, the soul of blues, and the loud riffs of rock & roll into their unique sound. With dual lead vocalists, they create rich harmonies over energetic rhythmic grooves. For fans of White Denim, Ty Segall, King Gizzard and the Lizard Wizard, and Wand. ... more",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://candycigsmusic.bandcamp.com/"
-      },
-      {
-        "label": "CandyCigs.com",
-        "url": "http://CandyCigs.com"
-      },
-      {
-        "label": "Facebook",
-        "url": "http://facebook.com/candycigs"
-      },
-      {
-        "label": "Instagram",
-        "url": "https://www.instagram.com/candy_cigs/"
+        "url": "https://killmer.bandcamp.com/"
       }
     ],
     "releases": [
       {
-        "title": "Horse Lungs",
+        "title": "primo!",
         "type": "album",
-        "url": "https://candycigsmusic.bandcamp.com/album/horse-lungs"
+        "url": "https://killmer.bandcamp.com/album/primo"
       },
       {
-        "title": "Candy Cigarettes",
-        "type": "album",
-        "url": "https://candycigsmusic.bandcamp.com/album/candy-cigarettes"
-      },
-      {
-        "title": "Stockholm",
+        "title": "Permafrown",
         "type": "track",
-        "url": "https://candycigsmusic.bandcamp.com/track/stockholm"
+        "url": "https://killmer.bandcamp.com/track/permafrown-2"
+      },
+      {
+        "title": "VHS",
+        "type": "track",
+        "url": "https://killmer.bandcamp.com/track/vhs"
+      },
+      {
+        "title": "Lost and Profound",
+        "type": "album",
+        "url": "https://killmer.bandcamp.com/album/lost-and-profound"
+      },
+      {
+        "title": "Permafrown (Demo)",
+        "type": "track",
+        "url": "https://killmer.bandcamp.com/track/permafrown-demo"
       }
     ]
   },
