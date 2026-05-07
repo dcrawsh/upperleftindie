@@ -1,6 +1,16 @@
 export const metadata = {
-  title: "Blog | Upper Left Indie",
-  description: "Upper Left Indie blog coming soon.",
+  title: "Northwest Music Notes",
+  description:
+    "Notes, interviews, and discoveries from Upper Left Indie, a local Northwest independent music curator.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Northwest Music Notes | Upper Left Indie",
+    description:
+      "Local Northwest music notes, interviews, and discoveries from Upper Left Indie.",
+    url: "/blog",
+  },
 };
 
 export default function BlogPage() {

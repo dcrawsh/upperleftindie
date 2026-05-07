@@ -1,8 +1,18 @@
 import SubmissionForm from "../components/SubmissionForm";
 
 export const metadata = {
-  title: "Submit Music | Upper Left Indie",
-  description: "Submit a Northwest artist or track for Upper Left Indie consideration.",
+  title: "Submit Northwest Music",
+  description:
+    "Submit music from a local Northwest independent artist for Upper Left Indie playlist consideration.",
+  alternates: {
+    canonical: "/submit",
+  },
+  openGraph: {
+    title: "Submit Northwest Music | Upper Left Indie",
+    description:
+      "Share a local Northwest independent artist, song, or project that deserves more ears.",
+    url: "/submit",
+  },
 };
 
 export default function SubmitPage() {

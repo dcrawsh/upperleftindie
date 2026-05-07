@@ -16,7 +16,8 @@ export default function Home() {
         />
         <h1 className="sr-only">Upper Left Indie</h1>
         <p className="mb-8 text-center text-2xl md:text-3xl font-semibold text-ink/90">
-          A Spotify playlist for underserved, under-heard Northwest artists.
+          A local Northwest music curator supporting underserved and under-heard
+          independent artists.
         </p>
         <div className="mb-8 flex flex-col gap-3 w-full sm:flex-row sm:justify-center">
           <Link
