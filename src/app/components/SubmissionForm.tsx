@@ -32,6 +32,8 @@ const initialFormState: FormState = {
 
 const playlistUrl =
   "https://open.spotify.com/playlist/3LTI227By7Wt7hGs3mz5hF?si=b0900f7372be4492";
+const instagramUrl = "https://www.instagram.com/upperleftindie/";
+const emailServiceTemporarilyDown = true;
 
 const regionOptions = [
   { label: "Oregon", value: "oregon", state: "OR", country: "US" },
@@ -95,6 +97,14 @@ export default function SubmissionForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (emailServiceTemporarilyDown) {
+      setStatus(
+        "Email submissions are temporarily down. Please send your track through Instagram for now."
+      );
+      return;
+    }
+
     // Validate Spotify link before submitting
     if (
       !/^https?:\/\/(open\.)?spotify\.com\//.test(formData.songLink.trim())
@@ -206,6 +216,26 @@ ${formData.notes || "Not provided"}`;
       onSubmit={handleSubmit}
       className="space-y-5 rounded-md border border-ink/10 bg-paper p-6 shadow-soft md:p-8"
     >
+      {emailServiceTemporarilyDown ? (
+        <div className="rounded-md border border-clay/25 bg-clay/10 p-4 text-sm leading-6 text-ink/75">
+          <p className="font-bold text-ink">
+            Email submissions are temporarily down.
+          </p>
+          <p className="mt-1">
+            Please submit your music through Instagram while we get the email
+            service back online.
+          </p>
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay"
+          >
+            Submit on Instagram
+          </a>
+        </div>
+      ) : null}
+
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="space-y-2 text-sm font-bold text-ink/70">
           Artist name
@@ -370,10 +400,14 @@ ${formData.notes || "Not provided"}`;
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || emailServiceTemporarilyDown}
         className="w-full rounded-full bg-ink px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay disabled:cursor-not-allowed disabled:bg-ink/45"
       >
-        {isSubmitting ? "Sending..." : "Submit Music"}
+        {emailServiceTemporarilyDown
+          ? "Submit on Instagram for Now"
+          : isSubmitting
+            ? "Sending..."
+            : "Submit Music"}
       </button>
 
       {status ? <p className="text-sm font-bold text-ink/70">{status}</p> : null}
