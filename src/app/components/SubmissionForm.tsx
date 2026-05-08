@@ -33,7 +33,7 @@ const initialFormState: FormState = {
 const playlistUrl =
   "https://open.spotify.com/playlist/3LTI227By7Wt7hGs3mz5hF?si=b0900f7372be4492";
 const instagramUrl = "https://www.instagram.com/upperleftindie/";
-const emailServiceTemporarilyDown = true;
+const emailServiceTemporarilyDown = false;
 
 const regionOptions = [
   { label: "Oregon", value: "oregon", state: "OR", country: "US" },

@@ -8,10 +8,23 @@ export async function POST(req: NextRequest) {
     const emailUser = process.env.EMAIL_USER;
     const emailPass = process.env.EMAIL_PASS;
     const recipientEmail = process.env.RECIPIENT_EMAIL;
+    const emailHost = process.env.EMAIL_HOST ?? "mail.privateemail.com";
+    const emailPort = Number(process.env.EMAIL_PORT ?? "465");
+    const emailSecure =
+      process.env.EMAIL_SECURE !== undefined
+        ? process.env.EMAIL_SECURE.toLowerCase() !== "false"
+        : emailPort === 465;
 
     if (!emailUser || !emailPass || !recipientEmail) {
       return Response.json(
         { error: "Email service is not configured" },
+        { status: 500 }
+      );
+    }
+
+    if (!Number.isInteger(emailPort)) {
+      return Response.json(
+        { error: "Email service port is invalid" },
         { status: 500 }
       );
     }
@@ -23,7 +36,9 @@ export async function POST(req: NextRequest) {
     const bodyText = (form.get("bodyText") as string) ?? "";
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: emailHost,
+      port: emailPort,
+      secure: emailSecure,
       auth: {
         user: emailUser,
         pass: emailPass,
