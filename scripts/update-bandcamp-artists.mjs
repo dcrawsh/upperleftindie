@@ -53,6 +53,35 @@ function getMetaContent(html, property) {
   return decodeEntities(html.match(pattern)?.[1] || "");
 }
 
+function getJsonLdValues(html) {
+  const values = [];
+  const scriptMatches = html.matchAll(
+    /<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
+  );
+
+  for (const match of scriptMatches) {
+    try {
+      values.push(JSON.parse(decodeEntities(match[1]).trim()));
+    } catch {
+      // Bandcamp has changed this payload before; keep falling through to regexes.
+    }
+  }
+
+  return values;
+}
+
+function getNestedName(value) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) {
+    return value.map(getNestedName).find(Boolean) || "";
+  }
+  if (typeof value === "object") {
+    return getNestedName(value.name);
+  }
+  return "";
+}
+
 function getBandcampProfileImage(html) {
   return (
     decodeEntities(
@@ -71,8 +100,29 @@ function getBandName(html, url) {
   )?.[1];
   if (nameFromBio) return stripTags(nameFromBio);
 
+  for (const value of getJsonLdValues(html)) {
+    const artistName = getNestedName(value.byArtist || value.artist);
+    if (artistName) return stripTags(artistName);
+  }
+
+  const tralbumArtist = html.match(/"artist"\s*:\s*"([^"]+)"/i)?.[1];
+  if (tralbumArtist) return decodeEntities(tralbumArtist).trim();
+
+  const byArtist = html.match(
+    /<span[^>]+itemprop=["']byArtist["'][\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
+  )?.[1];
+  if (byArtist) return stripTags(byArtist).replace(/^by\s+/i, "").trim();
+
   const ogTitle = getMetaContent(html, "og:title");
-  if (ogTitle) return ogTitle.replace(/^Music\s+\|\s+/i, "").trim();
+  if (ogTitle) {
+    const titleByArtist = ogTitle.match(/,\s*by\s+(.+)$/i)?.[1];
+    if (titleByArtist) return titleByArtist.trim();
+
+    const titlePipeArtist = ogTitle.match(/\|\s*([^|]+)$/)?.[1];
+    if (titlePipeArtist) return titlePipeArtist.trim();
+
+    return ogTitle.replace(/^Music\s+\|\s+/i, "").trim();
+  }
 
   return getFallbackName(url);
 }
@@ -89,6 +139,59 @@ function getBio(html) {
   if (bio) return stripTags(bio);
 
   return getMetaContent(html, "og:description").replace(/\s+/g, " ").trim();
+}
+
+function getReleaseTitle(html, url) {
+  for (const value of getJsonLdValues(html)) {
+    const title = getNestedName(value.name);
+    if (title) return stripTags(title);
+  }
+
+  const trackTitle = html.match(
+    /<h2[^>]+class=["'][^"']*trackTitle[^"']*["'][^>]*>([\s\S]*?)<\/h2>/i
+  )?.[1];
+  if (trackTitle) return stripTags(trackTitle);
+
+  const ogTitle = getMetaContent(html, "og:title");
+  if (ogTitle) {
+    return ogTitle
+      .replace(/,\s*by\s+.+$/i, "")
+      .replace(/\s+\|\s+.+$/i, "")
+      .trim();
+  }
+
+  try {
+    const slug = new URL(url).pathname.split("/").filter(Boolean).at(-1) || "";
+    return slug
+      .split("-")
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(" ");
+  } catch {
+    return "";
+  }
+}
+
+function getCurrentRelease(html, bandcampUrl) {
+  let type = "";
+  try {
+    type = new URL(bandcampUrl).pathname.includes("/track/") ? "track" : "";
+    if (!type && new URL(bandcampUrl).pathname.includes("/album/")) {
+      type = "album";
+    }
+  } catch {
+    return null;
+  }
+
+  if (!type) return null;
+
+  const title = getReleaseTitle(html, bandcampUrl);
+  if (!title) return null;
+
+  return {
+    title,
+    type,
+    url: bandcampUrl,
+  };
 }
 
 function getExternalLinks(html, bandcampUrl) {
@@ -152,6 +255,13 @@ function getReleases(html, bandcampUrl) {
   const grid = html.match(/<ol id="music-grid"[\s\S]*?<\/ol>/i)?.[0] || "";
   const releases = [];
   const seen = new Set();
+  const currentRelease = getCurrentRelease(html, bandcampUrl);
+
+  if (currentRelease) {
+    releases.push(currentRelease);
+    seen.add(normalizeUrl(currentRelease.url));
+  }
+
   const releaseMatches = grid.matchAll(
     /<li [^>]*data-item-id="(album|track)-[^"]+"[\s\S]*?<a href="([^"]+)"[\s\S]*?<p class="title">([\s\S]*?)<\/p>/gi
   );
@@ -177,24 +287,28 @@ async function fetchHtml(url) {
   if (!response.ok) {
     throw new Error(`Bandcamp returned ${response.status} for ${url}`);
   }
-  return response.text();
+  return {
+    finalUrl: response.url,
+    html: await response.text(),
+  };
 }
 
 async function buildArtist(bandcampUrl) {
   const cleanUrl = normalizeUrl(bandcampUrl) + "/";
 
   try {
-    const html = await fetchHtml(cleanUrl);
+    const { finalUrl, html } = await fetchHtml(cleanUrl);
+    const resolvedUrl = normalizeUrl(finalUrl || cleanUrl) + "/";
 
     return {
-      name: getBandName(html, cleanUrl),
+      name: getBandName(html, resolvedUrl),
       location: getLocation(html),
-      bandcampUrl: cleanUrl,
+      bandcampUrl: resolvedUrl,
       image: getBandcampProfileImage(html),
       bio: getBio(html),
       tags: getTags(html),
-      links: getExternalLinks(html, cleanUrl),
-      releases: getReleases(html, cleanUrl),
+      links: getExternalLinks(html, resolvedUrl),
+      releases: getReleases(html, resolvedUrl),
     };
   } catch (error) {
     console.warn(error instanceof Error ? error.message : error);
