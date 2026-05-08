@@ -759,5 +759,105 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "Lions of the Interstate",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://lionsoftheinterstate.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0043714849_10.jpg",
+    "bio": "The combined talents of Braxeling mainstays Ben Alberts, Arturo Diaz, Kyla Henry, Rich Millward and Jeremy Petersen. The band has released its second full-length, \"Blossom,\" an eclectic array of dreamy-pop greatness.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://lionsoftheinterstate.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Blossom",
+        "type": "album",
+        "url": "https://lionsoftheinterstate.bandcamp.com/album/blossom"
+      },
+      {
+        "title": "Strange Moods",
+        "type": "album",
+        "url": "https://lionsoftheinterstate.bandcamp.com/album/strange-moods"
+      },
+      {
+        "title": "Strange Empires",
+        "type": "album",
+        "url": "https://lionsoftheinterstate.bandcamp.com/album/strange-empires"
+      },
+      {
+        "title": "Lost in Spokane",
+        "type": "album",
+        "url": "https://lionsoftheinterstate.bandcamp.com/album/lost-in-spokane"
+      },
+      {
+        "title": "Hug Point + Death/Love",
+        "type": "album",
+        "url": "https://lionsoftheinterstate.bandcamp.com/album/hug-point-death-love"
+      },
+      {
+        "title": "Lions of the Interstate",
+        "type": "album",
+        "url": "https://lionsoftheinterstate.bandcamp.com/album/lions-of-the-interstate"
+      }
+    ]
+  },
+  {
+    "name": "Trash Panda Go Kart",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://trashpandagokart.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0043974662_10.jpg",
+    "bio": "power twee lesbian raccoon rock from Zinnia & Selena on the Island of Misfit Toys the moon is our bass player, raccoons are the only gods you need \"herstory in the making\" \"chaotic cartooniness turned up to 11\" \"heavy yet whimsical\" ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://trashpandagokart.bandcamp.com/"
+      },
+      {
+        "label": "trashpandagokart.com",
+        "url": "https://trashpandagokart.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/trashpandagokart/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "live raccoons inside",
+        "type": "album",
+        "url": "https://trashpandagokart.bandcamp.com/album/live-raccoons-inside"
+      },
+      {
+        "title": "RACCOON GODS",
+        "type": "album",
+        "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
+      },
+      {
+        "title": "Diamonds (2023) - single",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/diamonds-2023-single"
+      },
+      {
+        "title": "RACCOON GODS (The Single)",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
+      },
+      {
+        "title": "TPGK in the USA - single",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/tpgk-in-the-usa-single"
+      },
+      {
+        "title": "Might As Well Sprouted The Third Eye",
+        "type": "album",
+        "url": "https://trashpandagokart.bandcamp.com/album/might-as-well-sprouted-the-third-eye"
+      }
+    ]
   }
 ];
