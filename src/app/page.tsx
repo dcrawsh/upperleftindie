@@ -65,14 +65,12 @@ export default function Home() {
                 weird little run of stickers helps even more.
               </p>
             </div>
-            <a
-              href="https://bandcamp.com/discover"
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/artists"
               className="rounded-full bg-ink px-6 py-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay"
             >
-              Dig on Bandcamp
-            </a>
+              Support Artists
+            </Link>
           </div>
         </section>
       </div>

@@ -8,6 +8,7 @@ import { FaInstagram } from "react-icons/fa";
 
 const links = [
   { href: "/", label: "Home" },
+  { href: "/artists", label: "Support Artists" },
   { href: "/submit", label: "Submit" },
   { href: "/blog", label: "Blog" },
 ];

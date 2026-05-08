@@ -55,14 +55,14 @@ const artists: ArtistCard[] = (bandcampUrls as string[]).map((bandcampUrl) => {
 });
 
 export const metadata = {
-  title: "Northwest Artists",
+  title: "Support Artists",
   description:
     "Support independent artists featured on the Upper Left Indie playlist.",
   alternates: {
     canonical: "/artists",
   },
   openGraph: {
-    title: "Northwest Artists | Upper Left Indie",
+    title: "Support Artists | Upper Left Indie",
     description:
       "Support independent artists featured on the Upper Left Indie playlist.",
     url: "/artists",
