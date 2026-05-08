@@ -859,5 +859,20 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/album/might-as-well-sprouted-the-third-eye"
       }
     ]
+  },
+  {
+    "name": "Bike Fight",
+    "location": "Eugene, Oregon",
+    "bandcampUrl": "https://bikefightband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2665990410_10.jpg",
+    "bio": "Just some good ol' boys, never meanin' no harm.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://bikefightband.bandcamp.com/"
+      }
+    ],
+    "releases": []
   }
 ];
