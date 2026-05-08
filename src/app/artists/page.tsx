@@ -6,6 +6,20 @@ function normalizeUrl(url: string) {
   return url.replace(/\/+$/, "").toLowerCase();
 }
 
+function getBandcampHost(url: string) {
+  try {
+    const hostname = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+    return hostname.endsWith(".bandcamp.com") ? hostname : "";
+  } catch {
+    return "";
+  }
+}
+
+function isSameBandcampArtist(firstUrl: string, secondUrl: string) {
+  const firstHost = getBandcampHost(firstUrl);
+  return firstHost !== "" && firstHost === getBandcampHost(secondUrl);
+}
+
 function getNameFromBandcampUrl(url: string) {
   try {
     const hostname = new URL(url).hostname.replace(/^www\./, "");
@@ -17,7 +31,9 @@ function getNameFromBandcampUrl(url: string) {
 
 const artists: ArtistCard[] = (bandcampUrls as string[]).map((bandcampUrl) => {
   const generatedArtist = generatedArtists.find(
-    (artist) => normalizeUrl(artist.bandcampUrl) === normalizeUrl(bandcampUrl)
+    (artist) =>
+      normalizeUrl(artist.bandcampUrl) === normalizeUrl(bandcampUrl) ||
+      isSameBandcampArtist(artist.bandcampUrl, bandcampUrl)
   );
 
   if (generatedArtist) {

@@ -271,7 +271,13 @@ export const artists: Artist[] = [
         "url": "https://www.facebook.com/MOCKHEAVEN/"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "Doom Kitty",
+        "type": "album",
+        "url": "https://gvthdvddy.bandcamp.com/album/doom-kitty/"
+      }
+    ]
   },
   {
     "name": "Uncanny Valley Girls",
@@ -328,7 +334,13 @@ export const artists: Artist[] = [
         "url": "http://facebook.com/shayleeband"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "L-Shaped Room EP",
+        "type": "album",
+        "url": "https://shayleeband.bandcamp.com/album/l-shaped-room-ep/"
+      }
+    ]
   },
   {
     "name": "An Invisible Jet",
@@ -388,7 +400,13 @@ export const artists: Artist[] = [
         "url": "https://essieandthehum.bandcamp.com/"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "Live at Clay St. Studios",
+        "type": "album",
+        "url": "https://essieandthehum.bandcamp.com/album/live-at-clay-st-studios/"
+      }
+    ]
   },
   {
     "name": "Frontier Medicine",
@@ -407,7 +425,13 @@ export const artists: Artist[] = [
         "url": "http://hearfrontiermedicine.com"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "Frontier Medicine",
+        "type": "album",
+        "url": "https://hearfrontiermedicine.bandcamp.com/album/frontier-medicine/"
+      }
+    ]
   },
   {
     "name": "blond-noise",
@@ -521,7 +545,13 @@ export const artists: Artist[] = [
         "url": "https://twitter.com/Orbit17music"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "Bonfires",
+        "type": "album",
+        "url": "https://orbit17.bandcamp.com/album/bonfires/"
+      }
+    ]
   },
   {
     "name": "The Upkeeps",
@@ -590,7 +620,13 @@ export const artists: Artist[] = [
         "url": "http://fieldsofsilver.net"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "delicate flowers & bloody teeth",
+        "type": "album",
+        "url": "https://fieldsofsilver.bandcamp.com/album/delicate-flowers-bloody-teeth/"
+      }
+    ]
   },
   {
     "name": "The Quick & Easy Boys",
@@ -717,7 +753,13 @@ export const artists: Artist[] = [
         "url": "http://www.facebook.com/reigncycle"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "Solstice",
+        "type": "album",
+        "url": "https://reigncycle.bandcamp.com/album/solstice/"
+      }
+    ]
   },
   {
     "name": "great year",
@@ -758,7 +800,13 @@ export const artists: Artist[] = [
         "url": "https://wellkinda.bandcamp.com/"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "Cocaine",
+        "type": "track",
+        "url": "https://wellkinda.bandcamp.com/track/cocaine/"
+      }
+    ]
   },
   {
     "name": "Lions of the Interstate",
@@ -873,6 +921,12 @@ export const artists: Artist[] = [
         "url": "https://bikefightband.bandcamp.com/"
       }
     ],
-    "releases": []
+    "releases": [
+      {
+        "title": "Bright Future",
+        "type": "album",
+        "url": "https://bikefightband.bandcamp.com/album/bright-future/"
+      }
+    ]
   }
 ];

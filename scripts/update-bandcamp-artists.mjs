@@ -303,11 +303,11 @@ async function buildArtist(bandcampUrl) {
     return {
       name: getBandName(html, resolvedUrl),
       location: getLocation(html),
-      bandcampUrl: resolvedUrl,
+      bandcampUrl: cleanUrl,
       image: getBandcampProfileImage(html),
       bio: getBio(html),
       tags: getTags(html),
-      links: getExternalLinks(html, resolvedUrl),
+      links: getExternalLinks(html, cleanUrl),
       releases: getReleases(html, resolvedUrl),
     };
   } catch (error) {
