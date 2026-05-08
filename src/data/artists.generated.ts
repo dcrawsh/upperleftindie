@@ -202,5 +202,562 @@ export const artists: Artist[] = [
         "url": "https://thewaysidesmusic.bandcamp.com/track/surfacing"
       }
     ]
+  },
+  {
+    "name": "Candy Cigarettes",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://candycigsmusic.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041258213_10.jpg",
+    "bio": "Lane Mueller.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://candycigsmusic.bandcamp.com/"
+      },
+      {
+        "label": "CandyCigs.com",
+        "url": "http://CandyCigs.com"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://facebook.com/candycigs"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/candy_cigs/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Horse Lungs",
+        "type": "album",
+        "url": "https://candycigsmusic.bandcamp.com/album/horse-lungs"
+      },
+      {
+        "title": "Candy Cigarettes",
+        "type": "album",
+        "url": "https://candycigsmusic.bandcamp.com/album/candy-cigarettes"
+      },
+      {
+        "title": "Stockholm",
+        "type": "track",
+        "url": "https://candycigsmusic.bandcamp.com/track/stockholm"
+      }
+    ]
+  },
+  {
+    "name": "GVTH DVDDY",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://gvthdvddy.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a3653743646_10.jpg",
+    "bio": "K.Robinson J. Endicott GVTHDVDDY.com",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://gvthdvddy.bandcamp.com/"
+      },
+      {
+        "label": "gvthdvddy.com",
+        "url": "http://gvthdvddy.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/gvth_dvddy"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/MOCKHEAVEN/"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "Uncanny Valley Girls",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://uncannyvalleygirlspdx.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0037806411_10.jpg",
+    "bio": "Portland Oregon スケバン rocking roll from Cap Hill in Sea Apple, Washington. Cadence Welles (She/Her) - Vocals, guitar Coree Hogan (They/Them) - Lead guitar Juliet Terril (She/Her) - Bass Ryan Cripps (She/Her) - Drums ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://uncannyvalleygirlspdx.bandcamp.com/"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/uncannyvgirlsOR"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/uncannyvalleygirlspdx/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Hear Me, Earth Astronaut",
+        "type": "album",
+        "url": "https://uncannyvalleygirlspdx.bandcamp.com/album/hear-me-earth-astronaut"
+      },
+      {
+        "title": "Will to Resign",
+        "type": "track",
+        "url": "https://uncannyvalleygirlspdx.bandcamp.com/track/will-to-resign-3"
+      }
+    ]
+  },
+  {
+    "name": "Shaylee",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://shayleeband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0183651852_10.jpg",
+    "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://shayleeband.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "http://instagram.com/shayleeband"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://facebook.com/shayleeband"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "An Invisible Jet",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://aninvisiblejet.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0039684643_10.jpg",
+    "bio": "An Invisible Jet is a Portland, OR music project started by Matt Blum in 2020. An Invisible Jet focuses on guitar-driven music deriving its influences from 90's indie rock, metal, post-punk, and prog. Their signature sound typically involves an intricate guitar-riff at the heart of the song, with shifting dynamics that lead the listener down a rabbit hole (or k hole). ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://aninvisiblejet.bandcamp.com/"
+      },
+      {
+        "label": "allmylinks.com",
+        "url": "https://allmylinks.com/invisiblejet"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Welcome to the Warzone",
+        "type": "album",
+        "url": "https://aninvisiblejet.bandcamp.com/album/welcome-to-the-warzone"
+      },
+      {
+        "title": "The Gulf of Mexico",
+        "type": "track",
+        "url": "https://aninvisiblejet.bandcamp.com/track/the-gulf-of-mexico"
+      },
+      {
+        "title": "The Bottom of a Knife",
+        "type": "track",
+        "url": "https://aninvisiblejet.bandcamp.com/track/the-bottom-of-a-knife"
+      },
+      {
+        "title": "4 am at the country club",
+        "type": "album",
+        "url": "https://aninvisiblejet.bandcamp.com/album/4-am-at-the-country-club"
+      },
+      {
+        "title": "An Invisible Album for My Invisible Friends",
+        "type": "album",
+        "url": "https://aninvisiblejet.bandcamp.com/album/an-invisible-album-for-my-invisible-friends"
+      }
+    ]
+  },
+  {
+    "name": "Essie and The Hum",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://essieandthehum.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a4149136458_10.jpg",
+    "bio": "Essie and The Hum craft ethereal indie-folk rock shaped by the magic of live performance. Based in Portland, OR, their sound drifts from intimate, slow-burn ballads to full-throttle rock moments, pulling listeners into a wormhole they won’t want to leave. ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://essieandthehum.bandcamp.com/"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "Frontier Medicine",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://hearfrontiermedicine.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a3435300719_10.jpg",
+    "bio": "Frontier Medicine are a music recording duo based in Portland, Oregon formed by Jackson Conrad and Jetamio Kennedy. Frontier Medicine’s sound represents a fresh interpretation of nostalgia, with elements of folk, soul, grunge, Americana, and progressive rock. Drawing from a multitude of influences, their sound is best described simply as “rock and roll.” ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://hearfrontiermedicine.bandcamp.com/"
+      },
+      {
+        "label": "hearfrontiermedicine.com",
+        "url": "http://hearfrontiermedicine.com"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "blond-noise",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://blond-noise.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044362438_10.jpg",
+    "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://blond-noise.bandcamp.com/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@blond-noise"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/blond_noise/"
+      },
+      {
+        "label": "phenomenalcage.substack.com",
+        "url": "https://phenomenalcage.substack.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "home",
+        "type": "track",
+        "url": "https://blond-noise.bandcamp.com/track/home"
+      },
+      {
+        "title": "iLLEGALLY BLonD (Live)",
+        "type": "track",
+        "url": "https://blond-noise.bandcamp.com/track/illegally-blond-live"
+      }
+    ]
+  },
+  {
+    "name": "Long Deer",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://longdeer.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0037215591_10.jpg",
+    "bio": "Somewhere in the woods of the Pacific North West. They are compelled to play 1000 shows. FoLlOw",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://longdeer.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/theelongdeer"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://youtube.com/@longestdeer?si=vZGqnr7jMwGxJ3Gc"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Compulsive Thoughts",
+        "type": "album",
+        "url": "https://longdeer.bandcamp.com/album/compulsive-thoughts"
+      },
+      {
+        "title": "Road Head",
+        "type": "track",
+        "url": "https://longdeer.bandcamp.com/track/road-head"
+      },
+      {
+        "title": "I Bleed You",
+        "type": "track",
+        "url": "https://longdeer.bandcamp.com/track/i-bleed-you"
+      },
+      {
+        "title": "Be Careful With Deuce",
+        "type": "album",
+        "url": "https://longdeer.bandcamp.com/album/be-careful-with-deuce"
+      },
+      {
+        "title": "Shadow Man",
+        "type": "track",
+        "url": "https://longdeer.bandcamp.com/track/shadow-man"
+      }
+    ]
+  },
+  {
+    "name": "Orbit 17",
+    "location": "San Francisco, California",
+    "bandcampUrl": "https://orbit17.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2366914491_10.jpg",
+    "bio": "Orbit 17 weaves catchy melodies, funky rhythms and hypnotic grooves into intricate electro-rock.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://orbit17.bandcamp.com/"
+      },
+      {
+        "label": "SoundCloud",
+        "url": "https://soundcloud.com/orbit17music"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/orbit17music/"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/Orbit17music"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "The Upkeeps",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://theupkeeps.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0025926557_10.jpg",
+    "bio": "\"The Upkeeps are one of the most entertaining bands on the Portland rock scene today. From catchy hooks to their signature look, wild gestures, and non-stop crowd interaction, The Upkeeps play every show like a sold-out arena set.\" - PDX Presents SYE VILES- VOCALS/GUITAR AARON BRIXTON- LEADS OLIVER SWEET- BASS KURT DOPAMINE- DRUMS ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://theupkeeps.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Voices The UpKeeps",
+        "type": "track",
+        "url": "https://theupkeeps.bandcamp.com/track/voices"
+      },
+      {
+        "title": "I Want You Around The UpKeeps",
+        "type": "track",
+        "url": "https://theupkeeps.bandcamp.com/track/i-want-you-around"
+      },
+      {
+        "title": "Hear Me Out",
+        "type": "track",
+        "url": "https://theupkeeps.bandcamp.com/track/hear-me-out"
+      },
+      {
+        "title": "A Girl I Used To Know",
+        "type": "track",
+        "url": "https://theupkeeps.bandcamp.com/track/a-girl-i-used-to-know"
+      },
+      {
+        "title": "Secrets",
+        "type": "track",
+        "url": "https://theupkeeps.bandcamp.com/track/secrets"
+      },
+      {
+        "title": "Down N' Out",
+        "type": "track",
+        "url": "https://theupkeeps.bandcamp.com/track/down-n-out"
+      }
+    ]
+  },
+  {
+    "name": "fields of silver",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://fieldsofsilver.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a4172428797_10.jpg",
+    "bio": "grunge-y folk from the PNW",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://fieldsofsilver.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/fieldsofsilverband/"
+      },
+      {
+        "label": "fieldsofsilver.net",
+        "url": "http://fieldsofsilver.net"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "The Quick & Easy Boys",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://thequickandeasyboys.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0037450242_10.jpg",
+    "bio": "The Quick & Easy Boys are a power-trio from Portland, OR. They play rock and roll...and they do it well.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thequickandeasyboys.bandcamp.com/"
+      },
+      {
+        "label": "thequickandeasyboys.com",
+        "url": "http://www.thequickandeasyboys.com"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://facebook.com/thequickandeasyboys"
+      },
+      {
+        "label": "itunes.apple.com",
+        "url": "https://itunes.apple.com/us/artist/the-quick-easy-boys/id371514335"
+      },
+      {
+        "label": "YouTube",
+        "url": "http://YouTube.com/thequickandeasyboys"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "Terrible Pop",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://terriblepop.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040770732_100.png\",\"https_url\":\"https://f4.bcbits.com/img/0040770732_100.png\",\"format\":100,\"width\":975,\"height\":180},\"paypal_image\":{\"image_id\":40770732,\"url\":\"https://f4.bcbits.com/img/0040770732_101.jpg\",\"https_url\":\"https://f4.bcbits.com/img/0040770732_101.jpg\",\"format\":101,\"width\":488,\"height\":90},\"using_map\":null,\"area_tags\":null},\"header_phone\":null,\"design\":{\"bg_color\":\"FFBB00\",\"text_color\":\"363636\",\"secondary_text_color\":\"888888\",\"link_color\":\"0687F5\",\"body_color\":\"FFBB00\",\"hd_ft_color\":\"CCB166\",\"navbar_bg_color\":\"C4A140\",\"invert_iconography\":null,\"tile_bg\":null,\"bg_halign\":\"l\",\"bg_image_id\":null,\"bg_file_name\":null,\"defaultbg\":false,\"bg_fixed\":null,\"bg_behavior\":\"r\"},\"currency\":\"USD\",\"fan_email\":null,\"thanks_enabled\":1,\"reviews_enabled\":1,\"is_label\":false,\"has_label\":false,\"paypal_matching_label_id\":null,\"merch_enabled\":true,\"google_analytics_id\":null,\"has_recommendations\":false,\"has_tralbums\":true,\"has_public_tralbums\":true,\"has_public_merch\":false,\"has_any_downloads\":true,\"has_discounts\":false,\"has_download_codes\":false,\"has_policies\":false,\"sites\":[],\"navbar_items\":[{\"url\":\"/music\",\"title\":\"music\",\"nav_type\":\"m\"},{\"url\":\"/merch\",\"title\":\"merch\",\"nav_type\":\"p\"},{\"url\":\"/live\",\"title\":\"live",
+    "bio": "Terrible Pop is a band from Portland, OR. Songs with heart under the hood. Somewhere between stupid and sincere. Thank you for your time. Instagram: @terrible.pop Booking/questions/critique: terriblepopmusic@gmail.com ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://terriblepop.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Not Mine (Covers Album)",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/not-mine-covers-album"
+      },
+      {
+        "title": "Terrible Pop",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/terrible-pop"
+      },
+      {
+        "title": "Terrible Pop II",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/terrible-pop-ii"
+      }
+    ]
+  },
+  {
+    "name": "Glass Suburban",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://glasssuburban.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0039746000_10.jpg",
+    "bio": "Semi-nostalgic indie rock from Portland and its various and sundry suburbs. Sounds like offset guitars and lazy afternoons in the mid-nineties.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://glasssuburban.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "EP4",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/ep4"
+      },
+      {
+        "title": "EP3 + Singles",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/ep3-singles"
+      },
+      {
+        "title": "Sea Anemone [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/sea-anemone-single"
+      },
+      {
+        "title": "Play Up [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/play-up-single"
+      },
+      {
+        "title": "Not Today [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/not-today-single"
+      },
+      {
+        "title": "Cadillac [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/cadillac-single"
+      }
+    ]
+  },
+  {
+    "name": "Reign Cycle",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://reigncycle.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1572774560_10.jpg",
+    "bio": "Born in the brains of two young men under a teary sky. Nursed from the front seats of a compact car and the garage of a mansion to Portland's ever-reaching natural beauty and its steadfast inspiration. Set free with integrity and purpose. Given with love. ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://reigncycle.bandcamp.com/"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://www.facebook.com/reigncycle"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "great year",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://greatyear.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0032612564_10.jpg",
+    "bio": "Recreational Sadness League Champs since 2022 Alex. Sean. Gray. Keagan.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://greatyear.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Sleep All Day",
+        "type": "track",
+        "url": "https://greatyear.bandcamp.com/track/sleep-all-day"
+      },
+      {
+        "title": "Safer Tonight",
+        "type": "track",
+        "url": "https://greatyear.bandcamp.com/track/safer-tonight"
+      }
+    ]
+  },
+  {
+    "name": "Well Kinda",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://wellkinda.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a3283650272_10.jpg",
+    "bio": "track by Well Kinda",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://wellkinda.bandcamp.com/"
+      }
+    ],
+    "releases": []
   }
 ];
