@@ -25,12 +25,16 @@ export default function Nav() {
 
   return (
     <nav className="relative z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
-        <Link href="/" className="flex items-center gap-3" aria-label="Upper Left Indie home">
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-ink text-sm font-black uppercase text-paper">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-10">
+        <Link
+          href="/"
+          className="flex min-w-0 items-center gap-2 sm:gap-3"
+          aria-label="Upper Left Indie home"
+        >
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-xs font-black uppercase text-paper sm:h-10 sm:w-10 sm:text-sm">
             UL
           </span>
-          <span className="text-lg font-black uppercase tracking-[0.18em] text-ink">
+          <span className="min-w-0 truncate text-sm font-black uppercase tracking-[0.1em] text-ink sm:text-lg sm:tracking-[0.18em]">
             Upper Left Indie
           </span>
         </Link>
@@ -72,7 +76,7 @@ export default function Nav() {
         <button
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
-          className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 text-ink md:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/15 text-ink md:hidden"
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
         >
