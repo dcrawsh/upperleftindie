@@ -249,14 +249,14 @@ export const artists: Artist[] = [
   {
     "name": "GVTH DVDDY",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://gvthdvddy.bandcamp.com/album/doom-kitty/",
+    "bandcampUrl": "https://gvthdvddy.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a3653743646_10.jpg",
     "bio": "K.Robinson J. Endicott GVTHDVDDY.com",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://gvthdvddy.bandcamp.com/album/doom-kitty/"
+        "url": "https://gvthdvddy.bandcamp.com/"
       },
       {
         "label": "gvthdvddy.com",
@@ -271,13 +271,7 @@ export const artists: Artist[] = [
         "url": "https://www.facebook.com/MOCKHEAVEN/"
       }
     ],
-    "releases": [
-      {
-        "title": "Doom Kitty",
-        "type": "album",
-        "url": "https://gvthdvddy.bandcamp.com/album/doom-kitty/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "Uncanny Valley Girls",
@@ -316,14 +310,14 @@ export const artists: Artist[] = [
   {
     "name": "Shaylee",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://shayleeband.bandcamp.com/album/l-shaped-room-ep/",
+    "bandcampUrl": "https://shayleeband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a0183651852_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://shayleeband.bandcamp.com/album/l-shaped-room-ep/"
+        "url": "https://shayleeband.bandcamp.com/"
       },
       {
         "label": "Instagram",
@@ -334,13 +328,7 @@ export const artists: Artist[] = [
         "url": "http://facebook.com/shayleeband"
       }
     ],
-    "releases": [
-      {
-        "title": "L-Shaped Room EP",
-        "type": "album",
-        "url": "https://shayleeband.bandcamp.com/album/l-shaped-room-ep/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "An Invisible Jet",
@@ -390,48 +378,36 @@ export const artists: Artist[] = [
   {
     "name": "Essie and The Hum",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://essieandthehum.bandcamp.com/album/live-at-clay-st-studios/",
+    "bandcampUrl": "https://essieandthehum.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a4149136458_10.jpg",
     "bio": "Essie and The Hum craft ethereal indie-folk rock shaped by the magic of live performance. Based in Portland, OR, their sound drifts from intimate, slow-burn ballads to full-throttle rock moments, pulling listeners into a wormhole they won’t want to leave. ... more",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://essieandthehum.bandcamp.com/album/live-at-clay-st-studios/"
+        "url": "https://essieandthehum.bandcamp.com/"
       }
     ],
-    "releases": [
-      {
-        "title": "Live at Clay St. Studios",
-        "type": "album",
-        "url": "https://essieandthehum.bandcamp.com/album/live-at-clay-st-studios/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "Frontier Medicine",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://hearfrontiermedicine.bandcamp.com/album/frontier-medicine/",
+    "bandcampUrl": "https://hearfrontiermedicine.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a3435300719_10.jpg",
     "bio": "Frontier Medicine are a music recording duo based in Portland, Oregon formed by Jackson Conrad and Jetamio Kennedy. Frontier Medicine’s sound represents a fresh interpretation of nostalgia, with elements of folk, soul, grunge, Americana, and progressive rock. Drawing from a multitude of influences, their sound is best described simply as “rock and roll.” ... more",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://hearfrontiermedicine.bandcamp.com/album/frontier-medicine/"
+        "url": "https://hearfrontiermedicine.bandcamp.com/"
       },
       {
         "label": "hearfrontiermedicine.com",
         "url": "http://hearfrontiermedicine.com"
       }
     ],
-    "releases": [
-      {
-        "title": "Frontier Medicine",
-        "type": "album",
-        "url": "https://hearfrontiermedicine.bandcamp.com/album/frontier-medicine/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "blond-noise",
@@ -523,14 +499,14 @@ export const artists: Artist[] = [
   {
     "name": "Orbit 17",
     "location": "San Francisco, California",
-    "bandcampUrl": "https://orbit17.bandcamp.com/album/bonfires/",
+    "bandcampUrl": "https://orbit17.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2366914491_10.jpg",
     "bio": "Orbit 17 weaves catchy melodies, funky rhythms and hypnotic grooves into intricate electro-rock.",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://orbit17.bandcamp.com/album/bonfires/"
+        "url": "https://orbit17.bandcamp.com/"
       },
       {
         "label": "SoundCloud",
@@ -545,13 +521,7 @@ export const artists: Artist[] = [
         "url": "https://twitter.com/Orbit17music"
       }
     ],
-    "releases": [
-      {
-        "title": "Bonfires",
-        "type": "album",
-        "url": "https://orbit17.bandcamp.com/album/bonfires/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "The Upkeeps",
@@ -602,14 +572,14 @@ export const artists: Artist[] = [
   {
     "name": "fields of silver",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://fieldsofsilver.bandcamp.com/album/delicate-flowers-bloody-teeth/",
+    "bandcampUrl": "https://fieldsofsilver.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a4172428797_10.jpg",
     "bio": "grunge-y folk from the PNW",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://fieldsofsilver.bandcamp.com/album/delicate-flowers-bloody-teeth/"
+        "url": "https://fieldsofsilver.bandcamp.com/"
       },
       {
         "label": "Instagram",
@@ -620,13 +590,7 @@ export const artists: Artist[] = [
         "url": "http://fieldsofsilver.net"
       }
     ],
-    "releases": [
-      {
-        "title": "delicate flowers & bloody teeth",
-        "type": "album",
-        "url": "https://fieldsofsilver.bandcamp.com/album/delicate-flowers-bloody-teeth/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "The Quick & Easy Boys",
@@ -739,27 +703,21 @@ export const artists: Artist[] = [
   {
     "name": "Reign Cycle",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://reigncycle.bandcamp.com/album/solstice/",
+    "bandcampUrl": "https://reigncycle.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a1572774560_10.jpg",
     "bio": "Born in the brains of two young men under a teary sky. Nursed from the front seats of a compact car and the garage of a mansion to Portland's ever-reaching natural beauty and its steadfast inspiration. Set free with integrity and purpose. Given with love. ... more",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://reigncycle.bandcamp.com/album/solstice/"
+        "url": "https://reigncycle.bandcamp.com/"
       },
       {
         "label": "Facebook",
         "url": "http://www.facebook.com/reigncycle"
       }
     ],
-    "releases": [
-      {
-        "title": "Solstice",
-        "type": "album",
-        "url": "https://reigncycle.bandcamp.com/album/solstice/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "great year",
@@ -790,23 +748,17 @@ export const artists: Artist[] = [
   {
     "name": "Well Kinda",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://wellkinda.bandcamp.com/track/cocaine/",
+    "bandcampUrl": "https://wellkinda.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a3283650272_10.jpg",
     "bio": "track by Well Kinda",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://wellkinda.bandcamp.com/track/cocaine/"
+        "url": "https://wellkinda.bandcamp.com/"
       }
     ],
-    "releases": [
-      {
-        "title": "Cocaine",
-        "type": "track",
-        "url": "https://wellkinda.bandcamp.com/track/cocaine/"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "Lions of the Interstate",
@@ -911,22 +863,16 @@ export const artists: Artist[] = [
   {
     "name": "Bike Fight",
     "location": "Eugene, Oregon",
-    "bandcampUrl": "https://bikefightband.bandcamp.com/album/bright-future/",
+    "bandcampUrl": "https://bikefightband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2665990410_10.jpg",
     "bio": "Just some good ol' boys, never meanin' no harm.",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://bikefightband.bandcamp.com/album/bright-future/"
+        "url": "https://bikefightband.bandcamp.com/"
       }
     ],
-    "releases": [
-      {
-        "title": "Bright Future",
-        "type": "album",
-        "url": "https://bikefightband.bandcamp.com/album/bright-future/"
-      }
-    ]
+    "releases": []
   }
 ];
