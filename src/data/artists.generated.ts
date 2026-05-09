@@ -928,5 +928,146 @@ export const artists: Artist[] = [
         "url": "https://bikefightband.bandcamp.com/album/bright-future/"
       }
     ]
+  },
+  {
+    "name": "The Eye See You's",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://theeyeseeyous.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2421388631_10.jpg",
+    "bio": "Formed in 2024 in Portland, OR by dueling guitarist/vocalists John Rivers and Leila Siegel, as well as Aadit Bagdi (bass) and David O. (drums), the Eye See You's draw from an eclectic and diverse mix of influences to create a sound that is uniquely their own, bridging the gaps between virtuosity, emotional catharsis, danceability, lush guitar textures, and pure rock fury. ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://theeyeseeyous.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Falls From The Tree",
+        "type": "album",
+        "url": "https://theeyeseeyous.bandcamp.com/album/falls-from-the-tree/"
+      }
+    ]
+  },
+  {
+    "name": "BLISTER",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://blisterpdx.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0035245497_10.jpg",
+    "bio": "pdx death punk cult worship.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://blisterpdx.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Early Onset",
+        "type": "album",
+        "url": "https://blisterpdx.bandcamp.com/album/early-onset-2"
+      },
+      {
+        "title": "s/t",
+        "type": "album",
+        "url": "https://blisterpdx.bandcamp.com/album/s-t"
+      }
+    ]
+  },
+  {
+    "name": "New Victorian",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://newvictorian.bandcamp.com/music/",
+    "image": "https://f4.bcbits.com/img/0025696911_10.jpg",
+    "bio": "Rooted in the rainy hush of Portland, Oregon, New Victorian crafts ethereal music for the spaces in between. Like a dream you’re not quite ready to leave, they blend earnest, heart-pinned-to-the-sleeve songwriting with explosive sonic exploration, weaving a soundscape that is both intimate and otherworldly. ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://newvictorian.bandcamp.com/music/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/NewVictorianmuzak/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/new_victorian.music/"
+      },
+      {
+        "label": "newvictorian.net",
+        "url": "https://www.newvictorian.net"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Spring",
+        "type": "album",
+        "url": "https://newvictorian.bandcamp.com/album/spring"
+      },
+      {
+        "title": "Winter",
+        "type": "album",
+        "url": "https://newvictorian.bandcamp.com/album/winter"
+      },
+      {
+        "title": "Autumn",
+        "type": "album",
+        "url": "https://newvictorian.bandcamp.com/album/autumn"
+      },
+      {
+        "title": "High Mass",
+        "type": "album",
+        "url": "https://newvictorian.bandcamp.com/album/high-mass"
+      }
+    ]
+  },
+  {
+    "name": "Payne Fulcher",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://etfondle.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044265512_10.jpg",
+    "bio": "#noloudmusic",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://etfondle.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Slavic Dinner E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/slavic-dinner"
+      },
+      {
+        "title": "The Bacon's Lament E.T. Fondle and the Little Portland Players",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/the-bacons-lament"
+      },
+      {
+        "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
+      },
+      {
+        "title": "The Jackson Press Payne Fulcher and Gabe Pelli",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/the-jackson-press-2"
+      },
+      {
+        "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
+      },
+      {
+        "title": "Where I Shall Be Healed of My Grievous Wound",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/where-i-shall-be-healed-of-my-grievous-wound"
+      }
+    ]
   }
 ];
