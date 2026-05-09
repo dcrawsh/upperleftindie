@@ -11,6 +11,7 @@ const links = [
   { href: "/artists", label: "Support Artists" },
   { href: "/submit", label: "Submit" },
   { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const instagramUrl = "https://www.instagram.com/upperleftindie/";
