@@ -1125,5 +1125,55 @@ export const artists: Artist[] = [
         "url": "https://fountainparkapts.bandcamp.com/album/tonight-brought-stars/"
       }
     ]
+  },
+  {
+    "name": "Buddy Wynkoop",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://buddywynkoop.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044008727_10.jpg",
+    "bio": "Buddy Wynkoop is a six piece art punk outfit that combines a barrage of spoken word existentialism, shout-sung melodies and a unique approach to structure. Formed in the summer of 2019 in a basement in Portland, Or.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://buddywynkoop.bandcamp.com/"
+      },
+      {
+        "label": "buddywynkoop.com",
+        "url": "http://buddywynkoop.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Better Than Botox",
+        "type": "album",
+        "url": "https://buddywynkoop.bandcamp.com/album/better-than-botox-2"
+      },
+      {
+        "title": "Electric City",
+        "type": "track",
+        "url": "https://buddywynkoop.bandcamp.com/track/electric-city"
+      },
+      {
+        "title": "G.S.M.T",
+        "type": "track",
+        "url": "https://buddywynkoop.bandcamp.com/track/g-s-m-t"
+      },
+      {
+        "title": "Cleanest Dirty Shirt",
+        "type": "track",
+        "url": "https://buddywynkoop.bandcamp.com/track/cleanest-dirty-shirt"
+      },
+      {
+        "title": "Stress Fracture",
+        "type": "track",
+        "url": "https://buddywynkoop.bandcamp.com/track/stress-fracture"
+      },
+      {
+        "title": "Racing",
+        "type": "track",
+        "url": "https://buddywynkoop.bandcamp.com/track/racing"
+      }
+    ]
   }
 ];

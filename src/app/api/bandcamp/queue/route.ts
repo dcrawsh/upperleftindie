@@ -19,6 +19,15 @@ type UrlsFile = {
   sha?: string;
 };
 
+class BandcampQueueError extends Error {
+  constructor(
+    message: string,
+    readonly status = 500
+  ) {
+    super(message);
+  }
+}
+
 function normalizeBandcampArtistUrl(value: string) {
   const trimmed = value.trim();
   if (!trimmed) return "";
@@ -151,6 +160,14 @@ async function appendUrl(url: string, artistName: string) {
     defaultRepository;
   const branch = process.env.BANDCAMP_URLS_GITHUB_BRANCH ?? defaultBranch;
   const storage = token ? "github" : "local";
+
+  if (!token && process.env.NODE_ENV === "production") {
+    throw new BandcampQueueError(
+      "Bandcamp queue is missing BANDCAMP_URLS_GITHUB_TOKEN",
+      500
+    );
+  }
+
   const file = token
     ? await readGithubUrlsFile({ repository, branch, token })
     : await readLocalUrlsFile();
@@ -206,6 +223,11 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("bandcamp queue error", error);
+
+    if (error instanceof BandcampQueueError) {
+      return Response.json({ error: error.message }, { status: error.status });
+    }
+
     return Response.json(
       { error: "Bandcamp artist could not be queued" },
       { status: 500 }
