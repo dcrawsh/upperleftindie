@@ -979,14 +979,14 @@ export const artists: Artist[] = [
   {
     "name": "New Victorian",
     "location": "Portland, Oregon",
-    "bandcampUrl": "https://newvictorian.bandcamp.com/music/",
-    "image": "https://f4.bcbits.com/img/0025696911_10.jpg",
+    "bandcampUrl": "https://newvictorian.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0524182842_10.jpg",
     "bio": "Rooted in the rainy hush of Portland, Oregon, New Victorian crafts ethereal music for the spaces in between. Like a dream you’re not quite ready to leave, they blend earnest, heart-pinned-to-the-sleeve songwriting with explosive sonic exploration, weaving a soundscape that is both intimate and otherworldly. ... more",
     "tags": [],
     "links": [
       {
         "label": "Bandcamp",
-        "url": "https://newvictorian.bandcamp.com/music/"
+        "url": "https://newvictorian.bandcamp.com/"
       },
       {
         "label": "Facebook",
@@ -1005,22 +1005,7 @@ export const artists: Artist[] = [
       {
         "title": "Spring",
         "type": "album",
-        "url": "https://newvictorian.bandcamp.com/album/spring"
-      },
-      {
-        "title": "Winter",
-        "type": "album",
-        "url": "https://newvictorian.bandcamp.com/album/winter"
-      },
-      {
-        "title": "Autumn",
-        "type": "album",
-        "url": "https://newvictorian.bandcamp.com/album/autumn"
-      },
-      {
-        "title": "High Mass",
-        "type": "album",
-        "url": "https://newvictorian.bandcamp.com/album/high-mass"
+        "url": "https://newvictorian.bandcamp.com/album/spring/"
       }
     ]
   },
@@ -1067,6 +1052,77 @@ export const artists: Artist[] = [
         "title": "Where I Shall Be Healed of My Grievous Wound",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/where-i-shall-be-healed-of-my-grievous-wound"
+      }
+    ]
+  },
+  {
+    "name": "Rose Gerber",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://rosegerbermusic.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041874492_10.jpg",
+    "bio": "Based in Portland, OR, Rose Gerber is an American roots explorer, incorporating country, folk, rock, alt-rock, and alt-country into a seamless signature aesthetic, where cowboy boots meets Doc Martins.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://rosegerbermusic.bandcamp.com/"
+      },
+      {
+        "label": "rosegerbermusic.com",
+        "url": "http://www.rosegerbermusic.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Just Yesterday",
+        "type": "track",
+        "url": "https://rosegerbermusic.bandcamp.com/track/just-yesterday"
+      },
+      {
+        "title": "Rock Star Baby",
+        "type": "track",
+        "url": "https://rosegerbermusic.bandcamp.com/track/rock-star-baby"
+      },
+      {
+        "title": "Under the Bleachers",
+        "type": "track",
+        "url": "https://rosegerbermusic.bandcamp.com/track/under-the-bleachers"
+      },
+      {
+        "title": "Untraveled Highway",
+        "type": "album",
+        "url": "https://rosegerbermusic.bandcamp.com/album/untraveled-highway"
+      },
+      {
+        "title": "Memories Someday - EP",
+        "type": "album",
+        "url": "https://rosegerbermusic.bandcamp.com/album/memories-someday-ep"
+      },
+      {
+        "title": "Rearview Driving - single",
+        "type": "track",
+        "url": "https://rosegerbermusic.bandcamp.com/track/rearview-driving-single"
+      }
+    ]
+  },
+  {
+    "name": "Fountain Park Apts.",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://fountainparkapts.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1320570202_10.jpg",
+    "bio": "booking/collabs/ saying hi: email: fountainparkaptsmusic@gmail.com",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://fountainparkapts.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Tonight Brought Stars",
+        "type": "album",
+        "url": "https://fountainparkapts.bandcamp.com/album/tonight-brought-stars/"
       }
     ]
   }
