@@ -37,6 +37,28 @@ function normalizeUrl(url) {
   return url.trim().replace(/\/+$/, "");
 }
 
+function normalizeBandcampArtistUrl(value) {
+  const trimmed = String(value || "").trim();
+  if (!trimmed) return "";
+
+  const withProtocol = /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
+
+  try {
+    const url = new URL(withProtocol);
+    const hostname = url.hostname.replace(/^www\./, "").toLowerCase();
+
+    if (!hostname.endsWith(".bandcamp.com") || hostname === "bandcamp.com") {
+      return "";
+    }
+
+    return `https://${hostname}/`;
+  } catch {
+    return "";
+  }
+}
+
 function getFallbackName(url) {
   try {
     return new URL(url).hostname.replace(/^www\./, "").replace(/\.bandcamp\.com$/, "");
@@ -294,7 +316,8 @@ async function fetchHtml(url) {
 }
 
 async function buildArtist(bandcampUrl) {
-  const cleanUrl = normalizeUrl(bandcampUrl) + "/";
+  const cleanUrl =
+    normalizeBandcampArtistUrl(bandcampUrl) || normalizeUrl(bandcampUrl) + "/";
 
   try {
     const { finalUrl, html } = await fetchHtml(cleanUrl);
@@ -359,7 +382,9 @@ async function main() {
     throw new Error("src/data/bandcamp-urls.json must be an array of URLs");
   }
 
-  const urls = [...new Set(rawUrls.map((url) => String(url).trim()).filter(Boolean))];
+  const urls = [
+    ...new Set(rawUrls.map(normalizeBandcampArtistUrl).filter(Boolean)),
+  ];
   const artists = [];
 
   for (const url of urls) {

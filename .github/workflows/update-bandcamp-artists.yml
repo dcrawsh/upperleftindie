@@ -6,6 +6,8 @@ on:
       - main
     paths-ignore:
       - "src/data/artists.generated.ts"
+  schedule:
+    - cron: "0 10 * * *"
   workflow_dispatch:
 
 permissions:

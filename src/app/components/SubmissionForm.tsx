@@ -151,6 +151,34 @@ ${formData.notes || "Not provided"}`;
       }
 
       let newsletterSubscribed = true;
+      let artistPageQueued = true;
+
+      if (formData.artistPageConsent && formData.bandCampLink.trim()) {
+        try {
+          const queueResponse = await fetch("/api/bandcamp/queue", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              artistName: formData.artistName,
+              bandcampUrl: formData.bandCampLink,
+              source: "submission-form",
+            }),
+          });
+
+          artistPageQueued = queueResponse.ok;
+
+          if (!queueResponse.ok) {
+            console.error(
+              await getErrorMessage(queueResponse, "Bandcamp queue failed")
+            );
+          }
+        } catch (error) {
+          artistPageQueued = false;
+          console.error(error);
+        }
+      }
 
       if (formData.subscribeToNewsletter) {
         const locationFields = getLocationFields(formData.city, formData.region);
@@ -191,10 +219,15 @@ ${formData.notes || "Not provided"}`;
         }
       }
 
+      const followUpMessages = [
+        !artistPageQueued ? "Artist page queue could not be completed." : "",
+        !newsletterSubscribed ? "Newsletter signup could not be completed." : "",
+      ].filter(Boolean);
+
       setStatus(
-        newsletterSubscribed
-          ? "Submission sent. We’re excited to give your track a listen and will get to it as soon as we can. Please allow up to two weeks."
-          : "Submission sent. We’re excited to give your track a listen and will get to it as soon as we can. Please allow up to two weeks. Newsletter signup could not be completed."
+        `Submission sent. We’re excited to give your track a listen and will get to it as soon as we can. Please allow up to two weeks.${
+          followUpMessages.length > 0 ? ` ${followUpMessages.join(" ")}` : ""
+        }`
       );
       setShowPlaylistNudge(true);
       setFormData(initialFormState);
@@ -329,12 +362,17 @@ ${formData.notes || "Not provided"}`;
         Bandcamp link
         <input
           className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
+          required={formData.artistPageConsent}
           type="url"
           name="bandCampLink"
           value={formData.bandCampLink}
           onChange={handleChange}
           placeholder="https://yourband.bandcamp.com"
         />
+        <span className="block text-xs font-semibold text-ink/45">
+          Required if you want Upper Left Indie to feature this artist on the
+          site.
+        </span>
       </label>
 
       <label className="block space-y-2 text-sm font-bold text-ink/70">
