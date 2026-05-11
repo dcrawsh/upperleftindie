@@ -32,6 +32,10 @@ export default function SubmitPage() {
             Share an artist, track, or project that deserves more ears across Oregon,
             Washington, Idaho, Alaska, British Columbia, and the wider Northwest orbit.
           </p>
+          <p className="mt-4 text-base leading-7 text-ink/60">
+            I listen through submissions and add tracks that fit the playlist.
+            Because of volume, I may not be able to respond to every submission.
+          </p>
         </div>
 
         <div className="space-y-6">

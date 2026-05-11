@@ -225,7 +225,7 @@ ${formData.notes || "Not provided"}`;
       ].filter(Boolean);
 
       setStatus(
-        `Submission sent. We’re excited to give your track a listen and will get to it as soon as we can. Please allow up to two weeks.${
+        `Submission sent. Thanks for sharing it. I listen through submissions and add tracks that fit the playlist, though I may not be able to respond to every submission.${
           followUpMessages.length > 0 ? ` ${followUpMessages.join(" ")}` : ""
         }`
       );
