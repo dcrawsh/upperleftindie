@@ -1254,5 +1254,67 @@ export const artists: Artist[] = [
         "url": "https://kingropes.bandcamp.com/album/gravity-and-friction"
       }
     ]
+  },
+  {
+    "name": "When We Met",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://whenwemet.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0043097012_10.jpg",
+    "bio": "When We Met is a duo out of Portland, Oregon. Their collection of music ranges from alt rock, post punk, ethereal grunge to indie folk, dream pop bangers.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://whenwemet.bandcamp.com/"
+      },
+      {
+        "label": "whenwemet.band",
+        "url": "http://www.whenwemet.band"
+      },
+      {
+        "label": "Twitter",
+        "url": "http://www.twitter.com/whenwemetband"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://www.facebook.com/whenwemetband"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/whenwemetband/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Past Lives",
+        "type": "album",
+        "url": "https://whenwemet.bandcamp.com/album/past-lives"
+      },
+      {
+        "title": "Bizarre Love Triangle",
+        "type": "track",
+        "url": "https://whenwemet.bandcamp.com/track/bizarre-love-triangle"
+      },
+      {
+        "title": "Seventeen",
+        "type": "track",
+        "url": "https://whenwemet.bandcamp.com/track/seventeen"
+      },
+      {
+        "title": "Skinwalker Ranch",
+        "type": "track",
+        "url": "https://whenwemet.bandcamp.com/track/skinwalker-ranch"
+      },
+      {
+        "title": "All I Want Now",
+        "type": "track",
+        "url": "https://whenwemet.bandcamp.com/track/all-i-want-now"
+      },
+      {
+        "title": "Where Did They Come From?",
+        "type": "album",
+        "url": "https://whenwemet.bandcamp.com/album/where-did-they-come-from"
+      }
+    ]
   }
 ];
