@@ -1175,5 +1175,30 @@ export const artists: Artist[] = [
         "url": "https://buddywynkoop.bandcamp.com/track/racing"
       }
     ]
+  },
+  {
+    "name": "My Head Is My Only House",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://mhimoh.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2489355878_10.jpg",
+    "bio": "American expressionist rock and roll band",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://mhimoh.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/my_head_is_my_only_house/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "It Isn't You",
+        "type": "album",
+        "url": "https://mhimoh.bandcamp.com/album/it-isnt-you/"
+      }
+    ]
   }
 ];
