@@ -9,6 +9,7 @@ import SiteContainer from "./SiteContainer";
 
 const links = [
   { href: "/submit", label: "Submit" },
+  { href: "/shows", label: "Shows" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];

@@ -1,0 +1,98 @@
+[
+  {
+    "key": "no-fun",
+    "name": "No Fun",
+    "url": "https://www.nofunportland.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "kellys-olympian",
+    "name": "Kelly's Olympian",
+    "url": "https://kellysolympian.com/shows/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "turn-turn-turn",
+    "name": "Turn! Turn! Turn!",
+    "url": "https://turnturnturnpdx.com/entertainment/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "alberta-street-pub",
+    "name": "Alberta Street Pub",
+    "url": "https://www.albertastreetpub.com/music",
+    "parser": "html-lines"
+  },
+  {
+    "key": "mississippi-pizza",
+    "name": "Mississippi Pizza & Atlantis Lounge",
+    "url": "https://mississippipizza.com/calendar/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "bunk-sandwiches",
+    "name": "Bunk Sandwiches",
+    "url": "https://shows.bunksandwiches.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "high-water-mark",
+    "name": "High Water Mark Lounge",
+    "url": "https://www.highwatermarklounge.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "kenton-club",
+    "name": "Kenton Club",
+    "url": "https://www.kentonclub.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "star-theater",
+    "name": "Star Theater",
+    "url": "https://www.startheaterportland.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "swan-dive",
+    "name": "Swan Dive",
+    "url": "https://www.swandivepdx.com/events-2-1",
+    "parser": "html-lines"
+  },
+  {
+    "key": "midnight-society",
+    "name": "The Midnight Society",
+    "url": "https://themidnightsocietypdx.net/the-sx",
+    "parser": "html-lines"
+  },
+  {
+    "key": "showdown",
+    "name": "The Showdown",
+    "url": "https://www.showdownpdx.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "holocene",
+    "name": "Holocene",
+    "url": "https://www.holocene.org/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "hawthorne-hideaway",
+    "name": "Hawthorne Hideaway",
+    "url": "https://www.hh2221.com/scheduled-gigs",
+    "parser": "html-lines"
+  },
+  {
+    "key": "goodfoot",
+    "name": "The Goodfoot",
+    "url": "https://thegoodfoot.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "nova",
+    "name": "Nova PDX",
+    "url": "https://www.novapdxevents.com/",
+    "parser": "html-lines"
+  }
+]
