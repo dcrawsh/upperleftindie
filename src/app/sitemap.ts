@@ -34,6 +34,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/contact`,
       lastModified,
       changeFrequency: "yearly",
+    },
+    {
+      url: `${siteUrl}/support-the-project`,
+      lastModified,
+      changeFrequency: "monthly",
       priority: 0.4,
     },
   ];
