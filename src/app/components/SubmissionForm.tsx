@@ -8,6 +8,7 @@ type FormState = {
   email: string;
   city: string;
   region: string;
+  genre: string;
   songLink: string;
   bandCampLink: string;
   socialLink: string;
@@ -22,6 +23,7 @@ const initialFormState: FormState = {
   email: "",
   city: "",
   region: "",
+  genre: "",
   songLink: "",
   bandCampLink: "",
   socialLink: "",
@@ -43,6 +45,38 @@ const regionOptions = [
   { label: "Other region", value: "other-region" },
 ];
 
+const genreOptions = [
+  { label: "Alternative", value: "alternative" },
+  { label: "Ambient", value: "ambient" },
+  { label: "Americana", value: "americana" },
+  { label: "Country / Alt-Country", value: "country-alt-country" },
+  { label: "Electronic", value: "electronic" },
+  { label: "Emo", value: "emo" },
+  { label: "Experimental", value: "experimental" },
+  { label: "Folk", value: "folk" },
+  { label: "Garage Rock", value: "garage-rock" },
+  { label: "Hardcore", value: "hardcore" },
+  { label: "Hip-hop / Rap", value: "hip-hop-rap" },
+  { label: "Indie Folk", value: "indie-folk" },
+  { label: "Indie Pop", value: "indie-pop" },
+  { label: "Indie Rock", value: "indie-rock" },
+  { label: "Jazz", value: "jazz" },
+  { label: "Metal", value: "metal" },
+  { label: "New Wave / Synthpop", value: "new-wave-synthpop" },
+  { label: "Noise", value: "noise" },
+  { label: "Pop", value: "pop" },
+  { label: "Post-Rock", value: "post-rock" },
+  { label: "Post-punk", value: "post-punk" },
+  { label: "Psych / Psychedelic", value: "psych-psychedelic" },
+  { label: "Punk", value: "punk" },
+  { label: "R&B / Soul", value: "r-and-b-soul" },
+  { label: "Rock", value: "rock" },
+  { label: "Shoegaze / Dream Pop", value: "shoegaze-dream-pop" },
+  { label: "Singer-songwriter", value: "singer-songwriter" },
+  { label: "World / Global", value: "world-global" },
+  { label: "Other", value: "other" },
+];
+
 function getLocationFields(city: string, region: string) {
   const regionOption = regionOptions.find((option) => option.value === region);
 
@@ -52,6 +86,13 @@ function getLocationFields(city: string, region: string) {
     ...(regionOption?.state ? { state: regionOption.state } : {}),
     ...(regionOption?.country ? { country: regionOption.country } : {}),
   };
+}
+
+function getGenreLabel(genre: string) {
+  return (
+    genreOptions.find((option) => option.value === genre)?.label ||
+    "Not provided"
+  );
 }
 
 export default function SubmissionForm() {
@@ -124,6 +165,7 @@ Region: ${
       regionOptions.find((option) => option.value === formData.region)?.label ||
       "Not provided"
     }
+Genre: ${getGenreLabel(formData.genre)}
 Song link: ${formData.songLink}
 Bandcamp link: ${formData.bandCampLink || "Not provided"}
 Social link: ${formData.socialLink || "Not provided"}
@@ -163,6 +205,7 @@ ${formData.notes || "Not provided"}`;
             body: JSON.stringify({
               artistName: formData.artistName,
               bandcampUrl: formData.bandCampLink,
+              genre: getGenreLabel(formData.genre),
               source: "submission-form",
             }),
           });
@@ -200,6 +243,7 @@ ${formData.notes || "Not provided"}`;
                 ...(formData.bandCampLink.trim()
                   ? { band_camp: formData.bandCampLink.trim() }
                   : {}),
+                genre: formData.genre,
                 source_form: "submission-form",
                 role: "artist",
               },
@@ -334,6 +378,26 @@ ${formData.notes || "Not provided"}`;
               Select region
             </option>
             {regionOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="space-y-2 text-sm font-bold text-ink/70">
+          Genre
+          <select
+            className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
+            required
+            name="genre"
+            value={formData.genre}
+            onChange={handleChange}
+          >
+            <option value="" disabled>
+              Select genre
+            </option>
+            {genreOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>

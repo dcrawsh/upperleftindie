@@ -12,10 +12,16 @@ const defaultBranch = "main";
 type QueuePayload = {
   bandcampUrl?: unknown;
   artistName?: unknown;
+  genre?: unknown;
+};
+
+type BandcampSource = {
+  url: string;
+  genre?: string;
 };
 
 type UrlsFile = {
-  urls: string[];
+  urls: BandcampSource[];
   sha?: string;
 };
 
@@ -50,14 +56,47 @@ function normalizeBandcampArtistUrl(value: string) {
   }
 }
 
-function uniqueUrls(urls: string[]) {
-  const seen = new Set<string>();
-  return urls.filter((url) => {
-    const normalized = normalizeBandcampArtistUrl(url);
-    if (!normalized || seen.has(normalized)) return false;
-    seen.add(normalized);
-    return true;
-  });
+function normalizeGenre(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function normalizeSourceEntry(entry: unknown): BandcampSource | null {
+  if (typeof entry === "string") {
+    const url = normalizeBandcampArtistUrl(entry);
+    return url ? { url } : null;
+  }
+
+  if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+    return null;
+  }
+
+  const source = entry as { url?: unknown; genre?: unknown };
+  const url =
+    typeof source.url === "string" ? normalizeBandcampArtistUrl(source.url) : "";
+  if (!url) return null;
+
+  const genre = normalizeGenre(source.genre);
+  return {
+    url,
+    ...(genre ? { genre } : {}),
+  };
+}
+
+function normalizeSourceEntries(entries: unknown[]) {
+  const sourcesByUrl = new Map<string, BandcampSource>();
+
+  for (const entry of entries) {
+    const source = normalizeSourceEntry(entry);
+    if (!source) continue;
+
+    const existingSource = sourcesByUrl.get(source.url);
+    sourcesByUrl.set(source.url, {
+      url: source.url,
+      genre: source.genre || existingSource?.genre,
+    });
+  }
+
+  return [...sourcesByUrl.values()];
 }
 
 async function readLocalUrlsFile(): Promise<UrlsFile> {
@@ -68,10 +107,10 @@ async function readLocalUrlsFile(): Promise<UrlsFile> {
     throw new Error("Bandcamp URLs file must be a JSON array");
   }
 
-  return { urls: urls.map(String) };
+  return { urls: normalizeSourceEntries(urls) };
 }
 
-async function writeLocalUrlsFile(urls: string[]) {
+async function writeLocalUrlsFile(urls: BandcampSource[]) {
   await writeFile(urlsFilePath, `${JSON.stringify(urls, null, 2)}\n`, "utf8");
 }
 
@@ -107,21 +146,21 @@ async function readGithubUrlsFile({
     throw new Error("Bandcamp URLs file must be a JSON array");
   }
 
-  return { urls: urls.map(String), sha: file.sha };
+  return { urls: normalizeSourceEntries(urls), sha: file.sha };
 }
 
 async function writeGithubUrlsFile({
   repository,
   branch,
   token,
-  urls,
+  sources,
   sha,
   artistName,
 }: {
   repository: string;
   branch: string;
   token: string;
-  urls: string[];
+  sources: BandcampSource[];
   sha: string;
   artistName: string;
 }) {
@@ -139,7 +178,7 @@ async function writeGithubUrlsFile({
         branch,
         sha,
         message: `Add Bandcamp artist${artistName ? ` for ${artistName}` : ""}`,
-        content: Buffer.from(`${JSON.stringify(urls, null, 2)}\n`).toString(
+        content: Buffer.from(`${JSON.stringify(sources, null, 2)}\n`).toString(
           "base64"
         ),
       }),
@@ -151,7 +190,15 @@ async function writeGithubUrlsFile({
   }
 }
 
-async function appendUrl(url: string, artistName: string) {
+async function appendUrl({
+  url,
+  artistName,
+  genre,
+}: {
+  url: string;
+  artistName: string;
+  genre: string;
+}) {
   const token =
     process.env.BANDCAMP_URLS_GITHUB_TOKEN ?? process.env.GITHUB_TOKEN ?? "";
   const repository =
@@ -171,12 +218,19 @@ async function appendUrl(url: string, artistName: string) {
   const file = token
     ? await readGithubUrlsFile({ repository, branch, token })
     : await readLocalUrlsFile();
-  const urls = uniqueUrls([...file.urls.map(normalizeBandcampArtistUrl), url]);
-  const added = !uniqueUrls(file.urls.map(normalizeBandcampArtistUrl)).includes(
-    url
-  );
+  const existingSource = file.urls.find((source) => source.url === url);
+  const added = !existingSource;
+  const needsGenreUpdate =
+    Boolean(existingSource) && Boolean(genre) && existingSource?.genre !== genre;
+  const sources = normalizeSourceEntries([
+    ...file.urls,
+    {
+      url,
+      ...(genre ? { genre } : {}),
+    },
+  ]);
 
-  if (added) {
+  if (added || needsGenreUpdate) {
     if (token) {
       if (!file.sha) {
         throw new Error("GitHub file update is missing the current file SHA");
@@ -186,16 +240,16 @@ async function appendUrl(url: string, artistName: string) {
         repository,
         branch,
         token,
-        urls,
+        sources,
         sha: file.sha,
         artistName,
       });
     } else {
-      await writeLocalUrlsFile(urls);
+      await writeLocalUrlsFile(sources);
     }
   }
 
-  return { added, storage };
+  return { added, updated: needsGenreUpdate, storage };
 }
 
 export async function POST(req: NextRequest) {
@@ -205,6 +259,7 @@ export async function POST(req: NextRequest) {
       typeof payload.bandcampUrl === "string" ? payload.bandcampUrl : "";
     const artistName =
       typeof payload.artistName === "string" ? payload.artistName.trim() : "";
+    const genre = normalizeGenre(payload.genre);
     const normalizedUrl = normalizeBandcampArtistUrl(bandcampUrl);
 
     if (!normalizedUrl) {
@@ -214,7 +269,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = await appendUrl(normalizedUrl, artistName);
+    const result = await appendUrl({
+      url: normalizedUrl,
+      artistName,
+      genre,
+    });
 
     return Response.json({
       success: true,

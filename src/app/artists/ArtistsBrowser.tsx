@@ -11,6 +11,7 @@ export type ArtistCard = {
   bandcampUrl: string;
   image?: string;
   bio?: string;
+  submittedGenre?: string;
   tags: string[];
   links: {
     label: string;
@@ -64,6 +65,10 @@ function formatGenre(value: string) {
 }
 
 function getPrimaryGenre(artist: ArtistCard) {
+  if (artist.submittedGenre) {
+    return artist.submittedGenre;
+  }
+
   if (artist.tags[0]) {
     return formatGenre(artist.tags[0]);
   }

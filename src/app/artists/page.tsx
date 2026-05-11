@@ -3,6 +3,8 @@ import { artists as generatedArtists } from "../../data/artists.generated";
 import SiteContainer from "../components/SiteContainer";
 import ArtistsBrowser, { type ArtistCard } from "./ArtistsBrowser";
 
+type BandcampSource = string | { url: string; genre?: string };
+
 function normalizeUrl(url: string) {
   return url.replace(/\/+$/, "").toLowerCase();
 }
@@ -30,7 +32,12 @@ function getNameFromBandcampUrl(url: string) {
   }
 }
 
-const artists: ArtistCard[] = (bandcampUrls as string[]).map((bandcampUrl) => {
+function getBandcampUrl(source: BandcampSource) {
+  return typeof source === "string" ? source : source.url;
+}
+
+const artists: ArtistCard[] = (bandcampUrls as BandcampSource[]).map((source) => {
+  const bandcampUrl = getBandcampUrl(source);
   const generatedArtist = generatedArtists.find(
     (artist) =>
       normalizeUrl(artist.bandcampUrl) === normalizeUrl(bandcampUrl) ||

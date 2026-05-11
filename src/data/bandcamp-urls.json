@@ -1,37 +1,142 @@
 [
-  "https://killmer.bandcamp.com/",
-  "https://timetheft.bandcamp.com/",
-  "https://bonusroomband.bandcamp.com/",
-  "https://thewaysidesmusic.bandcamp.com/",
-  "https://candycigsmusic.bandcamp.com/",
-  "https://gvthdvddy.bandcamp.com/",
-  "https://uncannyvalleygirlspdx.bandcamp.com/",
-  "https://shayleeband.bandcamp.com/",
-  "https://aninvisiblejet.bandcamp.com/",
-  "https://essieandthehum.bandcamp.com/",
-  "https://hearfrontiermedicine.bandcamp.com/",
-  "https://blond-noise.bandcamp.com/",
-  "https://longdeer.bandcamp.com/",
-  "https://orbit17.bandcamp.com/",
-  "https://theupkeeps.bandcamp.com/",
-  "https://fieldsofsilver.bandcamp.com/",
-  "https://thequickandeasyboys.bandcamp.com/",
-  "https://terriblepop.bandcamp.com/",
-  "https://glasssuburban.bandcamp.com/",
-  "https://reigncycle.bandcamp.com/",
-  "https://greatyear.bandcamp.com/",
-  "https://wellkinda.bandcamp.com/",
-  "https://lionsoftheinterstate.bandcamp.com/",
-  "https://trashpandagokart.bandcamp.com/",
-  "https://bikefightband.bandcamp.com/",
-  "https://theeyeseeyous.bandcamp.com/",
-  "https://blisterpdx.bandcamp.com/",
-  "https://newvictorian.bandcamp.com/",
-  "https://etfondle.bandcamp.com/",
-  "https://rosegerbermusic.bandcamp.com/",
-  "https://fountainparkapts.bandcamp.com/",
-  "https://buddywynkoop.bandcamp.com/",
-  "https://mhimoh.bandcamp.com/",
-  "https://kingropes.bandcamp.com/",
-  "https://whenwemet.bandcamp.com/"
+  {
+    "url": "https://killmer.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://timetheft.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://bonusroomband.bandcamp.com/",
+    "genre": "Indie Rock"
+  },
+  {
+    "url": "https://thewaysidesmusic.bandcamp.com/",
+    "genre": "Indie Rock"
+  },
+  {
+    "url": "https://candycigsmusic.bandcamp.com/",
+    "genre": "Indie Pop"
+  },
+  {
+    "url": "https://gvthdvddy.bandcamp.com/",
+    "genre": "Alternative"
+  },
+  {
+    "url": "https://uncannyvalleygirlspdx.bandcamp.com/",
+    "genre": "Punk"
+  },
+  {
+    "url": "https://shayleeband.bandcamp.com/",
+    "genre": "Post-Rock"
+  },
+  {
+    "url": "https://aninvisiblejet.bandcamp.com/",
+    "genre": "Indie Rock"
+  },
+  {
+    "url": "https://essieandthehum.bandcamp.com/",
+    "genre": "Indie Folk"
+  },
+  {
+    "url": "https://hearfrontiermedicine.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://blond-noise.bandcamp.com/",
+    "genre": "Experimental"
+  },
+  {
+    "url": "https://longdeer.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://orbit17.bandcamp.com/",
+    "genre": "Electronic"
+  },
+  {
+    "url": "https://theupkeeps.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://fieldsofsilver.bandcamp.com/",
+    "genre": "Folk"
+  },
+  {
+    "url": "https://thequickandeasyboys.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://terriblepop.bandcamp.com/",
+    "genre": "Indie Rock"
+  },
+  {
+    "url": "https://glasssuburban.bandcamp.com/",
+    "genre": "Indie Rock"
+  },
+  {
+    "url": "https://reigncycle.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://greatyear.bandcamp.com/",
+    "genre": "Emo"
+  },
+  {
+    "url": "https://wellkinda.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://lionsoftheinterstate.bandcamp.com/",
+    "genre": "Indie Pop"
+  },
+  {
+    "url": "https://trashpandagokart.bandcamp.com/",
+    "genre": "Punk"
+  },
+  {
+    "url": "https://bikefightband.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://theeyeseeyous.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://blisterpdx.bandcamp.com/",
+    "genre": "Punk"
+  },
+  {
+    "url": "https://newvictorian.bandcamp.com/",
+    "genre": "Shoegaze / Dream Pop"
+  },
+  {
+    "url": "https://etfondle.bandcamp.com/",
+    "genre": "Singer-songwriter"
+  },
+  {
+    "url": "https://rosegerbermusic.bandcamp.com/",
+    "genre": "Country / Alt-Country"
+  },
+  {
+    "url": "https://fountainparkapts.bandcamp.com/",
+    "genre": "Indie Rock"
+  },
+  {
+    "url": "https://buddywynkoop.bandcamp.com/",
+    "genre": "Punk"
+  },
+  {
+    "url": "https://mhimoh.bandcamp.com/",
+    "genre": "Rock"
+  },
+  {
+    "url": "https://kingropes.bandcamp.com/",
+    "genre": "Americana"
+  },
+  {
+    "url": "https://whenwemet.bandcamp.com/",
+    "genre": "Alternative"
+  }
 ]

@@ -59,6 +59,48 @@ function normalizeBandcampArtistUrl(value) {
   }
 }
 
+function normalizeGenre(value) {
+  return String(value || "").trim();
+}
+
+function normalizeSourceEntry(entry) {
+  if (typeof entry === "string") {
+    return {
+      url: normalizeBandcampArtistUrl(entry),
+      genre: "",
+    };
+  }
+
+  if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+    return {
+      url: "",
+      genre: "",
+    };
+  }
+
+  return {
+    url: normalizeBandcampArtistUrl(entry.url),
+    genre: normalizeGenre(entry.genre),
+  };
+}
+
+function getArtistSources(rawUrls) {
+  const sourcesByUrl = new Map();
+
+  for (const entry of rawUrls) {
+    const source = normalizeSourceEntry(entry);
+    if (!source.url) continue;
+
+    const existingSource = sourcesByUrl.get(source.url);
+    sourcesByUrl.set(source.url, {
+      url: source.url,
+      genre: existingSource?.genre || source.genre,
+    });
+  }
+
+  return [...sourcesByUrl.values()];
+}
+
 function getFallbackName(url) {
   try {
     return new URL(url).hostname.replace(/^www\./, "").replace(/\.bandcamp\.com$/, "");
@@ -315,13 +357,14 @@ async function fetchHtml(url) {
   };
 }
 
-async function buildArtist(bandcampUrl) {
+async function buildArtist(source) {
   const cleanUrl =
-    normalizeBandcampArtistUrl(bandcampUrl) || normalizeUrl(bandcampUrl) + "/";
+    normalizeBandcampArtistUrl(source.url) || normalizeUrl(source.url) + "/";
 
   try {
     const { finalUrl, html } = await fetchHtml(cleanUrl);
     const resolvedUrl = normalizeUrl(finalUrl || cleanUrl) + "/";
+    const tags = getTags(html);
 
     return {
       name: getBandName(html, resolvedUrl),
@@ -329,7 +372,8 @@ async function buildArtist(bandcampUrl) {
       bandcampUrl: cleanUrl,
       image: getBandcampProfileImage(html),
       bio: getBio(html),
-      tags: getTags(html),
+      ...(source.genre ? { submittedGenre: source.genre } : {}),
+      tags: source.genre ? [source.genre, ...tags] : tags,
       links: getExternalLinks(html, cleanUrl),
       releases: getReleases(html, resolvedUrl),
     };
@@ -341,7 +385,8 @@ async function buildArtist(bandcampUrl) {
       bandcampUrl: cleanUrl,
       image: "",
       bio: "Bandcamp profile queued for metadata.",
-      tags: [],
+      ...(source.genre ? { submittedGenre: source.genre } : {}),
+      tags: source.genre ? [source.genre] : [],
       links: [{ label: "Bandcamp", url: cleanUrl }],
       releases: [],
     };
@@ -367,6 +412,7 @@ export type Artist = {
   bandcampUrl: string;
   image?: string;
   bio?: string;
+  submittedGenre?: string;
   tags: string[];
   links: ArtistLink[];
   releases: ArtistRelease[];
@@ -382,14 +428,12 @@ async function main() {
     throw new Error("src/data/bandcamp-urls.json must be an array of URLs");
   }
 
-  const urls = [
-    ...new Set(rawUrls.map(normalizeBandcampArtistUrl).filter(Boolean)),
-  ];
+  const sources = getArtistSources(rawUrls);
   const artists = [];
 
-  for (const url of urls) {
-    console.log(`Fetching ${url}`);
-    artists.push(await buildArtist(url));
+  for (const source of sources) {
+    console.log(`Fetching ${source.url}`);
+    artists.push(await buildArtist(source));
   }
 
   await writeFile(outputPath, toGeneratedFile(artists), "utf8");

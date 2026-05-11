@@ -16,6 +16,7 @@ export type Artist = {
   bandcampUrl: string;
   image?: string;
   bio?: string;
+  submittedGenre?: string;
   tags: string[];
   links: ArtistLink[];
   releases: ArtistRelease[];
@@ -28,7 +29,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://killmer.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0035077765_10.jpg",
     "bio": "Killmer is a 3-piece rock band that packages the intensity of punk rock, the soul of blues, and the loud riffs of rock & roll into their unique sound. With dual lead vocalists, they create rich harmonies over energetic rhythmic grooves. For fans of White Denim, Ty Segall, King Gizzard and the Lizard Wizard, and Wand. ... more",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -69,7 +73,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://timetheft.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0042060624_10.jpg",
     "bio": "Medium-Soft rock band from Portland, Oregon.",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -110,7 +117,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://bonusroomband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0035689173_10.jpg",
     "bio": "Upcoming Shows - \"BUNK\" EP Release Show!!! November 7th @ Alberta Street Pub with Animal Eyes and Ghost Frog BEN-CHRIS-DERRIN-ERIK-WES Feel good band of the summer. Portland, Oregon ... more",
-    "tags": [],
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -155,7 +165,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://thewaysidesmusic.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0038268184_10.jpg",
     "bio": "The Waysides write visceral, jangle guitar-infused indie rock that blends lush dream-pop vocals with the raw spirit and DIY ethos of punk. Their sophomore album, Elsewhere, explores the journey through loss and grief, delivering a poignant mix of sorrow, acceptance, and hope, all wrapped in their evocative and electrifying sound. ... more",
-    "tags": [],
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -209,7 +222,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://candycigsmusic.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0041258213_10.jpg",
     "bio": "Lane Mueller.",
-    "tags": [],
+    "submittedGenre": "Indie Pop",
+    "tags": [
+      "Indie Pop"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -252,7 +268,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://gvthdvddy.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a3653743646_10.jpg",
     "bio": "K.Robinson J. Endicott GVTHDVDDY.com",
-    "tags": [],
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -285,7 +304,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://uncannyvalleygirlspdx.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0037806411_10.jpg",
     "bio": "Portland Oregon スケバン rocking roll from Cap Hill in Sea Apple, Washington. Cadence Welles (She/Her) - Vocals, guitar Coree Hogan (They/Them) - Lead guitar Juliet Terril (She/Her) - Bass Ryan Cripps (She/Her) - Drums ... more",
-    "tags": [],
+    "submittedGenre": "Punk",
+    "tags": [
+      "Punk"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -319,7 +341,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a0183651852_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
-    "tags": [],
+    "submittedGenre": "Post-Rock",
+    "tags": [
+      "Post-Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -348,7 +373,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://aninvisiblejet.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0039684643_10.jpg",
     "bio": "An Invisible Jet is a Portland, OR music project started by Matt Blum in 2020. An Invisible Jet focuses on guitar-driven music deriving its influences from 90's indie rock, metal, post-punk, and prog. Their signature sound typically involves an intricate guitar-riff at the heart of the song, with shifting dynamics that lead the listener down a rabbit hole (or k hole). ... more",
-    "tags": [],
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -393,7 +421,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://essieandthehum.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a4149136458_10.jpg",
     "bio": "Essie and The Hum craft ethereal indie-folk rock shaped by the magic of live performance. Based in Portland, OR, their sound drifts from intimate, slow-burn ballads to full-throttle rock moments, pulling listeners into a wormhole they won’t want to leave. ... more",
-    "tags": [],
+    "submittedGenre": "Indie Folk",
+    "tags": [
+      "Indie Folk"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -414,7 +445,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://hearfrontiermedicine.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a3435300719_10.jpg",
     "bio": "Frontier Medicine are a music recording duo based in Portland, Oregon formed by Jackson Conrad and Jetamio Kennedy. Frontier Medicine’s sound represents a fresh interpretation of nostalgia, with elements of folk, soul, grunge, Americana, and progressive rock. Drawing from a multitude of influences, their sound is best described simply as “rock and roll.” ... more",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -439,7 +473,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0044362438_10.jpg",
     "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. ... more",
-    "tags": [],
+    "submittedGenre": "Experimental",
+    "tags": [
+      "Experimental"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -477,7 +514,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://longdeer.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0037215591_10.jpg",
     "bio": "Somewhere in the woods of the Pacific North West. They are compelled to play 1000 shows. FoLlOw",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -526,7 +566,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://orbit17.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2366914491_10.jpg",
     "bio": "Orbit 17 weaves catchy melodies, funky rhythms and hypnotic grooves into intricate electro-rock.",
-    "tags": [],
+    "submittedGenre": "Electronic",
+    "tags": [
+      "Electronic"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -559,7 +602,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://theupkeeps.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0025926557_10.jpg",
     "bio": "\"The Upkeeps are one of the most entertaining bands on the Portland rock scene today. From catchy hooks to their signature look, wild gestures, and non-stop crowd interaction, The Upkeeps play every show like a sold-out arena set.\" - PDX Presents SYE VILES- VOCALS/GUITAR AARON BRIXTON- LEADS OLIVER SWEET- BASS KURT DOPAMINE- DRUMS ... more",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -605,7 +651,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://fieldsofsilver.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a4172428797_10.jpg",
     "bio": "grunge-y folk from the PNW",
-    "tags": [],
+    "submittedGenre": "Folk",
+    "tags": [
+      "Folk"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -634,7 +683,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://thequickandeasyboys.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0037450242_10.jpg",
     "bio": "The Quick & Easy Boys are a power-trio from Portland, OR. They play rock and roll...and they do it well.",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -665,7 +717,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://terriblepop.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0040770732_100.png\",\"https_url\":\"https://f4.bcbits.com/img/0040770732_100.png\",\"format\":100,\"width\":975,\"height\":180},\"paypal_image\":{\"image_id\":40770732,\"url\":\"https://f4.bcbits.com/img/0040770732_101.jpg\",\"https_url\":\"https://f4.bcbits.com/img/0040770732_101.jpg\",\"format\":101,\"width\":488,\"height\":90},\"using_map\":null,\"area_tags\":null},\"header_phone\":null,\"design\":{\"bg_color\":\"FFBB00\",\"text_color\":\"363636\",\"secondary_text_color\":\"888888\",\"link_color\":\"0687F5\",\"body_color\":\"FFBB00\",\"hd_ft_color\":\"CCB166\",\"navbar_bg_color\":\"C4A140\",\"invert_iconography\":null,\"tile_bg\":null,\"bg_halign\":\"l\",\"bg_image_id\":null,\"bg_file_name\":null,\"defaultbg\":false,\"bg_fixed\":null,\"bg_behavior\":\"r\"},\"currency\":\"USD\",\"fan_email\":null,\"thanks_enabled\":1,\"reviews_enabled\":1,\"is_label\":false,\"has_label\":false,\"paypal_matching_label_id\":null,\"merch_enabled\":true,\"google_analytics_id\":null,\"has_recommendations\":false,\"has_tralbums\":true,\"has_public_tralbums\":true,\"has_public_merch\":false,\"has_any_downloads\":true,\"has_discounts\":false,\"has_download_codes\":false,\"has_policies\":false,\"sites\":[],\"navbar_items\":[{\"url\":\"/music\",\"title\":\"music\",\"nav_type\":\"m\"},{\"url\":\"/merch\",\"title\":\"merch\",\"nav_type\":\"p\"},{\"url\":\"/live\",\"title\":\"live",
     "bio": "Terrible Pop is a band from Portland, OR. Songs with heart under the hood. Somewhere between stupid and sincere. Thank you for your time. Instagram: @terrible.pop Booking/questions/critique: terriblepopmusic@gmail.com ... more",
-    "tags": [],
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -696,7 +751,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://glasssuburban.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0039746000_10.jpg",
     "bio": "Semi-nostalgic indie rock from Portland and its various and sundry suburbs. Sounds like offset guitars and lazy afternoons in the mid-nineties.",
-    "tags": [],
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -742,7 +800,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://reigncycle.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a1572774560_10.jpg",
     "bio": "Born in the brains of two young men under a teary sky. Nursed from the front seats of a compact car and the garage of a mansion to Portland's ever-reaching natural beauty and its steadfast inspiration. Set free with integrity and purpose. Given with love. ... more",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -767,7 +828,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://greatyear.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0032612564_10.jpg",
     "bio": "Recreational Sadness League Champs since 2022 Alex. Sean. Gray. Keagan.",
-    "tags": [],
+    "submittedGenre": "Emo",
+    "tags": [
+      "Emo"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -793,7 +857,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://wellkinda.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a3283650272_10.jpg",
     "bio": "track by Well Kinda",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -814,7 +881,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://lionsoftheinterstate.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0043714849_10.jpg",
     "bio": "The combined talents of Braxeling mainstays Ben Alberts, Arturo Diaz, Kyla Henry, Rich Millward and Jeremy Petersen. The band has released its second full-length, \"Blossom,\" an eclectic array of dreamy-pop greatness.",
-    "tags": [],
+    "submittedGenre": "Indie Pop",
+    "tags": [
+      "Indie Pop"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -860,7 +930,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://trashpandagokart.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0043974662_10.jpg",
     "bio": "power twee lesbian raccoon rock from Zinnia & Selena on the Island of Misfit Toys the moon is our bass player, raccoons are the only gods you need \"herstory in the making\" \"chaotic cartooniness turned up to 11\" \"heavy yet whimsical\" ... more",
-    "tags": [],
+    "submittedGenre": "Punk",
+    "tags": [
+      "Punk"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -914,7 +987,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://bikefightband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2665990410_10.jpg",
     "bio": "Just some good ol' boys, never meanin' no harm.",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -935,7 +1011,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://theeyeseeyous.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2421388631_10.jpg",
     "bio": "Formed in 2024 in Portland, OR by dueling guitarist/vocalists John Rivers and Leila Siegel, as well as Aadit Bagdi (bass) and David O. (drums), the Eye See You's draw from an eclectic and diverse mix of influences to create a sound that is uniquely their own, bridging the gaps between virtuosity, emotional catharsis, danceability, lush guitar textures, and pure rock fury. ... more",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -956,7 +1035,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://blisterpdx.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0035245497_10.jpg",
     "bio": "pdx death punk cult worship.",
-    "tags": [],
+    "submittedGenre": "Punk",
+    "tags": [
+      "Punk"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -982,7 +1064,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://newvictorian.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a0524182842_10.jpg",
     "bio": "Rooted in the rainy hush of Portland, Oregon, New Victorian crafts ethereal music for the spaces in between. Like a dream you’re not quite ready to leave, they blend earnest, heart-pinned-to-the-sleeve songwriting with explosive sonic exploration, weaving a soundscape that is both intimate and otherworldly. ... more",
-    "tags": [],
+    "submittedGenre": "Shoegaze / Dream Pop",
+    "tags": [
+      "Shoegaze / Dream Pop"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -1015,7 +1100,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://etfondle.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0044265512_10.jpg",
     "bio": "#noloudmusic",
-    "tags": [],
+    "submittedGenre": "Singer-songwriter",
+    "tags": [
+      "Singer-songwriter"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -1061,7 +1149,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://rosegerbermusic.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0041874492_10.jpg",
     "bio": "Based in Portland, OR, Rose Gerber is an American roots explorer, incorporating country, folk, rock, alt-rock, and alt-country into a seamless signature aesthetic, where cowboy boots meets Doc Martins.",
-    "tags": [],
+    "submittedGenre": "Country / Alt-Country",
+    "tags": [
+      "Country / Alt-Country"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -1111,7 +1202,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://fountainparkapts.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a1320570202_10.jpg",
     "bio": "booking/collabs/ saying hi: email: fountainparkaptsmusic@gmail.com",
-    "tags": [],
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -1132,7 +1226,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://buddywynkoop.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0044008727_10.jpg",
     "bio": "Buddy Wynkoop is a six piece art punk outfit that combines a barrage of spoken word existentialism, shout-sung melodies and a unique approach to structure. Formed in the summer of 2019 in a basement in Portland, Or.",
-    "tags": [],
+    "submittedGenre": "Punk",
+    "tags": [
+      "Punk"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -1182,7 +1279,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://mhimoh.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2489355878_10.jpg",
     "bio": "American expressionist rock and roll band",
-    "tags": [],
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -1207,7 +1307,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://kingropes.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0041997329_10.jpg",
     "bio": "King Ropes’ 6th full length album, Idaho, is soaked in \"The Spirit of The West\". Whatever that means. Riffing on the idea of Idaho as a kind of misunderstood underdog, the band is more interested in evoking a world both remarkably gorgeous and harshly unforgiving. The band is carving out a sound for itself that reflects modern life in The American West — ... more",
-    "tags": [],
+    "submittedGenre": "Americana",
+    "tags": [
+      "Americana"
+    ],
     "links": [
       {
         "label": "Bandcamp",
@@ -1261,7 +1364,10 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://whenwemet.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0043097012_10.jpg",
     "bio": "When We Met is a duo out of Portland, Oregon. Their collection of music ranges from alt rock, post punk, ethereal grunge to indie folk, dream pop bangers.",
-    "tags": [],
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
     "links": [
       {
         "label": "Bandcamp",
