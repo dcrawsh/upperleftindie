@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import SupportOptions from "./SupportOptions";
 
 export const metadata: Metadata = {
-  title: "Support Upper Left Indie",
+  title: "Support the Project",
   description:
     "Simple ways to support Upper Left Indie and help keep Northwest artist submissions free.",
   alternates: {
-    canonical: "/support",
+    canonical: "/support-the-project",
   },
   openGraph: {
-    title: "Support Upper Left Indie",
+    title: "Support the Project | Upper Left Indie",
     description:
       "Simple ways to support Upper Left Indie and help keep Northwest artist submissions free.",
-    url: "/support",
+    url: "/support-the-project",
   },
 };
 
@@ -25,7 +25,7 @@ export default function SupportPage() {
         </p>
         <div className="mb-10 max-w-3xl">
           <h1 className="text-4xl font-black leading-tight text-ink md:text-6xl">
-            Support Upper Left Indie
+            Support the Project
           </h1>
           <p className="mt-6 text-lg leading-8 text-ink/70">
             Upper Left Indie is independently run and community supported. If
@@ -40,4 +40,3 @@ export default function SupportPage() {
     </section>
   );
 }
-

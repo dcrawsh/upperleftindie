@@ -34,10 +34,10 @@ export default function BlogPage() {
             help keep submissions free and help us spend more time supporting
             underheard Northwest artists.{" "}
             <Link
-              href="/support"
+              href="/support-the-project"
               className="font-bold text-ink underline decoration-clay underline-offset-4"
             >
-              Support
+              Support the project
             </Link>
           </p>
         </div>

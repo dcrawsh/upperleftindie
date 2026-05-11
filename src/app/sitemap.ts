@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
     },
     {
-      url: `${siteUrl}/support`,
+      url: `${siteUrl}/support-the-project`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.4,

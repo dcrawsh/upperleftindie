@@ -2,10 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Thanks for the Support",
+  title: "Thanks for Supporting the Project",
   description: "Thank you for supporting Upper Left Indie.",
   alternates: {
-    canonical: "/support/success",
+    canonical: "/support-the-project/success",
   },
 };
 
@@ -42,4 +42,3 @@ export default function SupportSuccessPage() {
     </section>
   );
 }
-

@@ -16,7 +16,7 @@ export const supportOptions: SupportOption[] = [
     key: "buy-a-coffee",
     title: "Buy a Coffee",
     amount: "$3",
-    description: "Just a small thank you/support tip.",
+    description: "Just a small thank you tip.",
   },
   {
     key: "support-playlist",
@@ -33,10 +33,9 @@ export const supportOptions: SupportOption[] = [
   },
   {
     key: "support-upper-left-indie",
-    title: "Support Upper Left Indie",
+    title: "Support the Project",
     amount: "$20",
     description:
       "Helps fund artist features, merch experiments, photography, writing, and future local projects.",
   },
 ];
-

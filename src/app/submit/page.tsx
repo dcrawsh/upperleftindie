@@ -46,10 +46,10 @@ export default function SubmitPage() {
               supporting underheard Northwest artists.
             </p>
             <Link
-              href="/support"
+              href="/support-the-project"
               className="mt-4 inline-block rounded-full border border-ink/15 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-ink transition hover:border-clay hover:text-clay"
             >
-              Support the tip jar
+              Support the project
             </Link>
           </aside>
         </div>

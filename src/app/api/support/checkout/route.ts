@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import type { SupportOptionKey } from "../../../support/supportData";
+import type { SupportOptionKey } from "../../../support-the-project/supportData";
 
 export const runtime = "nodejs";
 
@@ -52,8 +52,8 @@ async function createStripeCheckoutSession(req: NextRequest, priceId: string) {
   const siteUrl = getSiteUrl(req);
   const body = new URLSearchParams({
     mode: "payment",
-    success_url: `${siteUrl}/support/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${siteUrl}/support?checkout=cancelled`,
+    success_url: `${siteUrl}/support-the-project/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${siteUrl}/support-the-project?checkout=cancelled`,
     "line_items[0][price]": priceId,
     "line_items[0][quantity]": "1",
   });
