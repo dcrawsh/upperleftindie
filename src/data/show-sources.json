@@ -1,80 +1,98 @@
 [
   {
-    "key": "no-fun",
-    "name": "No Fun",
-    "url": "https://www.nofunportland.com/",
+    "key": "45-east",
+    "name": "45 East",
+    "url": "https://www.45eastpdx.com/events",
     "parser": "html-lines"
   },
   {
-    "key": "kellys-olympian",
-    "name": "Kelly's Olympian",
-    "url": "https://kellysolympian.com/shows/",
+    "key": "als-den",
+    "name": "Al's Den",
+    "url": "https://www.mcmenamins.com/crystal-hotel/als-den",
     "parser": "html-lines"
   },
   {
-    "key": "turn-turn-turn",
-    "name": "Turn! Turn! Turn!",
-    "url": "https://turnturnturnpdx.com/entertainment/",
+    "key": "aladdin-theater",
+    "name": "Aladdin Theater",
+    "url": "https://www.aladdin-theater.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "alberta-abbey",
+    "name": "Alberta Abbey",
+    "url": "https://www.albertaabbey.org/calendar",
+    "parser": "html-lines"
+  },
+  {
+    "key": "alberta-rose-theatre",
+    "name": "Alberta Rose Theatre",
+    "url": "https://albertarosetheatre.com/events/",
     "parser": "html-lines"
   },
   {
     "key": "alberta-street-pub",
     "name": "Alberta Street Pub",
-    "url": "https://www.albertastreetpub.com/music",
+    "url": "https://www.albertastreetpub.com/events",
     "parser": "html-lines"
   },
   {
-    "key": "mississippi-pizza",
-    "name": "Mississippi Pizza & Atlantis Lounge",
-    "url": "https://mississippipizza.com/calendar/",
+    "key": "arbor-beer-lodge",
+    "name": "Arbor Beer Lodge",
+    "url": "https://www.arborbeerlodge.com/",
     "parser": "html-lines"
   },
   {
-    "key": "bunk-sandwiches",
-    "name": "Bunk Sandwiches",
+    "key": "arlene-schnitzer-concert-hall",
+    "name": "Arlene Schnitzer Concert Hall",
+    "url": "https://www.portland5.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "atlantis-lounge",
+    "name": "Atlantis Lounge",
+    "url": "https://dopdx.com/venues/atlantis-lounge",
+    "parser": "html-lines"
+  },
+  {
+    "key": "big-legrowlski",
+    "name": "The Big Legrowlski",
+    "url": "https://www.biglegrowlski.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "bunk-bar",
+    "name": "Bunk Bar",
     "url": "https://shows.bunksandwiches.com/",
     "parser": "html-lines"
   },
   {
-    "key": "high-water-mark",
-    "name": "High Water Mark Lounge",
-    "url": "https://www.highwatermarklounge.com/",
+    "key": "cascades-amphitheater",
+    "name": "Cascades Amphitheater",
+    "url": "https://www.mcmenamins.com/edgefield/cascades-amphitheater",
     "parser": "html-lines"
   },
   {
-    "key": "kenton-club",
-    "name": "Kenton Club",
-    "url": "https://www.kentonclub.com/",
+    "key": "crystal-ballroom",
+    "name": "Crystal Ballroom",
+    "url": "https://www.mcmenamins.com/crystal-ballroom",
     "parser": "html-lines"
   },
   {
-    "key": "star-theater",
-    "name": "Star Theater",
-    "url": "https://www.startheaterportland.com/",
+    "key": "dantes",
+    "name": "Dante's",
+    "url": "https://www.danteslive.com/events",
     "parser": "html-lines"
   },
   {
-    "key": "swan-dive",
-    "name": "Swan Dive",
-    "url": "https://www.swandivepdx.com/events-2-1",
+    "key": "edgefield",
+    "name": "Edgefield",
+    "url": "https://www.mcmenamins.com/edgefield",
     "parser": "html-lines"
   },
   {
-    "key": "midnight-society",
-    "name": "The Midnight Society",
-    "url": "https://themidnightsocietypdx.net/the-sx",
-    "parser": "html-lines"
-  },
-  {
-    "key": "showdown",
-    "name": "The Showdown",
-    "url": "https://www.showdownpdx.com/",
-    "parser": "html-lines"
-  },
-  {
-    "key": "holocene",
-    "name": "Holocene",
-    "url": "https://www.holocene.org/",
+    "key": "grand-lodge",
+    "name": "Grand Lodge",
+    "url": "https://www.mcmenamins.com/grand-lodge",
     "parser": "html-lines"
   },
   {
@@ -84,15 +102,327 @@
     "parser": "html-lines"
   },
   {
-    "key": "goodfoot",
-    "name": "The Goodfoot",
-    "url": "https://thegoodfoot.com/",
+    "key": "hawthorne-lounge",
+    "name": "Hawthorne Lounge",
+    "url": "https://www.hawthornelounge.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "hawthorne-theatre",
+    "name": "Hawthorne Theatre",
+    "url": "https://hawthornetheatre.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "haymaker",
+    "name": "Haymaker",
+    "url": "https://www.haymakerpdx.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "high-limit-room",
+    "name": "High Limit Room",
+    "url": "https://highlimitroompdx.com/shows/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "high-water-mark",
+    "name": "High Water Mark",
+    "url": "https://www.highwatermarklounge.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "holocene",
+    "name": "Holocene",
+    "url": "https://www.holocene.org/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "jack-london-revue",
+    "name": "Jack London Revue",
+    "url": "https://www.jacklondonrevue.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "keller-auditorium",
+    "name": "Keller Auditorium",
+    "url": "https://www.portland5.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "kellys-olympian",
+    "name": "Kelly's Olympian",
+    "url": "https://www.kellysolympian.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "kenton-club",
+    "name": "Kenton Club",
+    "url": "https://www.kentonclub.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "latelier-yaffe",
+    "name": "L'Atelier Yaffe",
+    "url": "https://www.latelierpdx.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "laurelthirst",
+    "name": "Laurelthirst Public House",
+    "url": "https://laurelthirst.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "lavernes",
+    "name": "Laverne's",
+    "url": "https://lavernespdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "mississippi-pizza",
+    "name": "Mississippi Pizza & Atlantis Lounge",
+    "url": "https://mississippipizza.com/calendar/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "mission-theater",
+    "name": "Mission Theater",
+    "url": "https://www.mcmenamins.com/mission-theater",
+    "parser": "html-lines"
+  },
+  {
+    "key": "mississippi-studios",
+    "name": "Mississippi Studios",
+    "url": "https://mississippistudios.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "moda-center",
+    "name": "Moda Center",
+    "url": "https://www.rosequarter.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "music-millennium",
+    "name": "Music Millennium",
+    "url": "https://musicmillennium.com/Events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "no-fun",
+    "name": "No Fun Bar",
+    "url": "https://www.nofunbar.com/events",
     "parser": "html-lines"
   },
   {
     "key": "nova",
     "name": "Nova PDX",
     "url": "https://www.novapdxevents.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "pioneer-courthouse-square",
+    "name": "Pioneer Courthouse Square",
+    "url": "https://www.thesquarepdx.org/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "polaris-hall",
+    "name": "Polaris Hall",
+    "url": "https://www.polarishall.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "ponderosa-lounge",
+    "name": "Ponderosa Lounge & Grill",
+    "url": "https://ponderosapdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "process-pdx",
+    "name": "Process PDX",
+    "url": "https://www.processpdx.club/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "providence-park",
+    "name": "Providence Park",
+    "url": "https://www.ptfcmap.com/schedule",
+    "parser": "html-lines"
+  },
+  {
+    "key": "realm",
+    "name": "Realm",
+    "url": "https://dopdx.com/venues/re-lm-pdx",
+    "parser": "html-lines"
+  },
+  {
+    "key": "revolution-hall",
+    "name": "Revolution Hall",
+    "url": "https://www.revolutionhall.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "roseland-theater",
+    "name": "Roseland Theater",
+    "url": "https://roselandpdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "show-bar-rev-hall",
+    "name": "Show Bar @ Rev Hall",
+    "url": "https://www.revolutionhall.com/show-bar/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "showdown",
+    "name": "Showdown Saloon",
+    "url": "https://www.showdownpdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "star-theater",
+    "name": "Star Theater",
+    "url": "https://www.startheaterportland.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "strum",
+    "name": "Strum",
+    "url": "https://strumpdx.com/shows/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "swan-dive",
+    "name": "Swan Dive",
+    "url": "https://www.swandivepdx.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-1905",
+    "name": "The 1905",
+    "url": "https://the1905.org/calendar",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-coffin",
+    "name": "The Coffin",
+    "url": "https://www.thecoffinclubpdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-den",
+    "name": "The Den",
+    "url": "https://www.thedenpdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-get-down",
+    "name": "The Get Down",
+    "url": "https://thegetdownpdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "goodfoot",
+    "name": "The Goodfoot",
+    "url": "https://thegoodfoot.com/events/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-griffin-house",
+    "name": "The Griffin House",
+    "url": "https://www.thegriffinhouse.com/happenings",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-nest",
+    "name": "The Nest",
+    "url": "https://dopdx.com/venues/the-nest-lounge",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-off-beat",
+    "name": "The Off Beat",
+    "url": "https://friendsofnoise.org/the-off-beat/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-old-church",
+    "name": "The Old Church Concert Hall",
+    "url": "https://www.theoldchurch.org/calendar",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-peculiarium",
+    "name": "The Peculiarium",
+    "url": "https://peculiarium.com/pages/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "midnight-society",
+    "name": "The Six below The Midnight Society",
+    "url": "https://themidnightsocietypdx.net/the-sx",
+    "parser": "html-lines"
+  },
+  {
+    "key": "the-spare-room",
+    "name": "The Spare Room Restaurant & Lounge",
+    "url": "https://www.spareroomrestaurant.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "topaz-farm",
+    "name": "Topaz Farm",
+    "url": "https://topazfarm.com/calendar",
+    "parser": "html-lines"
+  },
+  {
+    "key": "turn-turn-turn",
+    "name": "Turn! Turn! Turn!",
+    "url": "https://turnturnturnpdx.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "twilight-cafe-and-bar",
+    "name": "Twilight Cafe and Bar",
+    "url": "https://twilightcafeandbar.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "village-ballroom",
+    "name": "Village Ballroom",
+    "url": "https://www.villageballroom.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "white-eagle",
+    "name": "White Eagle",
+    "url": "https://www.mcmenamins.com/white-eagle",
+    "parser": "html-lines"
+  },
+  {
+    "key": "william-temple-house",
+    "name": "William Temple House",
+    "url": "https://www.williamtemple.org/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "winningstad-theatre",
+    "name": "Winningstad Theatre",
+    "url": "https://www.portland5.com/events",
+    "parser": "html-lines"
+  },
+  {
+    "key": "wonder-ballroom",
+    "name": "Wonder Ballroom",
+    "url": "https://www.wonderballroom.com/",
+    "parser": "html-lines"
+  },
+  {
+    "key": "wyrd-hut",
+    "name": "Wyrd Hut",
+    "url": "https://dopdx.com/venues/wyrd-hut",
     "parser": "html-lines"
   }
 ]
