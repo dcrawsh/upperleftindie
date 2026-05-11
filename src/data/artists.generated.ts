@@ -1200,5 +1200,59 @@ export const artists: Artist[] = [
         "url": "https://mhimoh.bandcamp.com/album/it-isnt-you/"
       }
     ]
+  },
+  {
+    "name": "KING ROPES",
+    "location": "Bozeman, montana",
+    "bandcampUrl": "https://kingropes.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041997329_10.jpg",
+    "bio": "King Ropes’ 6th full length album, Idaho, is soaked in \"The Spirit of The West\". Whatever that means. Riffing on the idea of Idaho as a kind of misunderstood underdog, the band is more interested in evoking a world both remarkably gorgeous and harshly unforgiving. The band is carving out a sound for itself that reflects modern life in The American West — ... more",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://kingropes.bandcamp.com/"
+      },
+      {
+        "label": "kingropesband.com",
+        "url": "http://kingropesband.com"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/kingropesband/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "IDAHO King Ropes",
+        "type": "album",
+        "url": "https://kingropes.bandcamp.com/album/idaho"
+      },
+      {
+        "title": "Super Natural",
+        "type": "album",
+        "url": "https://kingropes.bandcamp.com/album/super-natural"
+      },
+      {
+        "title": "Way Out West",
+        "type": "album",
+        "url": "https://kingropes.bandcamp.com/album/way-out-west"
+      },
+      {
+        "title": "Big Man on the TV",
+        "type": "track",
+        "url": "https://kingropes.bandcamp.com/track/big-man-on-the-tv-3"
+      },
+      {
+        "title": "Go Back Where They Came From",
+        "type": "album",
+        "url": "https://kingropes.bandcamp.com/album/go-back-where-they-came-from"
+      },
+      {
+        "title": "Gravity and Friction King Ropes",
+        "type": "album",
+        "url": "https://kingropes.bandcamp.com/album/gravity-and-friction"
+      }
+    ]
   }
 ];
