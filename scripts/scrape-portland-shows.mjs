@@ -31,11 +31,37 @@ function decodeEntities(value = "") {
     .replace(/&nbsp;/g, " ");
 }
 
-function htmlToLines(html) {
+function normalizeHref(href, sourceUrl) {
+  if (!href || /^(?:#|mailto:|tel:|javascript:)/i.test(href)) return "";
+
+  try {
+    return new URL(decodeEntities(href), sourceUrl).toString();
+  } catch {
+    return "";
+  }
+}
+
+function htmlToLineItems(html, sourceUrl) {
+  const linkMarker = "ULI_EVENT_URL";
+  const withoutInactiveContent = html
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ");
+  const withLinkMarkers = withoutInactiveContent.replace(
+    /<a\b([^>]*)>([\s\S]*?)<\/a>/gi,
+    (match, attrs, label) => {
+      const hrefMatch = attrs.match(
+        /\bhref\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s>]+))/i
+      );
+      const href = hrefMatch?.[1] || hrefMatch?.[2] || hrefMatch?.[3] || "";
+      const url = normalizeHref(href, sourceUrl);
+      const text = stripTags(label);
+
+      return `${text}${url ? ` [[${linkMarker}:${url}]]` : ""}`;
+    }
+  );
+
   return decodeEntities(
-    html
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    withLinkMarkers
       .replace(
         /<\/?(?:article|aside|br|div|figcaption|h[1-6]|header|li|main|p|section|time|ul|ol)[^>]*>/gi,
         "\n"
@@ -44,7 +70,19 @@ function htmlToLines(html) {
   )
     .split(/\n+/)
     .map((line) => line.replace(/\s+/g, " ").trim())
-    .filter(Boolean);
+    .map((line) => {
+      const urlMatch = line.match(new RegExp(`\\[\\[${linkMarker}:([^\\]]+)\\]\\]`));
+      const text = line
+        .replace(new RegExp(`\\s*\\[\\[${linkMarker}:[^\\]]+\\]\\]\\s*`, "g"), " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      return {
+        text,
+        url: urlMatch?.[1] || "",
+      };
+    })
+    .filter((line) => line.text);
 }
 
 function getNestedName(value) {
@@ -237,54 +275,65 @@ function isTitleCandidate(line, source) {
   return true;
 }
 
-function findNearbyTitle(lines, index, source) {
+function findNearbyTitleItem(lineItems, index, source) {
   for (let offset = 1; offset <= 5; offset += 1) {
-    const previous = lines[index - offset];
-    if (isTitleCandidate(previous, source)) return previous;
+    const previous = lineItems[index - offset];
+    if (isTitleCandidate(previous?.text, source)) return previous;
   }
 
   for (let offset = 1; offset <= 8; offset += 1) {
-    const next = lines[index + offset];
-    if (isTitleCandidate(next, source)) return next;
+    const next = lineItems[index + offset];
+    if (isTitleCandidate(next?.text, source)) return next;
   }
 
-  return "";
+  return null;
 }
 
-function findNearbyTime(lines, index) {
+function findNearbyTime(lineItems, index) {
   for (let offset = 1; offset <= 5; offset += 1) {
-    const time = parseTimeLine(lines[index + offset] || "");
+    const time = parseTimeLine(lineItems[index + offset]?.text || "");
     if (time) return time;
   }
 
   return null;
 }
 
-function getLineEventUrl(source) {
-  return source.url;
+function findNearbyLink(lineItems, index) {
+  const offsets = [0, -1, 1, -2, 2, -3, 3, -4, 4, -5, 5, 6, 7, 8];
+
+  for (const offset of offsets) {
+    const url = lineItems[index + offset]?.url;
+    if (url) return url;
+  }
+
+  return "";
+}
+
+function getLineEventUrl(source, titleItem, lineItems, index) {
+  return titleItem?.url || findNearbyLink(lineItems, index) || source.url;
 }
 
 function getHtmlLineEvents(source, html) {
-  const lines = htmlToLines(html);
+  const lineItems = htmlToLineItems(html, source.url);
   const seen = new Set();
   const shows = [];
 
-  for (let index = 0; index < lines.length; index += 1) {
-    const dateInfo = parseDateLine(lines[index]);
+  for (let index = 0; index < lineItems.length; index += 1) {
+    const dateInfo = parseDateLine(lineItems[index].text);
     if (!dateInfo) continue;
 
-    const title = findNearbyTitle(lines, index, source);
-    if (!title) continue;
+    const titleItem = findNearbyTitleItem(lineItems, index, source);
+    if (!titleItem) continue;
 
-    const startsAt = toShowIso(dateInfo, findNearbyTime(lines, index));
+    const startsAt = toShowIso(dateInfo, findNearbyTime(lineItems, index));
     if (!startsAt) continue;
 
     const show = {
       source_id: "",
       venue_name: source.name,
-      title,
+      title: titleItem.text,
       starts_at: startsAt,
-      url: getLineEventUrl(source),
+      url: getLineEventUrl(source, titleItem, lineItems, index),
       scraped_at: new Date().toISOString(),
     };
     const sourceId = getSourceId(source, show);

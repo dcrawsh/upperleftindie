@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import SiteContainer from "../components/SiteContainer";
 
 export const dynamic = "force-dynamic";
@@ -75,8 +76,25 @@ function formatShowDate(value: string) {
   }).format(new Date(value));
 }
 
-export default async function ShowsPage() {
+type ShowsPageProps = {
+  searchParams?: Promise<{
+    venue?: string | string[];
+  }>;
+};
+
+export default async function ShowsPage({ searchParams }: ShowsPageProps) {
   const { shows, isConfigured } = await getShows();
+  const params = await searchParams;
+  const rawVenue = Array.isArray(params?.venue)
+    ? params?.venue[0]
+    : params?.venue;
+  const venues = Array.from(
+    new Set(shows.map((show) => show.venue_name).filter(Boolean))
+  ).sort((first, second) => first.localeCompare(second));
+  const selectedVenue = rawVenue && venues.includes(rawVenue) ? rawVenue : "";
+  const visibleShows = selectedVenue
+    ? shows.filter((show) => show.venue_name === selectedVenue)
+    : shows;
 
   return (
     <section className="py-10 md:py-20">
@@ -94,6 +112,34 @@ export default async function ShowsPage() {
           </p>
         </div>
 
+        {isConfigured && venues.length > 0 ? (
+          <div className="mt-8 flex gap-2 overflow-x-auto pb-2 sm:mt-10 sm:flex-wrap sm:overflow-visible sm:pb-0">
+            <Link
+              href="/shows"
+              className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.12em] transition ${
+                selectedVenue
+                  ? "border-ink/15 text-ink/60 hover:border-clay hover:text-clay"
+                  : "border-ink bg-ink text-paper"
+              }`}
+            >
+              All
+            </Link>
+            {venues.map((venue) => (
+              <Link
+                key={venue}
+                href={`/shows?venue=${encodeURIComponent(venue)}`}
+                className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.12em] transition ${
+                  selectedVenue === venue
+                    ? "border-ink bg-ink text-paper"
+                    : "border-ink/15 text-ink/60 hover:border-clay hover:text-clay"
+                }`}
+              >
+                {venue}
+              </Link>
+            ))}
+          </div>
+        ) : null}
+
         <div className="mt-8 space-y-4 sm:mt-12">
           {!isConfigured ? (
             <p className="rounded-md border border-ink/10 bg-paper/80 p-5 text-sm font-bold text-ink/65">
@@ -108,7 +154,7 @@ export default async function ShowsPage() {
             </p>
           ) : null}
 
-          {shows.map((show) => (
+          {visibleShows.map((show) => (
             <article
               key={`${show.venue_name}-${show.starts_at}-${show.url}`}
               className="rounded-md border border-ink/10 bg-paper/80 p-5 shadow-soft"
