@@ -73,6 +73,27 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        <section className="mt-8 w-full border-t border-ink/10 pt-8">
+          <div className="flex flex-col gap-5 rounded-md border border-ink/10 bg-paper/60 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-lg font-black text-ink">
+                Support Upper Left Indie
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-6 text-ink/65">
+                Upper Left Indie is independently run and community supported.
+                Tips help keep submissions free and help us spend more time
+                supporting underheard Northwest artists.
+              </p>
+            </div>
+            <Link
+              href="/support"
+              className="rounded-full border border-ink/15 px-6 py-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-ink transition hover:border-clay hover:text-clay"
+            >
+              Chip in
+            </Link>
+          </div>
+        </section>
       </div>
     </section>
   );

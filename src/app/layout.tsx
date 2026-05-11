@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 import FooterSubscribe from "./components/FooterSubscribe";
 import Nav from "./components/Nav";
@@ -93,6 +94,12 @@ export default function RootLayout({
               <div className="space-y-1">
                 <p>Upper Left Indie</p>
                 <p>Pacific Northwest artists, heard closer.</p>
+                <Link
+                  href="/support"
+                  className="inline-block text-xs font-bold uppercase tracking-[0.14em] text-ink/55 transition hover:text-clay"
+                >
+                  Support
+                </Link>
               </div>
               <FooterSubscribe />
             </div>

@@ -1,4 +1,5 @@
 import SubmissionForm from "../components/SubmissionForm";
+import Link from "next/link";
 
 export const metadata = {
   title: "Submit Northwest Music",
@@ -32,7 +33,26 @@ export default function SubmitPage() {
           </p>
         </div>
 
-        <SubmissionForm />
+        <div className="space-y-6">
+          <SubmissionForm />
+
+          <aside className="rounded-md border border-ink/10 bg-paper/60 p-5">
+            <h2 className="text-lg font-black text-ink">
+              Help keep submissions free
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-ink/65">
+              Upper Left Indie is independently run and community supported.
+              Tips help keep submissions free and help us spend more time
+              supporting underheard Northwest artists.
+            </p>
+            <Link
+              href="/support"
+              className="mt-4 inline-block rounded-full border border-ink/15 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-ink transition hover:border-clay hover:text-clay"
+            >
+              Support the tip jar
+            </Link>
+          </aside>
+        </div>
       </div>
     </section>
   );
