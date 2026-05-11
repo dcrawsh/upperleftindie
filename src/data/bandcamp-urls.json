@@ -1,37 +1,108 @@
 [
-  "https://killmer.bandcamp.com/",
-  "https://timetheft.bandcamp.com/",
-  "https://bonusroomband.bandcamp.com/",
-  "https://thewaysidesmusic.bandcamp.com/",
-  "https://candycigsmusic.bandcamp.com/",
-  "https://gvthdvddy.bandcamp.com/",
-  "https://uncannyvalleygirlspdx.bandcamp.com/",
-  "https://shayleeband.bandcamp.com/",
-  "https://aninvisiblejet.bandcamp.com/",
-  "https://essieandthehum.bandcamp.com/",
-  "https://hearfrontiermedicine.bandcamp.com/",
-  "https://blond-noise.bandcamp.com/",
-  "https://longdeer.bandcamp.com/",
-  "https://orbit17.bandcamp.com/",
-  "https://theupkeeps.bandcamp.com/",
-  "https://fieldsofsilver.bandcamp.com/",
-  "https://thequickandeasyboys.bandcamp.com/",
-  "https://terriblepop.bandcamp.com/",
-  "https://glasssuburban.bandcamp.com/",
-  "https://reigncycle.bandcamp.com/",
-  "https://greatyear.bandcamp.com/",
-  "https://wellkinda.bandcamp.com/",
-  "https://lionsoftheinterstate.bandcamp.com/",
-  "https://trashpandagokart.bandcamp.com/",
-  "https://bikefightband.bandcamp.com/",
-  "https://theeyeseeyous.bandcamp.com/",
-  "https://blisterpdx.bandcamp.com/",
-  "https://newvictorian.bandcamp.com/",
-  "https://etfondle.bandcamp.com/",
-  "https://rosegerbermusic.bandcamp.com/",
-  "https://fountainparkapts.bandcamp.com/",
-  "https://buddywynkoop.bandcamp.com/",
-  "https://mhimoh.bandcamp.com/",
-  "https://kingropes.bandcamp.com/",
-  "https://whenwemet.bandcamp.com/"
+  {
+    "url": "https://killmer.bandcamp.com/"
+  },
+  {
+    "url": "https://timetheft.bandcamp.com/"
+  },
+  {
+    "url": "https://bonusroomband.bandcamp.com/"
+  },
+  {
+    "url": "https://thewaysidesmusic.bandcamp.com/"
+  },
+  {
+    "url": "https://candycigsmusic.bandcamp.com/"
+  },
+  {
+    "url": "https://gvthdvddy.bandcamp.com/"
+  },
+  {
+    "url": "https://uncannyvalleygirlspdx.bandcamp.com/"
+  },
+  {
+    "url": "https://shayleeband.bandcamp.com/"
+  },
+  {
+    "url": "https://aninvisiblejet.bandcamp.com/"
+  },
+  {
+    "url": "https://essieandthehum.bandcamp.com/"
+  },
+  {
+    "url": "https://hearfrontiermedicine.bandcamp.com/"
+  },
+  {
+    "url": "https://blond-noise.bandcamp.com/"
+  },
+  {
+    "url": "https://longdeer.bandcamp.com/"
+  },
+  {
+    "url": "https://orbit17.bandcamp.com/"
+  },
+  {
+    "url": "https://theupkeeps.bandcamp.com/"
+  },
+  {
+    "url": "https://fieldsofsilver.bandcamp.com/"
+  },
+  {
+    "url": "https://thequickandeasyboys.bandcamp.com/"
+  },
+  {
+    "url": "https://terriblepop.bandcamp.com/"
+  },
+  {
+    "url": "https://glasssuburban.bandcamp.com/"
+  },
+  {
+    "url": "https://reigncycle.bandcamp.com/"
+  },
+  {
+    "url": "https://greatyear.bandcamp.com/"
+  },
+  {
+    "url": "https://wellkinda.bandcamp.com/"
+  },
+  {
+    "url": "https://lionsoftheinterstate.bandcamp.com/"
+  },
+  {
+    "url": "https://trashpandagokart.bandcamp.com/"
+  },
+  {
+    "url": "https://bikefightband.bandcamp.com/"
+  },
+  {
+    "url": "https://theeyeseeyous.bandcamp.com/"
+  },
+  {
+    "url": "https://blisterpdx.bandcamp.com/"
+  },
+  {
+    "url": "https://newvictorian.bandcamp.com/"
+  },
+  {
+    "url": "https://etfondle.bandcamp.com/"
+  },
+  {
+    "url": "https://rosegerbermusic.bandcamp.com/"
+  },
+  {
+    "url": "https://fountainparkapts.bandcamp.com/"
+  },
+  {
+    "url": "https://buddywynkoop.bandcamp.com/",
+    "genre": "Psych / Psychedelic"
+  },
+  {
+    "url": "https://mhimoh.bandcamp.com/"
+  },
+  {
+    "url": "https://kingropes.bandcamp.com/"
+  },
+  {
+    "url": "https://whenwemet.bandcamp.com/"
+  }
 ]
