@@ -8,8 +8,6 @@ import { FaInstagram } from "react-icons/fa";
 import SiteContainer from "./SiteContainer";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/artists", label: "Support Artists" },
   { href: "/submit", label: "Submit" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -30,18 +28,40 @@ export default function Nav() {
       <SiteContainer className="flex items-center justify-between gap-3 py-4">
         <Link
           href="/"
-          className="flex min-w-0 items-center gap-2 sm:gap-3"
+          className="flex shrink-0 items-center gap-2 sm:gap-3"
           aria-label="Upper Left Indie home"
         >
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-xs font-black uppercase text-paper sm:h-10 sm:w-10 sm:text-sm">
             UL
           </span>
-          <span className="min-w-0 truncate text-sm font-black uppercase tracking-[0.1em] text-ink sm:text-lg sm:tracking-[0.18em]">
+          <span className="whitespace-nowrap text-sm font-black uppercase tracking-[0.1em] text-ink sm:text-lg lg:tracking-[0.18em]">
             Upper Left Indie
           </span>
         </Link>
 
-        <ul className="hidden items-center gap-8 text-sm font-bold uppercase tracking-[0.14em] text-ink/60 md:flex">
+        <ul className="hidden items-center gap-4 text-xs font-bold uppercase tracking-[0.08em] text-ink/60 md:flex lg:gap-6 lg:text-sm lg:tracking-[0.12em]">
+          <li>
+            <div className="flex items-center gap-1.5 whitespace-nowrap">
+              <span>Support</span>
+              <Link
+                href="/artists"
+                className={`transition hover:text-ink ${
+                  pathname === "/artists" ? "text-ink" : ""
+                }`}
+              >
+                Artists
+              </Link>
+              <span className="text-ink/30">/</span>
+              <Link
+                href="/support-the-project"
+                className={`transition hover:text-ink ${
+                  pathname === "/support-the-project" ? "text-ink" : ""
+                }`}
+              >
+                Playlist
+              </Link>
+            </div>
+          </li>
           {links.map((link) => (
             <li key={link.href}>
               <Link
@@ -56,7 +76,7 @@ export default function Nav() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden shrink-0 items-center gap-2 md:flex lg:gap-3">
           <a
             href={instagramUrl}
             target="_blank"
@@ -69,7 +89,7 @@ export default function Nav() {
           </a>
           <Link
             href="/submit"
-            className="rounded-full bg-clay px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-paper shadow-soft transition hover:bg-ink"
+            className="rounded-full bg-clay px-4 py-3 text-xs font-bold uppercase tracking-[0.08em] text-paper shadow-soft transition hover:bg-ink lg:px-5 lg:text-sm lg:tracking-[0.12em]"
           >
             Send a Track
           </Link>
@@ -112,6 +132,31 @@ export default function Nav() {
         </div>
 
         <ul className="flex-1 space-y-2 px-5 py-6 text-lg font-bold">
+          <li>
+            <div
+              className={`rounded-md px-3 py-3 ${
+                pathname === "/artists" || pathname === "/support-the-project"
+                  ? "bg-ink text-paper"
+                  : "text-ink"
+              }`}
+            >
+              <span className="mb-2 block text-sm uppercase tracking-[0.14em] opacity-70">
+                Support
+              </span>
+              <div className="flex items-center gap-2">
+                <Link href="/artists" className="transition hover:opacity-70">
+                  Artist
+                </Link>
+                <span className="opacity-40">/</span>
+                <Link
+                  href="/support-the-project"
+                  className="transition hover:opacity-70"
+                >
+                  Playlist
+                </Link>
+              </div>
+            </div>
+          </li>
           {links.map((link) => (
             <li key={link.href}>
               <Link

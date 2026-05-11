@@ -43,12 +43,12 @@ export default function SubmitPage() {
 
           <aside className="rounded-md border border-ink/10 bg-paper/60 p-5">
             <h2 className="text-lg font-black text-ink">
-              Help keep submissions free
+              Support growth / keep submissions free
             </h2>
             <p className="mt-2 text-sm leading-6 text-ink/65">
-              Upper Left Indie is independently run and community supported.
-              Tips help keep submissions free and help us spend more time
-              supporting underheard Northwest artists.
+              Expand our playlists to other platforms like Tidal, Apple Music,
+              and YouTube. Help keep artist submissions open and free for local
+              bands.
             </p>
             <Link
               href="/support-the-project"
