@@ -1,5 +1,6 @@
 import bandcampUrls from "../../data/bandcamp-urls.json";
 import { artists as generatedArtists } from "../../data/artists.generated";
+import SiteContainer from "../components/SiteContainer";
 import ArtistsBrowser, { type ArtistCard } from "./ArtistsBrowser";
 
 function normalizeUrl(url: string) {
@@ -66,8 +67,8 @@ export const metadata = {
 
 export default function ArtistsPage() {
   return (
-    <section className="px-4 py-10 sm:px-6 md:px-10 md:py-20">
-      <div className="mx-auto max-w-6xl">
+    <section className="py-10 md:py-20">
+      <SiteContainer>
         <div className="max-w-3xl">
           <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-clay sm:mb-4 sm:text-sm sm:tracking-[0.26em]">
             Featured Artists
@@ -83,7 +84,7 @@ export default function ArtistsPage() {
         </div>
 
         <ArtistsBrowser artists={artists} />
-      </div>
+      </SiteContainer>
     </section>
   );
 }

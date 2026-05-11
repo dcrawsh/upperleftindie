@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
+import SiteContainer from "./SiteContainer";
 
 const links = [
   { href: "/", label: "Home" },
@@ -26,7 +27,7 @@ export default function Nav() {
 
   return (
     <nav className="relative z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-10">
+      <SiteContainer className="flex items-center justify-between gap-3 py-4">
         <Link
           href="/"
           className="flex min-w-0 items-center gap-2 sm:gap-3"
@@ -83,7 +84,7 @@ export default function Nav() {
         >
           {menuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
         </button>
-      </div>
+      </SiteContainer>
 
       <div
         className={`fixed inset-0 bg-ink/35 transition-opacity duration-300 md:hidden ${

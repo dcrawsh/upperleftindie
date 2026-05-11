@@ -1,4 +1,5 @@
 import ContactForm from "../components/ContactForm";
+import SiteContainer from "../components/SiteContainer";
 
 export const metadata = {
   title: "Contact",
@@ -17,8 +18,8 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="px-6 py-14 md:px-10 md:py-20">
-      <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[0.75fr_1fr] lg:items-start">
+    <section className="py-14 md:py-20">
+      <SiteContainer className="grid gap-10 lg:grid-cols-[0.75fr_1fr] lg:items-start">
         <div>
           <p className="mb-4 text-sm font-black uppercase tracking-[0.26em] text-clay">
             Contact
@@ -34,7 +35,7 @@ export default function ContactPage() {
         </div>
 
         <ContactForm />
-      </div>
+      </SiteContainer>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import SubmissionForm from "../components/SubmissionForm";
 import Link from "next/link";
+import SiteContainer from "../components/SiteContainer";
 
 export const metadata = {
   title: "Submit Northwest Music",
@@ -18,8 +19,8 @@ export const metadata = {
 
 export default function SubmitPage() {
   return (
-    <section className="px-6 py-14 md:px-10 md:py-20">
-      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
+    <section className="py-14 md:py-20">
+      <SiteContainer className="grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <div>
           <p className="mb-4 text-sm font-black uppercase tracking-[0.26em] text-clay">
             Submissions
@@ -53,7 +54,7 @@ export default function SubmitPage() {
             </Link>
           </aside>
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

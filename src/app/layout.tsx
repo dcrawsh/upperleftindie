@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import FooterSubscribe from "./components/FooterSubscribe";
 import Nav from "./components/Nav";
+import SiteContainer from "./components/SiteContainer";
 
 const siteUrl = "https://www.upperleftindie.com";
 const siteDescription =
@@ -89,8 +90,8 @@ export default function RootLayout({
         <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
           <Nav />
           <main>{children}</main>
-          <footer className="border-t border-ink/10 px-6 py-8 text-sm text-ink/60 md:px-10">
-            <div className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <footer className="border-t border-ink/10 py-8 text-sm text-ink/60">
+            <SiteContainer className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="space-y-1">
                 <p>Upper Left Indie</p>
                 <p>Pacific Northwest artists, heard closer.</p>
@@ -102,7 +103,7 @@ export default function RootLayout({
                 </Link>
               </div>
               <FooterSubscribe />
-            </div>
+            </SiteContainer>
           </footer>
         </div>
       </body>
