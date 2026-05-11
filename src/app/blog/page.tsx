@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SiteContainer from "../components/SiteContainer";
 
 export const metadata = {
   title: "Northwest Music Notes",
@@ -17,8 +18,8 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <section className="px-6 py-20 md:px-10 md:py-28">
-      <div className="mx-auto max-w-4xl">
+    <section className="py-20 md:py-28">
+      <SiteContainer>
         <p className="mb-4 text-sm font-black uppercase tracking-[0.26em] text-clay">
           Blog
         </p>
@@ -41,7 +42,7 @@ export default function BlogPage() {
             </Link>
           </p>
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 } 

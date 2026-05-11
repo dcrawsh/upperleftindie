@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SiteContainer from "../components/SiteContainer";
 import SupportOptions from "./SupportOptions";
 
 export const metadata: Metadata = {
@@ -18,8 +19,8 @@ export const metadata: Metadata = {
 
 export default function SupportPage() {
   return (
-    <section className="px-6 py-14 md:px-10 md:py-20">
-      <div className="mx-auto max-w-5xl">
+    <section className="py-14 md:py-20">
+      <SiteContainer>
         <p className="mb-4 text-sm font-black uppercase tracking-[0.26em] text-clay">
           Tip jar
         </p>
@@ -36,7 +37,7 @@ export default function SupportPage() {
         </div>
 
         <SupportOptions />
-      </div>
+      </SiteContainer>
     </section>
   );
 }
