@@ -5,14 +5,14 @@ import SupportOptions from "./SupportOptions";
 export const metadata: Metadata = {
   title: "Support the Project",
   description:
-    "Simple ways to support Upper Left Indie and help keep Northwest artist submissions free.",
+    "Support Upper Left Indie growth and help keep artist submissions free for local bands.",
   alternates: {
     canonical: "/support-the-project",
   },
   openGraph: {
     title: "Support the Project | Upper Left Indie",
     description:
-      "Simple ways to support Upper Left Indie and help keep Northwest artist submissions free.",
+      "Support Upper Left Indie growth and help keep artist submissions free for local bands.",
     url: "/support-the-project",
   },
 };
@@ -29,10 +29,10 @@ export default function SupportPage() {
             Support the Project
           </h1>
           <p className="mt-6 text-lg leading-8 text-ink/70">
-            Upper Left Indie is independently run and community supported. If
-            the playlist has helped you find a new favorite band, or if you just
-            want to help keep submissions free, here are a few simple ways to
-            chip in.
+            Upper Left Indie is independently run and community supported. Your
+            support helps expand our playlists to platforms like Tidal, Apple
+            Music, and YouTube, and helps keep artist submissions open and free
+            for local bands.
           </p>
         </div>
 

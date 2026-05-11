@@ -27,9 +27,10 @@ export const supportOptions: SupportOption[] = [
   },
   {
     key: "keep-submissions-free",
-    title: "Keep Submissions Free",
+    title: "Support Growth / Keep Submissions Free",
     amount: "$10",
-    description: "Helps keep artist submissions open and free for local bands.",
+    description:
+      "Expand our playlists to other platforms like Tidal, Apple Music, and YouTube. Helps keep artist submissions open and free for local bands.",
   },
   {
     key: "support-upper-left-indie",
