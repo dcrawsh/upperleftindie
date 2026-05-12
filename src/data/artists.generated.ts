@@ -1242,6 +1242,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Nouveau Riche",
+        "type": "track",
+        "url": "https://buddywynkoop.bandcamp.com/track/nouveau-riche"
+      },
+      {
         "title": "Better Than Botox",
         "type": "album",
         "url": "https://buddywynkoop.bandcamp.com/album/better-than-botox-2"
@@ -1265,11 +1270,6 @@ export const artists: Artist[] = [
         "title": "Stress Fracture",
         "type": "track",
         "url": "https://buddywynkoop.bandcamp.com/track/stress-fracture"
-      },
-      {
-        "title": "Racing",
-        "type": "track",
-        "url": "https://buddywynkoop.bandcamp.com/track/racing"
       }
     ]
   },
@@ -1458,6 +1458,30 @@ export const artists: Artist[] = [
         "title": "Güero Brown",
         "type": "album",
         "url": "https://guerobrown.bandcamp.com/album/g-ero-brown"
+      }
+    ]
+  },
+  {
+    "name": "slow pony",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://slowpony1.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0735577736_10.jpg",
+    "bio": "Hailing from the damp corners of Portland Oregon , Slow Pony rides the line between alt-country grit and hazy indie rock.",
+    "submittedGenre": "Country / Alt-Country",
+    "tags": [
+      "Country / Alt-Country"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://slowpony1.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Jesus in a Snow Globe",
+        "type": "track",
+        "url": "https://slowpony1.bandcamp.com/track/jesus-in-a-snow-globe/"
       }
     ]
   }
