@@ -1098,7 +1098,7 @@ export const artists: Artist[] = [
     "name": "Payne Fulcher",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://etfondle.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044265512_10.jpg",
+    "image": "https://f4.bcbits.com/img/0044883082_10.jpg",
     "bio": "#noloudmusic",
     "submittedGenre": "Singer-songwriter",
     "tags": [
@@ -1420,6 +1420,44 @@ export const artists: Artist[] = [
         "title": "Where Did They Come From?",
         "type": "album",
         "url": "https://whenwemet.bandcamp.com/album/where-did-they-come-from"
+      }
+    ]
+  },
+  {
+    "name": "Güero Brown",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://guerobrown.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040724683_10.jpg",
+    "bio": "Güero Brown is an independent band based in Seattle, Washington.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://guerobrown.bandcamp.com/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/channel/UC9MsS2OMBMALIN94mY4dsVQ"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/LeGueroBrown/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/le_guero_brown/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Bläu",
+        "type": "album",
+        "url": "https://guerobrown.bandcamp.com/album/bl-u"
+      },
+      {
+        "title": "Güero Brown",
+        "type": "album",
+        "url": "https://guerobrown.bandcamp.com/album/g-ero-brown"
       }
     ]
   }
