@@ -1517,5 +1517,39 @@ export const artists: Artist[] = [
         "url": "https://cedarlange.bandcamp.com/album/wild-combinations"
       }
     ]
+  },
+  {
+    "name": "Bandski",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://bandski.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040794500_10.jpg",
+    "bio": "just a bandski playing our lil songskis in the big worldski",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://bandski.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Closure",
+        "type": "album",
+        "url": "https://bandski.bandcamp.com/album/closure"
+      },
+      {
+        "title": "Flightless Birds",
+        "type": "track",
+        "url": "https://bandski.bandcamp.com/track/flightless-birds-2"
+      },
+      {
+        "title": "It's Loud in Here/Long Way Home (DEMO)",
+        "type": "album",
+        "url": "https://bandski.bandcamp.com/album/its-loud-in-here-long-way-home-demo"
+      }
+    ]
   }
 ];
