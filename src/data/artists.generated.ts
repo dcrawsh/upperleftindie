@@ -1551,5 +1551,29 @@ export const artists: Artist[] = [
         "url": "https://bandski.bandcamp.com/album/its-loud-in-here-long-way-home-demo"
       }
     ]
+  },
+  {
+    "name": "Glen",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://itsglen.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1142691149_10.jpg",
+    "bio": "Alex, Scott, Peter, Nate... Glen!",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://itsglen.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Who is Glen",
+        "type": "album",
+        "url": "https://itsglen.bandcamp.com/album/who-is-glen/"
+      }
+    ]
   }
 ];
