@@ -1575,5 +1575,23 @@ export const artists: Artist[] = [
         "url": "https://itsglen.bandcamp.com/album/who-is-glen/"
       }
     ]
+  },
+  {
+    "name": "bandcamp.com",
+    "location": "",
+    "bandcampUrl": "https://kelpwanted.bandcamp.com/",
+    "image": "",
+    "bio": "",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://kelpwanted.bandcamp.com/"
+      }
+    ],
+    "releases": []
   }
 ];
