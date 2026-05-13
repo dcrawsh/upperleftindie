@@ -471,7 +471,7 @@ export const artists: Artist[] = [
     "name": "blond-noise",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044362438_10.jpg",
+    "image": "https://f4.bcbits.com/img/a1979534463_10.jpg",
     "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. ... more",
     "submittedGenre": "Experimental",
     "tags": [
@@ -499,12 +499,7 @@ export const artists: Artist[] = [
       {
         "title": "home",
         "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/home"
-      },
-      {
-        "title": "iLLEGALLY BLonD (Live)",
-        "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/illegally-blond-live"
+        "url": "https://blond-noise.bandcamp.com/track/home/"
       }
     ]
   },
@@ -1225,7 +1220,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://buddywynkoop.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0044008727_10.jpg",
-    "bio": "Buddy Wynkoop is a six piece art punk outfit that combines a barrage of spoken word existentialism, shout-sung melodies and a unique approach to structure. Formed in the summer of 2019 in a basement in Portland, Or.",
+    "bio": "Buddy Wynkoop is a six piece art punk outfit.",
     "submittedGenre": "Punk",
     "tags": [
       "Punk"
