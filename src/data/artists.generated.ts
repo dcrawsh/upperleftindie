@@ -1593,5 +1593,34 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "Bad Quitters",
+    "location": "Boise, Idaho",
+    "bandcampUrl": "https://badquitters.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0042771447_10.jpg",
+    "bio": "",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://badquitters.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Spend It All",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/spend-it-all"
+      },
+      {
+        "title": "Climb Inside and See",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/climb-inside-and-see"
+      }
+    ]
   }
 ];
