@@ -1479,5 +1479,43 @@ export const artists: Artist[] = [
         "url": "https://slowpony1.bandcamp.com/track/jesus-in-a-snow-globe/"
       }
     ]
+  },
+  {
+    "name": "Cedar Lange",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://cedarlange.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0019928244_10.jpg",
+    "bio": "trying out this music thing...",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://cedarlange.bandcamp.com/"
+      },
+      {
+        "label": "SoundCloud",
+        "url": "https://soundcloud.com/ceda-lange"
+      }
+    ],
+    "releases": [
+      {
+        "title": "wild combinations II",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/wild-combinations-ii"
+      },
+      {
+        "title": "Magic Junction",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/magic-junction"
+      },
+      {
+        "title": "wild combinations",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/wild-combinations"
+      }
+    ]
   }
 ];
