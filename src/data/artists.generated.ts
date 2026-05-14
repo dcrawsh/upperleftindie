@@ -1622,5 +1622,62 @@ export const artists: Artist[] = [
         "url": "https://badquitters.bandcamp.com/track/climb-inside-and-see"
       }
     ]
+  },
+  {
+    "name": "Shime",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://shimetheband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044285001_10.jpg",
+    "bio": "shime [ formerly king sheim ] is a seattle based musical project headed by celeste felsheim, composer, lyricist, performer and cornish college alum \"shime is a powerhouse of emotional intensity, delivering heartfelt sincerity in its lyrics and a chaotic performance that resonates with rebellious spirits everywhere.” shime is: celeste felsheim, eliza rosier, calla avery, and tristan white. ... more",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://shimetheband.bandcamp.com/"
+      },
+      {
+        "label": "shimetheband.com",
+        "url": "https://shimetheband.com"
+      },
+      {
+        "label": "open.spotify.com",
+        "url": "https://open.spotify.com/artist/11cJdPrN7HAU0BDQElELNp?si=m8CnuEV0R66O20QzgmQmlA"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Vulture's Wing",
+        "type": "album",
+        "url": "https://shimetheband.bandcamp.com/album/vultures-wing-2"
+      },
+      {
+        "title": "Soulmate 500 [clean]",
+        "type": "track",
+        "url": "https://shimetheband.bandcamp.com/track/soulmate-500-clean"
+      },
+      {
+        "title": "Spin The Spite",
+        "type": "album",
+        "url": "https://shimetheband.bandcamp.com/album/spin-the-spite"
+      },
+      {
+        "title": "Right to the Bone",
+        "type": "track",
+        "url": "https://shimetheband.bandcamp.com/track/right-to-the-bone-2"
+      },
+      {
+        "title": "Amends",
+        "type": "track",
+        "url": "https://shimetheband.bandcamp.com/track/amends"
+      },
+      {
+        "title": "Celeste Live @ Cornish Playhouse 4.22.22",
+        "type": "album",
+        "url": "https://shimetheband.bandcamp.com/album/celeste-live-cornish-playhouse-42222"
+      }
+    ]
   }
 ];
