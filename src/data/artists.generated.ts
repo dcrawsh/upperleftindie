@@ -1881,5 +1881,62 @@ export const artists: Artist[] = [
         "url": "https://daveybones.bandcamp.com/album/davey-bones/"
       }
     ]
+  },
+  {
+    "name": "The Hoot Hoots",
+    "location": "Seattle",
+    "bandcampUrl": "https://thehoothoots.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0003990942_10.jpg",
+    "bio": "Contact us at: thehoothoots@gmail.com Seattle power pop quartet The Hoot Hoots are irresistible party starters. Their songs are powered by fuzzy guitars, fuzzier keyboards, and headhum-inducing hooks, and all these combine in a glorious, slightly insane energy in both their live shows and in their newest EP, Rainbow Squadron. ... more",
+    "submittedGenre": "Pop",
+    "tags": [
+      "Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thehoothoots.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/thehoothoots/"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://www.facebook.com/thehoothoots"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Rainbow Squadron",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/rainbow-squadron"
+      },
+      {
+        "title": "COLORPUNCH",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/colorpunch"
+      },
+      {
+        "title": "Feel The Cosmos",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/feel-the-cosmos"
+      },
+      {
+        "title": "Appetite For Distraction",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/appetite-for-distraction"
+      },
+      {
+        "title": "Silly Lecture Series",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/silly-lecture-series"
+      },
+      {
+        "title": "Roundhouse - single",
+        "type": "track",
+        "url": "https://thehoothoots.bandcamp.com/track/roundhouse-single"
+      }
+    ]
   }
 ];
