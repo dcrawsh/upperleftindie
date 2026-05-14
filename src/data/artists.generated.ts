@@ -1717,5 +1717,62 @@ export const artists: Artist[] = [
         "url": "https://treefrogtheband.bandcamp.com/track/sleepwalking-3"
       }
     ]
+  },
+  {
+    "name": "Slow Rosary",
+    "location": "Louisiana",
+    "bandcampUrl": "https://slowrosary.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0028503742_10.jpg",
+    "bio": "deceptively secular band from south Louisiana now in northwestern Washington",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://slowrosary.bandcamp.com/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/braithwaitemusicLA"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/slowrosary/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Live (Before & After)",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/live-before-after"
+      },
+      {
+        "title": "Free WiFi in the Vatican",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/free-wifi-in-the-vatican"
+      },
+      {
+        "title": "Refinery",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/refinery-2"
+      },
+      {
+        "title": "Reasonably Far From Residential Areas",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/reasonably-far-from-residential-areas"
+      },
+      {
+        "title": "The Eyes of the Skin",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/the-eyes-of-the-skin"
+      },
+      {
+        "title": "The Tall and Strong White Oaks Braithwaite",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/the-tall-and-strong-white-oaks"
+      }
+    ]
   }
 ];
