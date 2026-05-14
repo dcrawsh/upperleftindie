@@ -1848,9 +1848,9 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://daveybones.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a1515154784_10.jpg",
     "bio": "10 track album",
-    "submittedGenre": "Post-punk",
+    "submittedGenre": "Alternative",
     "tags": [
-      "Post-punk"
+      "Alternative"
     ],
     "links": [
       {
