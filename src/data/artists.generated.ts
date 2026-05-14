@@ -1798,5 +1798,48 @@ export const artists: Artist[] = [
         "url": "https://trashasaurusrex.bandcamp.com/track/trashasaurus-rex/"
       }
     ]
+  },
+  {
+    "name": "Shea Isely",
+    "location": "Bellingham, Washington",
+    "bandcampUrl": "https://sheaisely.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044323486_10.jpg",
+    "bio": "",
+    "submittedGenre": "Singer-songwriter",
+    "tags": [
+      "Singer-songwriter"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://sheaisely.bandcamp.com/"
+      },
+      {
+        "label": "sheaisely.com",
+        "url": "http://sheaisely.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Over Like Days",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/over-like-days"
+      },
+      {
+        "title": "Keep The Time",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/keep-the-time"
+      },
+      {
+        "title": "Begin to Pack",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/begin-to-pack"
+      },
+      {
+        "title": "Over Like Weeks",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/over-like-weeks"
+      }
+    ]
   }
 ];
