@@ -1841,5 +1841,45 @@ export const artists: Artist[] = [
         "url": "https://sheaisely.bandcamp.com/track/over-like-weeks"
       }
     ]
+  },
+  {
+    "name": "Davey Bones",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://daveybones.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1515154784_10.jpg",
+    "bio": "10 track album",
+    "submittedGenre": "Post-punk",
+    "tags": [
+      "Post-punk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://daveybones.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/daveybonesmusic/"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/davey_music"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/daveybonesmusic"
+      },
+      {
+        "label": "linktr.ee",
+        "url": "https://linktr.ee/daveybonesmusic"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Davey Bones",
+        "type": "album",
+        "url": "https://daveybones.bandcamp.com/album/davey-bones/"
+      }
+    ]
   }
 ];
