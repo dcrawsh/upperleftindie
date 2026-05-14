@@ -1679,5 +1679,43 @@ export const artists: Artist[] = [
         "url": "https://shimetheband.bandcamp.com/album/celeste-live-cornish-playhouse-42222"
       }
     ]
+  },
+  {
+    "name": "Treefrog",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://treefrogtheband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0043952246_10.jpg",
+    "bio": "Swamp Rockers from PDX.",
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://treefrogtheband.bandcamp.com/"
+      },
+      {
+        "label": "linktr.ee",
+        "url": "https://linktr.ee/treefrogtheband"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Treefrog",
+        "type": "album",
+        "url": "https://treefrogtheband.bandcamp.com/album/treefrog"
+      },
+      {
+        "title": "Drive",
+        "type": "track",
+        "url": "https://treefrogtheband.bandcamp.com/track/drive-8"
+      },
+      {
+        "title": "Sleepwalking",
+        "type": "track",
+        "url": "https://treefrogtheband.bandcamp.com/track/sleepwalking-3"
+      }
+    ]
   }
 ];
