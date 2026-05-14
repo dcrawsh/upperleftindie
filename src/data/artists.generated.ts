@@ -1774,5 +1774,29 @@ export const artists: Artist[] = [
         "url": "https://slowrosary.bandcamp.com/album/the-tall-and-strong-white-oaks"
       }
     ]
+  },
+  {
+    "name": "Trashasaurus Rex",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://trashasaurusrex.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1461482586_10.jpg",
+    "bio": "track by Trashasaurus Rex",
+    "submittedGenre": "Punk",
+    "tags": [
+      "Punk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://trashasaurusrex.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Trashasaurus Rex",
+        "type": "track",
+        "url": "https://trashasaurusrex.bandcamp.com/track/trashasaurus-rex/"
+      }
+    ]
   }
 ];
