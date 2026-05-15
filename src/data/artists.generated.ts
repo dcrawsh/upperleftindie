@@ -1981,5 +1981,49 @@ export const artists: Artist[] = [
         "url": "https://billyandthedreamboats.bandcamp.com/album/cemetery"
       }
     ]
+  },
+  {
+    "name": "Blip.",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://blip206.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0042275938_10.jpg",
+    "bio": "Blip. writes mostly emo songs in standard. We have a cat song, a car song, and a pizza song. Wow. FFO Braid, The Weakerthans, Joyce Manor, & Shinobu. Booking: blipblip.206@gmail IG: @blip.206 ... more",
+    "submittedGenre": "Emo",
+    "tags": [
+      "Emo"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://blip206.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Downfall (demo)",
+        "type": "track",
+        "url": "https://blip206.bandcamp.com/track/downfall-demo"
+      },
+      {
+        "title": "A Mechanism For Action",
+        "type": "album",
+        "url": "https://blip206.bandcamp.com/album/a-mechanism-for-action"
+      },
+      {
+        "title": "Field Day (EP)",
+        "type": "album",
+        "url": "https://blip206.bandcamp.com/album/field-day-ep"
+      },
+      {
+        "title": "Long Term Plans (demo)",
+        "type": "track",
+        "url": "https://blip206.bandcamp.com/track/long-term-plans-demo"
+      },
+      {
+        "title": "Field Day demos",
+        "type": "album",
+        "url": "https://blip206.bandcamp.com/album/field-day-demos"
+      }
+    ]
   }
 ];
