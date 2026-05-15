@@ -1938,5 +1938,48 @@ export const artists: Artist[] = [
         "url": "https://thehoothoots.bandcamp.com/track/roundhouse-single"
       }
     ]
+  },
+  {
+    "name": "Billy and the Dreamboats",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://billyandthedreamboats.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0034294000_10.jpg",
+    "bio": "60s inspired dreamy pop band based in Seattle, WA",
+    "submittedGenre": "Indie Pop",
+    "tags": [
+      "Indie Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://billyandthedreamboats.bandcamp.com/"
+      },
+      {
+        "label": "billyandthedreamboats.com",
+        "url": "http://billyandthedreamboats.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "How Did You Get Here?",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/how-did-you-get-here"
+      },
+      {
+        "title": "Hallucination Machine",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/hallucination-machine"
+      },
+      {
+        "title": "Spiritual Staircase",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/spiritual-staircase"
+      },
+      {
+        "title": "Cemetery",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/cemetery"
+      }
+    ]
   }
 ];
