@@ -2025,5 +2025,29 @@ export const artists: Artist[] = [
         "url": "https://blip206.bandcamp.com/album/field-day-demos"
       }
     ]
+  },
+  {
+    "name": "Tiny Lion",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://tiny-lion.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a3992341645_10.jpg",
+    "bio": "Noisy indie-rock band with emo and math influences from life in the gloomy Pacific Northwest.",
+    "submittedGenre": "Emo",
+    "tags": [
+      "Emo"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://tiny-lion.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Good Grades",
+        "type": "album",
+        "url": "https://tiny-lion.bandcamp.com/album/good-grades-2/"
+      }
+    ]
   }
 ];
