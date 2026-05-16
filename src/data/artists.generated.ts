@@ -2049,5 +2049,39 @@ export const artists: Artist[] = [
         "url": "https://tiny-lion.bandcamp.com/album/good-grades-2/"
       }
     ]
+  },
+  {
+    "name": "Divorced Horses",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://divorcedhorses.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0036861748_10.jpg",
+    "bio": "3 little piggies who want to rock. some grunge, some jazz, some math, some funk, some ballad, some space, some soma.",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://divorcedhorses.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Also Oslo",
+        "type": "track",
+        "url": "https://divorcedhorses.bandcamp.com/track/also-oslo"
+      },
+      {
+        "title": "Live at The Skylark",
+        "type": "album",
+        "url": "https://divorcedhorses.bandcamp.com/album/live-at-the-skylark"
+      },
+      {
+        "title": "Divorce is Easy",
+        "type": "album",
+        "url": "https://divorcedhorses.bandcamp.com/album/divorce-is-easy"
+      }
+    ]
   }
 ];
