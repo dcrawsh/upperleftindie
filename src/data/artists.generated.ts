@@ -2083,5 +2083,44 @@ export const artists: Artist[] = [
         "url": "https://divorcedhorses.bandcamp.com/album/divorce-is-easy"
       }
     ]
+  },
+  {
+    "name": "All Friends Here",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://allfriendshere.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044247687_10.jpg",
+    "bio": "We're All Friends Here!",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://allfriendshere.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "11 Tons of Tire",
+        "type": "track",
+        "url": "https://allfriendshere.bandcamp.com/track/11-tons-of-tire"
+      },
+      {
+        "title": "I Hate to Wait",
+        "type": "album",
+        "url": "https://allfriendshere.bandcamp.com/album/i-hate-to-wait"
+      },
+      {
+        "title": "Houses, Dustbowl",
+        "type": "album",
+        "url": "https://allfriendshere.bandcamp.com/album/houses-dustbowl"
+      },
+      {
+        "title": "The Demos",
+        "type": "album",
+        "url": "https://allfriendshere.bandcamp.com/album/the-demos"
+      }
+    ]
   }
 ];
