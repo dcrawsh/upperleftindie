@@ -729,14 +729,14 @@ export const artists: Artist[] = [
         "url": "https://terriblepop.bandcamp.com/album/not-mine-covers-album"
       },
       {
-        "title": "Terrible Pop",
-        "type": "album",
-        "url": "https://terriblepop.bandcamp.com/album/terrible-pop"
-      },
-      {
         "title": "Terrible Pop II",
         "type": "album",
         "url": "https://terriblepop.bandcamp.com/album/terrible-pop-ii"
+      },
+      {
+        "title": "Terrible Pop",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/terrible-pop"
       }
     ]
   },
