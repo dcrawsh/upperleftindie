@@ -2122,5 +2122,66 @@ export const artists: Artist[] = [
         "url": "https://allfriendshere.bandcamp.com/album/the-demos"
       }
     ]
+  },
+  {
+    "name": "Susurrus Station",
+    "location": "Washington",
+    "bandcampUrl": "https://susurrusstation.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0034757045_10.jpg",
+    "bio": "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://susurrusstation.bandcamp.com/"
+      },
+      {
+        "label": "susurrusstation.com",
+        "url": "http://www.susurrusstation.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "http://instagram.com/aio_soundings"
+      },
+      {
+        "label": "Twitter",
+        "url": "http://twitter.com/susurrusstation"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Mythomania",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/mythomania"
+      },
+      {
+        "title": "Mythomania",
+        "type": "track",
+        "url": "https://susurrusstation.bandcamp.com/track/mythomania"
+      },
+      {
+        "title": "Point No Point",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/point-no-point-2"
+      },
+      {
+        "title": "Free Radio Memory",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/free-radio-memory"
+      },
+      {
+        "title": "Miss Anthropocene",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/miss-anthropocene-2"
+      },
+      {
+        "title": "Foxgloves",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/foxgloves"
+      }
+    ]
   }
 ];
