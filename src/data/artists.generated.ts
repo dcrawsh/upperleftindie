@@ -471,7 +471,7 @@ export const artists: Artist[] = [
     "name": "blond-noise",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044362438_10.jpg",
+    "image": "https://f4.bcbits.com/img/a1979534463_10.jpg",
     "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. ... more",
     "submittedGenre": "Experimental",
     "tags": [
@@ -499,12 +499,7 @@ export const artists: Artist[] = [
       {
         "title": "home",
         "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/home"
-      },
-      {
-        "title": "iLLEGALLY BLonD (Live)",
-        "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/illegally-blond-live"
+        "url": "https://blond-noise.bandcamp.com/track/home/"
       }
     ]
   },
@@ -734,14 +729,14 @@ export const artists: Artist[] = [
         "url": "https://terriblepop.bandcamp.com/album/not-mine-covers-album"
       },
       {
-        "title": "Terrible Pop",
-        "type": "album",
-        "url": "https://terriblepop.bandcamp.com/album/terrible-pop"
-      },
-      {
         "title": "Terrible Pop II",
         "type": "album",
         "url": "https://terriblepop.bandcamp.com/album/terrible-pop-ii"
+      },
+      {
+        "title": "Terrible Pop",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/terrible-pop"
       }
     ]
   },
@@ -1098,7 +1093,7 @@ export const artists: Artist[] = [
     "name": "Payne Fulcher",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://etfondle.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044265512_10.jpg",
+    "image": "https://f4.bcbits.com/img/0044883082_10.jpg",
     "bio": "#noloudmusic",
     "submittedGenre": "Singer-songwriter",
     "tags": [
@@ -1225,7 +1220,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://buddywynkoop.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0044008727_10.jpg",
-    "bio": "Buddy Wynkoop is a six piece art punk outfit that combines a barrage of spoken word existentialism, shout-sung melodies and a unique approach to structure. Formed in the summer of 2019 in a basement in Portland, Or.",
+    "bio": "Buddy Wynkoop is a six piece art punk outfit.",
     "submittedGenre": "Punk",
     "tags": [
       "Punk"
@@ -1241,6 +1236,11 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
+      {
+        "title": "Nouveau Riche",
+        "type": "track",
+        "url": "https://buddywynkoop.bandcamp.com/track/nouveau-riche"
+      },
       {
         "title": "Better Than Botox",
         "type": "album",
@@ -1265,11 +1265,6 @@ export const artists: Artist[] = [
         "title": "Stress Fracture",
         "type": "track",
         "url": "https://buddywynkoop.bandcamp.com/track/stress-fracture"
-      },
-      {
-        "title": "Racing",
-        "type": "track",
-        "url": "https://buddywynkoop.bandcamp.com/track/racing"
       }
     ]
   },
@@ -1420,6 +1415,811 @@ export const artists: Artist[] = [
         "title": "Where Did They Come From?",
         "type": "album",
         "url": "https://whenwemet.bandcamp.com/album/where-did-they-come-from"
+      }
+    ]
+  },
+  {
+    "name": "Güero Brown",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://guerobrown.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040724683_10.jpg",
+    "bio": "Güero Brown is an independent band based in Seattle, Washington.",
+    "tags": [],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://guerobrown.bandcamp.com/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/channel/UC9MsS2OMBMALIN94mY4dsVQ"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/LeGueroBrown/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/le_guero_brown/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Bläu",
+        "type": "album",
+        "url": "https://guerobrown.bandcamp.com/album/bl-u"
+      },
+      {
+        "title": "Güero Brown",
+        "type": "album",
+        "url": "https://guerobrown.bandcamp.com/album/g-ero-brown"
+      }
+    ]
+  },
+  {
+    "name": "slow pony",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://slowpony1.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0735577736_10.jpg",
+    "bio": "Hailing from the damp corners of Portland Oregon , Slow Pony rides the line between alt-country grit and hazy indie rock.",
+    "submittedGenre": "Country / Alt-Country",
+    "tags": [
+      "Country / Alt-Country"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://slowpony1.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Jesus in a Snow Globe",
+        "type": "track",
+        "url": "https://slowpony1.bandcamp.com/track/jesus-in-a-snow-globe/"
+      }
+    ]
+  },
+  {
+    "name": "Cedar Lange",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://cedarlange.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0019928244_10.jpg",
+    "bio": "trying out this music thing...",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://cedarlange.bandcamp.com/"
+      },
+      {
+        "label": "SoundCloud",
+        "url": "https://soundcloud.com/ceda-lange"
+      }
+    ],
+    "releases": [
+      {
+        "title": "wild combinations II",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/wild-combinations-ii"
+      },
+      {
+        "title": "Magic Junction",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/magic-junction"
+      },
+      {
+        "title": "wild combinations",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/wild-combinations"
+      }
+    ]
+  },
+  {
+    "name": "Bandski",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://bandski.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040794500_10.jpg",
+    "bio": "just a bandski playing our lil songskis in the big worldski",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://bandski.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Closure",
+        "type": "album",
+        "url": "https://bandski.bandcamp.com/album/closure"
+      },
+      {
+        "title": "Flightless Birds",
+        "type": "track",
+        "url": "https://bandski.bandcamp.com/track/flightless-birds-2"
+      },
+      {
+        "title": "It's Loud in Here/Long Way Home (DEMO)",
+        "type": "album",
+        "url": "https://bandski.bandcamp.com/album/its-loud-in-here-long-way-home-demo"
+      }
+    ]
+  },
+  {
+    "name": "Glen",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://itsglen.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1142691149_10.jpg",
+    "bio": "Alex, Scott, Peter, Nate... Glen!",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://itsglen.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Who is Glen",
+        "type": "album",
+        "url": "https://itsglen.bandcamp.com/album/who-is-glen/"
+      }
+    ]
+  },
+  {
+    "name": "bandcamp.com",
+    "location": "",
+    "bandcampUrl": "https://kelpwanted.bandcamp.com/",
+    "image": "",
+    "bio": "",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://kelpwanted.bandcamp.com/"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "Bad Quitters",
+    "location": "Boise, Idaho",
+    "bandcampUrl": "https://badquitters.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0042771447_10.jpg",
+    "bio": "",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://badquitters.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Spend It All",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/spend-it-all"
+      },
+      {
+        "title": "Climb Inside and See",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/climb-inside-and-see"
+      }
+    ]
+  },
+  {
+    "name": "Shime",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://shimetheband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044285001_10.jpg",
+    "bio": "shime [ formerly king sheim ] is a seattle based musical project headed by celeste felsheim, composer, lyricist, performer and cornish college alum \"shime is a powerhouse of emotional intensity, delivering heartfelt sincerity in its lyrics and a chaotic performance that resonates with rebellious spirits everywhere.” shime is: celeste felsheim, eliza rosier, calla avery, and tristan white. ... more",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://shimetheband.bandcamp.com/"
+      },
+      {
+        "label": "shimetheband.com",
+        "url": "https://shimetheband.com"
+      },
+      {
+        "label": "open.spotify.com",
+        "url": "https://open.spotify.com/artist/11cJdPrN7HAU0BDQElELNp?si=m8CnuEV0R66O20QzgmQmlA"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Vulture's Wing",
+        "type": "album",
+        "url": "https://shimetheband.bandcamp.com/album/vultures-wing-2"
+      },
+      {
+        "title": "Soulmate 500 [clean]",
+        "type": "track",
+        "url": "https://shimetheband.bandcamp.com/track/soulmate-500-clean"
+      },
+      {
+        "title": "Spin The Spite",
+        "type": "album",
+        "url": "https://shimetheband.bandcamp.com/album/spin-the-spite"
+      },
+      {
+        "title": "Right to the Bone",
+        "type": "track",
+        "url": "https://shimetheband.bandcamp.com/track/right-to-the-bone-2"
+      },
+      {
+        "title": "Amends",
+        "type": "track",
+        "url": "https://shimetheband.bandcamp.com/track/amends"
+      },
+      {
+        "title": "Celeste Live @ Cornish Playhouse 4.22.22",
+        "type": "album",
+        "url": "https://shimetheband.bandcamp.com/album/celeste-live-cornish-playhouse-42222"
+      }
+    ]
+  },
+  {
+    "name": "Treefrog",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://treefrogtheband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0043952246_10.jpg",
+    "bio": "Swamp Rockers from PDX.",
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://treefrogtheband.bandcamp.com/"
+      },
+      {
+        "label": "linktr.ee",
+        "url": "https://linktr.ee/treefrogtheband"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Treefrog",
+        "type": "album",
+        "url": "https://treefrogtheband.bandcamp.com/album/treefrog"
+      },
+      {
+        "title": "Drive",
+        "type": "track",
+        "url": "https://treefrogtheband.bandcamp.com/track/drive-8"
+      },
+      {
+        "title": "Sleepwalking",
+        "type": "track",
+        "url": "https://treefrogtheband.bandcamp.com/track/sleepwalking-3"
+      }
+    ]
+  },
+  {
+    "name": "Slow Rosary",
+    "location": "Louisiana",
+    "bandcampUrl": "https://slowrosary.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0028503742_10.jpg",
+    "bio": "deceptively secular band from south Louisiana now in northwestern Washington",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://slowrosary.bandcamp.com/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/braithwaitemusicLA"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/slowrosary/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Live (Before & After)",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/live-before-after"
+      },
+      {
+        "title": "Free WiFi in the Vatican",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/free-wifi-in-the-vatican"
+      },
+      {
+        "title": "Refinery",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/refinery-2"
+      },
+      {
+        "title": "Reasonably Far From Residential Areas",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/reasonably-far-from-residential-areas"
+      },
+      {
+        "title": "The Eyes of the Skin",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/the-eyes-of-the-skin"
+      },
+      {
+        "title": "The Tall and Strong White Oaks Braithwaite",
+        "type": "album",
+        "url": "https://slowrosary.bandcamp.com/album/the-tall-and-strong-white-oaks"
+      }
+    ]
+  },
+  {
+    "name": "Trashasaurus Rex",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://trashasaurusrex.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1461482586_10.jpg",
+    "bio": "track by Trashasaurus Rex",
+    "submittedGenre": "Punk",
+    "tags": [
+      "Punk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://trashasaurusrex.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Trashasaurus Rex",
+        "type": "track",
+        "url": "https://trashasaurusrex.bandcamp.com/track/trashasaurus-rex/"
+      }
+    ]
+  },
+  {
+    "name": "Shea Isely",
+    "location": "Bellingham, Washington",
+    "bandcampUrl": "https://sheaisely.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044323486_10.jpg",
+    "bio": "",
+    "submittedGenre": "Singer-songwriter",
+    "tags": [
+      "Singer-songwriter"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://sheaisely.bandcamp.com/"
+      },
+      {
+        "label": "sheaisely.com",
+        "url": "http://sheaisely.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Over Like Days",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/over-like-days"
+      },
+      {
+        "title": "Keep The Time",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/keep-the-time"
+      },
+      {
+        "title": "Begin to Pack",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/begin-to-pack"
+      },
+      {
+        "title": "Over Like Weeks",
+        "type": "track",
+        "url": "https://sheaisely.bandcamp.com/track/over-like-weeks"
+      }
+    ]
+  },
+  {
+    "name": "Davey Bones",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://daveybones.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1515154784_10.jpg",
+    "bio": "10 track album",
+    "submittedGenre": "Post-punk",
+    "tags": [
+      "Post-punk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://daveybones.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/daveybonesmusic/"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/davey_music"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/daveybonesmusic"
+      },
+      {
+        "label": "linktr.ee",
+        "url": "https://linktr.ee/daveybonesmusic"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Davey Bones",
+        "type": "album",
+        "url": "https://daveybones.bandcamp.com/album/davey-bones/"
+      }
+    ]
+  },
+  {
+    "name": "The Hoot Hoots",
+    "location": "Seattle",
+    "bandcampUrl": "https://thehoothoots.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0003990942_10.jpg",
+    "bio": "Contact us at: thehoothoots@gmail.com Seattle power pop quartet The Hoot Hoots are irresistible party starters. Their songs are powered by fuzzy guitars, fuzzier keyboards, and headhum-inducing hooks, and all these combine in a glorious, slightly insane energy in both their live shows and in their newest EP, Rainbow Squadron. ... more",
+    "submittedGenre": "Pop",
+    "tags": [
+      "Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thehoothoots.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/thehoothoots/"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://www.facebook.com/thehoothoots"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Rainbow Squadron",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/rainbow-squadron"
+      },
+      {
+        "title": "COLORPUNCH",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/colorpunch"
+      },
+      {
+        "title": "Feel The Cosmos",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/feel-the-cosmos"
+      },
+      {
+        "title": "Appetite For Distraction",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/appetite-for-distraction"
+      },
+      {
+        "title": "Silly Lecture Series",
+        "type": "album",
+        "url": "https://thehoothoots.bandcamp.com/album/silly-lecture-series"
+      },
+      {
+        "title": "Roundhouse - single",
+        "type": "track",
+        "url": "https://thehoothoots.bandcamp.com/track/roundhouse-single"
+      }
+    ]
+  },
+  {
+    "name": "Billy and the Dreamboats",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://billyandthedreamboats.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0034294000_10.jpg",
+    "bio": "60s inspired dreamy pop band based in Seattle, WA",
+    "submittedGenre": "Indie Pop",
+    "tags": [
+      "Indie Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://billyandthedreamboats.bandcamp.com/"
+      },
+      {
+        "label": "billyandthedreamboats.com",
+        "url": "http://billyandthedreamboats.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "How Did You Get Here?",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/how-did-you-get-here"
+      },
+      {
+        "title": "Hallucination Machine",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/hallucination-machine"
+      },
+      {
+        "title": "Spiritual Staircase",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/spiritual-staircase"
+      },
+      {
+        "title": "Cemetery",
+        "type": "album",
+        "url": "https://billyandthedreamboats.bandcamp.com/album/cemetery"
+      }
+    ]
+  },
+  {
+    "name": "Blip.",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://blip206.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0042275938_10.jpg",
+    "bio": "Blip. writes mostly emo songs in standard. We have a cat song, a car song, and a pizza song. Wow. FFO Braid, The Weakerthans, Joyce Manor, & Shinobu. Booking: blipblip.206@gmail IG: @blip.206 ... more",
+    "submittedGenre": "Emo",
+    "tags": [
+      "Emo"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://blip206.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Downfall (demo)",
+        "type": "track",
+        "url": "https://blip206.bandcamp.com/track/downfall-demo"
+      },
+      {
+        "title": "A Mechanism For Action",
+        "type": "album",
+        "url": "https://blip206.bandcamp.com/album/a-mechanism-for-action"
+      },
+      {
+        "title": "Field Day (EP)",
+        "type": "album",
+        "url": "https://blip206.bandcamp.com/album/field-day-ep"
+      },
+      {
+        "title": "Long Term Plans (demo)",
+        "type": "track",
+        "url": "https://blip206.bandcamp.com/track/long-term-plans-demo"
+      },
+      {
+        "title": "Field Day demos",
+        "type": "album",
+        "url": "https://blip206.bandcamp.com/album/field-day-demos"
+      }
+    ]
+  },
+  {
+    "name": "Tiny Lion",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://tiny-lion.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a3992341645_10.jpg",
+    "bio": "Noisy indie-rock band with emo and math influences from life in the gloomy Pacific Northwest.",
+    "submittedGenre": "Emo",
+    "tags": [
+      "Emo"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://tiny-lion.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Good Grades",
+        "type": "album",
+        "url": "https://tiny-lion.bandcamp.com/album/good-grades-2/"
+      }
+    ]
+  },
+  {
+    "name": "Divorced Horses",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://divorcedhorses.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0036861748_10.jpg",
+    "bio": "3 little piggies who want to rock. some grunge, some jazz, some math, some funk, some ballad, some space, some soma.",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://divorcedhorses.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Also Oslo",
+        "type": "track",
+        "url": "https://divorcedhorses.bandcamp.com/track/also-oslo"
+      },
+      {
+        "title": "Live at The Skylark",
+        "type": "album",
+        "url": "https://divorcedhorses.bandcamp.com/album/live-at-the-skylark"
+      },
+      {
+        "title": "Divorce is Easy",
+        "type": "album",
+        "url": "https://divorcedhorses.bandcamp.com/album/divorce-is-easy"
+      }
+    ]
+  },
+  {
+    "name": "All Friends Here",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://allfriendshere.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044247687_10.jpg",
+    "bio": "We're All Friends Here!",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://allfriendshere.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "11 Tons of Tire",
+        "type": "track",
+        "url": "https://allfriendshere.bandcamp.com/track/11-tons-of-tire"
+      },
+      {
+        "title": "I Hate to Wait",
+        "type": "album",
+        "url": "https://allfriendshere.bandcamp.com/album/i-hate-to-wait"
+      },
+      {
+        "title": "Houses, Dustbowl",
+        "type": "album",
+        "url": "https://allfriendshere.bandcamp.com/album/houses-dustbowl"
+      },
+      {
+        "title": "The Demos",
+        "type": "album",
+        "url": "https://allfriendshere.bandcamp.com/album/the-demos"
+      }
+    ]
+  },
+  {
+    "name": "Susurrus Station",
+    "location": "Washington",
+    "bandcampUrl": "https://susurrusstation.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0034757045_10.jpg",
+    "bio": "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://susurrusstation.bandcamp.com/"
+      },
+      {
+        "label": "susurrusstation.com",
+        "url": "http://www.susurrusstation.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "http://instagram.com/aio_soundings"
+      },
+      {
+        "label": "Twitter",
+        "url": "http://twitter.com/susurrusstation"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Mythomania",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/mythomania"
+      },
+      {
+        "title": "Mythomania",
+        "type": "track",
+        "url": "https://susurrusstation.bandcamp.com/track/mythomania"
+      },
+      {
+        "title": "Point No Point",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/point-no-point-2"
+      },
+      {
+        "title": "Free Radio Memory",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/free-radio-memory"
+      },
+      {
+        "title": "Miss Anthropocene",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/miss-anthropocene-2"
+      },
+      {
+        "title": "Foxgloves",
+        "type": "album",
+        "url": "https://susurrusstation.bandcamp.com/album/foxgloves"
+      }
+    ]
+  },
+  {
+    "name": "Jochulina",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://jochulina.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041592040_10.jpg",
+    "bio": "In many ways, music for Jochulina is therapy. She makes music for herself, but also finds it very rewarding to share that vulnerability with others. Jochulina believes that discovering and accepting your authentic self while helping others do the same is the ultimate goal of making art and sharing it with others. ... more",
+    "submittedGenre": "Indie Pop",
+    "tags": [
+      "Indie Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://jochulina.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "GLASS jochulina",
+        "type": "track",
+        "url": "https://jochulina.bandcamp.com/track/glass"
+      },
+      {
+        "title": "EXIT STRATEGY jochulina",
+        "type": "album",
+        "url": "https://jochulina.bandcamp.com/album/exit-strategy"
+      },
+      {
+        "title": "GRRR jochulina",
+        "type": "track",
+        "url": "https://jochulina.bandcamp.com/track/grrr"
+      },
+      {
+        "title": "Under The Sun jochulina",
+        "type": "track",
+        "url": "https://jochulina.bandcamp.com/track/under-the-sun"
       }
     ]
   }
