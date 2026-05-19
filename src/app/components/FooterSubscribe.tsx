@@ -26,7 +26,7 @@ export default function FooterSubscribe() {
             role: "listener",
           },
         }),
-      });
+      }); 
 
       if (!response.ok) {
         throw new Error("Newsletter request failed");
