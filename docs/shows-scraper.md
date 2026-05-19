@@ -5,9 +5,10 @@ at `/shows`.
 
 ## Minimal Data Collected
 
-- Show title
+- Artist/event name
 - Venue name
 - Start date/time
+- Genre, when a venue exposes one
 - Event URL
 - Last scraped timestamp
 
@@ -74,4 +75,10 @@ Local test without writing to Supabase:
 
 ```bash
 DRY_RUN=1 yarn scrape:shows
+```
+
+Local test for one source:
+
+```bash
+SHOW_SOURCE_KEY=als-den DRY_RUN=1 yarn scrape:shows
 ```

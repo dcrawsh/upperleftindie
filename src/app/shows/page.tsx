@@ -6,6 +6,8 @@ export const dynamic = "force-dynamic";
 
 type Show = {
   title: string;
+  artist_name: string | null;
+  genre: string | null;
   venue_name: string;
   starts_at: string;
   url: string;
@@ -38,7 +40,7 @@ async function getShows() {
   }
 
   const params = new URLSearchParams({
-    select: "title,venue_name,starts_at,url",
+    select: "title,artist_name,genre,venue_name,starts_at,url",
     order: "starts_at.asc",
     limit: "100",
   });
@@ -70,6 +72,12 @@ function formatShowDate(value: string) {
     weekday: "short",
     month: "short",
     day: "numeric",
+    timeZone: "America/Los_Angeles",
+  }).format(new Date(value));
+}
+
+function formatShowTime(value: string) {
+  return new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "2-digit",
     timeZone: "America/Los_Angeles",
@@ -163,11 +171,19 @@ export default async function ShowsPage({ searchParams }: ShowsPageProps) {
                 {formatShowDate(show.starts_at)}
               </p>
               <h2 className="mt-2 text-xl font-black leading-tight text-ink">
-                {show.title}
+                {show.artist_name || show.title}
               </h2>
-              <p className="mt-2 text-sm font-bold text-ink/55">
-                {show.venue_name}
-              </p>
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-ink/55">
+                <span>{show.venue_name}</span>
+                <span className="text-ink/25">/</span>
+                <span>{formatShowTime(show.starts_at)}</span>
+                {show.genre ? (
+                  <>
+                    <span className="text-ink/25">/</span>
+                    <span>{show.genre}</span>
+                  </>
+                ) : null}
+              </div>
               <a
                 href={show.url}
                 target="_blank"

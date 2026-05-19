@@ -1,135 +1,81 @@
 [
   {
-    "key": "45-east",
-    "name": "45 East",
-    "url": "https://www.45eastpdx.com/events",
-    "parser": "html-lines"
-  },
-  {
     "key": "als-den",
     "name": "Al's Den",
     "url": "https://www.mcmenamins.com/crystal-hotel/als-den",
-    "parser": "html-lines"
+    "parser": "mcmenamins-venue"
   },
   {
     "key": "aladdin-theater",
     "name": "Aladdin Theater",
-    "url": "https://www.aladdin-theater.com/",
-    "parser": "html-lines"
+    "url": "https://www.aladdin-theater.com/#shows-feed",
+    "parser": "aladdin-theater"
   },
   {
     "key": "alberta-abbey",
     "name": "Alberta Abbey",
     "url": "https://www.albertaabbey.org/calendar",
-    "parser": "html-lines"
+    "parser": "alberta-abbey"
   },
   {
     "key": "alberta-rose-theatre",
     "name": "Alberta Rose Theatre",
     "url": "https://albertarosetheatre.com/events/",
-    "parser": "html-lines"
+    "parser": "alberta-rose-theatre"
   },
   {
     "key": "alberta-street-pub",
     "name": "Alberta Street Pub",
-    "url": "https://www.albertastreetpub.com/events",
-    "parser": "html-lines"
-  },
-  {
-    "key": "arbor-beer-lodge",
-    "name": "Arbor Beer Lodge",
-    "url": "https://www.arborbeerlodge.com/",
-    "parser": "html-lines"
-  },
-  {
-    "key": "arlene-schnitzer-concert-hall",
-    "name": "Arlene Schnitzer Concert Hall",
-    "url": "https://www.portland5.com/events",
-    "parser": "html-lines"
+    "url": "https://www.albertastreetpub.com/music",
+    "parser": "alberta-street-pub"
   },
   {
     "key": "atlantis-lounge",
     "name": "Atlantis Lounge",
     "url": "https://dopdx.com/venues/atlantis-lounge",
-    "parser": "html-lines"
-  },
-  {
-    "key": "big-legrowlski",
-    "name": "The Big Legrowlski",
-    "url": "https://www.biglegrowlski.com/",
-    "parser": "html-lines"
+    "parser": "dopdx-venue"
   },
   {
     "key": "bunk-bar",
     "name": "Bunk Bar",
     "url": "https://shows.bunksandwiches.com/",
-    "parser": "html-lines"
-  },
-  {
-    "key": "cascades-amphitheater",
-    "name": "Cascades Amphitheater",
-    "url": "https://www.mcmenamins.com/edgefield/cascades-amphitheater",
-    "parser": "html-lines"
-  },
-  {
-    "key": "crystal-ballroom",
-    "name": "Crystal Ballroom",
-    "url": "https://www.mcmenamins.com/crystal-ballroom",
-    "parser": "html-lines"
+    "parser": "bunk-bar"
   },
   {
     "key": "dantes",
     "name": "Dante's",
-    "url": "https://www.danteslive.com/events",
-    "parser": "html-lines"
-  },
-  {
-    "key": "edgefield",
-    "name": "Edgefield",
-    "url": "https://www.mcmenamins.com/edgefield",
-    "parser": "html-lines"
-  },
-  {
-    "key": "grand-lodge",
-    "name": "Grand Lodge",
-    "url": "https://www.mcmenamins.com/grand-lodge",
-    "parser": "html-lines"
+    "url": "https://www.danteslive.com/",
+    "parser": "dantes-live"
   },
   {
     "key": "hawthorne-hideaway",
     "name": "Hawthorne Hideaway",
     "url": "https://www.hh2221.com/scheduled-gigs",
-    "parser": "html-lines"
-  },
-  {
-    "key": "hawthorne-lounge",
-    "name": "Hawthorne Lounge",
-    "url": "https://www.hawthornelounge.com/",
-    "parser": "html-lines"
+    "parser": "hawthorne-hideaway"
   },
   {
     "key": "hawthorne-theatre",
     "name": "Hawthorne Theatre",
-    "url": "https://hawthornetheatre.com/events",
-    "parser": "html-lines"
+    "url": "https://hawthornetheatre.com/events/",
+    "parser": "hawthorne-theatre"
   },
   {
     "key": "haymaker",
     "name": "Haymaker",
-    "url": "https://www.haymakerpdx.com/",
-    "parser": "html-lines"
+    "url": "https://www.haymakerportland.com/events",
+    "parser": "haymaker"
   },
   {
     "key": "high-limit-room",
     "name": "High Limit Room",
     "url": "https://highlimitroompdx.com/shows/",
-    "parser": "html-lines"
+    "parser": "afton-events"
   },
   {
     "key": "high-water-mark",
     "name": "High Water Mark",
-    "url": "https://www.highwatermarklounge.com/events",
-    "parser": "html-lines"
+    "url": "https://www.highwatermarklounge.com/",
+    "parser": "treetix-events"
   },
   {
     "key": "holocene",
@@ -141,12 +87,6 @@
     "key": "jack-london-revue",
     "name": "Jack London Revue",
     "url": "https://www.jacklondonrevue.com/events",
-    "parser": "html-lines"
-  },
-  {
-    "key": "keller-auditorium",
-    "name": "Keller Auditorium",
-    "url": "https://www.portland5.com/events",
     "parser": "html-lines"
   },
   {
@@ -180,12 +120,6 @@
     "parser": "html-lines"
   },
   {
-    "key": "mississippi-pizza",
-    "name": "Mississippi Pizza & Atlantis Lounge",
-    "url": "https://mississippipizza.com/calendar/",
-    "parser": "html-lines"
-  },
-  {
     "key": "mission-theater",
     "name": "Mission Theater",
     "url": "https://www.mcmenamins.com/mission-theater",
@@ -195,12 +129,6 @@
     "key": "mississippi-studios",
     "name": "Mississippi Studios",
     "url": "https://mississippistudios.com/",
-    "parser": "html-lines"
-  },
-  {
-    "key": "moda-center",
-    "name": "Moda Center",
-    "url": "https://www.rosequarter.com/events",
     "parser": "html-lines"
   },
   {
@@ -219,12 +147,6 @@
     "key": "nova",
     "name": "Nova PDX",
     "url": "https://www.novapdxevents.com/",
-    "parser": "html-lines"
-  },
-  {
-    "key": "pioneer-courthouse-square",
-    "name": "Pioneer Courthouse Square",
-    "url": "https://www.thesquarepdx.org/events",
     "parser": "html-lines"
   },
   {
@@ -336,12 +258,6 @@
     "parser": "html-lines"
   },
   {
-    "key": "the-nest",
-    "name": "The Nest",
-    "url": "https://dopdx.com/venues/the-nest-lounge",
-    "parser": "html-lines"
-  },
-  {
     "key": "the-off-beat",
     "name": "The Off Beat",
     "url": "https://friendsofnoise.org/the-off-beat/",
@@ -402,27 +318,9 @@
     "parser": "html-lines"
   },
   {
-    "key": "william-temple-house",
-    "name": "William Temple House",
-    "url": "https://www.williamtemple.org/events",
-    "parser": "html-lines"
-  },
-  {
-    "key": "winningstad-theatre",
-    "name": "Winningstad Theatre",
-    "url": "https://www.portland5.com/events",
-    "parser": "html-lines"
-  },
-  {
     "key": "wonder-ballroom",
     "name": "Wonder Ballroom",
     "url": "https://www.wonderballroom.com/",
-    "parser": "html-lines"
-  },
-  {
-    "key": "wyrd-hut",
-    "name": "Wyrd Hut",
-    "url": "https://dopdx.com/venues/wyrd-hut",
     "parser": "html-lines"
   }
 ]

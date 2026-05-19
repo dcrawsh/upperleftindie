@@ -3,13 +3,24 @@ create table if not exists public.shows (
   source_id text not null unique,
   venue_name text not null,
   title text not null,
+  artist_name text,
+  genre text,
   starts_at timestamptz not null,
   url text not null,
   scraped_at timestamptz not null default now()
 );
 
+alter table public.shows add column if not exists artist_name text;
+alter table public.shows add column if not exists genre text;
+
+update public.shows
+set artist_name = title
+where artist_name is null;
+
 create index if not exists shows_starts_at_idx on public.shows (starts_at);
 create index if not exists shows_venue_name_idx on public.shows (venue_name);
+create index if not exists shows_artist_name_idx on public.shows (artist_name);
+create index if not exists shows_genre_idx on public.shows (genre);
 
 alter table public.shows enable row level security;
 
