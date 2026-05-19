@@ -36,6 +36,10 @@ const playlistUrl =
   "https://open.spotify.com/playlist/3LTI227By7Wt7hGs3mz5hF?si=b0900f7372be4492";
 const instagramUrl = "https://www.instagram.com/upperleftindie/";
 const emailServiceTemporarilyDown = false;
+const spotifyTrackUrlPattern =
+  /^https:\/\/open\.spotify\.com\/(?:intl-[a-z]{2}\/)?track\/[A-Za-z0-9]{22}(?:[/?#].*)?$/i;
+const spotifyTrackLinkError =
+  "Please enter a Spotify song link, like https://open.spotify.com/track/...";
 
 const regionOptions = [
   { label: "Oregon", value: "oregon", state: "OR", country: "US" },
@@ -124,12 +128,8 @@ export default function SubmissionForm() {
 
     setFormData((current) => ({ ...current, [name]: nextValue }));
     if (name === "songLink") {
-      // Only allow Spotify links
-      if (
-        value.trim() !== "" &&
-        !/^https?:\/\/(open\.)?spotify\.com\//.test(value.trim())
-      ) {
-        setSongLinkError("Please enter a valid Spotify link.");
+      if (value.trim() !== "" && !spotifyTrackUrlPattern.test(value.trim())) {
+        setSongLinkError(spotifyTrackLinkError);
       } else {
         setSongLinkError("");
       }
@@ -146,11 +146,8 @@ export default function SubmissionForm() {
       return;
     }
 
-    // Validate Spotify link before submitting
-    if (
-      !/^https?:\/\/(open\.)?spotify\.com\//.test(formData.songLink.trim())
-    ) {
-      setSongLinkError("Please enter a valid Spotify link.");
+    if (!spotifyTrackUrlPattern.test(formData.songLink.trim())) {
+      setSongLinkError(spotifyTrackLinkError);
       return;
     }
     setStatus("Sending submission...");
@@ -179,17 +176,47 @@ ${formData.notes || "Not provided"}`;
     emailForm.append("email", formData.email);
     emailForm.append("formType", "playlist submission");
     emailForm.append("bodyText", bodyText);
+    emailForm.append("songLink", formData.songLink);
 
     try {
+      let submissionSaved = true;
+      let emailSent = true;
+
+      try {
+        const submissionResponse = await fetch("/api/submissions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        submissionSaved = submissionResponse.ok;
+
+        if (!submissionResponse.ok) {
+          console.error(
+            await getErrorMessage(submissionResponse, "Submission save failed")
+          );
+        }
+      } catch (error) {
+        submissionSaved = false;
+        console.error(error);
+      }
+
       const response = await fetch("/api/sendEmail", {
         method: "POST",
         body: emailForm,
       });
 
-      if (!response.ok) {
-        throw new Error(
-          await getErrorMessage(response, "Email request failed")
-        );
+      emailSent = response.ok;
+
+      if (!emailSent) {
+        const message = await getErrorMessage(response, "Email request failed");
+        console.error(message);
+
+        if (!submissionSaved) {
+          throw new Error(message);
+        }
       }
 
       let newsletterSubscribed = true;
@@ -264,6 +291,8 @@ ${formData.notes || "Not provided"}`;
       }
 
       const followUpMessages = [
+        !submissionSaved ? "Admin queue save could not be completed." : "",
+        !emailSent ? "Email notification could not be sent." : "",
         !artistPageQueued ? "Artist page queue could not be completed." : "",
         !newsletterSubscribed ? "Newsletter signup could not be completed." : "",
       ].filter(Boolean);
@@ -407,9 +436,11 @@ ${formData.notes || "Not provided"}`;
       </div>
 
       <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Spotify song or artist link
+        Spotify song link
         <input
-          className={`w-full rounded-md border ${songLinkError ? 'border-red-500' : 'border-ink/15'} bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay`}
+          className={`w-full rounded-md border ${
+            songLinkError ? "border-red-500" : "border-ink/15"
+          } bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay`}
           required
           type="url"
           name="songLink"
@@ -417,8 +448,15 @@ ${formData.notes || "Not provided"}`;
           onChange={handleChange}
           placeholder="https://open.spotify.com/track/..."
         />
-        {songLinkError && (
-          <span className="text-red-600 text-xs font-semibold">{songLinkError}</span>
+        {songLinkError ? (
+          <span className="text-xs font-semibold text-red-600">
+            {songLinkError}
+          </span>
+        ) : (
+          <span className="block text-xs font-semibold text-ink/45">
+            Please send a Spotify track URL, not an artist, album, or playlist
+            page.
+          </span>
         )}
       </label>
 
