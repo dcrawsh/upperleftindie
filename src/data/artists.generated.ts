@@ -2183,5 +2183,44 @@ export const artists: Artist[] = [
         "url": "https://susurrusstation.bandcamp.com/album/foxgloves"
       }
     ]
+  },
+  {
+    "name": "Jochulina",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://jochulina.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041592040_10.jpg",
+    "bio": "In many ways, music for Jochulina is therapy. She makes music for herself, but also finds it very rewarding to share that vulnerability with others. Jochulina believes that discovering and accepting your authentic self while helping others do the same is the ultimate goal of making art and sharing it with others. ... more",
+    "submittedGenre": "Indie Pop",
+    "tags": [
+      "Indie Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://jochulina.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "GLASS jochulina",
+        "type": "track",
+        "url": "https://jochulina.bandcamp.com/track/glass"
+      },
+      {
+        "title": "EXIT STRATEGY jochulina",
+        "type": "album",
+        "url": "https://jochulina.bandcamp.com/album/exit-strategy"
+      },
+      {
+        "title": "GRRR jochulina",
+        "type": "track",
+        "url": "https://jochulina.bandcamp.com/track/grrr"
+      },
+      {
+        "title": "Under The Sun jochulina",
+        "type": "track",
+        "url": "https://jochulina.bandcamp.com/track/under-the-sun"
+      }
+    ]
   }
 ];
