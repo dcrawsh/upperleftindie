@@ -41,6 +41,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Scratch the Itch",
+        "type": "track",
+        "url": "https://killmer.bandcamp.com/track/scratch-the-itch"
+      },
+      {
         "title": "primo!",
         "type": "album",
         "url": "https://killmer.bandcamp.com/album/primo"
@@ -2244,5 +2249,61 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "Kinzie Steele",
+    "location": "Joseph, Oregon",
+    "bandcampUrl": "https://kinziesteele.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041809815_10.jpg",
+    "bio": "Piano, Drums, Gongs, String Quartet. Music of Beauty, Healing and Energy.",
+    "submittedGenre": "World / Global",
+    "tags": [
+      "World / Global"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://kinziesteele.bandcamp.com/"
+      },
+      {
+        "label": "kinziesteele.com",
+        "url": "https://kinziesteele.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/kinziesteele"
+      },
+      {
+        "label": "sethkinzie.com",
+        "url": "https://sethkinzie.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Bright Violet",
+        "type": "album",
+        "url": "https://kinziesteele.bandcamp.com/album/bright-violet"
+      },
+      {
+        "title": "When I Was A Tree",
+        "type": "album",
+        "url": "https://kinziesteele.bandcamp.com/album/when-i-was-a-tree"
+      },
+      {
+        "title": "Brothers Retreat Seth Kinzie",
+        "type": "album",
+        "url": "https://kinziesteele.bandcamp.com/album/brothers-retreat"
+      },
+      {
+        "title": "Memories Are Captured By Sensations Seth Kinzie",
+        "type": "track",
+        "url": "https://kinziesteele.bandcamp.com/track/memories-are-captured-by-sensations"
+      },
+      {
+        "title": "The Half-Asian Inspiration Suite Seth Kinzie",
+        "type": "album",
+        "url": "https://kinziesteele.bandcamp.com/album/the-half-asian-inspiration-suite"
+      }
+    ]
   }
 ];
