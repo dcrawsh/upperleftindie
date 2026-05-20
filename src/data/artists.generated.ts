@@ -2305,5 +2305,44 @@ export const artists: Artist[] = [
         "url": "https://kinziesteele.bandcamp.com/album/the-half-asian-inspiration-suite"
       }
     ]
+  },
+  {
+    "name": "Bory",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://bory.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041974781_10.jpg",
+    "bio": "\"absolutely okay\"",
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://bory.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Never Turns To Night",
+        "type": "album",
+        "url": "https://bory.bandcamp.com/album/never-turns-to-night"
+      },
+      {
+        "title": "We'll Burn That Bridge When We Get To It",
+        "type": "track",
+        "url": "https://bory.bandcamp.com/track/well-burn-that-bridge-when-we-get-to-it"
+      },
+      {
+        "title": "Who's A Good Boy",
+        "type": "album",
+        "url": "https://bory.bandcamp.com/album/whos-a-good-boy"
+      },
+      {
+        "title": "Sidelined EP",
+        "type": "album",
+        "url": "https://bory.bandcamp.com/album/sidelined-ep"
+      }
+    ]
   }
 ];
