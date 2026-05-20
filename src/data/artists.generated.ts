@@ -2189,7 +2189,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://jochulina.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0041592040_10.jpg",
-    "bio": "In many ways, music for Jochulina is therapy. She makes music for herself, but also finds it very rewarding to share that vulnerability with others. Jochulina believes that discovering and accepting your authentic self while helping others do the same is the ultimate goal of making art and sharing it with others. ... more",
+    "bio": "pop music to fall from grace to <3",
     "submittedGenre": "Indie Pop",
     "tags": [
       "Indie Pop"
@@ -2198,6 +2198,10 @@ export const artists: Artist[] = [
       {
         "label": "Bandcamp",
         "url": "https://jochulina.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/jo.chulina/"
       }
     ],
     "releases": [
