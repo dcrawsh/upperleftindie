@@ -2222,5 +2222,23 @@ export const artists: Artist[] = [
         "url": "https://jochulina.bandcamp.com/track/under-the-sun"
       }
     ]
+  },
+  {
+    "name": "bandcamp.com",
+    "location": "",
+    "bandcampUrl": "https://masonmctell.bandcamp.com/",
+    "image": "",
+    "bio": "",
+    "submittedGenre": "Americana",
+    "tags": [
+      "Americana"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://masonmctell.bandcamp.com/"
+      }
+    ],
+    "releases": []
   }
 ];
