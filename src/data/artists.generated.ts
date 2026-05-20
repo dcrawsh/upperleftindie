@@ -2344,5 +2344,57 @@ export const artists: Artist[] = [
         "url": "https://bory.bandcamp.com/album/sidelined-ep"
       }
     ]
+  },
+  {
+    "name": "jackie tulsa",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://jackietulsa.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0042171691_10.jpg",
+    "bio": "moonlight music from the pacific northwest",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://jackietulsa.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/jackietulsa/"
+      },
+      {
+        "label": "open.spotify.com",
+        "url": "https://open.spotify.com/artist/4kjmNs1nLtBPjfjAKvV9lJ?si=ftTH3WUxTjyFLQ5mdarFVA"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Good Year",
+        "type": "album",
+        "url": "https://jackietulsa.bandcamp.com/album/good-year"
+      },
+      {
+        "title": "The Well",
+        "type": "track",
+        "url": "https://jackietulsa.bandcamp.com/track/the-well"
+      },
+      {
+        "title": "ANA",
+        "type": "track",
+        "url": "https://jackietulsa.bandcamp.com/track/ana"
+      },
+      {
+        "title": "GOD BLESS THE PNW",
+        "type": "album",
+        "url": "https://jackietulsa.bandcamp.com/album/god-bless-the-pnw"
+      },
+      {
+        "title": "jackie tulsa mystery album",
+        "type": "album",
+        "url": "https://jackietulsa.bandcamp.com/album/jackie-tulsa-mystery-album"
+      }
+    ]
   }
 ];
