@@ -1,13 +1,6 @@
-import { readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
-
-const urlsFilePath = path.join(process.cwd(), "src/data/bandcamp-urls.json");
-const urlsFileRepoPath = "src/data/bandcamp-urls.json";
-const defaultRepository = "dcrawsh/upperleftindie";
-const defaultBranch = "main";
 
 type QueuePayload = {
   bandcampUrl?: unknown;
@@ -15,14 +8,13 @@ type QueuePayload = {
   genre?: unknown;
 };
 
-type BandcampSource = {
-  url: string;
-  genre?: string;
-};
-
-type UrlsFile = {
-  urls: BandcampSource[];
-  sha?: string;
+type BandcampSourceRow = {
+  id: string;
+  bandcamp_url: string;
+  artist_name: string;
+  genre: string;
+  status: "active" | "hidden" | "failed";
+  source: string;
 };
 
 class BandcampQueueError extends Error {
@@ -32,6 +24,50 @@ class BandcampQueueError extends Error {
   ) {
     super(message);
   }
+}
+
+function getSupabaseConfig() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !key) {
+    throw new BandcampQueueError(
+      "Supabase is not configured. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
+      500
+    );
+  }
+
+  return {
+    url: url.replace(/\/$/, ""),
+    key,
+  };
+}
+
+async function supabaseRequest<T>(path: string, init: RequestInit = {}) {
+  const { url, key } = getSupabaseConfig();
+  const response = await fetch(`${url}/rest/v1/${path}`, {
+    ...init,
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+      ...init.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new BandcampQueueError(
+      detail || `Supabase request failed with ${response.status}`,
+      response.status
+    );
+  }
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return (await response.json()) as T;
 }
 
 function normalizeBandcampArtistUrl(value: string) {
@@ -60,137 +96,7 @@ function normalizeGenre(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
-function normalizeSourceEntry(entry: unknown): BandcampSource | null {
-  if (typeof entry === "string") {
-    const url = normalizeBandcampArtistUrl(entry);
-    return url ? { url } : null;
-  }
-
-  if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
-    return null;
-  }
-
-  const source = entry as { url?: unknown; genre?: unknown };
-  const url =
-    typeof source.url === "string" ? normalizeBandcampArtistUrl(source.url) : "";
-  if (!url) return null;
-
-  const genre = normalizeGenre(source.genre);
-  return {
-    url,
-    ...(genre ? { genre } : {}),
-  };
-}
-
-function normalizeSourceEntries(entries: unknown[]) {
-  const sourcesByUrl = new Map<string, BandcampSource>();
-
-  for (const entry of entries) {
-    const source = normalizeSourceEntry(entry);
-    if (!source) continue;
-
-    const existingSource = sourcesByUrl.get(source.url);
-    sourcesByUrl.set(source.url, {
-      url: source.url,
-      genre: source.genre || existingSource?.genre,
-    });
-  }
-
-  return [...sourcesByUrl.values()];
-}
-
-async function readLocalUrlsFile(): Promise<UrlsFile> {
-  const raw = await readFile(urlsFilePath, "utf8");
-  const urls = JSON.parse(raw);
-
-  if (!Array.isArray(urls)) {
-    throw new Error("Bandcamp URLs file must be a JSON array");
-  }
-
-  return { urls: normalizeSourceEntries(urls) };
-}
-
-async function writeLocalUrlsFile(urls: BandcampSource[]) {
-  await writeFile(urlsFilePath, `${JSON.stringify(urls, null, 2)}\n`, "utf8");
-}
-
-async function readGithubUrlsFile({
-  repository,
-  branch,
-  token,
-}: {
-  repository: string;
-  branch: string;
-  token: string;
-}): Promise<UrlsFile> {
-  const response = await fetch(
-    `https://api.github.com/repos/${repository}/contents/${urlsFileRepoPath}?ref=${branch}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`GitHub file lookup failed with ${response.status}`);
-  }
-
-  const file = (await response.json()) as { content?: string; sha?: string };
-  const content = Buffer.from(file.content ?? "", "base64").toString("utf8");
-  const urls = JSON.parse(content);
-
-  if (!Array.isArray(urls)) {
-    throw new Error("Bandcamp URLs file must be a JSON array");
-  }
-
-  return { urls: normalizeSourceEntries(urls), sha: file.sha };
-}
-
-async function writeGithubUrlsFile({
-  repository,
-  branch,
-  token,
-  sources,
-  sha,
-  artistName,
-}: {
-  repository: string;
-  branch: string;
-  token: string;
-  sources: BandcampSource[];
-  sha: string;
-  artistName: string;
-}) {
-  const response = await fetch(
-    `https://api.github.com/repos/${repository}/contents/${urlsFileRepoPath}`,
-    {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-      body: JSON.stringify({
-        branch,
-        sha,
-        message: `Add Bandcamp artist${artistName ? ` for ${artistName}` : ""}`,
-        content: Buffer.from(`${JSON.stringify(sources, null, 2)}\n`).toString(
-          "base64"
-        ),
-      }),
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`GitHub file update failed with ${response.status}`);
-  }
-}
-
-async function appendUrl({
+async function upsertBandcampSource({
   url,
   artistName,
   genre,
@@ -199,57 +105,47 @@ async function appendUrl({
   artistName: string;
   genre: string;
 }) {
-  const token =
-    process.env.BANDCAMP_URLS_GITHUB_TOKEN ?? process.env.GITHUB_TOKEN ?? "";
-  const repository =
-    process.env.BANDCAMP_URLS_GITHUB_REPOSITORY ??
-    process.env.GITHUB_REPOSITORY ??
-    defaultRepository;
-  const branch = process.env.BANDCAMP_URLS_GITHUB_BRANCH ?? defaultBranch;
-  const storage = token ? "github" : "local";
+  const encodedUrl = encodeURIComponent(url);
+  const existingRows = await supabaseRequest<BandcampSourceRow[]>(
+    `bandcamp_sources?select=*&bandcamp_url=eq.${encodedUrl}&limit=1`
+  );
+  const existing = existingRows[0];
+  const payload = {
+    bandcamp_url: url,
+    artist_name: artistName,
+    genre,
+    source: existing?.source || "submission-form",
+    status: "active",
+  };
 
-  if (!token && process.env.NODE_ENV === "production") {
-    throw new BandcampQueueError(
-      "Bandcamp queue is missing BANDCAMP_URLS_GITHUB_TOKEN",
-      500
-    );
-  }
-
-  const file = token
-    ? await readGithubUrlsFile({ repository, branch, token })
-    : await readLocalUrlsFile();
-  const existingSource = file.urls.find((source) => source.url === url);
-  const added = !existingSource;
-  const needsGenreUpdate =
-    Boolean(existingSource) && Boolean(genre) && existingSource?.genre !== genre;
-  const sources = normalizeSourceEntries([
-    ...file.urls,
-    {
-      url,
-      ...(genre ? { genre } : {}),
-    },
-  ]);
-
-  if (added || needsGenreUpdate) {
-    if (token) {
-      if (!file.sha) {
-        throw new Error("GitHub file update is missing the current file SHA");
+  if (existing) {
+    const rows = await supabaseRequest<BandcampSourceRow[]>(
+      `bandcamp_sources?id=eq.${encodeURIComponent(existing.id)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify({
+          ...payload,
+          artist_name: artistName || existing.artist_name,
+          genre: genre || existing.genre,
+        }),
       }
+    );
 
-      await writeGithubUrlsFile({
-        repository,
-        branch,
-        token,
-        sources,
-        sha: file.sha,
-        artistName,
-      });
-    } else {
-      await writeLocalUrlsFile(sources);
-    }
+    return { added: false, updated: true, source: rows[0] ?? existing };
   }
 
-  return { added, updated: needsGenreUpdate, storage };
+  const rows = await supabaseRequest<BandcampSourceRow[]>("bandcamp_sources", {
+    method: "POST",
+    headers: {
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  return { added: true, updated: false, source: rows[0] };
 }
 
 export async function POST(req: NextRequest) {
@@ -264,12 +160,12 @@ export async function POST(req: NextRequest) {
 
     if (!normalizedUrl) {
       return Response.json(
-        { error: "A valid Bandcamp artist, album, or track URL is required" },
+        { error: "A valid Bandcamp artist URL is required" },
         { status: 400 }
       );
     }
 
-    const result = await appendUrl({
+    const result = await upsertBandcampSource({
       url: normalizedUrl,
       artistName,
       genre,
@@ -278,6 +174,7 @@ export async function POST(req: NextRequest) {
     return Response.json({
       success: true,
       bandcampUrl: normalizedUrl,
+      storage: "supabase",
       ...result,
     });
   } catch (error) {

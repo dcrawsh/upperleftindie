@@ -12,6 +12,20 @@ const requestHeaders = {
     "UpperLeftIndieBot/1.0 (+https://www.upperleftindie.com; artist metadata generator)",
 };
 
+async function loadEnvFile(filePath) {
+  try {
+    const raw = await readFile(filePath, "utf8");
+
+    for (const line of raw.split(/\n/)) {
+      const match = line.match(/^([A-Z0-9_]+)=(.*)$/);
+      if (!match || process.env[match[1]]) continue;
+      process.env[match[1]] = match[2];
+    }
+  } catch {
+    // The generator can still run from JSON if local env is absent.
+  }
+}
+
 function decodeEntities(value = "") {
   return value
     .replace(/&quot;/g, '"')
@@ -99,6 +113,76 @@ function getArtistSources(rawUrls) {
   }
 
   return [...sourcesByUrl.values()];
+}
+
+function getSupabaseConfig() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_ANON_KEY;
+
+  if (!url || !key) {
+    return null;
+  }
+
+  return {
+    url: url.replace(/\/$/, ""),
+    key,
+  };
+}
+
+async function readSupabaseArtistSources() {
+  const config = getSupabaseConfig();
+  if (!config) return null;
+
+  const response = await fetch(
+    `${config.url}/rest/v1/bandcamp_sources?select=bandcamp_url,genre&status=eq.active&order=created_at.asc`,
+    {
+      headers: {
+        apikey: config.key,
+        Authorization: `Bearer ${config.key}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Supabase Bandcamp source lookup failed with ${response.status}: ${await response.text()}`
+    );
+  }
+
+  const rows = await response.json();
+
+  if (!Array.isArray(rows)) {
+    throw new Error("Supabase Bandcamp source response must be an array");
+  }
+
+  return getArtistSources(
+    rows.map((row) => ({
+      url: row.bandcamp_url,
+      genre: row.genre,
+    }))
+  );
+}
+
+async function readJsonArtistSources() {
+  const rawUrls = JSON.parse(await readFile(urlsPath, "utf8"));
+  if (!Array.isArray(rawUrls)) {
+    throw new Error("src/data/bandcamp-urls.json must be an array of URLs");
+  }
+
+  return getArtistSources(rawUrls);
+}
+
+async function readArtistSources() {
+  const supabaseSources = await readSupabaseArtistSources();
+
+  if (supabaseSources) {
+    console.log(`Loaded ${supabaseSources.length} Bandcamp sources from Supabase`);
+    return supabaseSources;
+  }
+
+  const jsonSources = await readJsonArtistSources();
+  console.log(`Loaded ${jsonSources.length} Bandcamp sources from JSON fallback`);
+  return jsonSources;
 }
 
 function getFallbackName(url) {
@@ -423,12 +507,9 @@ export const artists: Artist[] = ${JSON.stringify(artists, null, 2)};
 }
 
 async function main() {
-  const rawUrls = JSON.parse(await readFile(urlsPath, "utf8"));
-  if (!Array.isArray(rawUrls)) {
-    throw new Error("src/data/bandcamp-urls.json must be an array of URLs");
-  }
+  await loadEnvFile(path.join(rootDir, ".env.local"));
 
-  const sources = getArtistSources(rawUrls);
+  const sources = await readArtistSources();
   const artists = [];
 
   for (const source of sources) {
