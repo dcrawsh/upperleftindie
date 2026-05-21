@@ -171,7 +171,7 @@ export const artists: Artist[] = [
     ]
   },
   {
-    "name": "bandcamp.com",
+    "name": "masonmctell",
     "location": "",
     "bandcampUrl": "https://masonmctell.bandcamp.com/",
     "image": "",
@@ -822,7 +822,7 @@ export const artists: Artist[] = [
     ]
   },
   {
-    "name": "bandcamp.com",
+    "name": "kelpwanted",
     "location": "",
     "bandcampUrl": "https://kelpwanted.bandcamp.com/",
     "image": "",

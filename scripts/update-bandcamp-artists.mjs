@@ -77,10 +77,15 @@ function normalizeGenre(value) {
   return String(value || "").trim();
 }
 
+function normalizeArtistName(value) {
+  return String(value || "").trim();
+}
+
 function normalizeSourceEntry(entry) {
   if (typeof entry === "string") {
     return {
       url: normalizeBandcampArtistUrl(entry),
+      artistName: "",
       genre: "",
     };
   }
@@ -88,12 +93,14 @@ function normalizeSourceEntry(entry) {
   if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
     return {
       url: "",
+      artistName: "",
       genre: "",
     };
   }
 
   return {
     url: normalizeBandcampArtistUrl(entry.url),
+    artistName: normalizeArtistName(entry.artistName || entry.artist_name || entry.name),
     genre: normalizeGenre(entry.genre),
   };
 }
@@ -108,6 +115,7 @@ function getArtistSources(rawUrls) {
     const existingSource = sourcesByUrl.get(source.url);
     sourcesByUrl.set(source.url, {
       url: source.url,
+      artistName: existingSource?.artistName || source.artistName,
       genre: existingSource?.genre || source.genre,
     });
   }
@@ -134,7 +142,7 @@ async function readSupabaseArtistSources() {
   if (!config) return null;
 
   const response = await fetch(
-    `${config.url}/rest/v1/bandcamp_sources?select=bandcamp_url,genre&status=eq.active&order=created_at.asc`,
+    `${config.url}/rest/v1/bandcamp_sources?select=artist_name,bandcamp_url,genre&status=eq.active&order=created_at.asc`,
     {
       headers: {
         apikey: config.key,
@@ -158,6 +166,7 @@ async function readSupabaseArtistSources() {
   return getArtistSources(
     rows.map((row) => ({
       url: row.bandcamp_url,
+      artistName: row.artist_name,
       genre: row.genre,
     }))
   );
@@ -191,6 +200,20 @@ function getFallbackName(url) {
   } catch {
     return "Bandcamp Artist";
   }
+}
+
+function getSourceFallbackName(source, url) {
+  return source.artistName || getFallbackName(url);
+}
+
+function isGenericBandcampName(name) {
+  return /^bandcamp(?:\.com)?$/i.test(String(name || "").trim());
+}
+
+function getDisplayName(scrapedName, source, url) {
+  const cleanedName = normalizeArtistName(scrapedName);
+  if (cleanedName && !isGenericBandcampName(cleanedName)) return cleanedName;
+  return getSourceFallbackName(source, url);
 }
 
 function getMetaContent(html, property) {
@@ -444,6 +467,7 @@ async function fetchHtml(url) {
 async function buildArtist(source) {
   const cleanUrl =
     normalizeBandcampArtistUrl(source.url) || normalizeUrl(source.url) + "/";
+  const fallbackName = getSourceFallbackName(source, cleanUrl);
 
   try {
     const { finalUrl, html } = await fetchHtml(cleanUrl);
@@ -451,7 +475,7 @@ async function buildArtist(source) {
     const tags = getTags(html);
 
     return {
-      name: getBandName(html, resolvedUrl),
+      name: getDisplayName(getBandName(html, cleanUrl), source, cleanUrl),
       location: getLocation(html),
       bandcampUrl: cleanUrl,
       image: getBandcampProfileImage(html),
@@ -464,7 +488,7 @@ async function buildArtist(source) {
   } catch (error) {
     console.warn(error instanceof Error ? error.message : error);
     return {
-      name: getFallbackName(cleanUrl),
+      name: fallbackName,
       location: "",
       bandcampUrl: cleanUrl,
       image: "",

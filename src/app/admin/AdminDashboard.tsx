@@ -7,6 +7,7 @@ import {
   FiCornerUpLeft,
   FiExternalLink,
   FiLock,
+  FiMail,
   FiRefreshCw,
   FiX,
 } from "react-icons/fi";
@@ -44,6 +45,15 @@ type PlaylistTrack = {
 
 type Tab = "submissions" | "playlist" | "archive";
 
+type ReplyDraft = {
+  isOpen: boolean;
+  subject: string;
+  message: string;
+};
+
+const playlistUrl =
+  "https://open.spotify.com/playlist/3LTI227By7Wt7hGs3mz5hF?si=f9293e66628f4b54";
+
 const storageKey = "upperleftindie-admin-token";
 
 function formatDate(value: string) {
@@ -68,6 +78,9 @@ export default function AdminDashboard() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [tracks, setTracks] = useState<PlaylistTrack[]>([]);
   const [archiveTracks, setArchiveTracks] = useState<PlaylistTrack[]>([]);
+  const [replyDrafts, setReplyDrafts] = useState<Record<string, ReplyDraft>>(
+    {}
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [workingId, setWorkingId] = useState("");
   const [message, setMessage] = useState("");
@@ -81,6 +94,15 @@ export default function AdminDashboard() {
     }),
     [token]
   );
+
+  function clearAdminSession() {
+    window.localStorage.removeItem(storageKey);
+    setToken("");
+    setSubmissions([]);
+    setTracks([]);
+    setArchiveTracks([]);
+    setReplyDrafts({});
+  }
 
   async function adminFetch<T>(path: string, init: RequestInit = {}) {
     const response = await fetch(path, {
@@ -96,6 +118,10 @@ export default function AdminDashboard() {
     };
 
     if (!response.ok) {
+      if (response.status === 401) {
+        clearAdminSession();
+      }
+
       throw new Error(body.error || `Request failed with ${response.status}`);
     }
 
@@ -191,11 +217,7 @@ export default function AdminDashboard() {
   }
 
   function handleLogout() {
-    window.localStorage.removeItem(storageKey);
-    setToken("");
-    setSubmissions([]);
-    setTracks([]);
-    setArchiveTracks([]);
+    clearAdminSession();
   }
 
   async function addSubmissionToPlaylist(id: string) {
@@ -226,6 +248,90 @@ export default function AdminDashboard() {
       });
       setMessage("Submission archived from the review queue.");
       await loadSubmissions();
+    } catch (error) {
+      setMessage(getErrorMessage(error));
+    } finally {
+      setWorkingId("");
+    }
+  }
+
+  function getDefaultReplySubject(submission: Submission) {
+    return `Re: Upper Left Indie submission from ${submission.artist_name}`;
+  }
+
+  function getDefaultReplyMessage(submission: Submission) {
+    const contactName = submission.contact_name || "there";
+
+    return `Hello ${contactName},
+
+
+
+Please save and share the playlist to help more NW artists get heard:
+${playlistUrl}
+
+Cheers,
+Upper Left Indie team`;
+  }
+
+  function getReplyDraft(submission: Submission) {
+    return (
+      replyDrafts[submission.id] ?? {
+        isOpen: false,
+        subject: getDefaultReplySubject(submission),
+        message: getDefaultReplyMessage(submission),
+      }
+    );
+  }
+
+  function updateReplyDraft(
+    submission: Submission,
+    values: Partial<ReplyDraft>
+  ) {
+    setReplyDrafts((current) => {
+      const existing =
+        current[submission.id] ?? {
+          isOpen: false,
+          subject: getDefaultReplySubject(submission),
+          message: getDefaultReplyMessage(submission),
+        };
+
+      return {
+        ...current,
+        [submission.id]: {
+          ...existing,
+          ...values,
+        },
+      };
+    });
+  }
+
+  function toggleReplyDraft(submission: Submission) {
+    const draft = getReplyDraft(submission);
+    updateReplyDraft(submission, { isOpen: !draft.isOpen });
+  }
+
+  async function sendSubmissionReply(submission: Submission) {
+    const draft = getReplyDraft(submission);
+    const replyId = `reply-${submission.id}`;
+
+    if (!draft.message.trim()) {
+      setMessage("Write a reply before sending.");
+      return;
+    }
+
+    setWorkingId(replyId);
+    setMessage("");
+
+    try {
+      await adminFetch(`/api/admin/submissions/${submission.id}/reply`, {
+        method: "POST",
+        body: JSON.stringify({
+          subject: draft.subject,
+          message: draft.message,
+        }),
+      });
+      updateReplyDraft(submission, { isOpen: false, message: "" });
+      setMessage(`Reply sent to ${submission.email}.`);
     } catch (error) {
       setMessage(getErrorMessage(error));
     } finally {
@@ -402,105 +508,170 @@ export default function AdminDashboard() {
           </div>
 
           <div className="grid gap-4">
-            {submissions.map((submission) => (
-              <article
-                key={submission.id}
-                className="rounded-md border border-ink/10 bg-paper p-5 shadow-soft"
-              >
-                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                  <div className="min-w-0 space-y-3">
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
-                        {formatDate(submission.created_at)} /{" "}
-                        {submission.status}
-                      </p>
-                      <h2 className="mt-1 text-2xl font-black text-ink">
-                        {submission.artist_name}
-                      </h2>
-                      <p className="text-sm leading-6 text-ink/65">
-                        {submission.genre || "No genre"} /{" "}
-                        {submission.city || "No city"}{" "}
-                        {submission.region ? `/${submission.region}` : ""}
-                      </p>
-                    </div>
-                    <div className="grid gap-2 text-sm text-ink/70 md:grid-cols-2">
-                      <p>
-                        <span className="font-bold text-ink">Contact:</span>{" "}
-                        {submission.contact_name}
-                      </p>
-                      <p>
-                        <span className="font-bold text-ink">Email:</span>{" "}
+            {submissions.map((submission) => {
+              const replyDraft = getReplyDraft(submission);
+              const replyWorkingId = `reply-${submission.id}`;
+
+              return (
+                <article
+                  key={submission.id}
+                  className="rounded-md border border-ink/10 bg-paper p-5 shadow-soft"
+                >
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="min-w-0 space-y-3">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
+                          {formatDate(submission.created_at)} /{" "}
+                          {submission.status}
+                        </p>
+                        <h2 className="mt-1 text-2xl font-black text-ink">
+                          {submission.artist_name}
+                        </h2>
+                        <p className="text-sm leading-6 text-ink/65">
+                          {submission.genre || "No genre"} /{" "}
+                          {submission.city || "No city"}{" "}
+                          {submission.region ? `/${submission.region}` : ""}
+                        </p>
+                      </div>
+                      <div className="grid gap-2 text-sm text-ink/70 md:grid-cols-2">
+                        <p>
+                          <span className="font-bold text-ink">Contact:</span>{" "}
+                          {submission.contact_name}
+                        </p>
+                        <p>
+                          <span className="font-bold text-ink">Email:</span>{" "}
+                          <a
+                            href={`mailto:${submission.email}`}
+                            className="text-clay hover:text-ink"
+                          >
+                            {submission.email}
+                          </a>
+                        </p>
+                      </div>
+                      {submission.notes ? (
+                        <p className="max-w-3xl whitespace-pre-wrap text-sm leading-6 text-ink/70">
+                          {submission.notes}
+                        </p>
+                      ) : null}
+                      <div className="flex flex-wrap gap-2">
                         <a
-                          href={`mailto:${submission.email}`}
-                          className="text-clay hover:text-ink"
+                          href={submission.song_link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-green-700 hover:text-green-700"
                         >
-                          {submission.email}
+                          <FaSpotify size={16} />
+                          Song
                         </a>
-                      </p>
+                        {submission.bandcamp_link ? (
+                          <a
+                            href={submission.bandcamp_link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay"
+                          >
+                            <FiExternalLink size={16} />
+                            Bandcamp
+                          </a>
+                        ) : null}
+                        {submission.social_link ? (
+                          <a
+                            href={submission.social_link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay"
+                          >
+                            <FiExternalLink size={16} />
+                            Social
+                          </a>
+                        ) : null}
+                      </div>
                     </div>
-                    {submission.notes ? (
-                      <p className="max-w-3xl whitespace-pre-wrap text-sm leading-6 text-ink/70">
-                        {submission.notes}
-                      </p>
-                    ) : null}
-                    <div className="flex flex-wrap gap-2">
-                      <a
-                        href={submission.song_link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-green-700 hover:text-green-700"
+
+                    <div className="flex shrink-0 flex-wrap gap-2 lg:justify-end">
+                      <button
+                        type="button"
+                        onClick={() => toggleReplyDraft(submission)}
+                        className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay"
                       >
-                        <FaSpotify size={16} />
-                        Song
-                      </a>
-                      {submission.bandcamp_link ? (
-                        <a
-                          href={submission.bandcamp_link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay"
-                        >
-                          <FiExternalLink size={16} />
-                          Bandcamp
-                        </a>
-                      ) : null}
-                      {submission.social_link ? (
-                        <a
-                          href={submission.social_link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay"
-                        >
-                          <FiExternalLink size={16} />
-                          Social
-                        </a>
-                      ) : null}
+                        <FiMail size={16} />
+                        Reply
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => addSubmissionToPlaylist(submission.id)}
+                        disabled={workingId === submission.id}
+                        className="inline-flex items-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-ink disabled:opacity-60"
+                      >
+                        <FiCheck size={16} />
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => rejectSubmission(submission.id)}
+                        disabled={workingId === submission.id}
+                        className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
+                      >
+                        <FiX size={16} />
+                        Pass
+                      </button>
                     </div>
                   </div>
 
-                  <div className="flex shrink-0 flex-wrap gap-2 lg:justify-end">
-                    <button
-                      type="button"
-                      onClick={() => addSubmissionToPlaylist(submission.id)}
-                      disabled={workingId === submission.id}
-                      className="inline-flex items-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-ink disabled:opacity-60"
-                    >
-                      <FiCheck size={16} />
-                      Add
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => rejectSubmission(submission.id)}
-                      disabled={workingId === submission.id}
-                      className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
-                    >
-                      <FiX size={16} />
-                      Pass
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
+                  {replyDraft.isOpen ? (
+                    <div className="mt-5 space-y-3 border-t border-ink/10 pt-5">
+                      <label className="block space-y-2 text-sm font-bold text-ink/70">
+                        Subject
+                        <input
+                          type="text"
+                          value={replyDraft.subject}
+                          onChange={(event) =>
+                            updateReplyDraft(submission, {
+                              subject: event.target.value,
+                            })
+                          }
+                          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base font-normal text-ink outline-none transition focus:border-clay"
+                        />
+                      </label>
+                      <label className="block space-y-2 text-sm font-bold text-ink/70">
+                        Message
+                        <textarea
+                          value={replyDraft.message}
+                          onChange={(event) =>
+                            updateReplyDraft(submission, {
+                              message: event.target.value,
+                            })
+                          }
+                          rows={7}
+                          placeholder={`Hey ${submission.contact_name || "there"},`}
+                          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base font-normal leading-6 text-ink outline-none transition focus:border-clay"
+                        />
+                      </label>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => sendSubmissionReply(submission)}
+                          disabled={workingId === replyWorkingId}
+                          className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-clay disabled:opacity-60"
+                        >
+                          <FiMail size={16} />
+                          Send
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            updateReplyDraft(submission, { isOpen: false })
+                          }
+                          className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
           </div>
 
           {!isLoading && submissions.length === 0 ? (

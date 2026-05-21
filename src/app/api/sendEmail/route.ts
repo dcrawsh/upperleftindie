@@ -1,5 +1,9 @@
 import { NextRequest } from "next/server";
-import nodemailer from "nodemailer";
+import {
+  createEmailTransporter,
+  EmailServiceError,
+  getEmailConfig,
+} from "../../../lib/email";
 import {
   getSpotifyTrackFromUrl,
   getSpotifyTrackSummary,
@@ -51,26 +55,12 @@ Upper Left Indie`;
 
 export async function POST(req: NextRequest) {
   try {
-    const emailUser = process.env.EMAIL_USER;
-    const emailPass = process.env.EMAIL_PASS;
-    const recipientEmail = process.env.RECIPIENT_EMAIL;
-    const emailHost = process.env.EMAIL_HOST ?? "mail.privateemail.com";
-    const emailPort = Number(process.env.EMAIL_PORT ?? "465");
-    const emailSecure =
-      process.env.EMAIL_SECURE !== undefined
-        ? process.env.EMAIL_SECURE.toLowerCase() !== "false"
-        : emailPort === 465;
+    const emailConfig = getEmailConfig();
+    const recipientEmail = emailConfig.recipientEmail;
 
-    if (!emailUser || !emailPass || !recipientEmail) {
+    if (!recipientEmail) {
       return Response.json(
         { error: "Email service is not configured" },
-        { status: 500 }
-      );
-    }
-
-    if (!Number.isInteger(emailPort)) {
-      return Response.json(
-        { error: "Email service port is invalid" },
         { status: 500 }
       );
     }
@@ -82,18 +72,10 @@ export async function POST(req: NextRequest) {
     const bodyText = (form.get("bodyText") as string) ?? "";
     const songLink = (form.get("songLink") as string) ?? "";
 
-    const transporter = nodemailer.createTransport({
-      host: emailHost,
-      port: emailPort,
-      secure: emailSecure,
-      auth: {
-        user: emailUser,
-        pass: emailPass,
-      },
-    });
+    const transporter = createEmailTransporter(emailConfig);
 
     const info = await transporter.sendMail({
-      from: `"${name}" <${emailUser}>`,
+      from: `"${name}" <${emailConfig.user}>`,
       replyTo: email,
       to: recipientEmail,
       subject: `New Upper Left Indie ${formType} from ${name}`,
@@ -111,7 +93,7 @@ export async function POST(req: NextRequest) {
       try {
         const submittedTrackName = await getSubmittedTrackName(songLink);
         const autoReply = await transporter.sendMail({
-          from: `"Upper Left Indie" <${emailUser}>`,
+          from: `"Upper Left Indie" <${emailConfig.user}>`,
           replyTo: recipientEmail,
           to: email,
           subject: "Thanks for submitting to Upper Left Indie",
@@ -131,6 +113,9 @@ export async function POST(req: NextRequest) {
     return Response.json({ success: true, autoReplySent });
   } catch (err) {
     console.error("email error", err);
+    if (err instanceof EmailServiceError) {
+      return Response.json({ error: err.message }, { status: err.status });
+    }
     return Response.json({ error: "email failed" }, { status: 500 });
   }
 }
