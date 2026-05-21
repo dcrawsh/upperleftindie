@@ -271,7 +271,7 @@ export const artists: Artist[] = [
     "name": "GVTH DVDDY",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://gvthdvddy.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a3653743646_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0315012002_10.jpg",
     "bio": "K.Robinson J. Endicott GVTHDVDDY.com",
     "submittedGenre": "Alternative",
     "tags": [
@@ -297,9 +297,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Doom Kitty",
+        "title": "Who Knows How It Ends ?",
         "type": "album",
-        "url": "https://gvthdvddy.bandcamp.com/album/doom-kitty/"
+        "url": "https://gvthdvddy.bandcamp.com/album/who-knows-how-it-ends/"
       }
     ]
   },
