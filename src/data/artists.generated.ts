@@ -1295,9 +1295,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Slavic Dinner E.T. Fondle",
+        "title": "Slavic Dinner Live E.T. Fondle",
         "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/slavic-dinner"
+        "url": "https://etfondle.bandcamp.com/album/slavic-dinner-live"
       },
       {
         "title": "The Bacon's Lament E.T. Fondle and the Little Portland Players",
