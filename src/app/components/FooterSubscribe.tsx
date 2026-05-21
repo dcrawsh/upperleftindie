@@ -18,7 +18,7 @@ export default function FooterSubscribe() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({. 
+        body: JSON.stringify({
           email,
           groups: ["MAILERLITE_NEWSLETTER_GROUP_ID"],
           fields: {
