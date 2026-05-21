@@ -36,6 +36,9 @@ jobs:
 
       - name: Generate Bandcamp artist metadata
         run: yarn generate:bandcamp-artists
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
 
       - name: Build site
         run: yarn build
