@@ -44,9 +44,11 @@ jobs:
         run: yarn build
 
       - name: Commit generated metadata
+        id: commit-generated-metadata
         run: |
           if git diff --quiet -- src/data/artists.generated.ts; then
             echo "No generated metadata changes."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -55,3 +57,16 @@ jobs:
           git add src/data/artists.generated.ts
           git commit -m "Update Bandcamp artist metadata"
           git push
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger Vercel deployment
+        if: steps.commit-generated-metadata.outputs.committed == 'true'
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "VERCEL_DEPLOY_HOOK_URL is not set; skipping Vercel deploy hook."
+            exit 0
+          fi
+
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL"
