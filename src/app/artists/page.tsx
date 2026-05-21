@@ -1,61 +1,8 @@
-import bandcampUrls from "../../data/bandcamp-urls.json";
 import { artists as generatedArtists } from "../../data/artists.generated";
 import SiteContainer from "../components/SiteContainer";
 import ArtistsBrowser, { type ArtistCard } from "./ArtistsBrowser";
 
-type BandcampSource = string | { url: string; genre?: string };
-
-function normalizeUrl(url: string) {
-  return url.replace(/\/+$/, "").toLowerCase();
-}
-
-function getBandcampHost(url: string) {
-  try {
-    const hostname = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
-    return hostname.endsWith(".bandcamp.com") ? hostname : "";
-  } catch {
-    return "";
-  }
-}
-
-function isSameBandcampArtist(firstUrl: string, secondUrl: string) {
-  const firstHost = getBandcampHost(firstUrl);
-  return firstHost !== "" && firstHost === getBandcampHost(secondUrl);
-}
-
-function getNameFromBandcampUrl(url: string) {
-  try {
-    const hostname = new URL(url).hostname.replace(/^www\./, "");
-    return hostname.replace(/\.bandcamp\.com$/, "");
-  } catch {
-    return "Bandcamp Artist";
-  }
-}
-
-function getBandcampUrl(source: BandcampSource) {
-  return typeof source === "string" ? source : source.url;
-}
-
-const artists: ArtistCard[] = (bandcampUrls as BandcampSource[]).map((source) => {
-  const bandcampUrl = getBandcampUrl(source);
-  const generatedArtist = generatedArtists.find(
-    (artist) =>
-      normalizeUrl(artist.bandcampUrl) === normalizeUrl(bandcampUrl) ||
-      isSameBandcampArtist(artist.bandcampUrl, bandcampUrl)
-  );
-
-  if (generatedArtist) {
-    return generatedArtist;
-  }
-
-  return {
-    name: getNameFromBandcampUrl(bandcampUrl),
-    bandcampUrl,
-    tags: [],
-    links: [],
-    releases: [],
-  };
-});
+const artists = generatedArtists as ArtistCard[];
 
 export const metadata = {
   title: "Support Artists",
