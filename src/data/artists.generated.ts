@@ -2084,8 +2084,8 @@ export const artists: Artist[] = [
     "name": "Uncanny Valley Girls",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://uncannyvalleygirlspdx.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0037806411_10.jpg",
-    "bio": "Portland Oregon スケバン rocking roll from Cap Hill in Sea Apple, Washington. Cadence Welles (She/Her) - Vocals, guitar Coree Hogan (They/Them) - Lead guitar Juliet Terril (She/Her) - Bass Ryan Cripps (She/Her) - Drums ... more",
+    "image": "https://f4.bcbits.com/img/0045085164_10.jpg",
+    "bio": "Portland Oregon スケバン rocking roll from Cap Hill in Sea Apple, Washington. Cadence Welles (She/Her) - Vocals, guitar Coree Hogan (They/Them) - Lead guitar May al-Semsem (She/Her) - Bass Ryan Elizabeth Cripps (She/Her) - Drums ... more",
     "submittedGenre": "Punk",
     "tags": [
       "Punk"
@@ -2480,6 +2480,83 @@ export const artists: Artist[] = [
         "title": "Big Slothy (feat. Tristtan)",
         "type": "track",
         "url": "https://payette.bandcamp.com/track/big-slothy-feat-tristtan-2"
+      }
+    ]
+  },
+  {
+    "name": "stepskipper",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://stepskipper.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0042314687_10.jpg",
+    "bio": "stepskipper is a project born out of the need for creative catharsis.",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://stepskipper.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Hot Surfaces",
+        "type": "album",
+        "url": "https://stepskipper.bandcamp.com/album/hot-surfaces"
+      },
+      {
+        "title": "On the Rocks",
+        "type": "track",
+        "url": "https://stepskipper.bandcamp.com/track/on-the-rocks"
+      },
+      {
+        "title": "Brick Brubin",
+        "type": "track",
+        "url": "https://stepskipper.bandcamp.com/track/brick-brubin"
+      }
+    ]
+  },
+  {
+    "name": "Cory Strop Music",
+    "location": "Boise, Idaho",
+    "bandcampUrl": "https://corystrop.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0030194634_10.jpg",
+    "bio": "GOOD DUDE WITH GOOD SONGS CREATING A GOOD WORLD AND DOING GOOD DEEDS FOR THE GOOD OF HUMANITY AND GOOD TIMES",
+    "submittedGenre": "Singer-songwriter",
+    "tags": [
+      "Singer-songwriter"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://corystrop.bandcamp.com/"
+      },
+      {
+        "label": "corystrop.com",
+        "url": "http://www.corystrop.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Everyday Kids Songs Cory Strop (Kids)",
+        "type": "album",
+        "url": "https://corystrop.bandcamp.com/album/everyday-kids-songs"
+      },
+      {
+        "title": "Skeleton Lakehouse Skeleton Lakehouse",
+        "type": "album",
+        "url": "https://corystrop.bandcamp.com/album/skeleton-lakehouse"
+      },
+      {
+        "title": "The Future Team R.A.D.",
+        "type": "album",
+        "url": "https://corystrop.bandcamp.com/album/the-future"
+      },
+      {
+        "title": "R.A.D. Mix '99 Team R.A.D.",
+        "type": "album",
+        "url": "https://corystrop.bandcamp.com/album/r-a-d-mix-99"
       }
     ]
   }
