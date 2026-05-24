@@ -1828,7 +1828,7 @@ export const artists: Artist[] = [
     "name": "Orbit 17",
     "location": "San Francisco, California",
     "bandcampUrl": "https://orbit17.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a2366914491_10.jpg",
+    "image": "https://f4.bcbits.com/img/0044034803_10.jpg",
     "bio": "Orbit 17 weaves catchy melodies, funky rhythms and hypnotic grooves into intricate electro-rock.",
     "submittedGenre": "Electronic",
     "tags": [
@@ -1854,9 +1854,14 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Betrayer",
+        "type": "album",
+        "url": "https://orbit17.bandcamp.com/album/betrayer"
+      },
+      {
         "title": "Bonfires",
         "type": "album",
-        "url": "https://orbit17.bandcamp.com/album/bonfires/"
+        "url": "https://orbit17.bandcamp.com/album/bonfires"
       }
     ]
   },
