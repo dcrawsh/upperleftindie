@@ -2564,5 +2564,43 @@ export const artists: Artist[] = [
         "url": "https://corystrop.bandcamp.com/album/r-a-d-mix-99"
       }
     ]
+  },
+  {
+    "name": "Sanity Please",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://sanityplease.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0034462398_10.jpg",
+    "bio": "Roland T. Wingwood (Guitars/Vocals) River Hollis (Bass/Vocals) Gavin Sauls (Drums)",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://sanityplease.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "http://instagram.com/sanitypleaseband"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Mind Changer",
+        "type": "album",
+        "url": "https://sanityplease.bandcamp.com/album/mind-changer"
+      },
+      {
+        "title": "Young Professionals",
+        "type": "album",
+        "url": "https://sanityplease.bandcamp.com/album/young-professionals"
+      },
+      {
+        "title": "Travel Girl",
+        "type": "album",
+        "url": "https://sanityplease.bandcamp.com/album/travel-girl"
+      }
+    ]
   }
 ];
