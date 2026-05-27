@@ -1465,14 +1465,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "live raccoons inside",
-        "type": "album",
-        "url": "https://trashpandagokart.bandcamp.com/album/live-raccoons-inside"
-      },
-      {
-        "title": "RACCOON GODS",
-        "type": "album",
-        "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
+        "title": "Happy When It Rains - single",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/happy-when-it-rains-single"
       },
       {
         "title": "Diamonds (2023) - single",
@@ -1485,9 +1480,14 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
       },
       {
-        "title": "TPGK in the USA - single",
-        "type": "track",
-        "url": "https://trashpandagokart.bandcamp.com/track/tpgk-in-the-usa-single"
+        "title": "live raccoons inside",
+        "type": "album",
+        "url": "https://trashpandagokart.bandcamp.com/album/live-raccoons-inside"
+      },
+      {
+        "title": "RACCOON GODS",
+        "type": "album",
+        "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
       },
       {
         "title": "Might As Well Sprouted The Third Eye",
@@ -2230,6 +2230,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Talking to Strangers",
+        "type": "album",
+        "url": "https://thewaysidesmusic.bandcamp.com/album/talking-to-strangers"
+      },
+      {
         "title": "The Witch (Alternate Version)",
         "type": "track",
         "url": "https://thewaysidesmusic.bandcamp.com/track/the-witch-alternate-version"
@@ -2253,11 +2258,6 @@ export const artists: Artist[] = [
         "title": "Golden One",
         "type": "track",
         "url": "https://thewaysidesmusic.bandcamp.com/track/golden-one"
-      },
-      {
-        "title": "Surfacing",
-        "type": "track",
-        "url": "https://thewaysidesmusic.bandcamp.com/track/surfacing"
       }
     ]
   },
