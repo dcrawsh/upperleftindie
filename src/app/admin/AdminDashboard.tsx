@@ -30,6 +30,8 @@ type Submission = {
   social_link?: string | null;
   notes?: string | null;
   active_playlist_added_at?: string | null;
+  replied_at?: string | null;
+  reply_subject?: string | null;
 };
 
 type PlaylistTrack = {
@@ -66,6 +68,23 @@ function formatDate(value: string) {
 
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "Something went wrong.";
+}
+
+function getSpotifyAppTrackUrl(value: string) {
+  if (value.startsWith("spotify:track:")) return value;
+
+  try {
+    const url = new URL(value);
+    const [, type, id] = url.pathname.split("/");
+
+    if (url.hostname.includes("spotify.com") && type === "track" && id) {
+      return `spotify:track:${id}`;
+    }
+  } catch {
+    // Keep the original link if it is not a parseable URL.
+  }
+
+  return value;
 }
 
 export default function AdminDashboard() {
@@ -323,13 +342,23 @@ Upper Left Indie team`;
     setMessage("");
 
     try {
-      await adminFetch(`/api/admin/submissions/${submission.id}/reply`, {
-        method: "POST",
-        body: JSON.stringify({
-          subject: draft.subject,
-          message: draft.message,
-        }),
-      });
+      const data = await adminFetch<{ submission?: Submission }>(
+        `/api/admin/submissions/${submission.id}/reply`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            subject: draft.subject,
+            message: draft.message,
+          }),
+        }
+      );
+      if (data.submission) {
+        setSubmissions((current) =>
+          current.map((item) =>
+            item.id === data.submission?.id ? data.submission : item
+          )
+        );
+      }
       updateReplyDraft(submission, { isOpen: false, message: "" });
       setMessage(`Reply sent to ${submission.email}.`);
     } catch (error) {
@@ -511,11 +540,16 @@ Upper Left Indie team`;
             {submissions.map((submission) => {
               const replyDraft = getReplyDraft(submission);
               const replyWorkingId = `reply-${submission.id}`;
+              const hasReplied = Boolean(submission.replied_at);
 
               return (
                 <article
                   key={submission.id}
-                  className="rounded-md border border-ink/10 bg-paper p-5 shadow-soft"
+                  className={`rounded-md border p-5 shadow-soft ${
+                    hasReplied
+                      ? "border-moss/40 bg-moss/5"
+                      : "border-ink/10 bg-paper"
+                  }`}
                 >
                   <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div className="min-w-0 space-y-3">
@@ -523,10 +557,21 @@ Upper Left Indie team`;
                         <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
                           {formatDate(submission.created_at)} /{" "}
                           {submission.status}
+                          {submission.replied_at
+                            ? ` / replied ${formatDate(submission.replied_at)}`
+                            : ""}
                         </p>
-                        <h2 className="mt-1 text-2xl font-black text-ink">
-                          {submission.artist_name}
-                        </h2>
+                        <div className="mt-1 flex flex-wrap items-center gap-2">
+                          <h2 className="text-2xl font-black text-ink">
+                            {submission.artist_name}
+                          </h2>
+                          {hasReplied ? (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-moss px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-paper">
+                              <FiMail size={13} />
+                              Replied
+                            </span>
+                          ) : null}
+                        </div>
                         <p className="text-sm leading-6 text-ink/65">
                           {submission.genre || "No genre"} /{" "}
                           {submission.city || "No city"}{" "}
@@ -555,9 +600,7 @@ Upper Left Indie team`;
                       ) : null}
                       <div className="flex flex-wrap gap-2">
                         <a
-                          href={submission.song_link}
-                          target="_blank"
-                          rel="noreferrer"
+                          href={getSpotifyAppTrackUrl(submission.song_link)}
                           className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-green-700 hover:text-green-700"
                         >
                           <FaSpotify size={16} />
@@ -592,10 +635,14 @@ Upper Left Indie team`;
                       <button
                         type="button"
                         onClick={() => toggleReplyDraft(submission)}
-                        className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay"
+                        className={`inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] transition ${
+                          hasReplied
+                            ? "border-moss/40 text-moss hover:border-ink hover:text-ink"
+                            : "border-ink/15 text-ink hover:border-clay hover:text-clay"
+                        }`}
                       >
                         <FiMail size={16} />
-                        Reply
+                        {hasReplied ? "Replied" : "Reply"}
                       </button>
                       <button
                         type="button"
@@ -728,9 +775,7 @@ Upper Left Indie team`;
                 <div className="flex shrink-0 flex-wrap gap-2">
                   {track.externalUrl ? (
                     <a
-                      href={track.externalUrl}
-                      target="_blank"
-                      rel="noreferrer"
+                      href={track.uri || track.externalUrl}
                       className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-3 text-sm font-bold text-ink transition hover:border-green-700 hover:text-green-700"
                     >
                       <FaSpotify size={16} />
@@ -805,9 +850,7 @@ Upper Left Indie team`;
                 <div className="flex shrink-0 flex-wrap gap-2">
                   {track.externalUrl ? (
                     <a
-                      href={track.externalUrl}
-                      target="_blank"
-                      rel="noreferrer"
+                      href={track.uri || track.externalUrl}
                       className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-3 text-sm font-bold text-ink transition hover:border-green-700 hover:text-green-700"
                     >
                       <FaSpotify size={16} />

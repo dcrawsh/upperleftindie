@@ -7,6 +7,7 @@ import { EmailServiceError, sendSiteEmail } from "../../../../../../lib/email";
 import {
   getSubmission,
   SupabaseRequestError,
+  updateSubmission,
 } from "../../../../../../lib/submissions";
 
 export const runtime = "nodejs";
@@ -59,7 +60,12 @@ export async function POST(
       fromName: "Upper Left Indie",
     });
 
-    return Response.json({ success: true });
+    const updatedSubmission = await updateSubmission(id, {
+      replied_at: new Date().toISOString(),
+      reply_subject: subject,
+    });
+
+    return Response.json({ success: true, submission: updatedSubmission });
   } catch (error) {
     console.error("admin submission reply error", error);
 

@@ -22,8 +22,16 @@ create table if not exists public.submissions (
   spotify_track_uri text,
   active_playlist_added_at timestamptz,
   archived_at timestamptz,
+  replied_at timestamptz,
+  reply_subject text,
   admin_notes text
 );
+
+alter table public.submissions
+  add column if not exists replied_at timestamptz;
+
+alter table public.submissions
+  add column if not exists reply_subject text;
 
 create or replace function public.set_updated_at()
 returns trigger
@@ -46,5 +54,8 @@ create index if not exists submissions_status_created_at_idx
 
 create index if not exists submissions_spotify_track_uri_idx
   on public.submissions (spotify_track_uri);
+
+create index if not exists submissions_replied_at_idx
+  on public.submissions (replied_at desc);
 
 alter table public.submissions enable row level security;

@@ -23,6 +23,8 @@ export type Submission = {
   spotify_track_uri?: string | null;
   active_playlist_added_at?: string | null;
   archived_at?: string | null;
+  replied_at?: string | null;
+  reply_subject?: string | null;
   admin_notes?: string | null;
 };
 
