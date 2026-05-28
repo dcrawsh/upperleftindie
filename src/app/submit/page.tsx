@@ -36,6 +36,17 @@ export default function SubmitPage() {
             I listen through submissions and add tracks that fit the playlist.
             Because of volume, I may not be able to respond to every submission.
           </p>
+          <p className="mt-4 text-base leading-7 text-ink/60">
+            The active playlist is kept fresh for newer releases. After songs
+            have had time there, they move into the{" "}
+            <Link
+              href="/archive"
+              className="font-bold text-ink underline decoration-ink/25 underline-offset-4 transition hover:text-clay"
+            >
+              archive
+            </Link>{" "}
+            so the project can keep making room for more Northwest artists.
+          </p>
         </div>
 
         <div className="space-y-6">

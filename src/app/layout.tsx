@@ -101,6 +101,15 @@ export default function RootLayout({
                 >
                   Support the Project
                 </Link>
+                <span className="mx-2 text-ink/25" aria-hidden="true">
+                  /
+                </span>
+                <Link
+                  href="/archive"
+                  className="inline-block text-xs font-bold uppercase tracking-[0.14em] text-ink/55 transition hover:text-clay"
+                >
+                  Archive
+                </Link>
               </div>
               <FooterSubscribe />
             </SiteContainer>

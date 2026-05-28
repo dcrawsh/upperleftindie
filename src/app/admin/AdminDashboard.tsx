@@ -1000,19 +1000,41 @@ Upper Left Indie team`;
         </section>
       ) : (
         <section className="space-y-4">
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-bold text-ink/60">
-              {archiveTracks.length} archived tracks
-            </p>
-            <button
-              type="button"
-              onClick={loadArchiveTracks}
-              disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
-            >
-              <FiRefreshCw size={16} />
-              Refresh
-            </button>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm font-bold text-ink/60">
+                {archiveTracks.length} archived tracks
+              </p>
+              <a
+                href="/archive"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-1 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-ink/45 transition hover:text-clay"
+              >
+                View public archive page
+                <FiExternalLink size={13} />
+              </a>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <a
+                href="/archive"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay"
+              >
+                <FiExternalLink size={16} />
+                Public Page
+              </a>
+              <button
+                type="button"
+                onClick={loadArchiveTracks}
+                disabled={isLoading}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
+              >
+                <FiRefreshCw size={16} />
+                Refresh
+              </button>
+            </div>
           </div>
 
           <div className="grid gap-3">

@@ -48,6 +48,19 @@ export default function Home() {
               title="Spotify Playlist Embed"
             ></iframe>
           </div>
+          <div className="mt-5 max-w-2xl text-center text-sm leading-6 text-ink/60">
+            <p>
+              The active playlist stays fresh for newer Northwest releases.
+              Songs that have had their run move into the{" "}
+              <Link
+                href="/archive"
+                className="font-bold text-ink underline decoration-ink/25 underline-offset-4 transition hover:text-clay"
+              >
+                Upper Left Indie archive
+              </Link>
+              .
+            </p>
+          </div>
         </div>
 
         <div className="mx-auto mt-10 w-full max-w-4xl space-y-8 border-t border-ink/10 pt-8">

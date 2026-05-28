@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import SiteContainer from "../components/SiteContainer";
 import SupportOptions from "./SupportOptions";
 
@@ -33,6 +34,16 @@ export default function SupportPage() {
             support helps expand our playlists to platforms like Tidal, Apple
             Music, and YouTube, and helps keep artist submissions open and free
             for local bands.
+          </p>
+          <p className="mt-4 text-base leading-7 text-ink/60">
+            The active playlist stays focused on newer releases, while the{" "}
+            <Link
+              href="/archive"
+              className="font-bold text-ink underline decoration-ink/25 underline-offset-4 transition hover:text-clay"
+            >
+              archive
+            </Link>{" "}
+            keeps past Upper Left Indie picks easy to find.
           </p>
         </div>
 
