@@ -24,6 +24,40 @@ export type Artist = {
 
 export const artists: Artist[] = [
   {
+    "name": "Bad Quitters",
+    "location": "Boise, Idaho",
+    "bandcampUrl": "https://badquitters.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0042771447_10.jpg",
+    "bio": "",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://badquitters.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Hapax: Legomena",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/hapax-legomena"
+      },
+      {
+        "title": "Spend It All",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/spend-it-all"
+      },
+      {
+        "title": "Climb Inside and See",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/climb-inside-and-see"
+      }
+    ]
+  },
+  {
     "name": "jackie tulsa",
     "location": "Seattle, Washington",
     "bandcampUrl": "https://jackietulsa.bandcamp.com/",
@@ -789,35 +823,6 @@ export const artists: Artist[] = [
         "title": "Celeste Live @ Cornish Playhouse 4.22.22",
         "type": "album",
         "url": "https://shimetheband.bandcamp.com/album/celeste-live-cornish-playhouse-42222"
-      }
-    ]
-  },
-  {
-    "name": "Bad Quitters",
-    "location": "Boise, Idaho",
-    "bandcampUrl": "https://badquitters.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0042771447_10.jpg",
-    "bio": "",
-    "submittedGenre": "Indie Rock",
-    "tags": [
-      "Indie Rock"
-    ],
-    "links": [
-      {
-        "label": "Bandcamp",
-        "url": "https://badquitters.bandcamp.com/"
-      }
-    ],
-    "releases": [
-      {
-        "title": "Spend It All",
-        "type": "track",
-        "url": "https://badquitters.bandcamp.com/track/spend-it-all"
-      },
-      {
-        "title": "Climb Inside and See",
-        "type": "track",
-        "url": "https://badquitters.bandcamp.com/track/climb-inside-and-see"
       }
     ]
   },
@@ -2562,6 +2567,83 @@ export const artists: Artist[] = [
         "title": "R.A.D. Mix '99 Team R.A.D.",
         "type": "album",
         "url": "https://corystrop.bandcamp.com/album/r-a-d-mix-99"
+      }
+    ]
+  },
+  {
+    "name": "Sanity Please",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://sanityplease.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0034462398_10.jpg",
+    "bio": "Roland T. Wingwood (Guitars/Vocals) River Hollis (Bass/Vocals) Gavin Sauls (Drums)",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://sanityplease.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "http://instagram.com/sanitypleaseband"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Mind Changer",
+        "type": "album",
+        "url": "https://sanityplease.bandcamp.com/album/mind-changer"
+      },
+      {
+        "title": "Young Professionals",
+        "type": "album",
+        "url": "https://sanityplease.bandcamp.com/album/young-professionals"
+      },
+      {
+        "title": "Travel Girl",
+        "type": "album",
+        "url": "https://sanityplease.bandcamp.com/album/travel-girl"
+      }
+    ]
+  },
+  {
+    "name": "meredith smith",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://meredithsmith.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044504370_10.jpg",
+    "bio": "Wistful, throwback indie rock with a dash of shoegaze, from Seattle, WA. Plus acoustic covers and other experiments. One half of Twilight Diners.",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://meredithsmith.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "More Than a Dream (EP) Meredith Smith",
+        "type": "album",
+        "url": "https://meredithsmith.bandcamp.com/album/more-than-a-dream-ep"
+      },
+      {
+        "title": "Sirens (EP) Meredith Smith",
+        "type": "album",
+        "url": "https://meredithsmith.bandcamp.com/album/sirens-ep"
+      },
+      {
+        "title": "Covers vol 2 Meredith Smith",
+        "type": "album",
+        "url": "https://meredithsmith.bandcamp.com/album/covers-vol-2"
+      },
+      {
+        "title": "Covers vol 1 Meredith Smith",
+        "type": "album",
+        "url": "https://meredithsmith.bandcamp.com/album/covers-vol-1"
       }
     ]
   }
