@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   FiArchive,
   FiCheck,
@@ -8,6 +8,8 @@ import {
   FiExternalLink,
   FiLock,
   FiMail,
+  FiPause,
+  FiPlay,
   FiRefreshCw,
   FiX,
 } from "react-icons/fi";
@@ -42,6 +44,7 @@ type PlaylistTrack = {
   albumName: string;
   externalUrl: string;
   imageUrl: string;
+  previewUrl: string;
   addedAt: string;
 };
 
@@ -51,6 +54,11 @@ type ReplyDraft = {
   isOpen: boolean;
   subject: string;
   message: string;
+};
+
+type PreviewState = {
+  previewUrl: string;
+  isMissing: boolean;
 };
 
 const playlistUrl =
@@ -64,6 +72,23 @@ function formatDate(value: string) {
     day: "numeric",
     year: "numeric",
   }).format(new Date(value));
+}
+
+function formatDaysLive(value: string) {
+  const addedAt = new Date(value).getTime();
+
+  if (Number.isNaN(addedAt)) {
+    return "Live date unknown";
+  }
+
+  const daysLive = Math.max(
+    0,
+    Math.floor((Date.now() - addedAt) / 86_400_000)
+  );
+
+  if (daysLive === 0) return "Live today";
+  if (daysLive === 1) return "Live for 1 day";
+  return `Live for ${daysLive} days`;
 }
 
 function getErrorMessage(error: unknown) {
@@ -100,6 +125,13 @@ export default function AdminDashboard() {
   const [replyDrafts, setReplyDrafts] = useState<Record<string, ReplyDraft>>(
     {}
   );
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [currentPreviewTrackUri, setCurrentPreviewTrackUri] = useState("");
+  const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
+  const [previewsByKey, setPreviewsByKey] = useState<
+    Record<string, PreviewState>
+  >({});
+  const [loadingPreviewKey, setLoadingPreviewKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [workingId, setWorkingId] = useState("");
   const [message, setMessage] = useState("");
@@ -408,6 +440,102 @@ Upper Left Indie team`;
     }
   }
 
+  async function playPreview({
+    key,
+    initialPreviewUrl = "",
+    loadPreview,
+  }: {
+    key: string;
+    initialPreviewUrl?: string;
+    loadPreview: () => Promise<string>;
+  }) {
+    const audio = audioRef.current;
+    const cachedPreview = previewsByKey[key];
+    if (!audio || cachedPreview?.isMissing) return;
+
+    if (currentPreviewTrackUri === key && isPreviewPlaying) {
+      audio.pause();
+      setIsPreviewPlaying(false);
+      return;
+    }
+
+    let previewUrl = cachedPreview?.previewUrl || initialPreviewUrl;
+
+    if (!previewUrl) {
+      setLoadingPreviewKey(key);
+      setMessage("");
+
+      try {
+        previewUrl = await loadPreview();
+        setPreviewsByKey((current) => ({
+          ...current,
+          [key]: { previewUrl, isMissing: false },
+        }));
+      } catch (error) {
+        setPreviewsByKey((current) => ({
+          ...current,
+          [key]: { previewUrl: "", isMissing: true },
+        }));
+        setMessage(getErrorMessage(error));
+        return;
+      } finally {
+        setLoadingPreviewKey("");
+      }
+    }
+
+    if (currentPreviewTrackUri !== key) {
+      audio.src = previewUrl;
+      setCurrentPreviewTrackUri(key);
+    }
+
+    try {
+      await audio.play();
+      setIsPreviewPlaying(true);
+    } catch {
+      setMessage("Track preview could not be played in this browser.");
+    }
+  }
+
+  async function toggleTrackPreview(track: PlaylistTrack) {
+    const key = `track:${track.uri}`;
+
+    await playPreview({
+      key,
+      initialPreviewUrl: track.previewUrl,
+      loadPreview: async () => {
+        const data = await adminFetch<{
+          previewUrl: string;
+          source: "apple";
+        }>("/api/admin/playlist/preview", {
+          method: "POST",
+          body: JSON.stringify({
+            trackName: track.name,
+            artistNames: track.artistNames,
+            albumName: track.albumName,
+          }),
+        });
+
+        return data.previewUrl;
+      },
+    });
+  }
+
+  async function toggleSubmissionPreview(submission: Submission) {
+    const key = `submission:${submission.id}`;
+
+    await playPreview({
+      key,
+      loadPreview: async () => {
+        const data = await adminFetch<{
+          previewUrl: string;
+          source: "spotify" | "apple";
+        }>(`/api/admin/submissions/${submission.id}/preview`);
+
+        return data.previewUrl;
+      },
+    });
+  }
+
   if (!isUnlocked) {
     return (
       <div className="mx-auto max-w-md rounded-md border border-ink/10 bg-paper p-6 shadow-soft">
@@ -445,6 +573,12 @@ Upper Left Indie team`;
 
   return (
     <div className="space-y-6">
+      <audio
+        ref={audioRef}
+        preload="none"
+        onEnded={() => setIsPreviewPlaying(false)}
+        onPause={() => setIsPreviewPlaying(false)}
+      />
       <header className="flex flex-col gap-4 border-b border-ink/10 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-clay">
@@ -541,6 +675,11 @@ Upper Left Indie team`;
               const replyDraft = getReplyDraft(submission);
               const replyWorkingId = `reply-${submission.id}`;
               const hasReplied = Boolean(submission.replied_at);
+              const previewKey = `submission:${submission.id}`;
+              const previewState = previewsByKey[previewKey];
+              const isPreviewLoading = loadingPreviewKey === previewKey;
+              const isCurrentPreview =
+                currentPreviewTrackUri === previewKey && isPreviewPlaying;
 
               return (
                 <article
@@ -599,6 +738,31 @@ Upper Left Indie team`;
                         </p>
                       ) : null}
                       <div className="flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={() => toggleSubmissionPreview(submission)}
+                          disabled={isPreviewLoading || previewState?.isMissing}
+                          className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition ${
+                            previewState?.isMissing
+                              ? "border-ink/10 text-ink/35"
+                              : "border-ink/15 text-ink hover:border-moss hover:text-moss"
+                          }`}
+                        >
+                          {isCurrentPreview ? (
+                            <FiPause size={16} />
+                          ) : (
+                            <FiPlay size={16} />
+                          )}
+                          {isPreviewLoading
+                            ? "Finding..."
+                            : previewState?.isMissing
+                              ? "No Preview"
+                              : isCurrentPreview
+                                ? "Pause"
+                                : previewState?.previewUrl
+                                  ? "Preview"
+                                  : "Find Preview"}
+                        </button>
                         <a
                           href={getSpotifyAppTrackUrl(submission.song_link)}
                           className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-green-700 hover:text-green-700"
@@ -763,7 +927,8 @@ Upper Left Indie team`;
                 )}
                 <div className="min-w-0 flex-1">
                   <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
-                    Added {formatDate(track.addedAt)}
+                    {formatDaysLive(track.addedAt)} / Added{" "}
+                    {formatDate(track.addedAt)}
                   </p>
                   <h2 className="truncate text-lg font-black text-ink">
                     {track.name}
@@ -773,6 +938,37 @@ Upper Left Indie team`;
                   </p>
                 </div>
                 <div className="flex shrink-0 flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => toggleTrackPreview(track)}
+                    disabled={
+                      loadingPreviewKey === `track:${track.uri}` ||
+                      previewsByKey[`track:${track.uri}`]?.isMissing
+                    }
+                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-3 text-sm font-bold transition ${
+                      previewsByKey[`track:${track.uri}`]?.isMissing
+                        ? "border-ink/10 text-ink/35"
+                        : "border-ink/15 text-ink hover:border-moss hover:text-moss"
+                    }`}
+                  >
+                    {currentPreviewTrackUri === `track:${track.uri}` &&
+                    isPreviewPlaying ? (
+                      <FiPause size={16} />
+                    ) : (
+                      <FiPlay size={16} />
+                    )}
+                    {loadingPreviewKey === `track:${track.uri}`
+                      ? "Finding..."
+                      : previewsByKey[`track:${track.uri}`]?.isMissing
+                        ? "No Preview"
+                        : currentPreviewTrackUri === `track:${track.uri}` &&
+                            isPreviewPlaying
+                          ? "Pause"
+                          : track.previewUrl ||
+                              previewsByKey[`track:${track.uri}`]?.previewUrl
+                            ? "Preview"
+                            : "Find Preview"}
+                  </button>
                   {track.externalUrl ? (
                     <a
                       href={track.uri || track.externalUrl}

@@ -6,12 +6,22 @@ export type SpotifyPlaylistTrack = {
   albumName: string;
   externalUrl: string;
   imageUrl: string;
+  previewUrl: string;
   addedAt: string;
 };
 
 export type SpotifyTrackSummary = {
   id: string;
   name: string;
+};
+
+export type SpotifyTrackPreviewDetails = {
+  uri: string;
+  id: string;
+  name: string;
+  artistNames: string;
+  albumName: string;
+  previewUrl: string;
 };
 
 export class SpotifyRequestError extends Error {
@@ -155,6 +165,34 @@ export async function getSpotifyTrackSummary(trackId: string) {
   };
 }
 
+type SpotifyTrackPreviewResponse = {
+  uri: string;
+  id: string;
+  name: string;
+  album?: {
+    name?: string;
+  };
+  artists?: Array<{ name: string }>;
+  preview_url?: string | null;
+};
+
+export async function getSpotifyTrackPreviewDetails(trackId: string) {
+  const track = await spotifyRequest<SpotifyTrackPreviewResponse>(
+    `tracks/${trackId}`
+  );
+
+  return {
+    uri: track.uri,
+    id: track.id,
+    name: track.name,
+    artistNames:
+      track.artists?.map((artist) => artist.name).join(", ") ||
+      "Unknown artist",
+    albumName: track.album?.name ?? "Unknown album",
+    previewUrl: track.preview_url ?? "",
+  };
+}
+
 export async function archiveTrack(trackUri: string) {
   const { activePlaylistId, archivePlaylistId } = getSpotifyConfig();
 
@@ -191,13 +229,14 @@ type SpotifyPlaylistTracksResponse = {
       };
       artists?: Array<{ name: string }>;
       external_urls?: { spotify?: string };
+      preview_url?: string | null;
     } | null;
   }>;
 };
 
 async function listPlaylistTracks(playlistId: string) {
   const fields = encodeURIComponent(
-    "next,items(added_at,item(uri,id,name,type,album(name,images),artists(name),external_urls))"
+    "next,items(added_at,item(uri,id,name,type,album(name,images),artists(name),external_urls,preview_url))"
   );
   const items: SpotifyPlaylistTracksResponse["items"] = [];
   let offset = 0;
@@ -229,6 +268,7 @@ async function listPlaylistTracks(playlistId: string) {
         albumName: track.album?.name ?? "Unknown album",
         externalUrl: track.external_urls?.spotify ?? "",
         imageUrl: image,
+        previewUrl: track.preview_url ?? "",
         addedAt: item.added_at,
       };
     });
