@@ -1649,6 +1649,21 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Amsterdam [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/amsterdam-single"
+      },
+      {
+        "title": "Waterbug [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/waterbug-single"
+      },
+      {
+        "title": "Where the Novelists Live [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/where-the-novelists-live-single"
+      },
+      {
         "title": "EP4",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/ep4"
@@ -1662,21 +1677,6 @@ export const artists: Artist[] = [
         "title": "Sea Anemone [Single]",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/sea-anemone-single"
-      },
-      {
-        "title": "Play Up [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/play-up-single"
-      },
-      {
-        "title": "Not Today [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/not-today-single"
-      },
-      {
-        "title": "Cadillac [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/cadillac-single"
       }
     ]
   },
