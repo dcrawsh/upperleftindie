@@ -280,6 +280,33 @@ export async function listActivePlaylistTracks() {
   return listPlaylistTracks(activePlaylistId);
 }
 
+export async function reorderActivePlaylistTrack(
+  fromIndex: number,
+  toIndex: number
+) {
+  const { activePlaylistId } = getSpotifyConfig();
+
+  if (
+    !Number.isInteger(fromIndex) ||
+    !Number.isInteger(toIndex) ||
+    fromIndex < 0 ||
+    toIndex < 0
+  ) {
+    throw new SpotifyRequestError("Valid playlist positions are required.", 400);
+  }
+
+  if (fromIndex === toIndex) return;
+
+  await spotifyRequest(`playlists/${activePlaylistId}/items`, {
+    method: "PUT",
+    body: JSON.stringify({
+      range_start: fromIndex,
+      insert_before: fromIndex < toIndex ? toIndex + 1 : toIndex,
+      range_length: 1,
+    }),
+  });
+}
+
 export async function listArchivePlaylistTracks() {
   const { archivePlaylistId } = getSpotifyConfig();
 

@@ -8,6 +8,7 @@ import {
   FiExternalLink,
   FiLock,
   FiMail,
+  FiMove,
   FiPause,
   FiPlay,
   FiRefreshCw,
@@ -65,6 +66,45 @@ const playlistUrl =
   "https://open.spotify.com/playlist/3LTI227By7Wt7hGs3mz5hF?si=f9293e66628f4b54";
 
 const storageKey = "upperleftindie-admin-token";
+const sessionDurationMs = 60 * 60 * 1000;
+
+type StoredAdminSession = {
+  token: string;
+  expiresAt: number;
+};
+
+function getStoredAdminSession(): StoredAdminSession | null {
+  const storedValue = window.localStorage.getItem(storageKey);
+  if (!storedValue) return null;
+
+  try {
+    const parsed = JSON.parse(storedValue) as Partial<StoredAdminSession>;
+
+    if (typeof parsed.token === "string" && typeof parsed.expiresAt === "number") {
+      return {
+        token: parsed.token,
+        expiresAt: parsed.expiresAt,
+      };
+    }
+  } catch {
+    return {
+      token: storedValue,
+      expiresAt: Date.now() + sessionDurationMs,
+    };
+  }
+
+  return null;
+}
+
+function storeAdminSession(token: string) {
+  window.localStorage.setItem(
+    storageKey,
+    JSON.stringify({
+      token,
+      expiresAt: Date.now() + sessionDurationMs,
+    })
+  );
+}
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat("en", {
@@ -132,6 +172,8 @@ export default function AdminDashboard() {
     Record<string, PreviewState>
   >({});
   const [loadingPreviewKey, setLoadingPreviewKey] = useState("");
+  const [draggedTrackUri, setDraggedTrackUri] = useState("");
+  const [dragOverTrackUri, setDragOverTrackUri] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [workingId, setWorkingId] = useState("");
   const [message, setMessage] = useState("");
@@ -155,7 +197,22 @@ export default function AdminDashboard() {
     setReplyDrafts({});
   }
 
+  function isAdminSessionExpired() {
+    const session = getStoredAdminSession();
+    return !session || session.expiresAt <= Date.now();
+  }
+
+  function expireAdminSession() {
+    clearAdminSession();
+    setMessage("Admin session expired. Please unlock again.");
+  }
+
   async function adminFetch<T>(path: string, init: RequestInit = {}) {
+    if (isAdminSessionExpired()) {
+      expireAdminSession();
+      throw new Error("Admin session expired. Please unlock again.");
+    }
+
     const response = await fetch(path, {
       ...init,
       headers: {
@@ -234,11 +291,32 @@ export default function AdminDashboard() {
   }
 
   useEffect(() => {
-    const storedToken = window.localStorage.getItem(storageKey);
-    if (storedToken) {
-      setToken(storedToken);
+    const session = getStoredAdminSession();
+
+    if (!session) return;
+
+    if (session.expiresAt <= Date.now()) {
+      window.localStorage.removeItem(storageKey);
+      return;
     }
+
+    storeAdminSession(session.token);
+    setToken(session.token);
   }, []);
+
+  useEffect(() => {
+    if (!token) return;
+
+    const session = getStoredAdminSession();
+    if (!session) return;
+
+    const timeout = window.setTimeout(() => {
+      expireAdminSession();
+    }, Math.max(0, session.expiresAt - Date.now()));
+
+    return () => window.clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   useEffect(() => {
     if (!token) return;
@@ -262,7 +340,7 @@ export default function AdminDashboard() {
       return;
     }
 
-    window.localStorage.setItem(storageKey, nextToken);
+    storeAdminSession(nextToken);
     setToken(nextToken);
     setPassword("");
   }
@@ -438,6 +516,56 @@ Upper Left Indie team`;
     } finally {
       setWorkingId("");
     }
+  }
+
+  function moveTrackInList(
+    currentTracks: PlaylistTrack[],
+    fromIndex: number,
+    toIndex: number
+  ) {
+    const nextTracks = [...currentTracks];
+    const [track] = nextTracks.splice(fromIndex, 1);
+
+    if (!track) return currentTracks;
+
+    nextTracks.splice(toIndex, 0, track);
+    return nextTracks;
+  }
+
+  async function reorderActiveTrack(fromIndex: number, toIndex: number) {
+    if (fromIndex === toIndex || fromIndex < 0 || toIndex < 0) return;
+
+    const track = tracks[fromIndex];
+    if (!track) return;
+
+    const previousTracks = tracks;
+    const nextTracks = moveTrackInList(tracks, fromIndex, toIndex);
+
+    setTracks(nextTracks);
+    setWorkingId(`reorder:${track.uri}`);
+    setMessage("");
+
+    try {
+      await adminFetch("/api/admin/playlist/reorder", {
+        method: "POST",
+        body: JSON.stringify({ fromIndex, toIndex }),
+      });
+      setMessage(`Moved ${track.name}.`);
+    } catch (error) {
+      setTracks(previousTracks);
+      setMessage(getErrorMessage(error));
+    } finally {
+      setWorkingId("");
+      setDraggedTrackUri("");
+      setDragOverTrackUri("");
+    }
+  }
+
+  function handleTrackDrop(toIndex: number) {
+    if (!draggedTrackUri) return;
+
+    const fromIndex = tracks.findIndex((track) => track.uri === draggedTrackUri);
+    void reorderActiveTrack(fromIndex, toIndex);
   }
 
   async function playPreview({
@@ -909,11 +1037,45 @@ Upper Left Indie team`;
           </div>
 
           <div className="grid gap-3">
-            {tracks.map((track) => (
+            {tracks.map((track, index) => (
               <article
                 key={track.uri}
-                className="flex flex-col gap-4 rounded-md border border-ink/10 bg-paper p-4 shadow-soft sm:flex-row sm:items-center"
+                onDragOver={(event) => {
+                  if (!draggedTrackUri) return;
+                  event.preventDefault();
+                  setDragOverTrackUri(track.uri);
+                }}
+                onDrop={(event) => {
+                  event.preventDefault();
+                  handleTrackDrop(index);
+                }}
+                onDragEnd={() => {
+                  setDraggedTrackUri("");
+                  setDragOverTrackUri("");
+                }}
+                className={`flex flex-col gap-4 rounded-md border bg-paper p-4 shadow-soft transition sm:flex-row sm:items-center ${
+                  dragOverTrackUri === track.uri &&
+                  draggedTrackUri !== track.uri
+                    ? "border-clay bg-clay/5"
+                    : "border-ink/10"
+                }`}
               >
+                <button
+                  type="button"
+                  draggable
+                  onDragStart={(event) => {
+                    event.dataTransfer.effectAllowed = "move";
+                    event.dataTransfer.setData("text/plain", track.uri);
+                    setDraggedTrackUri(track.uri);
+                    setDragOverTrackUri(track.uri);
+                  }}
+                  disabled={workingId.startsWith("reorder:")}
+                  className="inline-flex h-10 w-10 shrink-0 cursor-grab items-center justify-center rounded-md border border-ink/10 text-ink/45 transition hover:border-clay hover:text-clay active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-50"
+                  aria-label={`Drag ${track.name} to reorder`}
+                  title="Drag to reorder"
+                >
+                  <FiMove size={18} />
+                </button>
                 {track.imageUrl ? (
                   <img
                     src={track.imageUrl}
