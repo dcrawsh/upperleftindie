@@ -611,7 +611,7 @@ export const artists: Artist[] = [
     "name": "Shea Isely",
     "location": "Bellingham, Washington",
     "bandcampUrl": "https://sheaisely.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044323486_10.jpg",
+    "image": "https://f4.bcbits.com/img/0045239171_10.jpg",
     "bio": "",
     "submittedGenre": "Singer-songwriter",
     "tags": [
