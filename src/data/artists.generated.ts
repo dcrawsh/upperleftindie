@@ -2646,5 +2646,41 @@ export const artists: Artist[] = [
         "url": "https://meredithsmith.bandcamp.com/album/covers-vol-1"
       }
     ]
+  },
+  {
+    "name": "Dan Lurie",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://danlurie.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0140126053_10.jpg",
+    "bio": "Memory-soaked indie/folk/pop from Portland, OR.",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://danlurie.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/danluriemusic/"
+      },
+      {
+        "label": "linktr.ee",
+        "url": "https://linktr.ee/danluriemusic"
+      },
+      {
+        "label": "danluriemusic.com",
+        "url": "http://www.danluriemusic.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Syndicated Sitcoms",
+        "type": "album",
+        "url": "https://danlurie.bandcamp.com/album/syndicated-sitcoms/"
+      }
+    ]
   }
 ];
