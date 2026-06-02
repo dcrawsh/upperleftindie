@@ -2682,5 +2682,35 @@ export const artists: Artist[] = [
         "url": "https://danlurie.bandcamp.com/album/syndicated-sitcoms/"
       }
     ]
+  },
+  {
+    "name": "Salo Panto",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://salopanto.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0031984347_10.jpg",
+    "bio": "Merch from Salo Panto",
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://salopanto.bandcamp.com/"
+      },
+      {
+        "label": "salopanto.com",
+        "url": "http://salopanto.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/salo__panto"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@salopantomusic"
+      }
+    ],
+    "releases": []
   }
 ];
