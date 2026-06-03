@@ -1475,6 +1475,11 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/track/happy-when-it-rains-single"
       },
       {
+        "title": "live raccoons inside",
+        "type": "album",
+        "url": "https://trashpandagokart.bandcamp.com/album/live-raccoons-inside"
+      },
+      {
         "title": "Diamonds (2023) - single",
         "type": "track",
         "url": "https://trashpandagokart.bandcamp.com/track/diamonds-2023-single"
@@ -1485,19 +1490,14 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
       },
       {
-        "title": "live raccoons inside",
-        "type": "album",
-        "url": "https://trashpandagokart.bandcamp.com/album/live-raccoons-inside"
-      },
-      {
         "title": "RACCOON GODS",
         "type": "album",
         "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
       },
       {
-        "title": "Might As Well Sprouted The Third Eye",
-        "type": "album",
-        "url": "https://trashpandagokart.bandcamp.com/album/might-as-well-sprouted-the-third-eye"
+        "title": "TPGK in the USA - single",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/tpgk-in-the-usa-single"
       }
     ]
   },
@@ -1926,7 +1926,7 @@ export const artists: Artist[] = [
     "name": "blond-noise",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1979534463_10.jpg",
+    "image": "https://f4.bcbits.com/img/0044362438_10.jpg",
     "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. ... more",
     "submittedGenre": "Experimental",
     "tags": [
@@ -1954,7 +1954,12 @@ export const artists: Artist[] = [
       {
         "title": "home",
         "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/home/"
+        "url": "https://blond-noise.bandcamp.com/track/home"
+      },
+      {
+        "title": "iLLEGALLY BLonD (Live)",
+        "type": "track",
+        "url": "https://blond-noise.bandcamp.com/track/illegally-blond-live"
       }
     ]
   },
