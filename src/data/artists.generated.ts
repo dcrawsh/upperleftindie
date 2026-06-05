@@ -2717,5 +2717,29 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "Thoughtbox",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://thoughtbox.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1119507309_10.jpg",
+    "bio": "~ PNW Alternative ~",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thoughtbox.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "you incomplete me",
+        "type": "album",
+        "url": "https://thoughtbox.bandcamp.com/album/you-incomplete-me/"
+      }
+    ]
   }
 ];
