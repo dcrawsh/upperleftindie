@@ -1300,6 +1300,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "The Same But Cheaper CRNSWT",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/the-same-but-cheaper"
+      },
+      {
         "title": "Our Dear Old Wake Forest E.T. Fondle",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
@@ -1323,11 +1328,6 @@ export const artists: Artist[] = [
         "title": "The Jackson Press Payne Fulcher and Gabe Pelli",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/the-jackson-press-2"
-      },
-      {
-        "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
       }
     ]
   },
@@ -2503,7 +2503,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://stepskipper.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0042314687_10.jpg",
-    "bio": "stepskipper is a project born out of the need for creative catharsis.",
+    "bio": "Math rock band from Portland, OR",
     "submittedGenre": "Indie Rock",
     "tags": [
       "Indie Rock"
@@ -2739,6 +2739,156 @@ export const artists: Artist[] = [
         "title": "you incomplete me",
         "type": "album",
         "url": "https://thoughtbox.bandcamp.com/album/you-incomplete-me/"
+      }
+    ]
+  },
+  {
+    "name": "Ghost House Audio",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://ghosthouseaudio.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040355330_10.jpg",
+    "bio": "",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://ghosthouseaudio.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Reckoning in Strip Mall Parking Lot Comma Comma",
+        "type": "track",
+        "url": "https://ghosthouseaudio.bandcamp.com/track/reckoning-in-strip-mall-parking-lot"
+      },
+      {
+        "title": "Sleeping Song Comma Comma ft. Steph Macpherson",
+        "type": "track",
+        "url": "https://ghosthouseaudio.bandcamp.com/track/sleeping-song"
+      },
+      {
+        "title": "Chain Mail Comma Comma",
+        "type": "track",
+        "url": "https://ghosthouseaudio.bandcamp.com/track/chain-mail"
+      },
+      {
+        "title": "enfin Comma Comma",
+        "type": "album",
+        "url": "https://ghosthouseaudio.bandcamp.com/album/enfin"
+      },
+      {
+        "title": "SUPER Bad Bad Power",
+        "type": "album",
+        "url": "https://ghosthouseaudio.bandcamp.com/album/super"
+      },
+      {
+        "title": "When we were lovers / Do u love me? Bad Bad Power",
+        "type": "album",
+        "url": "https://ghosthouseaudio.bandcamp.com/album/when-we-were-lovers-do-u-love-me"
+      }
+    ]
+  },
+  {
+    "name": "st. davis",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://stdavismusic.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1789302113_10.jpg",
+    "bio": "conversions in three minutes or less",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://stdavismusic.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "self-entitled",
+        "type": "album",
+        "url": "https://stdavismusic.bandcamp.com/album/self-entitled/"
+      }
+    ]
+  },
+  {
+    "name": "mothershout",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://mothershout.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0038164335_10.jpg",
+    "bio": "mothershout is Ben Last, based in Vancouver, Canada. I operate a machine called music but am never sure what will come out. Everything is done for fun, and it's a bonus if you like it. Let me know if you do!",
+    "submittedGenre": "Pop",
+    "tags": [
+      "Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://mothershout.bandcamp.com/"
+      },
+      {
+        "label": "mothershout.substack.com",
+        "url": "http://mothershout.substack.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Sunbecoming",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/sunbecoming"
+      },
+      {
+        "title": "So It Goes",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/so-it-goes"
+      },
+      {
+        "title": "How It Be",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/how-it-be"
+      },
+      {
+        "title": "Grow Up To Be Cowboys",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/grow-up-to-be-cowboys"
+      },
+      {
+        "title": "Gravity",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/gravity"
+      },
+      {
+        "title": "Hold Me",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/hold-me"
+      }
+    ]
+  },
+  {
+    "name": "Seaplane",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://seaplaneband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1216650339_10.jpg",
+    "bio": "5 track album",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://seaplaneband.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Zero Years",
+        "type": "album",
+        "url": "https://seaplaneband.bandcamp.com/album/zero-years/"
       }
     ]
   }
