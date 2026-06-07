@@ -2891,5 +2891,118 @@ export const artists: Artist[] = [
         "url": "https://seaplaneband.bandcamp.com/album/zero-years/"
       }
     ]
+  },
+  {
+    "name": "Rutland Bureau Of International Affairs",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://rutlandbureauofinternationalaffairs.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0044435722_10.jpg",
+    "bio": "solo emo project from vancouver bc, who cares about rutland.",
+    "submittedGenre": "Emo",
+    "tags": [
+      "Emo"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://rutlandbureauofinternationalaffairs.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/rutlandbureau.emo/"
+      },
+      {
+        "label": "open.spotify.com",
+        "url": "https://open.spotify.com/artist/3DeXIw076Mph2C0QYKamHJ?si=_zbMv7FWS_6a6TkUKShe-w"
+      },
+      {
+        "label": "music.apple.com",
+        "url": "https://music.apple.com/us/artist/rutland-bureau-of-international-affairs/1894752536"
+      },
+      {
+        "label": "SoundCloud",
+        "url": "https://soundcloud.com/rboia"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Ahead Of It's Time For Being Stuck In The Past",
+        "type": "album",
+        "url": "https://rutlandbureauofinternationalaffairs.bandcamp.com/album/ahead-of-its-time-for-being-stuck-in-the-past"
+      },
+      {
+        "title": "You're Obsessed With Vacations Gone Wrong",
+        "type": "track",
+        "url": "https://rutlandbureauofinternationalaffairs.bandcamp.com/track/youre-obsessed-with-vacations-gone-wrong"
+      }
+    ]
+  },
+  {
+    "name": "Sara Carbone",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://saracarbonemusic.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2003091674_10.jpg",
+    "bio": "hi thanks for being here",
+    "submittedGenre": "Indie Folk",
+    "tags": [
+      "Indie Folk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://saracarbonemusic.bandcamp.com/"
+      },
+      {
+        "label": "linktr.ee",
+        "url": "https://linktr.ee/saracarbonemusic"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Bloom",
+        "type": "album",
+        "url": "https://saracarbonemusic.bandcamp.com/album/bloom/"
+      }
+    ]
+  },
+  {
+    "name": "Lakefield",
+    "location": "Vancouver",
+    "bandcampUrl": "https://lakefield.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2217938653_10.jpg",
+    "bio": "6 track album",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://lakefield.bandcamp.com/"
+      },
+      {
+        "label": "lakefieldmusic.com",
+        "url": "http://lakefieldmusic.com"
+      },
+      {
+        "label": "Twitter",
+        "url": "http://twitter.com/lakefieldmusic"
+      },
+      {
+        "label": "Facebook",
+        "url": "http://facebook.com/lakefield"
+      },
+      {
+        "label": "SoundCloud",
+        "url": "http://soundcloud.com/lakefield"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Swan Songs",
+        "type": "album",
+        "url": "https://lakefield.bandcamp.com/album/swan-songs/"
+      }
+    ]
   }
 ];
