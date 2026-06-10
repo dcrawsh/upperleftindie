@@ -2820,7 +2820,7 @@ export const artists: Artist[] = [
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://mothershout.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0038164335_10.jpg",
-    "bio": "mothershout is Ben Last, based in Vancouver, Canada. I operate a machine called music but am never sure what will come out. Everything is done for fun, and it's a bonus if you like it. Let me know if you do!",
+    "bio": "mothershout is based in Vancouver, Canada. I operate a machine called music but am never sure what will come out. Everything is done for fun, and it's a bonus if you like it. Let me know if you do!",
     "submittedGenre": "Pop",
     "tags": [
       "Pop"
@@ -3002,6 +3002,30 @@ export const artists: Artist[] = [
         "title": "Swan Songs",
         "type": "album",
         "url": "https://lakefield.bandcamp.com/album/swan-songs/"
+      }
+    ]
+  },
+  {
+    "name": "Still Depths",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://stilldepths.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1341621600_10.jpg",
+    "bio": "www.instagram.com/stilldepths/ vancouver bc",
+    "submittedGenre": "Experimental",
+    "tags": [
+      "Experimental"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://stilldepths.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Like Hell!",
+        "type": "album",
+        "url": "https://stilldepths.bandcamp.com/album/like-hell/"
       }
     ]
   }
