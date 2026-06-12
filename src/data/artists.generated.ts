@@ -735,7 +735,7 @@ export const artists: Artist[] = [
     "name": "Treefrog",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://treefrogtheband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0043952246_10.jpg",
+    "image": "https://f4.bcbits.com/img/a3827042619_10.jpg",
     "bio": "Swamp Rockers from PDX.",
     "submittedGenre": "Rock",
     "tags": [
@@ -755,17 +755,7 @@ export const artists: Artist[] = [
       {
         "title": "Treefrog",
         "type": "album",
-        "url": "https://treefrogtheband.bandcamp.com/album/treefrog"
-      },
-      {
-        "title": "Drive",
-        "type": "track",
-        "url": "https://treefrogtheband.bandcamp.com/track/drive-8"
-      },
-      {
-        "title": "Sleepwalking",
-        "type": "track",
-        "url": "https://treefrogtheband.bandcamp.com/track/sleepwalking-3"
+        "url": "https://treefrogtheband.bandcamp.com/album/treefrog/"
       }
     ]
   },
