@@ -1290,6 +1290,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "F3Shitty Amphibians Only",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/f3shitty"
+      },
+      {
         "title": "The Same But Cheaper CRNSWT",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/the-same-but-cheaper"
@@ -1313,11 +1318,6 @@ export const artists: Artist[] = [
         "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
-      },
-      {
-        "title": "The Jackson Press Payne Fulcher and Gabe Pelli",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/the-jackson-press-2"
       }
     ]
   },
@@ -1390,7 +1390,7 @@ export const artists: Artist[] = [
     "name": "The Eye See You's",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://theeyeseeyous.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a2421388631_10.jpg",
+    "image": "https://f4.bcbits.com/img/a2734657341_10.jpg",
     "bio": "Formed in 2024 in Portland, OR by dueling guitarist/vocalists John Rivers and Leila Siegel, as well as Aadit Bagdi (bass) and David O. (drums), the Eye See You's draw from an eclectic and diverse mix of influences to create a sound that is uniquely their own, bridging the gaps between virtuosity, emotional catharsis, danceability, lush guitar textures, and pure rock fury. ... more",
     "submittedGenre": "Rock",
     "tags": [
@@ -1404,9 +1404,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Falls From The Tree",
-        "type": "album",
-        "url": "https://theeyeseeyous.bandcamp.com/album/falls-from-the-tree/"
+        "title": "SicNoMo",
+        "type": "track",
+        "url": "https://theeyeseeyous.bandcamp.com/track/sicnomo/"
       }
     ]
   },
@@ -1916,7 +1916,7 @@ export const artists: Artist[] = [
     "name": "blond-noise",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044362438_10.jpg",
+    "image": "https://f4.bcbits.com/img/a1979534463_10.jpg",
     "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. ... more",
     "submittedGenre": "Experimental",
     "tags": [
@@ -1944,12 +1944,7 @@ export const artists: Artist[] = [
       {
         "title": "home",
         "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/home"
-      },
-      {
-        "title": "iLLEGALLY BLonD (Live)",
-        "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/illegally-blond-live"
+        "url": "https://blond-noise.bandcamp.com/track/home/"
       }
     ]
   },
