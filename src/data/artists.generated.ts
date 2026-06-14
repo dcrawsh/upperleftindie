@@ -1290,9 +1290,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "F3Shitty Amphibians Only",
+        "title": "A Wizard is Never Late Amphibians Only",
         "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/f3shitty"
+        "url": "https://etfondle.bandcamp.com/album/a-wizard-is-never-late"
       },
       {
         "title": "The Same But Cheaper CRNSWT",
