@@ -2308,7 +2308,7 @@ export const artists: Artist[] = [
     "name": "time theft",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://timetheft.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0042060624_10.jpg",
+    "image": "https://f4.bcbits.com/img/0045548057_10.jpg",
     "bio": "Medium-Soft rock band from Portland, Oregon.",
     "submittedGenre": "Rock",
     "tags": [
