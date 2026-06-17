@@ -3013,5 +3013,23 @@ export const artists: Artist[] = [
         "url": "https://stilldepths.bandcamp.com/album/like-hell/"
       }
     ]
+  },
+  {
+    "name": "the pleasant uprising",
+    "location": "Puerto Vallarta, Mexico",
+    "bandcampUrl": "https://thepleasantuprising.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0043281780_10.jpg",
+    "bio": "fomented in the shadow of empire, fighting out of Puerto Vallarta, having a damn good time doing it. punk rock jazz band delivering angry surf disco through a classically trained soul chanteuse and a bellowing lunatic. party-ready solarfunk militia or something. ningun ser humano es ilegal. all power to The People. ... more",
+    "submittedGenre": "Hip-hop / Rap",
+    "tags": [
+      "Hip-hop / Rap"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thepleasantuprising.bandcamp.com/"
+      }
+    ],
+    "releases": []
   }
 ];
