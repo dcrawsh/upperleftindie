@@ -1475,14 +1475,14 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/track/diamonds-2023-single"
       },
       {
-        "title": "RACCOON GODS (The Single)",
-        "type": "track",
-        "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
-      },
-      {
         "title": "RACCOON GODS",
         "type": "album",
         "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
+      },
+      {
+        "title": "RACCOON GODS (The Single)",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
       },
       {
         "title": "TPGK in the USA - single",
@@ -1687,6 +1687,11 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
+      {
+        "title": "Albany Demos",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/albany-demos"
+      },
       {
         "title": "Not Mine (Covers Album)",
         "type": "album",
@@ -2121,7 +2126,7 @@ export const artists: Artist[] = [
     "name": "GVTH DVDDY",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://gvthdvddy.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0315012002_10.jpg",
+    "image": "https://f4.bcbits.com/img/a3825052764_10.jpg",
     "bio": "K.Robinson J. Endicott GVTHDVDDY.com",
     "submittedGenre": "Alternative",
     "tags": [
@@ -2147,9 +2152,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Who Knows How It Ends ?",
+        "title": "GVDV",
         "type": "album",
-        "url": "https://gvthdvddy.bandcamp.com/album/who-knows-how-it-ends/"
+        "url": "https://gvthdvddy.bandcamp.com/album/gvdv/"
       }
     ]
   },
