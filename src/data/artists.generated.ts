@@ -1639,6 +1639,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "EP4 + Singles",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/ep4-singles"
+      },
+      {
         "title": "Amsterdam [Single]",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/amsterdam-single"
@@ -1662,11 +1667,6 @@ export const artists: Artist[] = [
         "title": "EP3 + Singles",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/ep3-singles"
-      },
-      {
-        "title": "Sea Anemone [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/sea-anemone-single"
       }
     ]
   },
