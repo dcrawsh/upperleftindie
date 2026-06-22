@@ -1290,24 +1290,14 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "A Wizard is Never Late Amphibians Only",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/a-wizard-is-never-late"
-      },
-      {
-        "title": "The Same But Cheaper CRNSWT",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/the-same-but-cheaper"
-      },
-      {
-        "title": "Our Dear Old Wake Forest E.T. Fondle",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
-      },
-      {
         "title": "Slavic Dinner Live E.T. Fondle",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/slavic-dinner-live"
+      },
+      {
+        "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
       },
       {
         "title": "The Bacon's Lament E.T. Fondle and the Little Portland Players",
@@ -1315,9 +1305,19 @@ export const artists: Artist[] = [
         "url": "https://etfondle.bandcamp.com/album/the-bacons-lament"
       },
       {
-        "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
+        "title": "The Jackson Press Payne Fulcher and Gabe Pelli",
         "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
+        "url": "https://etfondle.bandcamp.com/album/the-jackson-press-2"
+      },
+      {
+        "title": "Our Dear Old Wake Forest E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
+      },
+      {
+        "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
       }
     ]
   },
@@ -1460,6 +1460,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "The Rainbow Connection - single",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/the-rainbow-connection-single"
+      },
+      {
         "title": "Happy When It Rains - single",
         "type": "track",
         "url": "https://trashpandagokart.bandcamp.com/track/happy-when-it-rains-single"
@@ -1470,9 +1475,9 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/album/live-raccoons-inside"
       },
       {
-        "title": "Diamonds (2023) - single",
+        "title": "RACCOON GODS (The Single)",
         "type": "track",
-        "url": "https://trashpandagokart.bandcamp.com/track/diamonds-2023-single"
+        "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
       },
       {
         "title": "RACCOON GODS",
@@ -1480,14 +1485,9 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
       },
       {
-        "title": "RACCOON GODS (The Single)",
+        "title": "Diamonds (2023) - single",
         "type": "track",
-        "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
-      },
-      {
-        "title": "TPGK in the USA - single",
-        "type": "track",
-        "url": "https://trashpandagokart.bandcamp.com/track/tpgk-in-the-usa-single"
+        "url": "https://trashpandagokart.bandcamp.com/track/diamonds-2023-single"
       }
     ]
   },
@@ -2827,6 +2827,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Tigers In The Dark",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/tigers-in-the-dark"
+      },
+      {
         "title": "Sunbecoming",
         "type": "track",
         "url": "https://mothershout.bandcamp.com/track/sunbecoming"
@@ -2850,11 +2855,6 @@ export const artists: Artist[] = [
         "title": "Gravity",
         "type": "track",
         "url": "https://mothershout.bandcamp.com/track/gravity"
-      },
-      {
-        "title": "Hold Me",
-        "type": "track",
-        "url": "https://mothershout.bandcamp.com/track/hold-me"
       }
     ]
   },
