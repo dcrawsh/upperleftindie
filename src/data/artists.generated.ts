@@ -1290,6 +1290,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Black Teeth Skinflints",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/black-teeth"
+      },
+      {
         "title": "Slavic Dinner Live E.T. Fondle",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/slavic-dinner-live"
@@ -1313,11 +1318,6 @@ export const artists: Artist[] = [
         "title": "Our Dear Old Wake Forest E.T. Fondle",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
-      },
-      {
-        "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
       }
     ]
   },
