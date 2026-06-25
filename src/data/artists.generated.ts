@@ -41,6 +41,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "I'll Be Damned",
+        "type": "album",
+        "url": "https://badquitters.bandcamp.com/album/ill-be-damned"
+      },
+      {
         "title": "Hapax: Legomena",
         "type": "track",
         "url": "https://badquitters.bandcamp.com/track/hapax-legomena"
@@ -1083,6 +1088,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "The Unknown",
+        "type": "album",
+        "url": "https://kingropes.bandcamp.com/album/the-unknown"
+      },
+      {
         "title": "IDAHO King Ropes",
         "type": "album",
         "url": "https://kingropes.bandcamp.com/album/idaho"
@@ -1106,11 +1116,6 @@ export const artists: Artist[] = [
         "title": "Go Back Where They Came From",
         "type": "album",
         "url": "https://kingropes.bandcamp.com/album/go-back-where-they-came-from"
-      },
-      {
-        "title": "Gravity and Friction King Ropes",
-        "type": "album",
-        "url": "https://kingropes.bandcamp.com/album/gravity-and-friction"
       }
     ]
   },
@@ -1290,16 +1295,6 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Black Teeth Skinflints",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/black-teeth"
-      },
-      {
-        "title": "Slavic Dinner Live E.T. Fondle",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/slavic-dinner-live"
-      },
-      {
         "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
@@ -1315,9 +1310,19 @@ export const artists: Artist[] = [
         "url": "https://etfondle.bandcamp.com/album/the-jackson-press-2"
       },
       {
+        "title": "Slavic Dinner Live E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/slavic-dinner-live"
+      },
+      {
         "title": "Our Dear Old Wake Forest E.T. Fondle",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
+      },
+      {
+        "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
       }
     ]
   },
