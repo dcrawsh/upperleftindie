@@ -3041,5 +3041,29 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "Assistant Manager",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://asstmngr.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0528294904_10.jpg",
+    "bio": "asstmngr.ampwall.com",
+    "submittedGenre": "Other",
+    "tags": [
+      "Other"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://asstmngr.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "\"Music\"",
+        "type": "album",
+        "url": "https://asstmngr.bandcamp.com/album/music/"
+      }
+    ]
   }
 ];
