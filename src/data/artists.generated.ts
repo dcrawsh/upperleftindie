@@ -2921,6 +2921,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "ghost man on third by taking back sunday",
+        "type": "track",
+        "url": "https://rutlandbureauofinternationalaffairs.bandcamp.com/track/ghost-man-on-third-by-taking-back-sunday"
+      },
+      {
         "title": "Ahead Of It's Time For Being Stuck In The Past",
         "type": "album",
         "url": "https://rutlandbureauofinternationalaffairs.bandcamp.com/album/ahead-of-its-time-for-being-stuck-in-the-past"
