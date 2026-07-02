@@ -374,7 +374,7 @@ export const artists: Artist[] = [
     "name": "Divorced Horses",
     "location": "Seattle, Washington",
     "bandcampUrl": "https://divorcedhorses.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0036861748_10.jpg",
+    "image": "https://f4.bcbits.com/img/0045860967_10.jpg",
     "bio": "3 little piggies who want to rock. some grunge, some jazz, some math, some funk, some ballad, some space, some soma.",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -387,6 +387,11 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
+      {
+        "title": "Alive and Well",
+        "type": "album",
+        "url": "https://divorcedhorses.bandcamp.com/album/alive-and-well"
+      },
       {
         "title": "Also Oslo",
         "type": "track",
@@ -3068,6 +3073,49 @@ export const artists: Artist[] = [
         "title": "\"Music\"",
         "type": "album",
         "url": "https://asstmngr.bandcamp.com/album/music/"
+      }
+    ]
+  },
+  {
+    "name": "Bad Dads",
+    "location": "Eastsound, Washington",
+    "bandcampUrl": "https://baddadsonorcas.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0021285608_10.jpg",
+    "bio": "Three dads with six kids on Orcas Island all in need of an attitude adjustment.",
+    "submittedGenre": "Punk",
+    "tags": [
+      "Punk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://baddadsonorcas.bandcamp.com/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/channel/UChQRj7ucUtVhH2_iXVPA5KQ?view_as=subscriber"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Sometimes I Just Say things",
+        "type": "album",
+        "url": "https://baddadsonorcas.bandcamp.com/album/sometimes-i-just-say-things"
+      },
+      {
+        "title": "Disappointing Manifestos",
+        "type": "album",
+        "url": "https://baddadsonorcas.bandcamp.com/album/disappointing-manifestos"
+      },
+      {
+        "title": "Dead Beats",
+        "type": "album",
+        "url": "https://baddadsonorcas.bandcamp.com/album/dead-beats"
+      },
+      {
+        "title": "Bad Dads S/t",
+        "type": "album",
+        "url": "https://baddadsonorcas.bandcamp.com/album/bad-dads-s-t"
       }
     ]
   }
