@@ -1649,6 +1649,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "EP5 + Singles",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/ep5-singles"
+      },
+      {
         "title": "EP4 + Singles",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/ep4-singles"
@@ -1672,11 +1677,6 @@ export const artists: Artist[] = [
         "title": "EP4",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/ep4"
-      },
-      {
-        "title": "EP3 + Singles",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/ep3-singles"
       }
     ]
   },
