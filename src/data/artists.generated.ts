@@ -1400,7 +1400,7 @@ export const artists: Artist[] = [
     "name": "The Eye See You's",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://theeyeseeyous.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a2734657341_10.jpg",
+    "image": "https://f4.bcbits.com/img/a4209351108_10.jpg",
     "bio": "Formed in 2024 in Portland, OR by dueling guitarist/vocalists John Rivers and Leila Siegel, as well as Aadit Bagdi (bass) and David O. (drums), the Eye See You's draw from an eclectic and diverse mix of influences to create a sound that is uniquely their own, bridging the gaps between virtuosity, emotional catharsis, danceability, lush guitar textures, and pure rock fury. ... more",
     "submittedGenre": "Rock",
     "tags": [
@@ -1414,9 +1414,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "SicNoMo",
+        "title": "Edge of Glass",
         "type": "track",
-        "url": "https://theeyeseeyous.bandcamp.com/track/sicnomo/"
+        "url": "https://theeyeseeyous.bandcamp.com/track/edge-of-glass/"
       }
     ]
   },
@@ -1649,34 +1649,34 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Clive Wearing / Realms [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/clive-wearing-realms-single"
+      },
+      {
+        "title": "EP5",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/ep5"
+      },
+      {
         "title": "EP5 + Singles",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/ep5-singles"
       },
       {
+        "title": "Mediocrity [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/mediocrity-single"
+      },
+      {
+        "title": "Zombie Beat [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/zombie-beat-single"
+      },
+      {
         "title": "EP4 + Singles",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/ep4-singles"
-      },
-      {
-        "title": "Amsterdam [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/amsterdam-single"
-      },
-      {
-        "title": "Waterbug [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/waterbug-single"
-      },
-      {
-        "title": "Where the Novelists Live [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/where-the-novelists-live-single"
-      },
-      {
-        "title": "EP4",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/ep4"
       }
     ]
   },
@@ -1932,7 +1932,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a1979534463_10.jpg",
-    "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. ... more",
+    "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. admin@blond-noise.com ... more",
     "submittedGenre": "Experimental",
     "tags": [
       "Experimental"
@@ -2433,6 +2433,11 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
+      {
+        "title": "8595",
+        "type": "track",
+        "url": "https://rediviva.bandcamp.com/track/8595"
+      },
       {
         "title": "Kármán gait",
         "type": "track",
