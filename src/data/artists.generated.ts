@@ -2810,6 +2810,10 @@ export const artists: Artist[] = [
       {
         "label": "Bandcamp",
         "url": "https://stdavismusic.bandcamp.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/stdavis_/"
       }
     ],
     "releases": [
