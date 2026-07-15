@@ -1901,6 +1901,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Long Deer Radio",
+        "type": "album",
+        "url": "https://longdeer.bandcamp.com/album/long-deer-radio"
+      },
+      {
         "title": "Compulsive Thoughts",
         "type": "album",
         "url": "https://longdeer.bandcamp.com/album/compulsive-thoughts"
@@ -2623,7 +2628,7 @@ export const artists: Artist[] = [
     "location": "Seattle, Washington",
     "bandcampUrl": "https://meredithsmith.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0044504370_10.jpg",
-    "bio": "Wistful, throwback indie rock with a dash of shoegaze, from Seattle, WA. Plus acoustic covers and other experiments. One half of Twilight Diners.",
+    "bio": "Female-fronted twee artist from Seattle, WA. Full band shows now in the GSA. One half of Twilight Diners.",
     "submittedGenre": "Indie Rock",
     "tags": [
       "Indie Rock"
