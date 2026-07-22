@@ -1948,16 +1948,20 @@ export const artists: Artist[] = [
         "url": "https://blond-noise.bandcamp.com/"
       },
       {
+        "label": "blond-noise.com",
+        "url": "http://blond-noise.com"
+      },
+      {
+        "label": "phenomenalcage.substack.com",
+        "url": "https://phenomenalcage.substack.com"
+      },
+      {
         "label": "YouTube",
         "url": "https://www.youtube.com/@blond-noise"
       },
       {
         "label": "Instagram",
         "url": "https://www.instagram.com/blond_noise/"
-      },
-      {
-        "label": "phenomenalcage.substack.com",
-        "url": "https://phenomenalcage.substack.com"
       }
     ],
     "releases": [
@@ -2805,7 +2809,7 @@ export const artists: Artist[] = [
     "name": "st. davis",
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://stdavismusic.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1789302113_10.jpg",
+    "image": "https://f4.bcbits.com/img/a4170779994_10.jpg",
     "bio": "conversions in three minutes or less",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -2823,9 +2827,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "self-entitled",
-        "type": "album",
-        "url": "https://stdavismusic.bandcamp.com/album/self-entitled/"
+        "title": "in the know",
+        "type": "track",
+        "url": "https://stdavismusic.bandcamp.com/track/in-the-know/"
       }
     ]
   },
@@ -3130,6 +3134,45 @@ export const artists: Artist[] = [
         "title": "Bad Dads S/t",
         "type": "album",
         "url": "https://baddadsonorcas.bandcamp.com/album/bad-dads-s-t"
+      }
+    ]
+  },
+  {
+    "name": "Venus Moons",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://venusmoons.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0045555738_10.jpg",
+    "bio": "Venus Moons is a Circassian singer-songwriter based in Seattle, WA. Blending folk influences with cinematic pop and alternative rock, inspired by heritage and personal experiences, her songs explore identity, nostalgia, resilience, motherhood, and the emotional complexity of everyday life. ... more",
+    "submittedGenre": "Other",
+    "tags": [
+      "Other"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://venusmoons.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Moms Want to Have Fun",
+        "type": "track",
+        "url": "https://venusmoons.bandcamp.com/track/moms-want-to-have-fun"
+      },
+      {
+        "title": "You are my Sunshine",
+        "type": "track",
+        "url": "https://venusmoons.bandcamp.com/track/you-are-my-sunshine"
+      },
+      {
+        "title": "Mother",
+        "type": "track",
+        "url": "https://venusmoons.bandcamp.com/track/mother"
+      },
+      {
+        "title": "Cheer Up",
+        "type": "track",
+        "url": "https://venusmoons.bandcamp.com/track/cheer-up"
       }
     ]
   }
