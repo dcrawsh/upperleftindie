@@ -1937,7 +1937,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a1979534463_10.jpg",
-    "bio": "blond-noise is a singer-songwriter turned sound artist/producer who creates experimental alternative and electronic music. Their work blends voice, instrumentation, and field recordings into immersive, textural compositions and is often accompanied by their own multimedia visual and video art. admin@blond-noise.com ... more",
+    "bio": "blond-noise is a singer-songwriter turned sound artist and producer creating experimental electronic and alternative music in Portland, Oregon. Their work blends voice, instrumentation, field recordings, and sound design into immersive, textural compositions, often accompanied by their own multimedia visual art. ... more",
     "submittedGenre": "Experimental",
     "tags": [
       "Experimental"
@@ -3173,6 +3173,30 @@ export const artists: Artist[] = [
         "title": "Cheer Up",
         "type": "track",
         "url": "https://venusmoons.bandcamp.com/track/cheer-up"
+      }
+    ]
+  },
+  {
+    "name": "Parker Johnson",
+    "location": "Anchorage, Alaska",
+    "bandcampUrl": "https://parkerjohnson1.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1952915335_10.jpg",
+    "bio": "Alaskan",
+    "submittedGenre": "Indie Folk",
+    "tags": [
+      "Indie Folk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://parkerjohnson1.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Northern Hope",
+        "type": "album",
+        "url": "https://parkerjohnson1.bandcamp.com/album/northern-hope/"
       }
     ]
   }
