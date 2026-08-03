@@ -1698,11 +1698,6 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Albany Demos",
-        "type": "album",
-        "url": "https://terriblepop.bandcamp.com/album/albany-demos"
-      },
-      {
         "title": "Not Mine (Covers Album)",
         "type": "album",
         "url": "https://terriblepop.bandcamp.com/album/not-mine-covers-album"
