@@ -686,9 +686,9 @@ export const artists: Artist[] = [
   },
   {
     "name": "Slow Rosary",
-    "location": "Louisiana",
+    "location": "Seattle, Washington",
     "bandcampUrl": "https://slowrosary.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0028503742_10.jpg",
+    "image": "https://f4.bcbits.com/img/0046503572_10.jpg",
     "bio": "deceptively secular band from south Louisiana now in northwestern Washington",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -700,8 +700,8 @@ export const artists: Artist[] = [
         "url": "https://slowrosary.bandcamp.com/"
       },
       {
-        "label": "Facebook",
-        "url": "https://www.facebook.com/braithwaitemusicLA"
+        "label": "slowrosary.com",
+        "url": "http://slowrosary.com"
       },
       {
         "label": "Instagram",
