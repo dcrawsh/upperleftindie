@@ -689,7 +689,7 @@ export const artists: Artist[] = [
     "location": "Seattle, Washington",
     "bandcampUrl": "https://slowrosary.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0046503572_10.jpg",
-    "bio": "deceptively secular band from south Louisiana now in northwestern Washington",
+    "bio": "deceptively secular band from southeast Louisiana now in northwest Washington",
     "submittedGenre": "Indie Rock",
     "tags": [
       "Indie Rock"
