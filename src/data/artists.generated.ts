@@ -1156,7 +1156,7 @@ export const artists: Artist[] = [
     "name": "Buddy Wynkoop",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://buddywynkoop.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044008727_10.jpg",
+    "image": "https://f4.bcbits.com/img/0046557463_10.jpg",
     "bio": "Buddy Wynkoop is a six piece art punk outfit.",
     "submittedGenre": "Punk",
     "tags": [
