@@ -2645,6 +2645,11 @@ export const artists: Artist[] = [
         "url": "https://meredithsmith.bandcamp.com/album/more-than-a-dream-single"
       },
       {
+        "title": "More than a Dream (Full EP)",
+        "type": "album",
+        "url": "https://meredithsmith.bandcamp.com/album/more-than-a-dream-full-ep-2"
+      },
+      {
         "title": "Sirens (Single) Meredith Smith",
         "type": "album",
         "url": "https://meredithsmith.bandcamp.com/album/sirens-single"
