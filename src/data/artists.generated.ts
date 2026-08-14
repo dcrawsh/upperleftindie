@@ -1931,7 +1931,7 @@ export const artists: Artist[] = [
     "name": "blond-noise",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blond-noise.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1979534463_10.jpg",
+    "image": "https://f4.bcbits.com/img/0046732425_10.jpg",
     "bio": "blond-noise is a singer-songwriter turned sound artist and producer creating experimental electronic and alternative music in Portland, Oregon. Their work blends voice, instrumentation, field recordings, and sound design into immersive, textural compositions, often accompanied by their own multimedia visual art. ... more",
     "submittedGenre": "Experimental",
     "tags": [
@@ -1961,9 +1961,14 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "as well as I can be / right now in Portland, Oregon",
+        "type": "track",
+        "url": "https://blond-noise.bandcamp.com/track/as-well-as-i-can-be-right-now-in-portland-oregon"
+      },
+      {
         "title": "home",
         "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/home/"
+        "url": "https://blond-noise.bandcamp.com/track/home"
       }
     ]
   },
