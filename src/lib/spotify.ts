@@ -193,6 +193,58 @@ export async function getSpotifyTrackPreviewDetails(trackId: string) {
   };
 }
 
+type SpotifyTracksResponse = {
+  tracks: Array<{
+    id: string;
+    name: string;
+    album?: {
+      images?: Array<{ url: string; width?: number; height?: number }>;
+    };
+    external_urls?: { spotify?: string };
+  } | null>;
+};
+
+export type SpotifyPublicTrack = {
+  id: string;
+  name: string;
+  imageUrl: string;
+  externalUrl: string;
+};
+
+/**
+ * Batch lookup for the public site: the title and album art of tracks that are
+ * already on the public playlist. One token exchange and one request for the
+ * whole set, and callers are expected to treat failure as "no detail
+ * available" rather than an error.
+ */
+export async function getPublicTrackDetails(trackIds: string[]) {
+  const ids = trackIds.filter((id) => spotifyTrackIdPattern.test(id)).slice(0, 50);
+  const details = new Map<string, SpotifyPublicTrack>();
+
+  if (ids.length === 0) {
+    return details;
+  }
+
+  const data = await spotifyRequest<SpotifyTracksResponse>(
+    `tracks?ids=${ids.join(",")}`
+  );
+
+  for (const track of data.tracks) {
+    if (!track) {
+      continue;
+    }
+
+    details.set(track.id, {
+      id: track.id,
+      name: track.name,
+      imageUrl: track.album?.images?.[0]?.url ?? "",
+      externalUrl: track.external_urls?.spotify ?? "",
+    });
+  }
+
+  return details;
+}
+
 export async function archiveTrack(trackUri: string) {
   const { activePlaylistId, archivePlaylistId } = getSpotifyConfig();
 

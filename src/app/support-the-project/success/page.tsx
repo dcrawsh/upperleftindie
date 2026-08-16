@@ -1,6 +1,7 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import SiteContainer from "../../components/SiteContainer";
+import ConfirmationPanel from "../../components/ui/ConfirmationPanel";
+import { ButtonLink } from "../../components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Thanks for Supporting the Project",
@@ -12,35 +13,39 @@ export const metadata: Metadata = {
 
 export default function SupportSuccessPage() {
   return (
-    <section className="py-20 md:py-28">
-      <SiteContainer>
-        <div className="mx-auto max-w-3xl rounded-md border border-ink/10 bg-paper/80 p-8 shadow-soft md:p-10">
-          <p className="mb-4 text-sm font-black uppercase tracking-[0.26em] text-clay">
-            Thank you
-          </p>
-          <h1 className="text-4xl font-black leading-tight text-ink md:text-5xl">
-            Thanks for supporting Upper Left Indie.
-          </h1>
-          <p className="mt-5 text-lg leading-8 text-ink/70">
-            Your support helps keep submissions free and gives a little more room
-            for playlist digging, artist features, writing, photography, and local
-            Northwest music projects.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/"
-              className="rounded-full bg-ink px-6 py-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay"
-            >
-              Back home
-            </Link>
-            <Link
-              href="/submit"
-              className="rounded-full border border-ink/15 px-6 py-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-ink transition hover:border-clay hover:text-clay"
-            >
-              Submit music
-            </Link>
-          </div>
-        </div>
+    <section className="py-16 md:py-20">
+      <SiteContainer size="medium">
+        <ConfirmationPanel
+          badge="Payment complete"
+          title="Thanks for chipping in."
+          description="Your tip goes to the running costs of the project: hosting, the domain, the playlist tooling, and the hours spent listening. It is what keeps submissions free for every artist who sends one."
+          recapTitle="What happens next"
+          recap={[
+            {
+              label: "Receipt",
+              value: "Stripe emails it to you directly — this site never sees your card details.",
+            },
+            {
+              label: "One-time",
+              value: "Nothing recurring was set up, and nothing is stored here.",
+            },
+            {
+              label: "The bigger ask",
+              value:
+                "If you want to support the music itself, buy something from an artist on their own Bandcamp. That money reaches them, not this project.",
+            },
+          ]}
+          actions={
+            <>
+              <ButtonLink href="/artists" emphasis="primary" size="md">
+                Browse the artists
+              </ButtonLink>
+              <ButtonLink href="/" emphasis="secondary" size="md">
+                Back to the playlist
+              </ButtonLink>
+            </>
+          }
+        />
       </SiteContainer>
     </section>
   );

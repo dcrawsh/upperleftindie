@@ -1,48 +1,61 @@
 import type { MetadataRoute } from "next";
-
-const siteUrl = "https://www.upperleftindie.com";
+import { SITE_URL } from "../lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   return [
     {
-      url: siteUrl,
+      url: SITE_URL,
       lastModified,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${siteUrl}/artists`,
+      url: `${SITE_URL}/artists`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/submit`,
+      // Present in the footer and on the homepage, but previously missing from
+      // the sitemap entirely.
+      url: `${SITE_URL}/archive`,
       lastModified,
-      changeFrequency: "monthly",
-      priority: 0.8,
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
-      url: `${siteUrl}/blog`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: `${siteUrl}/shows`,
+      url: `${SITE_URL}/shows`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.6,
     },
     {
-      url: `${siteUrl}/contact`,
+      url: `${SITE_URL}/submit`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/contact`,
       lastModified,
       changeFrequency: "yearly",
     },
     {
-      url: `${siteUrl}/support-the-project`,
+      url: `${SITE_URL}/support-the-project`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.4,

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteContainer from "../components/SiteContainer";
+import EmptyState from "../components/ui/EmptyState";
+import SectionHeading from "../components/ui/SectionHeading";
+import { ButtonLink } from "../components/ui/Button";
 
 export const dynamic = "force-dynamic";
 
@@ -90,6 +93,14 @@ type ShowsPageProps = {
   }>;
 };
 
+/**
+ * Shows — built from the Figma system rather than a dedicated high-fidelity
+ * frame. The route keeps its real Supabase read, its venue filter (which stays
+ * server-side and link-based, so it works without JavaScript) and both of its
+ * existing empty states; only the presentation is brought onto the design
+ * system. The homepage and header now link here — it previously had no inbound
+ * links at all.
+ */
 export default async function ShowsPage({ searchParams }: ShowsPageProps) {
   const { shows, isConfigured } = await getShows();
   const params = await searchParams;
@@ -104,96 +115,121 @@ export default async function ShowsPage({ searchParams }: ShowsPageProps) {
     ? shows.filter((show) => show.venue_name === selectedVenue)
     : shows;
 
+  const tagClasses = (isSelected: boolean) =>
+    `inline-flex h-11 shrink-0 items-center justify-center rounded-full border-[1.5px] px-3.5 type-label-m transition ${
+      isSelected
+        ? "border-inverse bg-inverse text-on-inverse"
+        : "border-subtle bg-surface text-secondary hover:border-accent-solid hover:text-accent"
+    }`;
+
   return (
-    <section className="py-10 md:py-20">
+    <section className="py-12 md:py-14">
       <SiteContainer>
-        <div className="max-w-3xl">
-          <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-clay sm:mb-4 sm:text-sm sm:tracking-[0.26em]">
-            Portland Shows
-          </p>
-          <h1 className="text-3xl font-black leading-tight text-ink sm:text-4xl md:text-6xl">
-            Local shows worth a look.
-          </h1>
-          <p className="mt-4 text-base leading-7 text-ink/70 sm:mt-6 sm:text-lg sm:leading-8">
-            A lightweight calendar scraped weekly from a small set of Portland
-            venue calendars. Always confirm details with the venue before you go.
-          </p>
-        </div>
+        <SectionHeading
+          as="h1"
+          size="page"
+          eyebrow="Portland shows · Updated weekly"
+          title="Local shows worth a look."
+          description="A lightweight calendar scraped from a small set of Portland venue calendars. Always confirm details with the venue before you go."
+        />
 
         {isConfigured && venues.length > 0 ? (
-          <div className="mt-8 flex gap-2 overflow-x-auto pb-2 sm:mt-10 sm:flex-wrap sm:overflow-visible sm:pb-0">
+          <nav
+            aria-label="Filter shows by venue"
+            className="mt-8 flex gap-2.5 overflow-x-auto border-y border-subtle py-6 sm:flex-wrap sm:overflow-visible"
+          >
             <Link
               href="/shows"
-              className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.12em] transition ${
-                selectedVenue
-                  ? "border-ink/15 text-ink/60 hover:border-clay hover:text-clay"
-                  : "border-ink bg-ink text-paper"
-              }`}
+              aria-current={selectedVenue ? undefined : "true"}
+              className={tagClasses(!selectedVenue)}
             >
-              All
+              All venues
             </Link>
             {venues.map((venue) => (
               <Link
                 key={venue}
                 href={`/shows?venue=${encodeURIComponent(venue)}`}
-                className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.12em] transition ${
-                  selectedVenue === venue
-                    ? "border-ink bg-ink text-paper"
-                    : "border-ink/15 text-ink/60 hover:border-clay hover:text-clay"
-                }`}
+                aria-current={selectedVenue === venue ? "true" : undefined}
+                className={tagClasses(selectedVenue === venue)}
               >
                 {venue}
               </Link>
             ))}
-          </div>
+          </nav>
         ) : null}
 
-        <div className="mt-8 space-y-4 sm:mt-12">
+        {isConfigured && shows.length > 0 ? (
+          <p className="mt-6 type-body-s text-secondary">
+            {`Showing ${visibleShows.length} upcoming ${
+              visibleShows.length === 1 ? "show" : "shows"
+            }`}
+            {selectedVenue ? ` at ${selectedVenue}` : ""}
+          </p>
+        ) : null}
+
+        <div className="mt-6">
           {!isConfigured ? (
-            <p className="rounded-md border border-ink/10 bg-paper/80 p-5 text-sm font-bold text-ink/65">
-              Shows are ready for setup. Add Supabase environment variables to
-              display upcoming events here.
-            </p>
-          ) : null}
-
-          {isConfigured && shows.length === 0 ? (
-            <p className="rounded-md border border-ink/10 bg-paper/80 p-5 text-sm font-bold text-ink/65">
-              No upcoming shows are listed yet.
-            </p>
-          ) : null}
-
-          {visibleShows.map((show) => (
-            <article
-              key={`${show.venue_name}-${show.starts_at}-${show.url}`}
-              className="rounded-md border border-ink/10 bg-paper/80 p-5 shadow-soft"
-            >
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-clay">
-                {formatShowDate(show.starts_at)}
-              </p>
-              <h2 className="mt-2 text-xl font-black leading-tight text-ink">
-                {show.artist_name || show.title}
-              </h2>
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-ink/55">
-                <span>{show.venue_name}</span>
-                <span className="text-ink/25">/</span>
-                <span>{formatShowTime(show.starts_at)}</span>
-                {show.genre ? (
-                  <>
-                    <span className="text-ink/25">/</span>
-                    <span>{show.genre}</span>
-                  </>
-                ) : null}
-              </div>
-              <a
-                href={show.url}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-4 inline-flex rounded-full border border-ink/15 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-ink transition hover:border-clay hover:text-clay"
-              >
-                View details
-              </a>
-            </article>
-          ))}
+            <EmptyState
+              title="Shows are ready for setup"
+              description="Add the Supabase environment variables to display upcoming events here."
+            />
+          ) : shows.length === 0 ? (
+            <EmptyState
+              title="No upcoming shows are listed yet"
+              description="The calendar is scraped from a small set of Portland venues, so it goes quiet between updates. The playlist does not."
+              action={
+                <ButtonLink href="/" emphasis="secondary" size="md">
+                  Listen instead
+                </ButtonLink>
+              }
+            />
+          ) : visibleShows.length === 0 ? (
+            <EmptyState
+              title={`Nothing listed at ${selectedVenue} right now`}
+              description="Try another venue, or see everything that is coming up."
+              action={
+                <ButtonLink href="/shows" emphasis="secondary" size="md">
+                  Show all venues
+                </ButtonLink>
+              }
+            />
+          ) : (
+            <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {visibleShows.map((show) => (
+                <li
+                  key={`${show.venue_name}-${show.starts_at}-${show.url}`}
+                  className="flex min-w-0"
+                >
+                  <article className="flex w-full flex-col gap-2.5 rounded-card border-[1.5px] border-subtle bg-surface p-6">
+                    <p className="type-label-s text-accent">
+                      {formatShowDate(show.starts_at)} ·{" "}
+                      {formatShowTime(show.starts_at)}
+                    </p>
+                    <h2 className="type-heading-m text-primary">
+                      {show.artist_name || show.title}
+                    </h2>
+                    <p className="type-body-s text-secondary">
+                      {show.venue_name}
+                      {show.genre ? ` · ${show.genre}` : ""}
+                    </p>
+                    <div className="mt-auto pt-3">
+                      <a
+                        href={show.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-h-11 items-center rounded-full border-[1.5px] border-strong px-3.5 type-label-s text-primary transition hover:border-accent-solid hover:text-accent"
+                      >
+                        View details
+                        <span className="sr-only">{` for ${
+                          show.artist_name || show.title
+                        } at ${show.venue_name}`}</span>
+                      </a>
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </SiteContainer>
     </section>

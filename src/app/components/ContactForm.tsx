@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "./ui/Button";
+import { ConsentCheckbox, TextField, TextareaField } from "./ui/Field";
 
 type ContactFormState = {
   name: string;
@@ -46,7 +48,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus("Sending message...");
+    setStatus("Sending your message…");
     setIsSubmitting(true);
 
     const bodyText = `Name: ${formData.name}
@@ -105,7 +107,7 @@ ${formData.message}`;
       setStatus("Message sent. Thanks for reaching out.");
       if (!newsletterSubscribed) {
         setStatus(
-          "Message sent. Thanks for reaching out. Newsletter signup could not be completed."
+          "Message sent. Thanks for reaching out. You were not added to the mailing list — you can join any time from the footer."
         );
       }
       setFormData(initialFormState);
@@ -124,88 +126,78 @@ ${formData.message}`;
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-5 rounded-md border border-ink/10 bg-paper p-6 shadow-soft md:p-8"
+      className="flex flex-col gap-5 rounded-card border-[1.5px] border-subtle bg-surface p-6 md:p-8"
     >
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Name
-        <input
-          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-          required
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Your name"
-        />
-      </label>
+      <TextField
+        id="contact-name"
+        name="name"
+        label="Name"
+        required
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Your name"
+        autoComplete="name"
+      />
 
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Email
-        <input
-          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-          required
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="you@example.com"
-        />
-      </label>
+      <TextField
+        id="contact-email"
+        name="email"
+        type="email"
+        label="Email"
+        required
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="you@example.com"
+        autoComplete="email"
+      />
 
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Subject
-        <input
-          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          placeholder="What is this about?"
-        />
-      </label>
+      <TextField
+        id="contact-subject"
+        name="subject"
+        label="Subject"
+        optional
+        value={formData.subject}
+        onChange={handleChange}
+        placeholder="What is this about?"
+      />
 
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Message
-        <textarea
-          className="min-h-40 w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-          required
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder="Write your message"
-        />
-      </label>
+      <TextareaField
+        id="contact-message"
+        name="message"
+        label="Message"
+        required
+        value={formData.message}
+        onChange={handleChange}
+        placeholder="Write your message"
+        rows={7}
+      />
 
-      <label className="flex items-start gap-3 rounded-md border border-ink/10 bg-white/70 p-4 text-sm text-ink/70">
-        <input
-          className="mt-1 h-4 w-4 rounded border-ink/20 accent-clay"
-          type="checkbox"
-          name="subscribeToNewsletter"
-          checked={formData.subscribeToNewsletter}
-          onChange={handleChange}
-        />
-        <span>
-          <span className="block font-bold">
-            Also send me Upper Left Indie updates.
-          </span>
-          <span className="mt-1 block text-xs text-ink/55">
-            Playlist adds, artist features, local music notes, and submission
-            updates. No spam. Unsubscribe anytime.
-          </span>
-        </span>
-      </label>
+      <ConsentCheckbox
+        id="contact-subscribeToNewsletter"
+        name="subscribeToNewsletter"
+        checked={formData.subscribeToNewsletter}
+        onChange={handleChange}
+        title="Also send me Upper Left Indie updates."
+        description="Playlist adds, artist features, local music notes, and submission updates. No spam, unsubscribe any time. Unchecked by default."
+      />
 
-      <button
+      <Button
         type="submit"
+        emphasis="primary"
+        size="lg"
+        fullWidth
         disabled={isSubmitting}
-        className="w-full rounded-full bg-ink px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay disabled:cursor-not-allowed disabled:bg-ink/45"
       >
-        {isSubmitting ? "Sending..." : "Send Message"}
-      </button>
+        {isSubmitting ? "Sending…" : "Send message"}
+      </Button>
 
-      {status ? (
-        <p className="text-sm font-bold text-ink/70" aria-live="polite">
-          {status}
-        </p>
-      ) : null}
+      <p
+        className="type-body-s font-medium text-primary empty:hidden"
+        role="status"
+        aria-live="polite"
+      >
+        {status}
+      </p>
     </form>
   );
 }

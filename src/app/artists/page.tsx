@@ -1,43 +1,41 @@
-import { artists as generatedArtists } from "../../data/artists.generated";
+import { Suspense } from "react";
 import SiteContainer from "../components/SiteContainer";
-import ArtistsBrowser, { type ArtistCard } from "./ArtistsBrowser";
+import SectionHeading from "../components/ui/SectionHeading";
+import { getArtists } from "../../lib/artists";
+import ArtistsBrowser from "./ArtistsBrowser";
 
-const artists = generatedArtists as ArtistCard[];
+const artists = getArtists();
 
 export const metadata = {
-  title: "Support Artists",
+  title: "Artists",
   description:
-    "Support independent artists featured on the Upper Left Indie playlist.",
+    "Browse the Northwest artists Upper Left Indie has played, by region and genre. Every artist links straight to their own Bandcamp.",
   alternates: {
     canonical: "/artists",
   },
   openGraph: {
-    title: "Support Artists | Upper Left Indie",
+    title: "Artists | Upper Left Indie",
     description:
-      "Support independent artists featured on the Upper Left Indie playlist.",
+      "Browse the Northwest artists Upper Left Indie has played, by region and genre.",
     url: "/artists",
   },
 };
 
 export default function ArtistsPage() {
   return (
-    <section className="py-10 md:py-20">
+    <section className="py-12 md:py-14">
       <SiteContainer>
-        <div className="max-w-3xl">
-          <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-clay sm:mb-4 sm:text-sm sm:tracking-[0.26em]">
-            Featured Artists
-          </p>
-          <h1 className="text-3xl font-black leading-tight text-ink sm:text-4xl md:text-6xl">
-            Artists from the playlist.
-          </h1>
-          <p className="mt-4 text-base leading-7 text-ink/70 sm:mt-6 sm:text-lg sm:leading-8">
-            Here are some of the artists who have been featured on Upper Left
-            Indie. Please support them, check out their music, and follow where
-            the sound takes you.
-          </p>
-        </div>
+        <SectionHeading
+          as="h1"
+          size="page"
+          eyebrow={`${artists.length} artists · Updated as submissions come in`}
+          title="Everyone we’ve played."
+          description="Every artist here was submitted, listened to, and chosen. Each one links straight to their own Bandcamp — buying from them is the point."
+        />
 
-        <ArtistsBrowser artists={artists} />
+        <Suspense fallback={null}>
+          <ArtistsBrowser artists={artists} />
+        </Suspense>
       </SiteContainer>
     </section>
   );
