@@ -1,5 +1,6 @@
-import Link from "next/link";
 import SiteContainer from "../components/SiteContainer";
+import SectionHeading from "../components/ui/SectionHeading";
+import { ButtonLink } from "../components/ui/Button";
 
 export const metadata = {
   title: "Northwest Music Notes",
@@ -16,33 +17,31 @@ export const metadata = {
   },
 };
 
+/**
+ * The route stays so existing links keep working, but it no longer holds a
+ * top-level navigation slot — it promised content it does not have.
+ */
 export default function BlogPage() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-16 md:py-20">
       <SiteContainer>
-        <p className="mb-4 text-sm font-black uppercase tracking-[0.26em] text-clay">
-          Blog
-        </p>
-        <h1 className="text-5xl font-black leading-tight text-ink md:text-7xl">
-          Coming soon.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/70">
-          Notes, interviews, and Northwest music discoveries are on the way.
-        </p>
-        <div className="mt-14 border-t border-ink/10 pt-6">
-          <p className="max-w-2xl text-sm leading-6 text-ink/60">
-            Upper Left Indie is independently run and community supported. Tips
-            help keep submissions free and help us spend more time supporting
-            underheard Northwest artists.{" "}
-            <Link
-              href="/support-the-project"
-              className="font-bold text-ink underline decoration-clay underline-offset-4"
-            >
-              Support the project
-            </Link>
-          </p>
+        <SectionHeading
+          as="h1"
+          size="page"
+          eyebrow="Notes"
+          title="Nothing written up yet."
+          description="Notes, interviews, and Northwest music discoveries are still to come. Until then, the playlist and the artist directory are where the work is."
+        />
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <ButtonLink href="/" emphasis="primary" size="lg">
+            Listen to the playlist
+          </ButtonLink>
+          <ButtonLink href="/artists" emphasis="secondary" size="lg">
+            Browse the artists
+          </ButtonLink>
         </div>
       </SiteContainer>
     </section>
   );
-} 
+}

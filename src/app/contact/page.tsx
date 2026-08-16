@@ -1,5 +1,6 @@
 import ContactForm from "../components/ContactForm";
 import SiteContainer from "../components/SiteContainer";
+import { ButtonLink } from "../components/ui/Button";
 
 export const metadata = {
   title: "Contact",
@@ -18,20 +19,29 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="py-14 md:py-20">
-      <SiteContainer className="grid gap-10 lg:grid-cols-[0.75fr_1fr] lg:items-start">
-        <div>
-          <p className="mb-4 text-sm font-black uppercase tracking-[0.26em] text-clay">
-            Contact
+    <section className="py-12 md:py-14">
+      <SiteContainer className="grid gap-10 lg:grid-cols-[440px_1fr] lg:items-start lg:gap-16">
+        <div className="flex flex-col gap-5">
+          <p className="type-label-m text-accent">Contact</p>
+          <h1 className="type-display-xl text-primary">Get in touch.</h1>
+          <p className="type-body-l text-secondary">
+            Pitching an artist, a scene story, a show, or a correction? Send it
+            this way.
           </p>
-          <h1 className="text-4xl font-black leading-tight text-ink md:text-6xl">
-            Get in touch.
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-ink/70">
-            Interested in having us do a write-up or feature for a new or
-            upcoming release? Want to pitch an artist, scene story, show, or
-            idea we should know about? Send it our way.
-          </p>
+          <div className="flex flex-col gap-2 rounded-field bg-accent-soft px-5 py-4">
+            <h2 className="type-heading-s text-primary">
+              Submitting your own music?
+            </h2>
+            <p className="type-body-s text-secondary">
+              Use the submission form instead — it captures the links and
+              permissions needed to consider a track for the playlist.
+            </p>
+            <div className="pt-1">
+              <ButtonLink href="/submit" emphasis="secondary" size="md">
+                Submit music
+              </ButtonLink>
+            </div>
+          </div>
         </div>
 
         <ContactForm />

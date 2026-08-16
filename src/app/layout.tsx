@@ -1,13 +1,30 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Archivo_Narrow, Public_Sans } from "next/font/google";
 import "./globals.css";
-import FooterSubscribe from "./components/FooterSubscribe";
 import Nav from "./components/Nav";
-import SiteContainer from "./components/SiteContainer";
+import SiteFooter from "./components/SiteFooter";
+import { SITE_DESCRIPTION, SITE_URL } from "../lib/site";
 
-const siteUrl = "https://www.upperleftindie.com";
-const siteDescription =
-  "Upper Left Indie is a Northwest music curation project supporting local underserved and under-heard independent artists.";
+const siteUrl = SITE_URL;
+const siteDescription = SITE_DESCRIPTION;
+
+// Figma foundations: Archivo Narrow for display, Public Sans for text. Weights
+// are limited to the four the design actually uses, and both faces are
+// self-hosted and subset by next/font to keep the payload small — the product
+// previously loaded no webfont at all.
+const displayFont = Archivo_Narrow({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const textFont = Public_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-text",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -85,35 +102,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${displayFont.variable} ${textFont.variable}`}>
       <body>
-        <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-field focus:bg-inverse focus:px-5 focus:py-3 focus:type-button focus:text-on-inverse"
+        >
+          Skip to content
+        </a>
+        <div id="site-shell" className="grid min-h-screen grid-rows-[auto_1fr_auto]">
           <Nav />
-          <main>{children}</main>
-          <footer className="border-t border-ink/10 py-8 text-sm text-ink/60">
-            <SiteContainer className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-              <div className="space-y-1">
-                <p>Upper Left Indie</p>
-                <p>Pacific Northwest artists, heard closer.</p>
-                <Link
-                  href="/support-the-project"
-                  className="inline-block text-xs font-bold uppercase tracking-[0.14em] text-ink/55 transition hover:text-clay"
-                >
-                  Support the Project
-                </Link>
-                <span className="mx-2 text-ink/25" aria-hidden="true">
-                  /
-                </span>
-                <Link
-                  href="/archive"
-                  className="inline-block text-xs font-bold uppercase tracking-[0.14em] text-ink/55 transition hover:text-clay"
-                >
-                  Archive
-                </Link>
-              </div>
-              <FooterSubscribe />
-            </SiteContainer>
-          </footer>
+          {/* min-w-0: as a grid item, main defaults to min-width:auto, which
+              lets any wide descendant (a horizontal filter strip, a long
+              unbroken string) push the whole page wider than the viewport. */}
+          <main id="main" className="min-w-0">
+            {children}
+          </main>
+          <SiteFooter />
         </div>
       </body>
     </html>

@@ -1,7 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { FiAlertCircle } from "react-icons/fi";
+import { Button, ButtonLink } from "./ui/Button";
+import ConfirmationPanel from "./ui/ConfirmationPanel";
+import {
+  ConsentCheckbox,
+  SelectField,
+  TextField,
+  TextareaField,
+} from "./ui/Field";
+import { genreOptions, getGenreLabel } from "../../lib/genres";
+import { ACTIVE_PLAYLIST_URL, INSTAGRAM_URL, REGION_SCOPE } from "../../lib/site";
 
+/**
+ * Submission form — Figma "Submit · Desktop 1440" (24:76),
+ * "Submit · Confirmation" (28:199) and "Submit · Validation error" (28:241).
+ *
+ * The twelve fields are grouped into Artist / Music / Permissions, validation
+ * explains why a Spotify track link is required, every async outcome is
+ * announced, and success is a confirmation state with a consent recap rather
+ * than a paragraph under the button. The Supabase, email, artist-page queue and
+ * newsletter calls are unchanged.
+ */
 type FormState = {
   artistName: string;
   contactName: string;
@@ -29,57 +50,43 @@ const initialFormState: FormState = {
   socialLink: "",
   notes: "",
   artistPageConsent: false,
-  subscribeToNewsletter: true,
+  // Opt-in, not opt-out. The previous default was pre-checked.
+  subscribeToNewsletter: false,
 };
 
-const playlistUrl =
-  "https://open.spotify.com/playlist/3LTI227By7Wt7hGs3mz5hF?si=b0900f7372be4492";
-const instagramUrl = "https://www.instagram.com/upperleftindie/";
 const emailServiceTemporarilyDown = false;
+
 const spotifyTrackUrlPattern =
   /^https:\/\/open\.spotify\.com\/(?:intl-[a-z]{2}\/)?track\/[A-Za-z0-9]{22}(?:[/?#].*)?$/i;
-const spotifyTrackLinkError =
-  "Please enter a Spotify song link, like https://open.spotify.com/track/...";
 
+const spotifyTrackLinkError =
+  "Please enter a Spotify song link, like https://open.spotify.com/track/…";
+
+const bandcampLinkError =
+  "Please enter the artist’s Bandcamp address, like https://yourband.bandcamp.com";
+
+// Alaska is named in the eligibility copy on every page; it was missing from
+// this selector.
 const regionOptions = [
   { label: "Oregon", value: "oregon", state: "OR", country: "US" },
   { label: "Washington", value: "washington", state: "WA", country: "US" },
   { label: "Idaho", value: "idaho", state: "ID", country: "US" },
-  { label: "BC", value: "bc", state: "BC", country: "CA" },
+  { label: "Alaska", value: "alaska", state: "AK", country: "US" },
+  { label: "British Columbia", value: "bc", state: "BC", country: "CA" },
   { label: "Other region", value: "other-region" },
 ];
 
-const genreOptions = [
-  { label: "Alternative", value: "alternative" },
-  { label: "Ambient", value: "ambient" },
-  { label: "Americana", value: "americana" },
-  { label: "Country / Alt-Country", value: "country-alt-country" },
-  { label: "Electronic", value: "electronic" },
-  { label: "Emo", value: "emo" },
-  { label: "Experimental", value: "experimental" },
-  { label: "Folk", value: "folk" },
-  { label: "Garage Rock", value: "garage-rock" },
-  { label: "Hardcore", value: "hardcore" },
-  { label: "Hip-hop / Rap", value: "hip-hop-rap" },
-  { label: "Indie Folk", value: "indie-folk" },
-  { label: "Indie Pop", value: "indie-pop" },
-  { label: "Indie Rock", value: "indie-rock" },
-  { label: "Jazz", value: "jazz" },
-  { label: "Metal", value: "metal" },
-  { label: "New Wave / Synthpop", value: "new-wave-synthpop" },
-  { label: "Noise", value: "noise" },
-  { label: "Pop", value: "pop" },
-  { label: "Post-Rock", value: "post-rock" },
-  { label: "Post-punk", value: "post-punk" },
-  { label: "Psych / Psychedelic", value: "psych-psychedelic" },
-  { label: "Punk", value: "punk" },
-  { label: "R&B / Soul", value: "r-and-b-soul" },
-  { label: "Rock", value: "rock" },
-  { label: "Shoegaze / Dream Pop", value: "shoegaze-dream-pop" },
-  { label: "Singer-songwriter", value: "singer-songwriter" },
-  { label: "World / Global", value: "world-global" },
-  { label: "Other", value: "other" },
-];
+type FieldErrors = Partial<Record<keyof FormState, string>>;
+
+type SubmittedSummary = {
+  artistName: string;
+  city: string;
+  regionLabel: string;
+  genreLabel: string;
+  artistPageConsent: boolean;
+  subscribeToNewsletter: boolean;
+  followUps: string[];
+};
 
 function getLocationFields(city: string, region: string) {
   const regionOption = regionOptions.find((option) => option.value === region);
@@ -92,19 +99,32 @@ function getLocationFields(city: string, region: string) {
   };
 }
 
-function getGenreLabel(genre: string) {
+function getRegionLabel(region: string) {
   return (
-    genreOptions.find((option) => option.value === genre)?.label ||
+    regionOptions.find((option) => option.value === region)?.label ||
     "Not provided"
   );
 }
 
+function isBandcampUrl(value: string) {
+  try {
+    const url = new URL(value.trim());
+    return (
+      url.protocol === "https:" &&
+      (url.hostname === "bandcamp.com" || url.hostname.endsWith(".bandcamp.com"))
+    );
+  } catch {
+    return false;
+  }
+}
+
 export default function SubmissionForm() {
   const [formData, setFormData] = useState(initialFormState);
-  const [status, setStatus] = useState("");
-  const [showPlaylistNudge, setShowPlaylistNudge] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [songLinkError, setSongLinkError] = useState("");
+  const [submitted, setSubmitted] = useState<SubmittedSummary | null>(null);
+  const summaryRef = useRef<HTMLDivElement>(null);
 
   const getErrorMessage = async (response: Response, fallback: string) => {
     try {
@@ -127,41 +147,74 @@ export default function SubmissionForm() {
         : value;
 
     setFormData((current) => ({ ...current, [name]: nextValue }));
+
     if (name === "songLink") {
-      if (value.trim() !== "" && !spotifyTrackUrlPattern.test(value.trim())) {
-        setSongLinkError(spotifyTrackLinkError);
-      } else {
-        setSongLinkError("");
-      }
+      setFieldErrors((current) => ({
+        ...current,
+        songLink:
+          value.trim() === "" || spotifyTrackUrlPattern.test(value.trim())
+            ? undefined
+            : spotifyTrackLinkError,
+      }));
     }
+
+    if (name === "bandCampLink") {
+      setFieldErrors((current) => ({
+        ...current,
+        bandCampLink:
+          value.trim() === "" || isBandcampUrl(value)
+            ? undefined
+            : bandcampLinkError,
+      }));
+    }
+  };
+
+  const validate = (): FieldErrors => {
+    const errors: FieldErrors = {};
+
+    if (!spotifyTrackUrlPattern.test(formData.songLink.trim())) {
+      errors.songLink = spotifyTrackLinkError;
+    }
+
+    if (formData.bandCampLink.trim() && !isBandcampUrl(formData.bandCampLink)) {
+      errors.bandCampLink = bandcampLinkError;
+    }
+
+    if (formData.artistPageConsent && !formData.bandCampLink.trim()) {
+      errors.bandCampLink =
+        "A Bandcamp address is needed before an artist page can be created.";
+    }
+
+    return errors;
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (emailServiceTemporarilyDown) {
-      setStatus(
-        "Email submissions are temporarily down. Please send your track through Instagram for now."
+      setFormError(
+        "Submissions by form are paused right now. Please send your track through Instagram instead."
       );
       return;
     }
 
-    if (!spotifyTrackUrlPattern.test(formData.songLink.trim())) {
-      setSongLinkError(spotifyTrackLinkError);
+    const errors = validate();
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      setFormError("");
+      window.requestAnimationFrame(() => summaryRef.current?.focus());
       return;
     }
-    setStatus("Sending submission...");
-    setShowPlaylistNudge(false);
+
+    setFormError("");
     setIsSubmitting(true);
 
     const bodyText = `Artist: ${formData.artistName}
 Contact: ${formData.contactName}
 Email: ${formData.email}
 City: ${formData.city}
-Region: ${
-      regionOptions.find((option) => option.value === formData.region)?.label ||
-      "Not provided"
-    }
+Region: ${getRegionLabel(formData.region)}
 Genre: ${getGenreLabel(formData.genre)}
 Song link: ${formData.songLink}
 Bandcamp link: ${formData.bandCampLink || "Not provided"}
@@ -290,118 +343,239 @@ ${formData.notes || "Not provided"}`;
         }
       }
 
-      const followUpMessages = [
-        !submissionSaved ? "Admin queue save could not be completed." : "",
-        !emailSent ? "Email notification could not be sent." : "",
-        !artistPageQueued ? "Artist page queue could not be completed." : "",
-        !newsletterSubscribed ? "Newsletter signup could not be completed." : "",
+      // Artist-facing wording. The old messages surfaced internal vocabulary
+      // like "Admin queue save could not be completed."
+      const followUps = [
+        !submissionSaved
+          ? "Your track reached me by email but not the review queue, so a reply may take longer than usual."
+          : "",
+        !emailSent
+          ? "Your track is in the review queue, but the notification email did not go out, so a reply may take longer than usual."
+          : "",
+        !artistPageQueued
+          ? "The artist-page request did not go through. You can send it again from the contact page."
+          : "",
+        !newsletterSubscribed
+          ? "You were not added to the mailing list. You can join any time from the footer."
+          : "",
       ].filter(Boolean);
 
-      setStatus(
-        `Submission sent. Thanks for sharing it. I listen through submissions and add tracks that fit the playlist, though I may not be able to respond to every submission.${
-          followUpMessages.length > 0 ? ` ${followUpMessages.join(" ")}` : ""
-        }`
-      );
-      setShowPlaylistNudge(true);
+      setSubmitted({
+        artistName: formData.artistName,
+        city: formData.city,
+        regionLabel: getRegionLabel(formData.region),
+        genreLabel: getGenreLabel(formData.genre),
+        artistPageConsent: formData.artistPageConsent,
+        subscribeToNewsletter: formData.subscribeToNewsletter,
+        followUps,
+      });
       setFormData(initialFormState);
+      setFieldErrors({});
     } catch (error) {
       console.error(error);
-      setShowPlaylistNudge(false);
-      setStatus(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again."
+      setFormError(
+        "Something went wrong sending your track. Please try again in a minute."
       );
+      window.requestAnimationFrame(() => summaryRef.current?.focus());
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  if (submitted) {
+    const place = [submitted.city.trim(), submitted.regionLabel]
+      .filter((part) => part && part !== "Not provided")
+      .join(" · ");
+
+    return (
+      <div aria-live="polite">
+        <ConfirmationPanel
+          badge="Submission received"
+          title="Thanks — it’s in the queue."
+          description="One person listens to everything that comes in. Because of volume I can’t reply to every submission, but if your track fits the playlist you’ll hear from me."
+          recapTitle="What you sent, and what you agreed to"
+          recap={[
+            { label: "Artist", value: submitted.artistName || "Not provided" },
+            { label: "From", value: place || "Not provided" },
+            { label: "Genre", value: submitted.genreLabel },
+            {
+              label: "Artist page",
+              value: submitted.artistPageConsent
+                ? "Yes — you asked for this artist to be featured on the site, using public Bandcamp details."
+                : "No — you did not ask for an artist page.",
+            },
+            {
+              label: "Mailing list",
+              value: submitted.subscribeToNewsletter
+                ? "Yes — you joined the Upper Left Indie list. Unsubscribe any time."
+                : "No — you did not join. You can join any time from the footer.",
+            },
+          ]}
+          actions={
+            <>
+              <ButtonLink
+                href={ACTIVE_PLAYLIST_URL}
+                external
+                emphasis="primary"
+                size="md"
+              >
+                Save the playlist on Spotify
+              </ButtonLink>
+              <Button
+                emphasis="secondary"
+                size="md"
+                onClick={() => setSubmitted(null)}
+              >
+                Submit another track
+              </Button>
+            </>
+          }
+          footnote={
+            <>
+              Saving the playlist genuinely helps — it is the single biggest lever
+              on whether these artists get heard beyond this site.
+              {submitted.followUps.length > 0 ? (
+                <>
+                  {" "}
+                  <span className="block pt-2 font-medium text-primary">
+                    {submitted.followUps.join(" ")}
+                  </span>
+                </>
+              ) : null}
+            </>
+          }
+        />
+      </div>
+    );
+  }
+
+  const errorEntries = Object.entries(fieldErrors).filter(
+    ([, message]) => Boolean(message)
+  ) as Array<[keyof FormState, string]>;
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-5 rounded-md border border-ink/10 bg-paper p-6 shadow-soft md:p-8"
+      noValidate
+      className="flex flex-col gap-8 rounded-card border-[1.5px] border-subtle bg-surface p-6 md:p-10"
     >
+      <div
+        ref={summaryRef}
+        tabIndex={-1}
+        role="alert"
+        aria-live="assertive"
+        className="empty:hidden"
+      >
+        {errorEntries.length > 0 || formError ? (
+          <div className="flex flex-col gap-2 rounded-field border-2 border-error bg-surface px-5 py-4">
+            <p className="flex items-center gap-2 type-body-m-medium text-error">
+              <FiAlertCircle size={20} aria-hidden="true" />
+              {formError
+                ? "That didn’t send"
+                : errorEntries.length === 1
+                  ? "One thing needs fixing"
+                  : `${errorEntries.length} things need fixing`}
+            </p>
+            {formError ? (
+              <p className="type-body-s text-secondary">{formError}</p>
+            ) : (
+              <ul className="flex flex-col gap-1">
+                {errorEntries.map(([field, message]) => (
+                  <li key={field}>
+                    <a
+                      href={`#submit-${field}`}
+                      className="type-body-s text-secondary underline decoration-error underline-offset-4"
+                    >
+                      {message}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ) : null}
+      </div>
+
       {emailServiceTemporarilyDown ? (
-        <div className="rounded-md border border-clay/25 bg-clay/10 p-4 text-sm leading-6 text-ink/75">
-          <p className="font-bold text-ink">
-            Email submissions are temporarily down.
+        <div className="flex flex-col gap-3 rounded-field border-[1.5px] border-accent-solid bg-accent-soft p-5">
+          <p className="type-body-m-medium text-primary">
+            Submissions by form are paused right now.
           </p>
-          <p className="mt-1">
-            Please submit your music through Instagram while we get the email
-            service back online.
+          <p className="type-body-s text-secondary">
+            Please send your music through Instagram while the form is offline.
           </p>
-          <a
-            href={instagramUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 inline-flex rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay"
-          >
-            Submit on Instagram
-          </a>
+          <div>
+            <ButtonLink href={INSTAGRAM_URL} external emphasis="primary" size="md">
+              Submit on Instagram
+            </ButtonLink>
+          </div>
         </div>
       ) : null}
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <label className="space-y-2 text-sm font-bold text-ink/70">
-          Artist name
-          <input
-            className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-            required
+      <fieldset className="flex flex-col gap-4">
+        <legend className="flex flex-col gap-1 pb-2">
+          <span className="block type-label-m text-accent">1 · The artist</span>
+          <span className="block type-body-s text-tertiary">
+            Who I’m listening to, and who I reply to.
+          </span>
+        </legend>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <TextField
+            id="submit-artistName"
             name="artistName"
+            label="Artist or band name"
+            required
             value={formData.artistName}
             onChange={handleChange}
             placeholder="Band or artist"
+            autoComplete="organization"
           />
-        </label>
-
-        <label className="space-y-2 text-sm font-bold text-ink/70">
-          Your name
-          <input
-            className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-            required
+          <TextField
+            id="submit-contactName"
             name="contactName"
+            label="Your name"
+            required
             value={formData.contactName}
             onChange={handleChange}
             placeholder="Contact name"
+            autoComplete="name"
           />
-        </label>
-      </div>
+        </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <label className="space-y-2 text-sm font-bold text-ink/70">
-          Email
-          <input
-            className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-            required
-            type="email"
+        <div className="grid gap-4 sm:grid-cols-2">
+          <TextField
+            id="submit-email"
             name="email"
+            type="email"
+            label="Email"
+            required
             value={formData.email}
             onChange={handleChange}
             placeholder="you@example.com"
+            autoComplete="email"
           />
-        </label>
-
-        <label className="space-y-2 text-sm font-bold text-ink/70">
-          City / scene
-          <input
-            className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-            required
+          <TextField
+            id="submit-city"
             name="city"
+            label="City or scene"
+            required
             value={formData.city}
             onChange={handleChange}
             placeholder="Portland"
+            autoComplete="address-level2"
           />
-        </label>
+        </div>
 
-        <label className="space-y-2 text-sm font-bold text-ink/70">
-          Region
-          <select
-            className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-            required
+        <div className="grid gap-4 sm:grid-cols-2">
+          <SelectField
+            id="submit-region"
             name="region"
+            label="Region"
+            required
             value={formData.region}
             onChange={handleChange}
+            helper="Alaska is included, along with the wider Northwest orbit."
           >
             <option value="" disabled>
               Select region
@@ -411,15 +585,13 @@ ${formData.notes || "Not provided"}`;
                 {option.label}
               </option>
             ))}
-          </select>
-        </label>
+          </SelectField>
 
-        <label className="space-y-2 text-sm font-bold text-ink/70">
-          Genre
-          <select
-            className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-            required
+          <SelectField
+            id="submit-genre"
             name="genre"
+            label="Genre"
+            required
             value={formData.genre}
             onChange={handleChange}
           >
@@ -431,140 +603,111 @@ ${formData.notes || "Not provided"}`;
                 {option.label}
               </option>
             ))}
-          </select>
-        </label>
-      </div>
+          </SelectField>
+        </div>
+      </fieldset>
 
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Spotify song link
-        <input
-          className={`w-full rounded-md border ${
-            songLinkError ? "border-red-500" : "border-ink/15"
-          } bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay`}
-          required
-          type="url"
+      <fieldset className="flex flex-col gap-4">
+        <legend className="flex flex-col gap-1 pb-2">
+          <span className="block type-label-m text-accent">2 · The music</span>
+          <span className="block type-body-s text-tertiary">
+            One song, not a whole discography. Pick the one you would want a
+            stranger to hear first.
+          </span>
+        </legend>
+
+        <TextField
+          id="submit-songLink"
           name="songLink"
+          type="url"
+          label="Spotify song link"
+          required
           value={formData.songLink}
           onChange={handleChange}
-          placeholder="https://open.spotify.com/track/..."
+          error={fieldErrors.songLink}
+          placeholder="https://open.spotify.com/track/…"
+          helper="A Spotify track link is what lets me add your song straight to the playlist, so it is the one link I have to have. Send the track page, not an artist, album, or playlist page."
         />
-        {songLinkError ? (
-          <span className="text-xs font-semibold text-red-600">
-            {songLinkError}
-          </span>
-        ) : (
-          <span className="block text-xs font-semibold text-ink/45">
-            Please send a Spotify track URL, not an artist, album, or playlist
-            page.
-          </span>
-        )}
-      </label>
 
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Bandcamp link
-        <input
-          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-          required={formData.artistPageConsent}
-          type="url"
+        <TextField
+          id="submit-bandCampLink"
           name="bandCampLink"
+          type="url"
+          label="Bandcamp link"
+          optional={!formData.artistPageConsent}
+          required={formData.artistPageConsent}
           value={formData.bandCampLink}
           onChange={handleChange}
+          error={fieldErrors.bandCampLink}
           placeholder="https://yourband.bandcamp.com"
+          helper="Needed only if you want an artist page on this site. It is also where listeners are sent to buy from you."
         />
-        <span className="block text-xs font-semibold text-ink/45">
-          Required if you want Upper Left Indie to feature this artist on the
-          site.
-        </span>
-      </label>
 
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Social or website
-        <input
-          className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
-          type="url"
+        <TextField
+          id="submit-socialLink"
           name="socialLink"
+          type="url"
+          label="Website or socials"
+          optional
           value={formData.socialLink}
           onChange={handleChange}
           placeholder="Instagram, website, press kit"
         />
-      </label>
 
-      <label className="block space-y-2 text-sm font-bold text-ink/70">
-        Why this belongs
-        <textarea
-          className="min-h-32 w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-clay"
+        <TextareaField
+          id="submit-notes"
           name="notes"
+          label="Anything I should know"
+          optional
           value={formData.notes}
           onChange={handleChange}
-          placeholder="Tell us anything useful about the artist, scene, release, or context."
+          placeholder="The scene it came out of, who played on it, where you recorded it."
         />
-      </label>
+      </fieldset>
 
-      <label className="flex items-start gap-3 rounded-md border border-ink/10 bg-white/70 p-4 text-sm text-ink/70">
-        <input
-          className="mt-1 h-4 w-4 rounded border-ink/20 accent-clay"
-          type="checkbox"
+      <fieldset className="flex flex-col gap-4">
+        <legend className="flex flex-col gap-1 pb-2">
+          <span className="block type-label-m text-accent">3 · Permissions</span>
+          <span className="block type-body-s text-tertiary">
+            Both are optional, and neither affects whether I listen.
+          </span>
+        </legend>
+
+        <ConsentCheckbox
+          id="submit-artistPageConsent"
           name="artistPageConsent"
           checked={formData.artistPageConsent}
           onChange={handleChange}
+          title="I’m okay with Upper Left Indie featuring this artist on the site."
+          description="This may include public Bandcamp details, images, music links, and related social or website links."
         />
-        <span>
-          <span className="block font-bold">
-            I’m okay with Upper Left Indie featuring this artist on the site.
-          </span>
-          <span className="mt-1 block text-xs text-ink/55">
-            This may include public Bandcamp details, images, music links, and
-            related social or website links.
-          </span>
-        </span>
-      </label>
 
-      <label className="flex items-start gap-3 rounded-md border border-ink/10 bg-white/70 p-4 text-sm text-ink/70">
-        <input
-          className="mt-1 h-4 w-4 rounded border-ink/20 accent-clay"
-          type="checkbox"
+        <ConsentCheckbox
+          id="submit-subscribeToNewsletter"
           name="subscribeToNewsletter"
           checked={formData.subscribeToNewsletter}
           onChange={handleChange}
+          title="Send me Upper Left Indie updates."
+          description="New playlist adds, local artist features, and submission updates. No spam, unsubscribe any time. Unchecked by default."
         />
-        <span>
-          <span className="block font-bold">
-            Also send me Upper Left Indie updates.
-          </span>
-          <span className="mt-1 block text-xs text-ink/55">
-            New playlist adds, local artist features, and submission updates. No
-            spam. Unsubscribe anytime.
-          </span>
-        </span>
-      </label>
+      </fieldset>
 
-      <button
-        type="submit"
-        disabled={isSubmitting || emailServiceTemporarilyDown}
-        className="w-full rounded-full bg-ink px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay disabled:cursor-not-allowed disabled:bg-ink/45"
-      >
-        {emailServiceTemporarilyDown
-          ? "Submit on Instagram for Now"
-          : isSubmitting
-            ? "Sending..."
-            : "Submit Music"}
-      </button>
-
-      {status ? <p className="text-sm font-bold text-ink/70">{status}</p> : null}
-      {showPlaylistNudge ? (
-        <p className="text-sm text-ink/65">
-          If you have a minute, please save the playlist on Spotify. It helps the
-          artists you hear here travel a little farther.{" "}
-          <a
-            href={playlistUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="font-bold text-ink underline decoration-clay underline-offset-4"
-          >
-            Save Upper Left Indie
-          </a>
+      <div className="flex flex-col gap-2.5">
+        <Button
+          type="submit"
+          emphasis="primary"
+          size="lg"
+          fullWidth
+          disabled={isSubmitting || emailServiceTemporarilyDown}
+        >
+          {isSubmitting ? "Sending…" : "Send my track"}
+        </Button>
+        <p className="type-body-s text-tertiary" aria-live="polite">
+          {isSubmitting
+            ? "Sending your submission…"
+            : "Free. No account needed. Your details are only used to reply to you."}
         </p>
-      ) : null}
+      </div>
     </form>
   );
 }

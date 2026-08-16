@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 
+/**
+ * Newsletter signup — Figma footer newsletter block (21:87).
+ *
+ * Real MailerLite behaviour is preserved, including the "already subscribed"
+ * response, and every outcome is announced through a live region.
+ */
 export default function FooterSubscribe() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
@@ -26,7 +32,7 @@ export default function FooterSubscribe() {
             role: "listener",
           },
         }),
-      }); 
+      });
 
       if (!response.ok) {
         throw new Error("Newsletter request failed");
@@ -49,42 +55,46 @@ export default function FooterSubscribe() {
   };
 
   return (
-    <div className="w-full sm:max-w-sm">
-      <div className="mb-3 space-y-1">
-        <h2 className="text-base font-bold text-ink">
-          Join the Upper Left Indie list
-        </h2>
-        <p className="text-sm text-ink/60">
-          New playlist adds, local artist features, and submission updates.
-        </p>
-      </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row">
+    <div className="w-full md:max-w-[400px]">
+      <h2 className="type-heading-s text-on-inverse">Join the list</h2>
+      <p className="mt-2 type-body-s text-on-inverse/85">
+        New playlist adds, local artist features, and submission updates.
+      </p>
+      <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-2 sm:flex-row">
         <label className="sr-only" htmlFor="footer-email">
-          Email
+          Email address
         </label>
         <input
           id="footer-email"
-          className="min-w-0 flex-1 rounded-md border border-ink/15 bg-white px-3 py-2 text-sm text-ink outline-none transition placeholder:text-ink/40 focus:border-clay"
+          className="min-w-0 flex-1 rounded-field border-[1.5px] border-subtle bg-page px-4 py-3.5 type-body-m text-primary placeholder:text-tertiary"
           required
           type="email"
+          autoComplete="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="Email"
+          placeholder="you@example.com"
         />
+        {/*
+          Figma fills this button with accent/solid, but on-inverse text on that
+          fill measures 4.45:1 — below AA, and the same pairing the audit flagged
+          on the old header CTA. The design system's own rule is that
+          accent/solid never carries small text, so the button uses the page
+          colour, matching every other button drawn on an inverse surface.
+        */}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-md bg-ink px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-paper transition hover:bg-clay disabled:cursor-not-allowed disabled:bg-ink/45"
+          className="min-h-11 shrink-0 rounded-field bg-page px-6 type-button text-primary transition hover:bg-accent-soft hover:text-accent disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isSubmitting ? "Joining" : "Join"}
+          {isSubmitting ? "Joining…" : "Join"}
         </button>
       </form>
-      <p className="mt-2 text-xs text-ink/50">No spam. Unsubscribe anytime.</p>
-      {status ? (
-        <p className="mt-2 text-xs font-bold text-ink/70" aria-live="polite">
-          {status}
-        </p>
-      ) : null}
+      <p className="mt-2 type-body-s text-on-inverse/85">
+        No spam. Unsubscribe anytime.
+      </p>
+      <p className="mt-2 type-body-s font-medium text-on-inverse" role="status" aria-live="polite">
+        {status}
+      </p>
     </div>
   );
 }

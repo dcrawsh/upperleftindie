@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Foundations — Figma "07 — Final UI / Foundations" (node 18:2).
+ * Colour, radius, elevation and layout live in tailwind.config.ts.
+ * The type ramp lives here because each style pairs a family, size, leading
+ * and tracking, and several of them change at the mobile breakpoint.
+ */
+
 :root {
   --background: #fffdf6;
   --foreground: #101014;
@@ -18,10 +25,11 @@ html {
 body {
   margin: 0;
   color: var(--foreground);
-  background:
-    radial-gradient(circle at 12% 18%, rgba(216, 166, 72, 0.18), transparent 28rem),
-    linear-gradient(135deg, #fffdf6 0%, #f3efe2 48%, #e5dac4 100%);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Flat page background. The previous page-length gradient made text
+     contrast depend on scroll position (audit §9.1 / requirement A2). */
+  background: var(--background);
+  font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -32,4 +40,124 @@ a {
 ::selection {
   background: #d8a648;
   color: #101014;
+}
+
+/* A3 — every interactive element gets a visible, non-colour-only focus
+   indicator at >=3:1 against both the page and inverse surfaces. */
+:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* A8 — all motion, including smooth scrolling, respects the OS preference. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  /* Type ramp — Figma text styles. */
+  .type-display-xl {
+    font-family: var(--font-display), var(--font-text), sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+
+  .type-display-l {
+    font-family: var(--font-display), var(--font-text), sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .type-heading-m {
+    font-family: var(--font-display), var(--font-text), sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+
+  .type-heading-s {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .type-body-l {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .type-body-m {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .type-body-m-medium {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .type-body-s {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .type-label-m {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .type-label-s {
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .type-button {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 768px) {
+    .type-display-xl {
+      font-size: 56px;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+
+    .type-display-l {
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+    }
+
+    .type-body-l {
+      font-size: 18px;
+    }
+  }
 }

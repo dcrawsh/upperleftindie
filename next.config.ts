@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "f4.bcbits.com",
       },
+      {
+        // Spotify album art, used by the attributed recent-adds cards.
+        protocol: "https",
+        hostname: "i.scdn.co",
+      },
     ],
   },
 
