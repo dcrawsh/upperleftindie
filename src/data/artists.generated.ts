@@ -2762,10 +2762,10 @@ export const artists: Artist[] = [
     ]
   },
   {
-    "name": "Ghost House Audio",
-    "location": "Vancouver, British Columbia",
+    "name": "ghosthouseaudio",
+    "location": "",
     "bandcampUrl": "https://ghosthouseaudio.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0040355330_10.jpg",
+    "image": "",
     "bio": "",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -2777,38 +2777,7 @@ export const artists: Artist[] = [
         "url": "https://ghosthouseaudio.bandcamp.com/"
       }
     ],
-    "releases": [
-      {
-        "title": "Reckoning in Strip Mall Parking Lot Comma Comma",
-        "type": "track",
-        "url": "https://ghosthouseaudio.bandcamp.com/track/reckoning-in-strip-mall-parking-lot"
-      },
-      {
-        "title": "Sleeping Song Comma Comma ft. Steph Macpherson",
-        "type": "track",
-        "url": "https://ghosthouseaudio.bandcamp.com/track/sleeping-song"
-      },
-      {
-        "title": "Chain Mail Comma Comma",
-        "type": "track",
-        "url": "https://ghosthouseaudio.bandcamp.com/track/chain-mail"
-      },
-      {
-        "title": "enfin Comma Comma",
-        "type": "album",
-        "url": "https://ghosthouseaudio.bandcamp.com/album/enfin"
-      },
-      {
-        "title": "SUPER Bad Bad Power",
-        "type": "album",
-        "url": "https://ghosthouseaudio.bandcamp.com/album/super"
-      },
-      {
-        "title": "When we were lovers / Do u love me? Bad Bad Power",
-        "type": "album",
-        "url": "https://ghosthouseaudio.bandcamp.com/album/when-we-were-lovers-do-u-love-me"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "st. davis",
