@@ -3173,5 +3173,53 @@ export const artists: Artist[] = [
         "url": "https://parkerjohnson1.bandcamp.com/album/northern-hope/"
       }
     ]
+  },
+  {
+    "name": "Relmon",
+    "location": "Vancouver, Washington",
+    "bandcampUrl": "https://relmon.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1107261265_10.jpg",
+    "bio": "0 track album",
+    "submittedGenre": "Emo",
+    "tags": [
+      "Emo"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://relmon.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "where have you been?",
+        "type": "album",
+        "url": "https://relmon.bandcamp.com/album/where-have-you-been/"
+      }
+    ]
+  },
+  {
+    "name": "Mop Hilda",
+    "location": "North Bend, Washington",
+    "bandcampUrl": "https://mophilda.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0954102911_10.jpg",
+    "bio": "2 track album",
+    "submittedGenre": "New Wave / Synthpop",
+    "tags": [
+      "New Wave / Synthpop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://mophilda.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "In Your Space",
+        "type": "album",
+        "url": "https://mophilda.bandcamp.com/album/in-your-space/"
+      }
+    ]
   }
 ];
