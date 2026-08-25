@@ -1251,6 +1251,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "They Can't Take the Music",
+        "type": "album",
+        "url": "https://rosegerbermusic.bandcamp.com/album/they-cant-take-the-music"
+      },
+      {
         "title": "Just Yesterday",
         "type": "track",
         "url": "https://rosegerbermusic.bandcamp.com/track/just-yesterday"
@@ -1274,11 +1279,6 @@ export const artists: Artist[] = [
         "title": "Memories Someday - EP",
         "type": "album",
         "url": "https://rosegerbermusic.bandcamp.com/album/memories-someday-ep"
-      },
-      {
-        "title": "Rearview Driving - single",
-        "type": "track",
-        "url": "https://rosegerbermusic.bandcamp.com/track/rearview-driving-single"
       }
     ]
   },
@@ -1470,6 +1470,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Maybe Don't - single (2026)",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/maybe-dont-single-2026"
+      },
+      {
         "title": "The Rainbow Connection - single",
         "type": "track",
         "url": "https://trashpandagokart.bandcamp.com/track/the-rainbow-connection-single"
@@ -1493,11 +1498,6 @@ export const artists: Artist[] = [
         "title": "RACCOON GODS",
         "type": "album",
         "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
-      },
-      {
-        "title": "Diamonds (2023) - single",
-        "type": "track",
-        "url": "https://trashpandagokart.bandcamp.com/track/diamonds-2023-single"
       }
     ]
   },
@@ -3203,7 +3203,7 @@ export const artists: Artist[] = [
     "location": "North Bend, Washington",
     "bandcampUrl": "https://mophilda.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a0954102911_10.jpg",
-    "bio": "2 track album",
+    "bio": "Mop Hilda is Aaron, James, Josh and Lisa. We’ve been friends since Kindergarten. Our debut album, In Your Space, explores nostalgia, memory, and conflict. It examines the inherent tension between the past and present and the complexity of relationships. ... more",
     "submittedGenre": "New Wave / Synthpop",
     "tags": [
       "New Wave / Synthpop"
@@ -3219,6 +3219,47 @@ export const artists: Artist[] = [
         "title": "In Your Space",
         "type": "album",
         "url": "https://mophilda.bandcamp.com/album/in-your-space/"
+      }
+    ]
+  },
+  {
+    "name": "Dying",
+    "location": "Kuopio, Finland",
+    "bandcampUrl": "https://dyingkpo.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0046659886_10.jpg",
+    "bio": "NYHC-style music from Finland. Sami Taskinen: Vocals, Drums Eetu Ihalainen: Guitars, Bass Stay Real, Stay HARDCORE",
+    "submittedGenre": "Hardcore",
+    "tags": [
+      "Hardcore"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://dyingkpo.bandcamp.com/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/Dyingkpo/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/dyingband/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@Dyingbandofficial"
+      }
+    ],
+    "releases": [
+      {
+        "title": "The House Always Wins",
+        "type": "album",
+        "url": "https://dyingkpo.bandcamp.com/album/the-house-always-wins"
+      },
+      {
+        "title": "One Chance",
+        "type": "track",
+        "url": "https://dyingkpo.bandcamp.com/track/one-chance"
       }
     ]
   }
