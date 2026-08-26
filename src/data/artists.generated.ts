@@ -3262,5 +3262,58 @@ export const artists: Artist[] = [
         "url": "https://dyingkpo.bandcamp.com/track/one-chance"
       }
     ]
+  },
+  {
+    "name": "Lizzy Rose",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://lizzyrose.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041998563_10.jpg",
+    "bio": "Dreamy, genre-blurring songs rooted in classical voice, raw emotion, and lo-fi storytelling. Singer, composer, multi-instrumentalist.",
+    "submittedGenre": "Indie Folk",
+    "tags": [
+      "Indie Folk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://lizzyrose.bandcamp.com/"
+      },
+      {
+        "label": "lizzyrosemusic.com",
+        "url": "https://www.lizzyrosemusic.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Faultlines",
+        "type": "album",
+        "url": "https://lizzyrose.bandcamp.com/album/faultlines"
+      },
+      {
+        "title": "Crocodile Tears",
+        "type": "album",
+        "url": "https://lizzyrose.bandcamp.com/album/crocodile-tears"
+      },
+      {
+        "title": "Self Titled",
+        "type": "album",
+        "url": "https://lizzyrose.bandcamp.com/album/self-titled"
+      },
+      {
+        "title": "I Fall to Pieces",
+        "type": "track",
+        "url": "https://lizzyrose.bandcamp.com/track/i-fall-to-pieces"
+      },
+      {
+        "title": "Sally's Song - The Nightmare Before Christmas Danny Elfman",
+        "type": "track",
+        "url": "https://lizzyrose.bandcamp.com/track/sallys-song-the-nightmare-before-christmas"
+      },
+      {
+        "title": "Whatever It Is",
+        "type": "album",
+        "url": "https://lizzyrose.bandcamp.com/album/whatever-it-is"
+      }
+    ]
   }
 ];
