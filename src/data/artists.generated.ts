@@ -437,7 +437,7 @@ export const artists: Artist[] = [
     "name": "Blip.",
     "location": "Seattle, Washington",
     "bandcampUrl": "https://blip206.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0042275938_10.jpg",
+    "image": "https://f4.bcbits.com/img/0046972322_10.jpg",
     "bio": "Blip. writes mostly emo songs in standard. We have a cat song, a car song, and a pizza song. Wow. FFO Braid, The Weakerthans, Joyce Manor, & Shinobu. Booking: blipblip.206@gmail IG: @blip.206 ... more",
     "submittedGenre": "Emo",
     "tags": [
@@ -848,7 +848,7 @@ export const artists: Artist[] = [
     "name": "Glen",
     "location": "Seattle, Washington",
     "bandcampUrl": "https://itsglen.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1142691149_10.jpg",
+    "image": "https://f4.bcbits.com/img/0046976800_10.jpg",
     "bio": "Alex, Scott, Peter, Nate... Glen!",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -862,9 +862,14 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Where is Glen",
+        "type": "album",
+        "url": "https://itsglen.bandcamp.com/album/where-is-glen"
+      },
+      {
         "title": "Who is Glen",
         "type": "album",
-        "url": "https://itsglen.bandcamp.com/album/who-is-glen/"
+        "url": "https://itsglen.bandcamp.com/album/who-is-glen"
       }
     ]
   },
