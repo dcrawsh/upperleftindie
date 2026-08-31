@@ -1689,7 +1689,7 @@ export const artists: Artist[] = [
     "name": "Terrible Pop",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://terriblepop.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0040770732_100.png\",\"https_url\":\"https://f4.bcbits.com/img/0040770732_100.png\",\"format\":100,\"width\":975,\"height\":180},\"paypal_image\":{\"image_id\":40770732,\"url\":\"https://f4.bcbits.com/img/0040770732_101.jpg\",\"https_url\":\"https://f4.bcbits.com/img/0040770732_101.jpg\",\"format\":101,\"width\":488,\"height\":90},\"using_map\":null,\"area_tags\":null},\"header_phone\":null,\"design\":{\"bg_color\":\"FFBB00\",\"text_color\":\"363636\",\"secondary_text_color\":\"888888\",\"link_color\":\"0687F5\",\"body_color\":\"FFBB00\",\"hd_ft_color\":\"CCB166\",\"navbar_bg_color\":\"C4A140\",\"invert_iconography\":null,\"tile_bg\":null,\"bg_halign\":\"l\",\"bg_image_id\":null,\"bg_file_name\":null,\"defaultbg\":false,\"bg_fixed\":null,\"bg_behavior\":\"r\"},\"currency\":\"USD\",\"fan_email\":null,\"thanks_enabled\":1,\"reviews_enabled\":1,\"is_label\":false,\"has_label\":false,\"paypal_matching_label_id\":null,\"merch_enabled\":true,\"google_analytics_id\":null,\"has_recommendations\":false,\"has_tralbums\":true,\"has_public_tralbums\":true,\"has_public_merch\":false,\"has_any_downloads\":true,\"has_discounts\":false,\"has_download_codes\":false,\"has_policies\":false,\"sites\":[],\"navbar_items\":[{\"url\":\"/music\",\"title\":\"music\",\"nav_type\":\"m\"},{\"url\":\"/merch\",\"title\":\"merch\",\"nav_type\":\"p\"},{\"url\":\"/live\",\"title\":\"live",
+    "image": "https://f4.bcbits.com/img/0047050821_10.jpg",
     "bio": "Terrible Pop is a band from Portland, OR. Songs with heart under the hood. Somewhere between stupid and sincere. Thank you for your time. Instagram: @terrible.pop Booking/questions/critique: terriblepopmusic@gmail.com ... more",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -3318,6 +3318,34 @@ export const artists: Artist[] = [
         "title": "Whatever It Is",
         "type": "album",
         "url": "https://lizzyrose.bandcamp.com/album/whatever-it-is"
+      }
+    ]
+  },
+  {
+    "name": "Glēm",
+    "location": "Winthrop, Washington",
+    "bandcampUrl": "https://glemmusic.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a3950570194_10.jpg",
+    "bio": "Neil Gynther's solo pop project containing themes of nature and personal experience.",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://glemmusic.bandcamp.com/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/watch?v=shthpGY9lyc"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Glēm",
+        "type": "album",
+        "url": "https://glemmusic.bandcamp.com/album/gl-m/"
       }
     ]
   }
