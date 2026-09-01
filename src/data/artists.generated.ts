@@ -3348,5 +3348,34 @@ export const artists: Artist[] = [
         "url": "https://glemmusic.bandcamp.com/album/gl-m/"
       }
     ]
+  },
+  {
+    "name": "oren and chelsea",
+    "location": "Vancouver, British Columbia",
+    "bandcampUrl": "https://orenandchelsea.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0047070903_10.jpg",
+    "bio": "",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://orenandchelsea.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "That's Enough",
+        "type": "track",
+        "url": "https://orenandchelsea.bandcamp.com/track/thats-enough"
+      },
+      {
+        "title": "Vibe on Forever",
+        "type": "track",
+        "url": "https://orenandchelsea.bandcamp.com/track/vibe-on-forever"
+      }
+    ]
   }
 ];
