@@ -1500,9 +1500,9 @@ export const artists: Artist[] = [
         "url": "https://trashpandagokart.bandcamp.com/track/raccoon-gods-the-single"
       },
       {
-        "title": "RACCOON GODS",
-        "type": "album",
-        "url": "https://trashpandagokart.bandcamp.com/album/raccoon-gods"
+        "title": "Diamonds (2023) - single",
+        "type": "track",
+        "url": "https://trashpandagokart.bandcamp.com/track/diamonds-2023-single"
       }
     ]
   },
