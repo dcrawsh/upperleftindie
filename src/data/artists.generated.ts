@@ -1967,8 +1967,8 @@ export const artists: Artist[] = [
     "releases": [
       {
         "title": "as well as I can be / right now in Portland, Oregon",
-        "type": "track",
-        "url": "https://blond-noise.bandcamp.com/track/as-well-as-i-can-be-right-now-in-portland-oregon"
+        "type": "album",
+        "url": "https://blond-noise.bandcamp.com/album/as-well-as-i-can-be-right-now-in-portland-oregon"
       },
       {
         "title": "home",
@@ -3377,5 +3377,23 @@ export const artists: Artist[] = [
         "url": "https://orenandchelsea.bandcamp.com/track/vibe-on-forever"
       }
     ]
+  },
+  {
+    "name": "maybridgesburn",
+    "location": "",
+    "bandcampUrl": "https://maybridgesburn.bandcamp.com/",
+    "image": "",
+    "bio": "",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://maybridgesburn.bandcamp.com/"
+      }
+    ],
+    "releases": []
   }
 ];
