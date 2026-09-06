@@ -3184,7 +3184,7 @@ export const artists: Artist[] = [
     "location": "Vancouver, Washington",
     "bandcampUrl": "https://relmon.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a1107261265_10.jpg",
-    "bio": "0 track album",
+    "bio": "Relmon, the artist name of Talyn, is an independent artist and producer from Vancouver, Washington. Blending emo and melodic rap with dark, atmospheric production, Relmon creates vulnerable music centered around depression, identity, loss, and self-discovery. Inspired by artists like Juice WRLD, Lil Peep, XXXTENTACION, and Trippie Redd, he builds immersive worlds through his music. ... more",
     "submittedGenre": "Emo",
     "tags": [
       "Emo"
