@@ -349,6 +349,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Cowboy Heart",
+        "type": "album",
+        "url": "https://allfriendshere.bandcamp.com/album/cowboy-heart"
+      },
+      {
         "title": "11 Tons of Tire",
         "type": "track",
         "url": "https://allfriendshere.bandcamp.com/track/11-tons-of-tire"
@@ -688,7 +693,7 @@ export const artists: Artist[] = [
     "name": "Slow Rosary",
     "location": "Seattle, Washington",
     "bandcampUrl": "https://slowrosary.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0046503572_10.jpg",
+    "image": "https://f4.bcbits.com/img/a2080647534_10.jpg",
     "bio": "deceptively secular band from southeast Louisiana now in northwest Washington",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -710,34 +715,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Live (Before & After)",
+        "title": "ALL TROUT",
         "type": "album",
-        "url": "https://slowrosary.bandcamp.com/album/live-before-after"
-      },
-      {
-        "title": "Free WiFi in the Vatican",
-        "type": "album",
-        "url": "https://slowrosary.bandcamp.com/album/free-wifi-in-the-vatican"
-      },
-      {
-        "title": "Refinery",
-        "type": "album",
-        "url": "https://slowrosary.bandcamp.com/album/refinery-2"
-      },
-      {
-        "title": "Reasonably Far From Residential Areas",
-        "type": "album",
-        "url": "https://slowrosary.bandcamp.com/album/reasonably-far-from-residential-areas"
-      },
-      {
-        "title": "The Eyes of the Skin",
-        "type": "album",
-        "url": "https://slowrosary.bandcamp.com/album/the-eyes-of-the-skin"
-      },
-      {
-        "title": "The Tall and Strong White Oaks Braithwaite",
-        "type": "album",
-        "url": "https://slowrosary.bandcamp.com/album/the-tall-and-strong-white-oaks"
+        "url": "https://slowrosary.bandcamp.com/album/all-trout/"
       }
     ]
   },
@@ -3395,5 +3375,39 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "Evangelos Lascos",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://evangeloslascos.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0047023674_10.jpg",
+    "bio": "",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://evangeloslascos.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Ten Days",
+        "type": "track",
+        "url": "https://evangeloslascos.bandcamp.com/track/ten-days"
+      },
+      {
+        "title": "onetakes & incompletes from san francisco",
+        "type": "album",
+        "url": "https://evangeloslascos.bandcamp.com/album/onetakes-incompletes-from-san-francisco"
+      },
+      {
+        "title": "College Songs",
+        "type": "album",
+        "url": "https://evangeloslascos.bandcamp.com/album/college-songs"
+      }
+    ]
   }
 ];
