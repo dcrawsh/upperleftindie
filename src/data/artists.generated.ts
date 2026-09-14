@@ -1271,7 +1271,7 @@ export const artists: Artist[] = [
     "name": "Payne Fulcher",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://etfondle.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044883082_10.jpg",
+    "image": "https://f4.bcbits.com/img/0047347035_10.jpg",
     "bio": "#noloudmusic",
     "submittedGenre": "Singer-songwriter",
     "tags": [
@@ -1284,6 +1284,11 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
+      {
+        "title": "Don't Shoot the Piano E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/dont-shoot-the-piano"
+      },
       {
         "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
         "type": "album",
@@ -1308,11 +1313,6 @@ export const artists: Artist[] = [
         "title": "Where I Shall Be Healed of My Grievous Wound",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/where-i-shall-be-healed-of-my-grievous-wound"
-      },
-      {
-        "title": "Our Dear Old Wake Forest E.T. Fondle",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
       }
     ]
   },
