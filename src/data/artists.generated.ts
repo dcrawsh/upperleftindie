@@ -1385,7 +1385,7 @@ export const artists: Artist[] = [
     "name": "The Eye See You's",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://theeyeseeyous.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a4209351108_10.jpg",
+    "image": "https://f4.bcbits.com/img/a1720736952_10.jpg",
     "bio": "Formed in 2024 in Portland, OR by dueling guitarist/vocalists John Rivers and Leila Siegel, as well as Aadit Bagdi (bass) and David O. (drums), the Eye See You's draw from an eclectic and diverse mix of influences to create a sound that is uniquely their own, bridging the gaps between virtuosity, emotional catharsis, danceability, lush guitar textures, and pure rock fury. ... more",
     "submittedGenre": "Rock",
     "tags": [
@@ -1399,9 +1399,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Edge of Glass",
+        "title": "Told Ya See",
         "type": "track",
-        "url": "https://theeyeseeyous.bandcamp.com/track/edge-of-glass/"
+        "url": "https://theeyeseeyous.bandcamp.com/track/told-ya-see/"
       }
     ]
   },
