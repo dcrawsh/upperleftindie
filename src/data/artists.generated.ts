@@ -1634,34 +1634,34 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "EP6",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/ep6"
+      },
+      {
+        "title": "EP6 + Singles",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/ep6-singles"
+      },
+      {
+        "title": "Leather Mule [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/leather-mule-single"
+      },
+      {
+        "title": "Over the Line [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/over-the-line-single"
+      },
+      {
+        "title": "Scattered Minds [Single]",
+        "type": "album",
+        "url": "https://glasssuburban.bandcamp.com/album/scattered-minds-single"
+      },
+      {
         "title": "Clive Wearing / Realms [Single]",
         "type": "album",
         "url": "https://glasssuburban.bandcamp.com/album/clive-wearing-realms-single"
-      },
-      {
-        "title": "EP5",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/ep5"
-      },
-      {
-        "title": "EP5 + Singles",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/ep5-singles"
-      },
-      {
-        "title": "Mediocrity [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/mediocrity-single"
-      },
-      {
-        "title": "Zombie Beat [Single]",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/zombie-beat-single"
-      },
-      {
-        "title": "EP4 + Singles",
-        "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/ep4-singles"
       }
     ]
   },
