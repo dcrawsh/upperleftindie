@@ -2768,7 +2768,7 @@ export const artists: Artist[] = [
     "name": "st. davis",
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://stdavismusic.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a4170779994_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0108270404_10.jpg",
     "bio": "conversions in three minutes or less",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -2786,9 +2786,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "in the know",
-        "type": "track",
-        "url": "https://stdavismusic.bandcamp.com/track/in-the-know/"
+        "title": "poverty of thought EP",
+        "type": "album",
+        "url": "https://stdavismusic.bandcamp.com/album/poverty-of-thought-ep/"
       }
     ]
   },
