@@ -3409,5 +3409,54 @@ export const artists: Artist[] = [
         "url": "https://evangeloslascos.bandcamp.com/album/college-songs"
       }
     ]
+  },
+  {
+    "name": "Kenzy Peach",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://kenzypeach.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0046566777_10.jpg",
+    "bio": "Beloved by unsettling women, silly billies, and not all men, Kenzy Peach makes earnest, campy folk-pop in Portland, Oregon. She is doing her best to keep it weird.",
+    "submittedGenre": "Country / Alt-Country",
+    "tags": [
+      "Country / Alt-Country"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://kenzypeach.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "The 77",
+        "type": "track",
+        "url": "https://kenzypeach.bandcamp.com/track/the-77"
+      },
+      {
+        "title": "The Lesson",
+        "type": "track",
+        "url": "https://kenzypeach.bandcamp.com/track/the-lesson"
+      },
+      {
+        "title": "Super Psycho Crazy",
+        "type": "track",
+        "url": "https://kenzypeach.bandcamp.com/track/super-psycho-crazy"
+      },
+      {
+        "title": "I Think I Get it Now",
+        "type": "track",
+        "url": "https://kenzypeach.bandcamp.com/track/i-think-i-get-it-now"
+      },
+      {
+        "title": "Bric a Brac Baby",
+        "type": "album",
+        "url": "https://kenzypeach.bandcamp.com/album/bric-a-brac-baby"
+      },
+      {
+        "title": "She Would",
+        "type": "track",
+        "url": "https://kenzypeach.bandcamp.com/track/she-would"
+      }
+    ]
   }
 ];
