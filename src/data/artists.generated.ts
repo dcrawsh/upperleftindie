@@ -3458,5 +3458,34 @@ export const artists: Artist[] = [
         "url": "https://kenzypeach.bandcamp.com/track/she-would"
       }
     ]
+  },
+  {
+    "name": "Coworkers!",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://coworkerspdx.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0043649657_10.jpg",
+    "bio": "Portland-based singer-songwriter folk-pop duo. These two coworkers-turned-lovers pour their hearts out through deeply honest lyrics and captivating harmonies.",
+    "submittedGenre": "Rock",
+    "tags": [
+      "Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://coworkerspdx.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "See You, SkyKing",
+        "type": "track",
+        "url": "https://coworkerspdx.bandcamp.com/track/see-you-skyking"
+      },
+      {
+        "title": "Irvington Sessions Demo",
+        "type": "album",
+        "url": "https://coworkerspdx.bandcamp.com/album/irvington-sessions-demo"
+      }
+    ]
   }
 ];
