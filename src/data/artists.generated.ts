@@ -1285,9 +1285,14 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Don't Shoot the Piano E.T. Fondle",
+        "title": "Live from Lapin Bleu E.T. Fondle",
         "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/dont-shoot-the-piano"
+        "url": "https://etfondle.bandcamp.com/album/live-from-lapin-bleu"
+      },
+      {
+        "title": "Live from Courier Studio E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/live-from-courier-studio"
       },
       {
         "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
@@ -1308,11 +1313,6 @@ export const artists: Artist[] = [
         "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
-      },
-      {
-        "title": "Where I Shall Be Healed of My Grievous Wound",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/where-i-shall-be-healed-of-my-grievous-wound"
       }
     ]
   },
