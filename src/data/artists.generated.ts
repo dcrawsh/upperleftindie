@@ -3487,5 +3487,47 @@ export const artists: Artist[] = [
         "url": "https://coworkerspdx.bandcamp.com/album/irvington-sessions-demo"
       }
     ]
+  },
+  {
+    "name": "Lucas Treptow",
+    "location": "Oregon",
+    "bandcampUrl": "https://lucastreptow.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2510381483_10.jpg",
+    "bio": "track by Lucas Treptow",
+    "submittedGenre": "Americana",
+    "tags": [
+      "Americana"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://lucastreptow.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Half Street",
+        "type": "track",
+        "url": "https://lucastreptow.bandcamp.com/track/half-street/"
+      }
+    ]
+  },
+  {
+    "name": "Herr God",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://herrgod.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0039350700_10.jpg",
+    "bio": "slowgaze from portland, oregon",
+    "submittedGenre": "Shoegaze / Dream Pop",
+    "tags": [
+      "Shoegaze / Dream Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://herrgod.bandcamp.com/"
+      }
+    ],
+    "releases": []
   }
 ];
