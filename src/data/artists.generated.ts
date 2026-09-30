@@ -2270,7 +2270,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://bonusroomband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0035689173_10.jpg",
-    "bio": "Upcoming Shows - \"BUNK\" EP Release Show!!! November 7th @ Alberta Street Pub with Animal Eyes and Ghost Frog BEN-CHRIS-DERRIN-ERIK-WES Feel good band of the summer. Portland, Oregon ... more",
+    "bio": "Upcoming Shows - 11/28/26 @ Swan Dive 12/3/26 @ The Showdown BEN-CHRIS-DERRIN-ERIK-WES Feel good band of the summer. Portland, Oregon",
     "submittedGenre": "Indie Rock",
     "tags": [
       "Indie Rock"
