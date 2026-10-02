@@ -725,7 +725,7 @@ export const artists: Artist[] = [
     "name": "Treefrog",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://treefrogtheband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a3827042619_10.jpg",
+    "image": "https://f4.bcbits.com/img/0047268473_10.jpg",
     "bio": "Swamp Rockers from PDX.",
     "submittedGenre": "Rock",
     "tags": [
@@ -743,9 +743,14 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Pixel",
+        "type": "track",
+        "url": "https://treefrogtheband.bandcamp.com/track/pixel"
+      },
+      {
         "title": "Treefrog",
         "type": "album",
-        "url": "https://treefrogtheband.bandcamp.com/album/treefrog/"
+        "url": "https://treefrogtheband.bandcamp.com/album/treefrog"
       }
     ]
   },
@@ -1194,7 +1199,7 @@ export const artists: Artist[] = [
     "name": "Fountain Park Apts.",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://fountainparkapts.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1320570202_10.jpg",
+    "image": "https://f4.bcbits.com/img/a1961118381_10.jpg",
     "bio": "booking/collabs/ saying hi: email: fountainparkaptsmusic@gmail.com",
     "submittedGenre": "Indie Rock",
     "tags": [
@@ -1208,9 +1213,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Tonight Brought Stars",
+        "title": "DESERVE",
         "type": "album",
-        "url": "https://fountainparkapts.bandcamp.com/album/tonight-brought-stars/"
+        "url": "https://fountainparkapts.bandcamp.com/album/deserve/"
       }
     ]
   },
@@ -1285,16 +1290,6 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Live from Lapin Bleu E.T. Fondle",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/live-from-lapin-bleu"
-      },
-      {
-        "title": "Live from Courier Studio E.T. Fondle",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/live-from-courier-studio"
-      },
-      {
         "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
@@ -1313,6 +1308,16 @@ export const artists: Artist[] = [
         "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
+      },
+      {
+        "title": "Our Dear Old Wake Forest E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
+      },
+      {
+        "title": "Where I Shall Be Healed of My Grievous Wound",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/where-i-shall-be-healed-of-my-grievous-wound"
       }
     ]
   },
@@ -3529,5 +3534,29 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "Black Dwarf",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://blackdwarfband.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2392262368_10.jpg",
+    "bio": "Black Dwarf is in the kitchen and the kettle is whistling. Something new is on the way. Hailing from Seattle and hauling freight cars full of post-punk jangle and psychedelic haze, Black Dwarf is the perfect blend of all the stuff you want to get from your rock and roll. ... more",
+    "submittedGenre": "Post-punk",
+    "tags": [
+      "Post-punk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://blackdwarfband.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Stranger",
+        "type": "track",
+        "url": "https://blackdwarfband.bandcamp.com/track/stranger/"
+      }
+    ]
   }
 ];
