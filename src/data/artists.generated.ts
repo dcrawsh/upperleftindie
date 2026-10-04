@@ -1821,7 +1821,7 @@ export const artists: Artist[] = [
   },
   {
     "name": "Orbit 17",
-    "location": "San Francisco, California",
+    "location": "Portland, Oregon",
     "bandcampUrl": "https://orbit17.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0046077147_10.jpg",
     "bio": "Orbit 17 weaves catchy melodies, funky rhythms and hypnotic grooves into intricate electro-rock.",
