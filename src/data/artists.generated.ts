@@ -2928,7 +2928,7 @@ export const artists: Artist[] = [
     "name": "Sara Carbone",
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://saracarbonemusic.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a2003091674_10.jpg",
+    "image": "https://f4.bcbits.com/img/a3826572006_10.jpg",
     "bio": "hi thanks for being here",
     "submittedGenre": "Indie Folk",
     "tags": [
@@ -2946,9 +2946,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Bloom",
-        "type": "album",
-        "url": "https://saracarbonemusic.bandcamp.com/album/bloom/"
+        "title": "i want to be a farm cat v.2",
+        "type": "track",
+        "url": "https://saracarbonemusic.bandcamp.com/track/i-want-to-be-a-farm-cat-v-2/"
       }
     ]
   },
