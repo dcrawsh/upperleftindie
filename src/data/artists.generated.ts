@@ -3558,5 +3558,27 @@ export const artists: Artist[] = [
         "url": "https://blackdwarfband.bandcamp.com/track/stranger/"
       }
     ]
+  },
+  {
+    "name": "Summer Sleeves",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://summersleeves1.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0045872434_10.jpg",
+    "bio": "Summer Sleeves is a pop rock outfit from West Seattle, WA. Mainly lead by singer/songwriter Jeremy Wayne, with friends on board for navigating. Their 3rd album, \"I'm Shelling Real Daggers\" will be out Sept 4th.",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://summersleeves1.bandcamp.com/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/summer.sleeves.1"
+      }
+    ],
+    "releases": []
   }
 ];
