@@ -1639,9 +1639,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "EP6",
+        "title": "Glass Suburban",
         "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/ep6"
+        "url": "https://glasssuburban.bandcamp.com/album/glass-suburban"
       },
       {
         "title": "EP6 + Singles",
@@ -1649,24 +1649,24 @@ export const artists: Artist[] = [
         "url": "https://glasssuburban.bandcamp.com/album/ep6-singles"
       },
       {
-        "title": "Leather Mule [Single]",
+        "title": "EP5 + Singles",
         "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/leather-mule-single"
+        "url": "https://glasssuburban.bandcamp.com/album/ep5-singles"
       },
       {
-        "title": "Over the Line [Single]",
+        "title": "EP4 + Singles",
         "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/over-the-line-single"
+        "url": "https://glasssuburban.bandcamp.com/album/ep4-singles"
       },
       {
-        "title": "Scattered Minds [Single]",
+        "title": "EP3 + Singles",
         "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/scattered-minds-single"
+        "url": "https://glasssuburban.bandcamp.com/album/ep3-singles"
       },
       {
-        "title": "Clive Wearing / Realms [Single]",
+        "title": "EP2 + Singles",
         "type": "album",
-        "url": "https://glasssuburban.bandcamp.com/album/clive-wearing-realms-single"
+        "url": "https://glasssuburban.bandcamp.com/album/ep2-singles"
       }
     ]
   },
