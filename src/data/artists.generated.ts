@@ -2066,7 +2066,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0183651852_10.jpg",
+    "image": "https://f4.bcbits.com/img/a2244575338_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2088,9 +2088,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "L-Shaped Room EP",
-        "type": "album",
-        "url": "https://shayleeband.bandcamp.com/album/l-shaped-room-ep/"
+        "title": "The Dream",
+        "type": "track",
+        "url": "https://shayleeband.bandcamp.com/track/the-dream/"
       }
     ]
   },
