@@ -443,7 +443,7 @@ export const artists: Artist[] = [
     "location": "Seattle, Washington",
     "bandcampUrl": "https://blip206.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0046972322_10.jpg",
-    "bio": "Blip. writes mostly emo songs in standard. We have a cat song, a car song, and a pizza song. Wow. FFO Braid, The Weakerthans, Joyce Manor, & Shinobu. Booking: blipblip.206@gmail IG: @blip.206 ... more",
+    "bio": "Blip. writes mostly emo songs in standard. We have a cat song, a car song, and a pizza song. Wow. FFO Braid, The Weakerthans, Joyce Manor, & Shinobu. Booking: blipblip.206@gmail youtu.be/_UPY5bcwRNg?si=rvRrjGI9pLIq7b25 ... more",
     "submittedGenre": "Emo",
     "tags": [
       "Emo"
@@ -1994,7 +1994,7 @@ export const artists: Artist[] = [
     "name": "Essie and The Hum",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://essieandthehum.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a4149136458_10.jpg",
+    "image": "https://f4.bcbits.com/img/0042997881_10.jpg",
     "bio": "Essie and The Hum craft ethereal indie-folk rock shaped by the magic of live performance. Based in Portland, OR, their sound drifts from intimate, slow-burn ballads to full-throttle rock moments, pulling listeners into a wormhole they won’t want to leave. ... more",
     "submittedGenre": "Indie Folk",
     "tags": [
@@ -2008,9 +2008,14 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Dead To Me",
+        "type": "track",
+        "url": "https://essieandthehum.bandcamp.com/track/dead-to-me"
+      },
+      {
         "title": "Live at Clay St. Studios",
         "type": "album",
-        "url": "https://essieandthehum.bandcamp.com/album/live-at-clay-st-studios/"
+        "url": "https://essieandthehum.bandcamp.com/album/live-at-clay-st-studios"
       }
     ]
   },
