@@ -726,7 +726,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://treefrogtheband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0047268473_10.jpg",
-    "bio": "Swamp Rockers from PDX.",
+    "bio": "Swamp Rockers.",
     "submittedGenre": "Rock",
     "tags": [
       "Rock"
