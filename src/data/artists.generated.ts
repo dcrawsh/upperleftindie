@@ -1688,6 +1688,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "III",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/iii-2"
+      },
+      {
         "title": "Not Mine (Covers Album)",
         "type": "album",
         "url": "https://terriblepop.bandcamp.com/album/not-mine-covers-album"
@@ -3403,6 +3408,11 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
+      {
+        "title": "Provo",
+        "type": "track",
+        "url": "https://evangeloslascos.bandcamp.com/track/provo"
+      },
       {
         "title": "Ten Days",
         "type": "track",
