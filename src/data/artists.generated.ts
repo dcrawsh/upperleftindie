@@ -914,6 +914,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Helvetia covers Helvetia",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/helvetia-covers"
+      },
+      {
         "title": "wild combinations II",
         "type": "album",
         "url": "https://cedarlange.bandcamp.com/album/wild-combinations-ii"
