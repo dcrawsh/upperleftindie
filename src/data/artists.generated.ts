@@ -1367,7 +1367,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://blisterpdx.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0047953599_10.jpg",
-    "bio": "pdx death punk cult worship.",
+    "bio": "heavy synth punk",
     "submittedGenre": "Punk",
     "tags": [
       "Punk"
