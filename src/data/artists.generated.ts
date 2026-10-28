@@ -41,6 +41,16 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Bernie",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/bernie"
+      },
+      {
+        "title": "Sleep Now",
+        "type": "track",
+        "url": "https://badquitters.bandcamp.com/track/sleep-now"
+      },
+      {
         "title": "I'll Be Damned",
         "type": "album",
         "url": "https://badquitters.bandcamp.com/album/ill-be-damned"
@@ -1395,7 +1405,7 @@ export const artists: Artist[] = [
     "name": "The Eye See You's",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://theeyeseeyous.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1720736952_10.jpg",
+    "image": "https://f4.bcbits.com/img/a1236332031_10.jpg",
     "bio": "Formed in 2024 in Portland, OR by dueling guitarist/vocalists John Rivers and Leila Siegel, as well as Aadit Bagdi (bass) and David O. (drums), the Eye See You's draw from an eclectic and diverse mix of influences to create a sound that is uniquely their own, bridging the gaps between virtuosity, emotional catharsis, danceability, lush guitar textures, and pure rock fury. ... more",
     "submittedGenre": "Rock",
     "tags": [
@@ -1409,9 +1419,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Told Ya See",
+        "title": "Social Butterfly",
         "type": "track",
-        "url": "https://theeyeseeyous.bandcamp.com/track/told-ya-see/"
+        "url": "https://theeyeseeyous.bandcamp.com/track/social-butterfly/"
       }
     ]
   },
