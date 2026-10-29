@@ -2091,7 +2091,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0396879287_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0490243961_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2113,9 +2113,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Grief",
+        "title": "Diamonds of Love",
         "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/grief/"
+        "url": "https://shayleeband.bandcamp.com/track/diamonds-of-love/"
       }
     ]
   },
