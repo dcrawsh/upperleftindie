@@ -1305,6 +1305,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Cow Palace E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/cow-palace-2"
+      },
+      {
         "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
@@ -1328,11 +1333,6 @@ export const artists: Artist[] = [
         "title": "Our Dear Old Wake Forest E.T. Fondle",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
-      },
-      {
-        "title": "Where I Shall Be Healed of My Grievous Wound",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/where-i-shall-be-healed-of-my-grievous-wound"
       }
     ]
   },
@@ -3610,5 +3610,70 @@ export const artists: Artist[] = [
       }
     ],
     "releases": []
+  },
+  {
+    "name": "generifus",
+    "location": "Olympia, Washington",
+    "bandcampUrl": "https://generifus.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0048089262_10.jpg",
+    "bio": "Spencer Sult with different buds playing live.. generifus@gmail.com",
+    "submittedGenre": "Indie Folk",
+    "tags": [
+      "Indie Folk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://generifus.bandcamp.com/"
+      },
+      {
+        "label": "generifus.com",
+        "url": "http://generifus.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/generifus/"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/spencersult/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/generifus/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Bird Beak",
+        "type": "album",
+        "url": "https://generifus.bandcamp.com/album/bird-beak"
+      },
+      {
+        "title": "Summerberrys",
+        "type": "album",
+        "url": "https://generifus.bandcamp.com/album/summerberrys"
+      },
+      {
+        "title": "Rearrangel",
+        "type": "album",
+        "url": "https://generifus.bandcamp.com/album/rearrangel"
+      },
+      {
+        "title": "Southpaw",
+        "type": "album",
+        "url": "https://generifus.bandcamp.com/album/southpaw"
+      },
+      {
+        "title": "Live in LA March 1st, 2020",
+        "type": "album",
+        "url": "https://generifus.bandcamp.com/album/live-in-la-march-1st-2020"
+      },
+      {
+        "title": "Songs About Nothing",
+        "type": "album",
+        "url": "https://generifus.bandcamp.com/album/songs-about-nothing"
+      }
+    ]
   }
 ];
