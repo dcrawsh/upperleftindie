@@ -1310,6 +1310,11 @@ export const artists: Artist[] = [
         "url": "https://etfondle.bandcamp.com/album/cow-palace-2"
       },
       {
+        "title": "The Jackson Press Payne Fulcher and Gabe Pelli",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/the-jackson-press-2"
+      },
+      {
         "title": "Rough Wind E.T. Fondle & The Dan K. Moore Highway Band",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/rough-wind-2"
@@ -1318,11 +1323,6 @@ export const artists: Artist[] = [
         "title": "The Bacon's Lament E.T. Fondle and the Little Portland Players",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/the-bacons-lament"
-      },
-      {
-        "title": "The Jackson Press Payne Fulcher and Gabe Pelli",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/the-jackson-press-2"
       },
       {
         "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
@@ -2932,6 +2932,11 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
+      {
+        "title": "Pushing Mongo",
+        "type": "track",
+        "url": "https://rutlandbureauofinternationalaffairs.bandcamp.com/track/pushing-mongo"
+      },
       {
         "title": "ghost man on third by taking back sunday",
         "type": "track",
