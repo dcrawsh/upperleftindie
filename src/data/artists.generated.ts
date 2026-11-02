@@ -2028,6 +2028,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Unrequited",
+        "type": "track",
+        "url": "https://essieandthehum.bandcamp.com/track/unrequited"
+      },
+      {
         "title": "Dead To Me",
         "type": "track",
         "url": "https://essieandthehum.bandcamp.com/track/dead-to-me"
