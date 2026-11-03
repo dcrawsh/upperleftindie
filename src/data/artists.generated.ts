@@ -1291,7 +1291,7 @@ export const artists: Artist[] = [
     "name": "Payne Fulcher",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://etfondle.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0047347035_10.jpg",
+    "image": "https://f4.bcbits.com/img/0048340463_10.jpg",
     "bio": "#noloudmusic",
     "submittedGenre": "Singer-songwriter",
     "tags": [
@@ -2096,7 +2096,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0490243961_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0323358368_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2118,9 +2118,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Diamonds of Love",
+        "title": "Chew Me Up",
         "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/diamonds-of-love/"
+        "url": "https://shayleeband.bandcamp.com/track/chew-me-up/"
       }
     ]
   },
