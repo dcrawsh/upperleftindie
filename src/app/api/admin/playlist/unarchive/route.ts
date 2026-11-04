@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
 import { assertAdminRequest, AdminAuthError } from "../../../../../lib/admin-auth";
 import {
   SupabaseRequestError,
@@ -37,6 +38,8 @@ export async function POST(req: NextRequest) {
         throw error;
       }
     }
+
+    revalidatePath("/");
 
     return Response.json({ success: true });
   } catch (error) {

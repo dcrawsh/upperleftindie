@@ -1,8 +1,7 @@
 import { findArtistByName } from "./artists";
 import {
-  getPublicTrackDetails,
   getSpotifyTrackFromUrl,
-  type SpotifyPublicTrack,
+  listActivePlaylistTracks,
 } from "./spotify";
 
 /**
@@ -109,48 +108,57 @@ export type RecentTrackCard = {
  * belongs to that artist — otherwise the card falls back to initials.
  */
 export async function getRecentTrackCards(limit = 3): Promise<RecentTrackCard[]> {
-  const adds = await getRecentAdds(limit);
+  // Fetch enough historical candidates to backfill the rail when older rows
+  // still say "added" even though the track was removed directly in Spotify.
+  const adds = await getRecentAdds(Math.max(limit, 100));
 
   if (adds.length === 0) {
     return [];
   }
 
-  const trackIds = new Map<string, string>();
-
-  for (const add of adds) {
-    const track = getSpotifyTrackFromUrl(add.songLink);
-    if (track) {
-      trackIds.set(add.songLink, track.id);
-    }
-  }
-
-  let trackDetails = new Map<string, SpotifyPublicTrack>();
-
-  try {
-    trackDetails = await getPublicTrackDetails([...trackIds.values()]);
-  } catch {
-    // Spotify is optional for this surface: without it the card still carries
-    // the artist, the place, the date and both outbound links.
-    console.error("recent adds: spotify track lookup unavailable");
-  }
-
-  return adds.map((add) => {
-    const trackId = trackIds.get(add.songLink);
-    const details = trackId ? trackDetails.get(trackId) : undefined;
-    const directoryArtist = findArtistByName(add.artistName);
-
-    return {
-      key: `${add.artistName}-${add.addedAt}`,
-      artistName: add.artistName,
-      trackTitle: details?.name,
-      place: formatRecentAddPlace(add),
-      addedLabel: formatAddedDate(add.addedAt),
-      imageSrc: details?.imageUrl || directoryArtist?.image || undefined,
-      spotifyUrl: details?.externalUrl || add.songLink,
-      bandcampUrl:
-        add.bandcampLink ?? directoryArtist?.bandcampUrl ?? undefined,
-    };
+  const activeTracks = await listActivePlaylistTracks().catch(() => {
+    // Fail closed: a card should never claim a track is currently active when
+    // Spotify membership could not be verified.
+    console.warn("recent adds: active playlist unavailable");
+    return null;
   });
+
+  if (!activeTracks) {
+    return [];
+  }
+
+  const activeTracksByUri = new Map(
+    activeTracks.map((track) => [track.uri, track])
+  );
+
+  return adds
+    .flatMap((add) => {
+      const parsedTrack = getSpotifyTrackFromUrl(add.songLink);
+      const activeTrack = parsedTrack
+        ? activeTracksByUri.get(parsedTrack.uri)
+        : undefined;
+
+      if (!activeTrack) {
+        return [];
+      }
+
+      const directoryArtist = findArtistByName(add.artistName);
+
+      return [
+        {
+          key: `${add.artistName}-${add.addedAt}`,
+          artistName: add.artistName,
+          trackTitle: activeTrack.name,
+          place: formatRecentAddPlace(add),
+          addedLabel: formatAddedDate(add.addedAt),
+          imageSrc: activeTrack.imageUrl || directoryArtist?.image || undefined,
+          spotifyUrl: activeTrack.externalUrl || add.songLink,
+          bandcampUrl:
+            add.bandcampLink ?? directoryArtist?.bandcampUrl ?? undefined,
+        },
+      ];
+    })
+    .slice(0, limit);
 }
 
 export async function getRecentAdds(limit = 3): Promise<RecentAdd[]> {
@@ -178,9 +186,7 @@ export async function getRecentAdds(limit = 3): Promise<RecentAdd[]> {
           apikey: supabaseKey,
           Authorization: `Bearer ${supabaseKey}`,
         },
-        next: {
-          revalidate: 900,
-        },
+        cache: "no-store",
       }
     );
 
@@ -201,8 +207,11 @@ export async function getRecentAdds(limit = 3): Promise<RecentAdd[]> {
       bandcampLink: row.bandcamp_link,
       addedAt: row.active_playlist_added_at,
     }));
-  } catch {
-    console.error("recent adds fetch failed");
+  } catch (error) {
+    console.error(
+      "recent adds fetch failed",
+      error instanceof Error ? error.message : "Unknown error"
+    );
     return [];
   }
 }

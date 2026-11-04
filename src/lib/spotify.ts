@@ -200,15 +200,13 @@ export async function getSpotifyTrackPreviewDetails(trackId: string) {
   };
 }
 
-type SpotifyTracksResponse = {
-  tracks: Array<{
-    id: string;
-    name: string;
-    album?: {
-      images?: Array<{ url: string; width?: number; height?: number }>;
-    };
-    external_urls?: { spotify?: string };
-  } | null>;
+type SpotifyPublicTrackResponse = {
+  id: string;
+  name: string;
+  album?: {
+    images?: Array<{ url: string; width?: number; height?: number }>;
+  };
+  external_urls?: { spotify?: string };
 };
 
 export type SpotifyPublicTrack = {
@@ -232,15 +230,13 @@ export async function getPublicTrackDetails(trackIds: string[]) {
     return details;
   }
 
-  const data = await spotifyRequest<SpotifyTracksResponse>(
-    `tracks?ids=${ids.join(",")}`
+  const tracks = await Promise.all(
+    ids.map((id) =>
+      spotifyRequest<SpotifyPublicTrackResponse>(`tracks/${id}`)
+    )
   );
 
-  for (const track of data.tracks) {
-    if (!track) {
-      continue;
-    }
-
+  for (const track of tracks) {
     details.set(track.id, {
       id: track.id,
       name: track.name,
@@ -337,6 +333,12 @@ export async function listActivePlaylistTracks() {
   const { activePlaylistId } = getSpotifyConfig();
 
   return listPlaylistTracks(activePlaylistId);
+}
+
+export async function activePlaylistHasTrack(trackUri: string) {
+  const tracks = await listActivePlaylistTracks();
+
+  return tracks.some((track) => track.uri === trackUri);
 }
 
 export async function reorderActivePlaylistTrack(

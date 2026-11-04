@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
 import {
   assertAdminRequest,
   AdminAuthError,
@@ -9,6 +10,7 @@ import {
   updateSubmission,
 } from "../../../../../../lib/submissions";
 import {
+  activePlaylistHasTrack,
   addTrackToActivePlaylist,
   getSpotifyTrackFromUrl,
   SpotifyRequestError,
@@ -38,7 +40,12 @@ export async function POST(
       );
     }
 
-    await addTrackToActivePlaylist(track.uri);
+    const isAlreadyActive = await activePlaylistHasTrack(track.uri);
+
+    if (!isAlreadyActive) {
+      await addTrackToActivePlaylist(track.uri);
+    }
+
     const updatedSubmission = await updateSubmission(id, {
       status: "added",
       spotify_track_id: track.id,
@@ -46,7 +53,13 @@ export async function POST(
       active_playlist_added_at: new Date().toISOString(),
     });
 
-    return Response.json({ success: true, submission: updatedSubmission });
+    revalidatePath("/");
+
+    return Response.json({
+      success: true,
+      alreadyOnPlaylist: isAlreadyActive,
+      submission: updatedSubmission,
+    });
   } catch (error) {
     console.error("add to playlist error", error);
 
