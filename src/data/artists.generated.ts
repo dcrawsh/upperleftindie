@@ -3690,5 +3690,39 @@ export const artists: Artist[] = [
         "url": "https://generifus.bandcamp.com/album/songs-about-nothing"
       }
     ]
+  },
+  {
+    "name": "Former Jock",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://formerjock.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0047987494_10.jpg",
+    "bio": "Bringing together the talents of singer Spencer Bennett, bassist Jeff Harder, guitarist Michael Vostatek, and drummer Adrian La Reyna, Former Jock is a band bursting at the seams with big catchy choruses, energetic grooves, and loud punchy guitars. It’s a shot in the arm of an old favorite in the Northwest. ... more",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://formerjock.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Intuition",
+        "type": "track",
+        "url": "https://formerjock.bandcamp.com/track/intuition"
+      },
+      {
+        "title": "Bad Movies",
+        "type": "track",
+        "url": "https://formerjock.bandcamp.com/track/bad-movies"
+      },
+      {
+        "title": "Olympia",
+        "type": "track",
+        "url": "https://formerjock.bandcamp.com/track/olympia"
+      }
+    ]
   }
 ];
