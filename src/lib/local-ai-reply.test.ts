@@ -78,11 +78,7 @@ describe("buildAcceptanceMessages", () => {
 
     const messages = buildAcceptanceMessages(input, [example]);
 
-    expect(messages.map((m) => m.role)).toEqual([
-      "user",
-      "assistant",
-      "user",
-    ]);
+    expect(messages.map((m) => m.role)).toEqual(["user", "assistant", "user"]);
     expect(JSON.parse(messages[1].content)).toEqual({
       subject: example.subject,
       message: example.message,

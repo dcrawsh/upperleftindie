@@ -104,7 +104,9 @@ describe("getArtistInitials", () => {
 describe("getPrimaryGenre", () => {
   it("prefers the submitted genre", () => {
     expect(
-      getPrimaryGenre(artist({ submittedGenre: "indie rock", tags: ["shoegaze"] }))
+      getPrimaryGenre(
+        artist({ submittedGenre: "indie rock", tags: ["shoegaze"] })
+      )
     ).toBe("indie rock");
   });
 

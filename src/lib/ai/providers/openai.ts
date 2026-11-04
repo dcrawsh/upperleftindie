@@ -75,7 +75,8 @@ export function createOpenAiProvider(): AiProvider {
 
         if (!response.ok) {
           throw new AiProviderError(
-            body.error?.message || `OpenAI request failed with ${response.status}`,
+            body.error?.message ||
+              `OpenAI request failed with ${response.status}`,
             response.status
           );
         }

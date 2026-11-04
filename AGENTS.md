@@ -41,6 +41,7 @@ The site also publishes a Bandcamp artist directory and a scraped Portland show 
 ```
 src/app/              App Router pages, layouts, metadata, globals.css
 src/app/api/          Route handlers. src/app/api/admin/** is token-protected.
+src/app/admin/        Admin console: AdminDashboard orchestrates, *Tab components render
 src/app/components/   Shared site components (Nav, forms, cards, containers)
 src/app/components/ui Reusable primitives: Button, Field, Tag, SectionHeading, EmptyState, ...
 src/lib/              Server/domain helpers: Supabase accessors, Spotify, email, auth
@@ -184,6 +185,12 @@ Adding a variable means documenting it here, in [.env.example](./.env.example), 
 - Match the surrounding file's style; this codebase favors small, explicit, dependency-free
   helpers over abstractions.
 - Prefer adding to `src/lib` over inlining logic in a route handler.
+- **Keep components under ~400 lines.** The admin console is the worked example: state and
+  actions live in [AdminDashboard.tsx](./src/app/admin/AdminDashboard.tsx), session and
+  audio concerns in `useAdminSession`/`useTrackPreview`, pure functions in
+  `src/app/admin/helpers.ts` (unit-tested), and each tab renders from its own
+  `*Tab.tsx` receiving explicit props. Follow that shape rather than growing one file.
+- Extract pure logic into a plain function so it can be unit-tested without a DOM.
 - Add dependencies only when genuinely necessary — the dependency list is deliberately tiny.
 - Comment only non-obvious decisions. Most of this code is intentionally uncommented.
-- After editing TypeScript, run `yarn lint` and `yarn build`.
+- After editing TypeScript, run `yarn lint`, `yarn test`, and `yarn build`.

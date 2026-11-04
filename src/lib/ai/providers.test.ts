@@ -72,7 +72,9 @@ describe("getAiProvider", () => {
 
 describe("ollama provider", () => {
   it("sends the schema as `format` and reads message.content", async () => {
-    const fetchMock = mockFetch({ message: { content: JSON.stringify(draft) } });
+    const fetchMock = mockFetch({
+      message: { content: JSON.stringify(draft) },
+    });
 
     const result = await createOllamaProvider().generateStructured(request);
 
@@ -149,9 +151,9 @@ describe("anthropic provider", () => {
     const body = bodyOf(fetchMock);
     // System is a top-level field here, not a message.
     expect(body.system).toBe("You are a curator.");
-    expect(body.messages.some((m: { role: string }) => m.role === "system")).toBe(
-      false
-    );
+    expect(
+      body.messages.some((m: { role: string }) => m.role === "system")
+    ).toBe(false);
     expect(body.tool_choice).toEqual({
       type: "tool",
       name: "acceptance_reply",

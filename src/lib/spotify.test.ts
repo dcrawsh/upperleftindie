@@ -20,7 +20,9 @@ describe("getSpotifyTrackFromUrl", () => {
 
   it("parses locale-prefixed URLs", () => {
     expect(
-      getSpotifyTrackFromUrl(`https://open.spotify.com/intl-de/track/${validId}`)
+      getSpotifyTrackFromUrl(
+        `https://open.spotify.com/intl-de/track/${validId}`
+      )
     ).toEqual({ id: validId, uri: `spotify:track:${validId}` });
   });
 
@@ -47,7 +49,9 @@ describe("getSpotifyTrackFromUrl", () => {
   });
 
   it("rejects ids that are not 22 alphanumeric characters", () => {
-    expect(getSpotifyTrackFromUrl("https://open.spotify.com/track/abc")).toBeNull();
+    expect(
+      getSpotifyTrackFromUrl("https://open.spotify.com/track/abc")
+    ).toBeNull();
     expect(
       getSpotifyTrackFromUrl("https://open.spotify.com/track/" + "!".repeat(22))
     ).toBeNull();

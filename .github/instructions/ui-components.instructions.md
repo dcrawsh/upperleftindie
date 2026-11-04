@@ -23,10 +23,23 @@ applyTo: "src/app/**/*.tsx"
   `SectionHeading`, `EmptyState`, `ConfirmationPanel`, `ArtistImage`.
 - `src/app/components/` — composed site components: `Nav`, `SiteFooter`, `SiteContainer`,
   `SubmissionForm`, `ContactForm`, `ArtistCard`, `TrackCard`.
-- Route-specific components live beside their page (e.g. `src/app/admin/AdminDashboard.tsx`).
+- Route-specific components live beside their page — see `src/app/admin/`, where
+  `AdminDashboard.tsx` owns state and actions while `SubmissionsTab`, `PlaylistTab`,
+  `ArchiveTab`, and `LoginScreen` are presentational and receive explicit props.
 
 **Check `components/ui` before writing a new button, form field, tag, or empty state.**
 Extend the existing primitive rather than hand-rolling a styled `<button>`.
+
+## Component size
+
+Keep components under ~400 lines. When one grows past that:
+
+- move state and data fetching into a hook (`useAdminSession`, `useTrackPreview`);
+- move pure functions into a sibling `helpers.ts` and unit-test them;
+- split the render into child components that take explicit props.
+
+Avoid context or global stores for this — prop drilling one or two levels is clearer here
+and keeps each file independently readable by both humans and agents.
 
 ## Tailwind tokens
 

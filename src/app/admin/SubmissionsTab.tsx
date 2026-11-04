@@ -1,0 +1,391 @@
+"use client";
+
+import { FaSpotify } from "react-icons/fa";
+import {
+  FiCheck,
+  FiCpu,
+  FiExternalLink,
+  FiMail,
+  FiPause,
+  FiPlay,
+  FiRefreshCw,
+  FiThumbsDown,
+  FiThumbsUp,
+  FiX,
+} from "react-icons/fi";
+import { formatDate, getSpotifyAppTrackUrl } from "./helpers";
+import type {
+  PreviewState,
+  ReplyDraft,
+  Submission,
+  SubmissionStatus,
+} from "./types";
+
+const STATUS_FILTERS = ["pending", "added", "rejected", "all"] as const;
+
+type SubmissionsTabProps = {
+  submissions: Submission[];
+  statusFilter: SubmissionStatus | "all";
+  setStatusFilter: (status: SubmissionStatus | "all") => void;
+  isLoading: boolean;
+  workingId: string;
+  onRefresh: () => void;
+  getReplyDraft: (submission: Submission) => ReplyDraft;
+  updateReplyDraft: (
+    submission: Submission,
+    values: Partial<ReplyDraft>
+  ) => void;
+  onToggleReplyDraft: (submission: Submission) => void;
+  onAddToPlaylist: (submission: Submission) => void;
+  onReject: (id: string) => void;
+  onGenerateReply: (submission: Submission) => void;
+  onRateDraft: (submission: Submission, rating: -1 | 1) => void;
+  onSendReply: (submission: Submission) => void;
+  onTogglePreview: (submission: Submission) => void;
+  currentPreviewTrackUri: string;
+  isPreviewPlaying: boolean;
+  previewsByKey: Record<string, PreviewState>;
+  loadingPreviewKey: string;
+};
+
+function SubmissionCard({
+  submission,
+  workingId,
+  getReplyDraft,
+  updateReplyDraft,
+  onToggleReplyDraft,
+  onAddToPlaylist,
+  onReject,
+  onGenerateReply,
+  onRateDraft,
+  onSendReply,
+  onTogglePreview,
+  currentPreviewTrackUri,
+  isPreviewPlaying,
+  previewsByKey,
+  loadingPreviewKey,
+}: { submission: Submission } & Omit<
+  SubmissionsTabProps,
+  "submissions" | "statusFilter" | "setStatusFilter" | "isLoading" | "onRefresh"
+>) {
+  const replyDraft = getReplyDraft(submission);
+  const replyWorkingId = `reply-${submission.id}`;
+  const draftWorkingId = `draft-${submission.id}`;
+  const ratingWorkingId = `rating-${submission.id}`;
+  const hasReplied = Boolean(submission.replied_at);
+  const previewKey = `submission:${submission.id}`;
+  const previewState = previewsByKey[previewKey];
+  const isPreviewLoading = loadingPreviewKey === previewKey;
+  const isCurrentPreview =
+    currentPreviewTrackUri === previewKey && isPreviewPlaying;
+
+  return (
+    <article
+      className={`rounded-md border p-5 shadow-soft ${
+        hasReplied ? "border-moss/40 bg-moss/5" : "border-ink/10 bg-paper"
+      }`}
+    >
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0 space-y-3">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
+              {formatDate(submission.created_at)} / {submission.status}
+              {submission.replied_at
+                ? ` / replied ${formatDate(submission.replied_at)}`
+                : ""}
+            </p>
+            <div className="mt-1 flex flex-wrap items-center gap-2">
+              <h2 className="text-2xl font-black text-ink">
+                {submission.artist_name}
+              </h2>
+              {hasReplied ? (
+                <span className="inline-flex items-center gap-1 rounded-full bg-moss px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-paper">
+                  <FiMail size={13} />
+                  Replied
+                </span>
+              ) : null}
+            </div>
+            <p className="text-sm leading-6 text-ink/65">
+              {submission.genre || "No genre"} / {submission.city || "No city"}{" "}
+              {submission.region ? `/${submission.region}` : ""}
+            </p>
+          </div>
+          <div className="grid gap-2 text-sm text-ink/70 md:grid-cols-2">
+            <p>
+              <span className="font-bold text-ink">Contact:</span>{" "}
+              {submission.contact_name}
+            </p>
+            <p>
+              <span className="font-bold text-ink">Email:</span>{" "}
+              <a
+                href={`mailto:${submission.email}`}
+                className="text-clay hover:text-ink"
+              >
+                {submission.email}
+              </a>
+            </p>
+          </div>
+          {submission.notes ? (
+            <p className="max-w-3xl whitespace-pre-wrap text-sm leading-6 text-ink/70">
+              {submission.notes}
+            </p>
+          ) : null}
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => onTogglePreview(submission)}
+              disabled={isPreviewLoading || previewState?.isMissing}
+              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition ${
+                previewState?.isMissing
+                  ? "border-ink/10 text-ink/35"
+                  : "border-ink/15 text-ink hover:border-moss hover:text-moss"
+              }`}
+            >
+              {isCurrentPreview ? <FiPause size={16} /> : <FiPlay size={16} />}
+              {isPreviewLoading
+                ? "Finding..."
+                : previewState?.isMissing
+                  ? "No Preview"
+                  : isCurrentPreview
+                    ? "Pause"
+                    : previewState?.previewUrl
+                      ? "Preview"
+                      : "Find Preview"}
+            </button>
+            <a
+              href={getSpotifyAppTrackUrl(submission.song_link)}
+              className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-green-700 hover:text-green-700"
+            >
+              <FaSpotify size={16} />
+              Song
+            </a>
+            {submission.bandcamp_link ? (
+              <a
+                href={submission.bandcamp_link}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay"
+              >
+                <FiExternalLink size={16} />
+                Bandcamp
+              </a>
+            ) : null}
+            {submission.social_link ? (
+              <a
+                href={submission.social_link}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay"
+              >
+                <FiExternalLink size={16} />
+                Social
+              </a>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="flex shrink-0 flex-wrap gap-2 lg:justify-end">
+          <button
+            type="button"
+            onClick={() => onToggleReplyDraft(submission)}
+            className={`inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] transition ${
+              hasReplied
+                ? "border-moss/40 text-moss hover:border-ink hover:text-ink"
+                : "border-ink/15 text-ink hover:border-clay hover:text-clay"
+            }`}
+          >
+            <FiMail size={16} />
+            {hasReplied ? "Replied" : "Reply"}
+          </button>
+          <button
+            type="button"
+            onClick={() => onAddToPlaylist(submission)}
+            disabled={
+              workingId === submission.id || workingId === draftWorkingId
+            }
+            className="inline-flex items-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-ink disabled:opacity-60"
+          >
+            <FiCheck size={16} />
+            Add + Draft
+          </button>
+          <button
+            type="button"
+            onClick={() => onReject(submission.id)}
+            disabled={
+              workingId === submission.id || workingId === draftWorkingId
+            }
+            className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
+          >
+            <FiX size={16} />
+            Pass
+          </button>
+        </div>
+      </div>
+
+      {replyDraft.isOpen ? (
+        <div className="mt-5 space-y-3 border-t border-ink/10 pt-5">
+          <label className="block space-y-2 text-sm font-bold text-ink/70">
+            Subject
+            <input
+              type="text"
+              value={replyDraft.subject}
+              onChange={(event) =>
+                updateReplyDraft(submission, { subject: event.target.value })
+              }
+              className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base font-normal text-ink outline-none transition focus:border-clay"
+            />
+          </label>
+          <label className="block space-y-2 text-sm font-bold text-ink/70">
+            Message
+            <textarea
+              value={replyDraft.message}
+              onChange={(event) =>
+                updateReplyDraft(submission, { message: event.target.value })
+              }
+              rows={7}
+              placeholder={`Hey ${submission.contact_name || "there"},`}
+              className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base font-normal leading-6 text-ink outline-none transition focus:border-clay"
+            />
+          </label>
+          <div className="flex flex-wrap items-center gap-2 rounded-md border border-ink/10 bg-white/60 p-3">
+            <button
+              type="button"
+              onClick={() => onGenerateReply(submission)}
+              disabled={
+                submission.status !== "added" || workingId === draftWorkingId
+              }
+              className="inline-flex items-center gap-2 rounded-full border border-clay/40 px-4 py-2 text-sm font-bold text-clay transition hover:border-ink hover:text-ink disabled:opacity-60"
+            >
+              <FiCpu size={16} />
+              {workingId === draftWorkingId
+                ? "Drafting..."
+                : submission.status !== "added"
+                  ? "Add Track to Draft Acceptance"
+                  : replyDraft.aiDraftId
+                    ? "Regenerate AI Draft"
+                    : "Draft with AI"}
+            </button>
+            {replyDraft.aiDraftId ? (
+              <>
+                <span className="text-xs font-bold uppercase tracking-[0.1em] text-ink/45">
+                  Training feedback
+                </span>
+                <button
+                  type="button"
+                  onClick={() => onRateDraft(submission, 1)}
+                  disabled={workingId === ratingWorkingId}
+                  aria-pressed={replyDraft.aiRating === 1}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition disabled:opacity-60 ${
+                    replyDraft.aiRating === 1
+                      ? "border-moss bg-moss text-paper"
+                      : "border-ink/15 text-ink hover:border-moss hover:text-moss"
+                  }`}
+                >
+                  <FiThumbsUp size={15} />
+                  Good
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onRateDraft(submission, -1)}
+                  disabled={workingId === ratingWorkingId}
+                  aria-pressed={replyDraft.aiRating === -1}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition disabled:opacity-60 ${
+                    replyDraft.aiRating === -1
+                      ? "border-clay bg-clay text-paper"
+                      : "border-ink/15 text-ink hover:border-clay hover:text-clay"
+                  }`}
+                >
+                  <FiThumbsDown size={15} />
+                  Needs Work
+                </button>
+              </>
+            ) : (
+              <span className="text-xs leading-5 text-ink/50">
+                {submission.status === "added"
+                  ? "The result fills the editor but never sends automatically."
+                  : "Acceptance drafting unlocks after the track is added."}
+              </span>
+            )}
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onSendReply(submission)}
+              disabled={
+                workingId === replyWorkingId || workingId === draftWorkingId
+              }
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-clay disabled:opacity-60"
+            >
+              <FiMail size={16} />
+              Send
+            </button>
+            <button
+              type="button"
+              onClick={() => updateReplyDraft(submission, { isOpen: false })}
+              className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : null}
+    </article>
+  );
+}
+
+export function SubmissionsTab({
+  submissions,
+  statusFilter,
+  setStatusFilter,
+  isLoading,
+  onRefresh,
+  ...cardProps
+}: SubmissionsTabProps) {
+  return (
+    <section className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-wrap gap-2">
+          {STATUS_FILTERS.map((status) => (
+            <button
+              key={status}
+              type="button"
+              onClick={() => setStatusFilter(status)}
+              className={`rounded-full px-4 py-2 text-sm font-bold capitalize transition ${
+                statusFilter === status
+                  ? "bg-moss text-paper"
+                  : "border border-ink/15 text-ink/70 hover:border-moss hover:text-moss"
+              }`}
+            >
+              {status}
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={onRefresh}
+          disabled={isLoading}
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
+        >
+          <FiRefreshCw size={16} />
+          Refresh
+        </button>
+      </div>
+
+      <div className="grid gap-4">
+        {submissions.map((submission) => (
+          <SubmissionCard
+            key={submission.id}
+            submission={submission}
+            {...cardProps}
+          />
+        ))}
+      </div>
+
+      {!isLoading && submissions.length === 0 ? (
+        <p className="rounded-md border border-ink/10 bg-paper/75 p-5 text-sm font-bold text-ink/60">
+          No submissions in this view.
+        </p>
+      ) : null}
+    </section>
+  );
+}
