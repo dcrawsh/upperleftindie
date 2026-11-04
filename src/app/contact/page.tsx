@@ -1,6 +1,6 @@
-import ContactForm from "../components/ContactForm";
-import SiteContainer from "../components/SiteContainer";
-import { ButtonLink } from "../components/ui/Button";
+import ContactForm from "@/app/components/ContactForm";
+import SiteContainer from "@/app/components/SiteContainer";
+import { ButtonLink } from "@/app/components/ui/Button";
 
 export const metadata = {
   title: "Contact",

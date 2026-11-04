@@ -3,11 +3,11 @@ import {
   createEmailTransporter,
   EmailServiceError,
   getEmailConfig,
-} from "../../../lib/email";
+} from "@/lib/email";
 import {
   getSpotifyTrackFromUrl,
   getSpotifyTrackSummary,
-} from "../../../lib/spotify";
+} from "@/lib/spotify";
 
 export const runtime = "nodejs";
 

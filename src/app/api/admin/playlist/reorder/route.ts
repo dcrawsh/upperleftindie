@@ -2,11 +2,11 @@ import { NextRequest } from "next/server";
 import {
   AdminAuthError,
   assertAdminRequest,
-} from "../../../../../lib/admin-auth";
+} from "@/lib/admin-auth";
 import {
   reorderActivePlaylistTrack,
   SpotifyRequestError,
-} from "../../../../../lib/spotify";
+} from "@/lib/spotify";
 
 export const runtime = "nodejs";
 

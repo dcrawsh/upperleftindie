@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
-import { getSpotifyTrackFromUrl } from "../../../lib/spotify";
-import { createSubmission, SupabaseRequestError } from "../../../lib/submissions";
+import { getSpotifyTrackFromUrl } from "@/lib/spotify";
+import { createSubmission, SupabaseRequestError } from "@/lib/submissions";
 
 export const runtime = "nodejs";
 

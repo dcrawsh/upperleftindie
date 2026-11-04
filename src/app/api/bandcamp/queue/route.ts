@@ -1,4 +1,8 @@
 import { NextRequest } from "next/server";
+import {
+  isSupabaseConfigured,
+  supabaseRequest as baseSupabaseRequest,
+} from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -26,48 +30,22 @@ class BandcampQueueError extends Error {
   }
 }
 
-function getSupabaseConfig() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!url || !key) {
+async function supabaseRequest<T>(path: string, init: RequestInit = {}) {
+  if (!isSupabaseConfigured()) {
     throw new BandcampQueueError(
       "Supabase is not configured. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
       500
     );
   }
 
-  return {
-    url: url.replace(/\/$/, ""),
-    key,
-  };
-}
-
-async function supabaseRequest<T>(path: string, init: RequestInit = {}) {
-  const { url, key } = getSupabaseConfig();
-  const response = await fetch(`${url}/rest/v1/${path}`, {
+  return baseSupabaseRequest<T>(path, {
     ...init,
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-      ...init.headers,
-    },
+    mapError: (status, details) =>
+      new BandcampQueueError(
+        details || `Supabase request failed with ${status}`,
+        status
+      ),
   });
-
-  if (!response.ok) {
-    const detail = await response.text();
-    throw new BandcampQueueError(
-      detail || `Supabase request failed with ${response.status}`,
-      response.status
-    );
-  }
-
-  if (response.status === 204) {
-    return undefined as T;
-  }
-
-  return (await response.json()) as T;
 }
 
 function normalizeBandcampArtistUrl(value: string) {

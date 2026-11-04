@@ -6,7 +6,7 @@ import {
   formatLocation,
   getPrimaryGenre,
   type Artist,
-} from "../../lib/artists";
+} from "@/lib/artists";
 
 /**
  * Artist Card — Figma component set 15:59.

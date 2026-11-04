@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import SiteContainer from "../components/SiteContainer";
-import SectionHeading from "../components/ui/SectionHeading";
-import { ButtonLink } from "../components/ui/Button";
-import { getArtists } from "../../lib/artists";
+import SiteContainer from "@/app/components/SiteContainer";
+import SectionHeading from "@/app/components/ui/SectionHeading";
+import { ButtonLink } from "@/app/components/ui/Button";
+import { getArtists } from "@/lib/artists";
 import SupportOptions from "./SupportOptions";
 
 export const metadata: Metadata = {

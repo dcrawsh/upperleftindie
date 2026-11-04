@@ -2,14 +2,14 @@ import Link from "next/link";
 import SiteContainer from "./components/SiteContainer";
 import TrackCard from "./components/TrackCard";
 import { ButtonLink } from "./components/ui/Button";
-import { getArtists } from "../lib/artists";
-import { getRecentTrackCards } from "../lib/recent-adds";
+import { getArtists } from "@/lib/artists";
+import { getRecentTrackCards } from "@/lib/recent-adds";
 import {
   ACTIVE_PLAYLIST_ID,
   ACTIVE_PLAYLIST_URL,
   REGION_SCOPE,
   playlistEmbedUrl,
-} from "../lib/site";
+} from "@/lib/site";
 
 // The recent-adds rail reads the submissions table, so the page revalidates
 // rather than being fully static.

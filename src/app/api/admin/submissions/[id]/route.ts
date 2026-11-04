@@ -2,11 +2,11 @@ import { NextRequest } from "next/server";
 import {
   assertAdminRequest,
   AdminAuthError,
-} from "../../../../../lib/admin-auth";
+} from "@/lib/admin-auth";
 import {
   SupabaseRequestError,
   updateSubmission,
-} from "../../../../../lib/submissions";
+} from "@/lib/submissions";
 
 export const runtime = "nodejs";
 

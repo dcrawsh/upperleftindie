@@ -1,6 +1,6 @@
-import SubmissionForm from "../components/SubmissionForm";
-import SiteContainer from "../components/SiteContainer";
-import { REGION_SCOPE } from "../../lib/site";
+import SubmissionForm from "@/app/components/SubmissionForm";
+import SiteContainer from "@/app/components/SiteContainer";
+import { REGION_SCOPE } from "@/lib/site";
 
 export const metadata = {
   title: "Submit Northwest Music",

@@ -1,11 +1,11 @@
 import { NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
-import { assertAdminRequest, AdminAuthError } from "../../../../../lib/admin-auth";
+import { assertAdminRequest, AdminAuthError } from "@/lib/admin-auth";
 import {
   SupabaseRequestError,
   updateSubmissionsByTrackUri,
-} from "../../../../../lib/submissions";
-import { SpotifyRequestError, unarchiveTrack } from "../../../../../lib/spotify";
+} from "@/lib/submissions";
+import { SpotifyRequestError, unarchiveTrack } from "@/lib/spotify";
 
 export const runtime = "nodejs";
 

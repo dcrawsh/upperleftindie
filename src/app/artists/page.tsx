@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import SiteContainer from "../components/SiteContainer";
-import SectionHeading from "../components/ui/SectionHeading";
-import { getArtists } from "../../lib/artists";
+import SiteContainer from "@/app/components/SiteContainer";
+import SectionHeading from "@/app/components/ui/SectionHeading";
+import { getArtists } from "@/lib/artists";
 import ArtistsBrowser from "./ArtistsBrowser";
 
 const artists = getArtists();

@@ -1,4 +1,4 @@
-import { artists as generatedArtists, type Artist } from "../data/artists.generated";
+import { artists as generatedArtists, type Artist } from "@/data/artists.generated";
 
 /**
  * Presentation helpers for the generated Bandcamp artist directory.

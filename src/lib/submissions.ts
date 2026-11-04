@@ -1,3 +1,9 @@
+import { supabaseRequest, SupabaseRequestError } from "@/lib/supabase";
+
+// Re-exported so existing `instanceof` narrowing in route handlers keeps
+// working against a single class identity.
+export { SupabaseRequestError };
+
 const submissionsTable = "submissions";
 
 export type SubmissionStatus = "pending" | "added" | "rejected" | "archived";
@@ -42,60 +48,6 @@ export type SubmissionPayload = {
   artistPageConsent?: unknown;
   subscribeToNewsletter?: unknown;
 };
-
-export class SupabaseRequestError extends Error {
-  constructor(
-    message: string,
-    readonly status = 500
-  ) {
-    super(message);
-  }
-}
-
-function getSupabaseConfig() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!url || !key) {
-    throw new SupabaseRequestError("Supabase is not configured.", 500);
-  }
-
-  return {
-    url: url.replace(/\/$/, ""),
-    key,
-  };
-}
-
-async function supabaseRequest<T>(
-  path: string,
-  init: RequestInit & { prefer?: string } = {}
-): Promise<T> {
-  const { url, key } = getSupabaseConfig();
-  const response = await fetch(`${url}/rest/v1/${path}`, {
-    ...init,
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-      ...(init.prefer ? { Prefer: init.prefer } : {}),
-      ...init.headers,
-    },
-  });
-
-  if (!response.ok) {
-    const details = await response.text();
-    throw new SupabaseRequestError(
-      details || `Supabase request failed with ${response.status}`,
-      response.status
-    );
-  }
-
-  if (response.status === 204) {
-    return undefined as T;
-  }
-
-  return (await response.json()) as T;
-}
 
 function asString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";

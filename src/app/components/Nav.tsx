@@ -8,7 +8,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
 import SiteContainer from "./SiteContainer";
 import { ButtonLink } from "./ui/Button";
-import { INSTAGRAM_URL } from "../../lib/site";
+import { INSTAGRAM_URL } from "@/lib/site";
 
 /**
  * Header — Figma component set 16:23.

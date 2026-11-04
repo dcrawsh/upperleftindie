@@ -3,6 +3,11 @@ import {
   getSpotifyTrackFromUrl,
   listActivePlaylistTracks,
 } from "./spotify";
+import {
+  isSupabaseConfigured,
+  supabasePath,
+  supabaseRequest,
+} from "./supabase";
 
 /**
  * Recent playlist adds, attributed.
@@ -162,14 +167,11 @@ export async function getRecentTrackCards(limit = 3): Promise<RecentTrackCard[]>
 }
 
 export async function getRecentAdds(limit = 3): Promise<RecentAdd[]> {
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
+  if (!isSupabaseConfigured()) {
     return [];
   }
 
-  const params = new URLSearchParams({
+  const path = supabasePath("submissions", {
     select: PUBLIC_COLUMNS,
     status: "eq.added",
     artist_page_consent: "is.true",
@@ -179,24 +181,7 @@ export async function getRecentAdds(limit = 3): Promise<RecentAdd[]> {
   });
 
   try {
-    const response = await fetch(
-      `${supabaseUrl.replace(/\/$/, "")}/rest/v1/submissions?${params.toString()}`,
-      {
-        headers: {
-          apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`,
-        },
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      // Status only — submission rows must never reach the logs.
-      console.error("recent adds fetch failed", response.status);
-      return [];
-    }
-
-    const rows = (await response.json()) as RecentAddRow[];
+    const rows = await supabaseRequest<RecentAddRow[]>(path);
 
     return rows.map((row) => ({
       artistName: row.artist_name,
@@ -208,6 +193,7 @@ export async function getRecentAdds(limit = 3): Promise<RecentAdd[]> {
       addedAt: row.active_playlist_added_at,
     }));
   } catch (error) {
+    // Status/message only — submission rows must never reach the logs.
     console.error(
       "recent adds fetch failed",
       error instanceof Error ? error.message : "Unknown error"

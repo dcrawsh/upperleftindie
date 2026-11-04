@@ -3,7 +3,7 @@ import { Archivo_Narrow, Public_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
 import SiteFooter from "./components/SiteFooter";
-import { SITE_DESCRIPTION, SITE_URL } from "../lib/site";
+import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 const siteUrl = SITE_URL;
 const siteDescription = SITE_DESCRIPTION;

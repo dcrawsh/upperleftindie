@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import SiteContainer from "../components/SiteContainer";
+import SiteContainer from "@/app/components/SiteContainer";
 import AdminDashboard from "./AdminDashboard";
 
 export const metadata: Metadata = {

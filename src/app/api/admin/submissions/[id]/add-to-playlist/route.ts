@@ -3,18 +3,18 @@ import { revalidatePath } from "next/cache";
 import {
   assertAdminRequest,
   AdminAuthError,
-} from "../../../../../../lib/admin-auth";
+} from "@/lib/admin-auth";
 import {
   getSubmission,
   SupabaseRequestError,
   updateSubmission,
-} from "../../../../../../lib/submissions";
+} from "@/lib/submissions";
 import {
   activePlaylistHasTrack,
   addTrackToActivePlaylist,
   getSpotifyTrackFromUrl,
   SpotifyRequestError,
-} from "../../../../../../lib/spotify";
+} from "@/lib/spotify";
 
 export const runtime = "nodejs";
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import SiteContainer from "../../components/SiteContainer";
-import ConfirmationPanel from "../../components/ui/ConfirmationPanel";
-import { ButtonLink } from "../../components/ui/Button";
+import SiteContainer from "@/app/components/SiteContainer";
+import ConfirmationPanel from "@/app/components/ui/ConfirmationPanel";
+import { ButtonLink } from "@/app/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Thanks for Supporting the Project",

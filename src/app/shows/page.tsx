@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import SiteContainer from "../components/SiteContainer";
-import EmptyState from "../components/ui/EmptyState";
-import SectionHeading from "../components/ui/SectionHeading";
-import { ButtonLink } from "../components/ui/Button";
+import SiteContainer from "@/app/components/SiteContainer";
+import EmptyState from "@/app/components/ui/EmptyState";
+import SectionHeading from "@/app/components/ui/SectionHeading";
+import { ButtonLink } from "@/app/components/ui/Button";
 
 export const dynamic = "force-dynamic";
 

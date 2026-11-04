@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FaBandcamp, FaSpotify } from "react-icons/fa";
-import { getArtistInitials } from "../../lib/artists";
-import type { RecentTrackCard } from "../../lib/recent-adds";
+import { getArtistInitials } from "@/lib/artists";
+import type { RecentTrackCard } from "@/lib/recent-adds";
 
 /**
  * Track Row — Figma component set 14:100.

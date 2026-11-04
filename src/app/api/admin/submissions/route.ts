@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
-import { assertAdminRequest, AdminAuthError } from "../../../../lib/admin-auth";
-import { listSubmissions, SupabaseRequestError } from "../../../../lib/submissions";
+import { assertAdminRequest, AdminAuthError } from "@/lib/admin-auth";
+import { listSubmissions, SupabaseRequestError } from "@/lib/submissions";
 
 export const runtime = "nodejs";
 

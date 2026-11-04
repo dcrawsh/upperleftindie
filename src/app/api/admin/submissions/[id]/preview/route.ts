@@ -2,20 +2,20 @@ import { NextRequest } from "next/server";
 import {
   AdminAuthError,
   assertAdminRequest,
-} from "../../../../../../lib/admin-auth";
+} from "@/lib/admin-auth";
 import {
   ApplePreviewError,
   findApplePreview,
-} from "../../../../../../lib/apple-preview";
+} from "@/lib/apple-preview";
 import {
   getSpotifyTrackFromUrl,
   getSpotifyTrackPreviewDetails,
   SpotifyRequestError,
-} from "../../../../../../lib/spotify";
+} from "@/lib/spotify";
 import {
   getSubmission,
   SupabaseRequestError,
-} from "../../../../../../lib/submissions";
+} from "@/lib/submissions";
 
 export const runtime = "nodejs";
 

@@ -5,6 +5,7 @@ import {
   FiArchive,
   FiCheck,
   FiCornerUpLeft,
+  FiCpu,
   FiExternalLink,
   FiLock,
   FiMail,
@@ -12,6 +13,8 @@ import {
   FiPause,
   FiPlay,
   FiRefreshCw,
+  FiThumbsDown,
+  FiThumbsUp,
   FiX,
 } from "react-icons/fi";
 import { FaSpotify } from "react-icons/fa";
@@ -55,6 +58,8 @@ type ReplyDraft = {
   isOpen: boolean;
   subject: string;
   message: string;
+  aiDraftId?: string;
+  aiRating?: -1 | 0 | 1;
 };
 
 type PreviewState = {
@@ -349,16 +354,26 @@ export default function AdminDashboard() {
     clearAdminSession();
   }
 
-  async function addSubmissionToPlaylist(id: string) {
-    setWorkingId(id);
+  async function addSubmissionToPlaylist(submission: Submission) {
+    setWorkingId(submission.id);
     setMessage("");
 
     try {
-      await adminFetch(`/api/admin/submissions/${id}/add-to-playlist`, {
-        method: "POST",
-      });
-      setMessage("Track added to the active playlist.");
-      await loadSubmissions();
+      const data = await adminFetch<{ submission?: Submission }>(
+        `/api/admin/submissions/${submission.id}/add-to-playlist`,
+        { method: "POST" }
+      );
+
+      if (data.submission) {
+        setSubmissions((current) =>
+          current.map((item) =>
+            item.id === data.submission?.id ? data.submission : item
+          )
+        );
+      }
+
+      setStatusFilter("added");
+      await generateSubmissionReply(submission, true);
     } catch (error) {
       setMessage(getErrorMessage(error));
     } finally {
@@ -439,6 +454,81 @@ Upper Left Indie team`;
     updateReplyDraft(submission, { isOpen: !draft.isOpen });
   }
 
+  async function generateSubmissionReply(
+    submission: Submission,
+    trackWasAdded = false
+  ) {
+    const draft = getReplyDraft(submission);
+    const draftWorkingId = `draft-${submission.id}`;
+
+    updateReplyDraft(submission, { isOpen: true });
+    setWorkingId(draftWorkingId);
+    setMessage(trackWasAdded ? "Track added. Drafting a reply locally..." : "");
+
+    try {
+      const data = await adminFetch<{
+        draftId: string;
+        subject: string;
+        message: string;
+      }>(`/api/admin/submissions/${submission.id}/draft-reply`, {
+        method: "POST",
+        body: JSON.stringify({ previousDraftId: draft.aiDraftId }),
+      });
+
+      updateReplyDraft(submission, {
+        isOpen: true,
+        subject: data.subject,
+        message: data.message,
+        aiDraftId: data.draftId,
+        aiRating: 0,
+      });
+      setMessage(
+        trackWasAdded
+          ? "Track added and local AI reply drafted. Review it before sending."
+          : "Local AI reply drafted. Review it before sending."
+      );
+      return true;
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      setMessage(
+        trackWasAdded
+          ? `Track added, but the local draft failed: ${errorMessage}`
+          : errorMessage
+      );
+      return false;
+    } finally {
+      setWorkingId("");
+    }
+  }
+
+  async function rateReplyDraft(
+    submission: Submission,
+    rating: -1 | 1
+  ) {
+    const draft = getReplyDraft(submission);
+    if (!draft.aiDraftId) return;
+
+    const ratingWorkingId = `rating-${submission.id}`;
+    setWorkingId(ratingWorkingId);
+
+    try {
+      await adminFetch(`/api/admin/reply-drafts/${draft.aiDraftId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ rating, feedbackTags: [] }),
+      });
+      updateReplyDraft(submission, { aiRating: rating });
+      setMessage(
+        rating === 1
+          ? "Draft marked as a good example."
+          : "Draft marked as needing work. Your final edit will be saved if you send it."
+      );
+    } catch (error) {
+      setMessage(getErrorMessage(error));
+    } finally {
+      setWorkingId("");
+    }
+  }
+
   async function sendSubmissionReply(submission: Submission) {
     const draft = getReplyDraft(submission);
     const replyId = `reply-${submission.id}`;
@@ -452,13 +542,17 @@ Upper Left Indie team`;
     setMessage("");
 
     try {
-      const data = await adminFetch<{ submission?: Submission }>(
+      const data = await adminFetch<{
+        submission?: Submission;
+        trainingSaved?: boolean | null;
+      }>(
         `/api/admin/submissions/${submission.id}/reply`,
         {
           method: "POST",
           body: JSON.stringify({
             subject: draft.subject,
             message: draft.message,
+            draftId: draft.aiDraftId,
           }),
         }
       );
@@ -469,8 +563,17 @@ Upper Left Indie team`;
           )
         );
       }
-      updateReplyDraft(submission, { isOpen: false, message: "" });
-      setMessage(`Reply sent to ${submission.email}.`);
+      updateReplyDraft(submission, {
+        isOpen: false,
+        message: "",
+        aiDraftId: undefined,
+        aiRating: undefined,
+      });
+      setMessage(
+        data.trainingSaved === false
+          ? `Reply sent to ${submission.email}, but the training example could not be saved.`
+          : `Reply sent to ${submission.email}.`
+      );
     } catch (error) {
       setMessage(getErrorMessage(error));
     } finally {
@@ -802,6 +905,8 @@ Upper Left Indie team`;
             {submissions.map((submission) => {
               const replyDraft = getReplyDraft(submission);
               const replyWorkingId = `reply-${submission.id}`;
+              const draftWorkingId = `draft-${submission.id}`;
+              const ratingWorkingId = `rating-${submission.id}`;
               const hasReplied = Boolean(submission.replied_at);
               const previewKey = `submission:${submission.id}`;
               const previewState = previewsByKey[previewKey];
@@ -938,17 +1043,23 @@ Upper Left Indie team`;
                       </button>
                       <button
                         type="button"
-                        onClick={() => addSubmissionToPlaylist(submission.id)}
-                        disabled={workingId === submission.id}
+                        onClick={() => addSubmissionToPlaylist(submission)}
+                        disabled={
+                          workingId === submission.id ||
+                          workingId === draftWorkingId
+                        }
                         className="inline-flex items-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-ink disabled:opacity-60"
                       >
                         <FiCheck size={16} />
-                        Add
+                        Add + Draft
                       </button>
                       <button
                         type="button"
                         onClick={() => rejectSubmission(submission.id)}
-                        disabled={workingId === submission.id}
+                        disabled={
+                          workingId === submission.id ||
+                          workingId === draftWorkingId
+                        }
                         className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
                       >
                         <FiX size={16} />
@@ -986,11 +1097,75 @@ Upper Left Indie team`;
                           className="w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base font-normal leading-6 text-ink outline-none transition focus:border-clay"
                         />
                       </label>
+                      <div className="flex flex-wrap items-center gap-2 rounded-md border border-ink/10 bg-white/60 p-3">
+                        <button
+                          type="button"
+                          onClick={() => generateSubmissionReply(submission)}
+                          disabled={
+                            submission.status !== "added" ||
+                            workingId === draftWorkingId
+                          }
+                          className="inline-flex items-center gap-2 rounded-full border border-clay/40 px-4 py-2 text-sm font-bold text-clay transition hover:border-ink hover:text-ink disabled:opacity-60"
+                        >
+                          <FiCpu size={16} />
+                          {workingId === draftWorkingId
+                            ? "Drafting locally..."
+                            : submission.status !== "added"
+                              ? "Add Track to Draft Acceptance"
+                              : replyDraft.aiDraftId
+                                ? "Regenerate AI Draft"
+                                : "Draft with Local AI"}
+                        </button>
+                        {replyDraft.aiDraftId ? (
+                          <>
+                            <span className="text-xs font-bold uppercase tracking-[0.1em] text-ink/45">
+                              Training feedback
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => rateReplyDraft(submission, 1)}
+                              disabled={workingId === ratingWorkingId}
+                              aria-pressed={replyDraft.aiRating === 1}
+                              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition disabled:opacity-60 ${
+                                replyDraft.aiRating === 1
+                                  ? "border-moss bg-moss text-paper"
+                                  : "border-ink/15 text-ink hover:border-moss hover:text-moss"
+                              }`}
+                            >
+                              <FiThumbsUp size={15} />
+                              Good
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => rateReplyDraft(submission, -1)}
+                              disabled={workingId === ratingWorkingId}
+                              aria-pressed={replyDraft.aiRating === -1}
+                              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition disabled:opacity-60 ${
+                                replyDraft.aiRating === -1
+                                  ? "border-clay bg-clay text-paper"
+                                  : "border-ink/15 text-ink hover:border-clay hover:text-clay"
+                              }`}
+                            >
+                              <FiThumbsDown size={15} />
+                              Needs Work
+                            </button>
+                          </>
+                        ) : (
+                          <span className="text-xs leading-5 text-ink/50">
+                            {submission.status === "added"
+                              ? "The result fills the editor but never sends automatically."
+                              : "Acceptance drafting unlocks after the track is added."}
+                          </span>
+                        )}
+                      </div>
                       <div className="flex flex-wrap items-center gap-2">
                         <button
                           type="button"
                           onClick={() => sendSubmissionReply(submission)}
-                          disabled={workingId === replyWorkingId}
+                          disabled={
+                            workingId === replyWorkingId ||
+                            workingId === draftWorkingId
+                          }
                           className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-clay disabled:opacity-60"
                         >
                           <FiMail size={16} />

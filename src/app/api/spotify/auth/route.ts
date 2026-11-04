@@ -4,7 +4,7 @@ import {
   assertSpotifyAuthConfigured,
   getRequestOrigin,
   getSpotifyRedirectUri,
-} from "../../../../lib/spotify-auth";
+} from "@/lib/spotify-auth";
 
 export const runtime = "nodejs";
 

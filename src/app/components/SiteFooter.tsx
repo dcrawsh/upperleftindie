@@ -1,7 +1,7 @@
 import Link from "next/link";
 import FooterSubscribe from "./FooterSubscribe";
 import SiteContainer from "./SiteContainer";
-import { INSTAGRAM_URL } from "../../lib/site";
+import { INSTAGRAM_URL } from "@/lib/site";
 
 /**
  * Footer — Figma 21:76 (desktop) / 22:124 (mobile).

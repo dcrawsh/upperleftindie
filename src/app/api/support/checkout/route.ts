@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import type { SupportOptionKey } from "../../../support-the-project/supportData";
+import type { SupportOptionKey } from "@/app/support-the-project/supportData";
 
 export const runtime = "nodejs";
 

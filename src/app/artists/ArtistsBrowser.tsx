@@ -2,16 +2,16 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
-import ArtistCard from "../components/ArtistCard";
-import EmptyState from "../components/ui/EmptyState";
-import { Button } from "../components/ui/Button";
-import { Tag } from "../components/ui/Tag";
+import ArtistCard from "@/app/components/ArtistCard";
+import EmptyState from "@/app/components/ui/EmptyState";
+import { Button } from "@/app/components/ui/Button";
+import { Tag } from "@/app/components/ui/Tag";
 import {
   getPrimaryGenre,
   getRegion,
   REGIONS,
   type Artist,
-} from "../../lib/artists";
+} from "@/lib/artists";
 
 /**
  * Artists browser — Figma "Artists · Desktop 1440" (25:95) and

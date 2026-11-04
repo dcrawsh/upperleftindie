@@ -10,8 +10,8 @@ import {
   TextField,
   TextareaField,
 } from "./ui/Field";
-import { genreOptions, getGenreLabel } from "../../lib/genres";
-import { ACTIVE_PLAYLIST_URL, INSTAGRAM_URL, REGION_SCOPE } from "../../lib/site";
+import { genreOptions, getGenreLabel } from "@/lib/genres";
+import { ACTIVE_PLAYLIST_URL, INSTAGRAM_URL, REGION_SCOPE } from "@/lib/site";
 
 /**
  * Submission form — Figma "Submit · Desktop 1440" (24:76),

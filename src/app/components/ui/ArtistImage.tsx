@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getArtistInitials } from "../../../lib/artists";
+import { getArtistInitials } from "@/lib/artists";
 
 /**
  * ArtistImage — Figma component set 46:310.

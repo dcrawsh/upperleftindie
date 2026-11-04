@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import SiteContainer from "../components/SiteContainer";
-import SectionHeading from "../components/ui/SectionHeading";
-import { ButtonLink } from "../components/ui/Button";
-import { playlistEmbedUrl } from "../../lib/site";
+import SiteContainer from "@/app/components/SiteContainer";
+import SectionHeading from "@/app/components/ui/SectionHeading";
+import { ButtonLink } from "@/app/components/ui/Button";
+import { playlistEmbedUrl } from "@/lib/site";
 
 const archivePlaylistId =
   process.env.SPOTIFY_ARCHIVE_PLAYLIST_ID ?? "4eNvO2pXMvaDPDhs271NZr";

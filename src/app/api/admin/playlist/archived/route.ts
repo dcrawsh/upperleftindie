@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server";
-import { assertAdminRequest, AdminAuthError } from "../../../../../lib/admin-auth";
+import { assertAdminRequest, AdminAuthError } from "@/lib/admin-auth";
 import {
   listArchivePlaylistTracks,
   SpotifyRequestError,
-} from "../../../../../lib/spotify";
+} from "@/lib/spotify";
 
 export const runtime = "nodejs";
 

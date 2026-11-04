@@ -1,6 +1,6 @@
-import SiteContainer from "../components/SiteContainer";
-import SectionHeading from "../components/ui/SectionHeading";
-import { ButtonLink } from "../components/ui/Button";
+import SiteContainer from "@/app/components/SiteContainer";
+import SectionHeading from "@/app/components/ui/SectionHeading";
+import { ButtonLink } from "@/app/components/ui/Button";
 
 export const metadata = {
   title: "Northwest Music Notes",
