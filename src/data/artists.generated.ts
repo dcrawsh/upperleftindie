@@ -24,6 +24,30 @@ export type Artist = {
 
 export const artists: Artist[] = [
   {
+    "name": "Fountain Park Apts.",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://fountainparkapts.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1961118381_10.jpg",
+    "bio": "booking/collabs/ saying hi: email: fountainparkaptsmusic@gmail.com",
+    "submittedGenre": "Indie Folk",
+    "tags": [
+      "Indie Folk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://fountainparkapts.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "DESERVE",
+        "type": "album",
+        "url": "https://fountainparkapts.bandcamp.com/album/deserve/"
+      }
+    ]
+  },
+  {
     "name": "Bad Quitters",
     "location": "Boise, Idaho",
     "bandcampUrl": "https://badquitters.bandcamp.com/",
@@ -1211,30 +1235,6 @@ export const artists: Artist[] = [
     ]
   },
   {
-    "name": "Fountain Park Apts.",
-    "location": "Portland, Oregon",
-    "bandcampUrl": "https://fountainparkapts.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1961118381_10.jpg",
-    "bio": "booking/collabs/ saying hi: email: fountainparkaptsmusic@gmail.com",
-    "submittedGenre": "Indie Rock",
-    "tags": [
-      "Indie Rock"
-    ],
-    "links": [
-      {
-        "label": "Bandcamp",
-        "url": "https://fountainparkapts.bandcamp.com/"
-      }
-    ],
-    "releases": [
-      {
-        "title": "DESERVE",
-        "type": "album",
-        "url": "https://fountainparkapts.bandcamp.com/album/deserve/"
-      }
-    ]
-  },
-  {
     "name": "Rose Gerber",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://rosegerbermusic.bandcamp.com/",
@@ -1703,11 +1703,6 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "DEMO",
-        "type": "album",
-        "url": "https://terriblepop.bandcamp.com/album/demo"
-      },
-      {
         "title": "III",
         "type": "album",
         "url": "https://terriblepop.bandcamp.com/album/iii-2"
@@ -1726,6 +1721,11 @@ export const artists: Artist[] = [
         "title": "Terrible Pop",
         "type": "album",
         "url": "https://terriblepop.bandcamp.com/album/terrible-pop"
+      },
+      {
+        "title": "DEMO",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/demo"
       }
     ]
   },
@@ -3722,6 +3722,118 @@ export const artists: Artist[] = [
         "title": "Olympia",
         "type": "track",
         "url": "https://formerjock.bandcamp.com/track/olympia"
+      }
+    ]
+  },
+  {
+    "name": "Change Life",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://changelife.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2877844579_10.jpg",
+    "bio": "Change Life, change the world. These two things make only one for us.",
+    "submittedGenre": "Post-punk",
+    "tags": [
+      "Post-punk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://changelife.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Change Life",
+        "type": "album",
+        "url": "https://changelife.bandcamp.com/album/change-life/"
+      }
+    ]
+  },
+  {
+    "name": "The Second Half Walters",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://thesecondhalfwalters.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a2330501031_10.jpg",
+    "bio": "The Second Half Walters is an indie punk band from Portland, OR. They write energetic songs, with big dynamic shifts and poppy melodies, all backed up with grit and speed. The lineup is: Bobby Naughton on lead vocals and guitar, Ben Goldberg on lead guitar/vocals, Ellie Barany on keyboard/vocals, Dylan Nanney on bass, and Alonzo Watson on drums. ... more",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thesecondhalfwalters.bandcamp.com/"
+      },
+      {
+        "label": "linktr.ee",
+        "url": "https://linktr.ee/secondhalfwalters"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/secondhalfwalters"
+      },
+      {
+        "label": "tiktok.com",
+        "url": "https://www.tiktok.com/@secondhalfwalters"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/secondhalfwalters"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Brain Garden",
+        "type": "album",
+        "url": "https://thesecondhalfwalters.bandcamp.com/album/brain-garden-2/"
+      }
+    ]
+  },
+  {
+    "name": "Hadley Parrish-Cotton",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://hadleyparrishcotton.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0041266452_10.jpg",
+    "bio": "Making music that toes the line between folk, emo, and country in Portland, Oregon",
+    "submittedGenre": "Folk",
+    "tags": [
+      "Folk"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://hadleyparrishcotton.bandcamp.com/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/HadleyPCMusic/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Quit Smoking",
+        "type": "album",
+        "url": "https://hadleyparrishcotton.bandcamp.com/album/quit-smoking"
+      },
+      {
+        "title": "States Between",
+        "type": "album",
+        "url": "https://hadleyparrishcotton.bandcamp.com/album/states-between"
+      },
+      {
+        "title": "States Between (Single)",
+        "type": "track",
+        "url": "https://hadleyparrishcotton.bandcamp.com/track/states-between-single"
+      },
+      {
+        "title": "Ship In a Bottle",
+        "type": "album",
+        "url": "https://hadleyparrishcotton.bandcamp.com/album/ship-in-a-bottle"
+      },
+      {
+        "title": "Sophomore (Demos)",
+        "type": "album",
+        "url": "https://hadleyparrishcotton.bandcamp.com/album/sophomore-demos"
       }
     ]
   }
