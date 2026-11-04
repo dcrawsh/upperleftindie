@@ -37,6 +37,10 @@ const spotifyTrackIdPattern = /^[A-Za-z0-9]{22}$/;
 const defaultActivePlaylistId = "3LTI227By7Wt7hGs3mz5hF";
 const activePlaylistInsertionPosition = 5;
 
+type SpotifyPlaylistItemCountResponse = {
+  total: number;
+};
+
 function getSpotifyConfig() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -146,12 +150,15 @@ export function getSpotifyTrackFromUrl(value: string) {
 
 export async function addTrackToActivePlaylist(trackUri: string) {
   const { activePlaylistId } = getSpotifyConfig();
+  const { total } = await spotifyRequest<SpotifyPlaylistItemCountResponse>(
+    `playlists/${activePlaylistId}/items?limit=1&fields=total`
+  );
 
   await spotifyRequest(`playlists/${activePlaylistId}/items`, {
     method: "POST",
     body: JSON.stringify({
       uris: [trackUri],
-      position: activePlaylistInsertionPosition,
+      position: Math.min(activePlaylistInsertionPosition, total),
     }),
   });
 }
@@ -382,11 +389,15 @@ export async function unarchiveTrack(trackUri: string) {
     );
   }
 
+  const { total } = await spotifyRequest<SpotifyPlaylistItemCountResponse>(
+    `playlists/${activePlaylistId}/items?limit=1&fields=total`
+  );
+
   await spotifyRequest(`playlists/${activePlaylistId}/items`, {
     method: "POST",
     body: JSON.stringify({
       uris: [trackUri],
-      position: activePlaylistInsertionPosition,
+      position: Math.min(activePlaylistInsertionPosition, total),
     }),
   });
 
