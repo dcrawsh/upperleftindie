@@ -172,16 +172,13 @@ export default function AdminDashboard() {
     updateReplyDraft(submission, { isOpen: !getReplyDraft(submission).isOpen });
   }
 
-  async function generateSubmissionReply(
-    submission: Submission,
-    trackWasAdded = false
-  ) {
+  async function generateSubmissionReply(submission: Submission) {
     const draft = getReplyDraft(submission);
     const draftWorkingId = `draft-${submission.id}`;
 
     updateReplyDraft(submission, { isOpen: true });
     setWorkingId(draftWorkingId);
-    setMessage(trackWasAdded ? "Track added. Drafting a reply..." : "");
+    setMessage("");
 
     try {
       const data = await adminFetch<{
@@ -201,24 +198,21 @@ export default function AdminDashboard() {
         aiRating: 0,
       });
       setMessage(
-        trackWasAdded
-          ? "Track added and AI reply drafted. Review it before sending."
-          : "AI reply drafted. Review it before sending."
+        "AI reply drafted. The track joins the playlist when you send it."
       );
       return true;
     } catch (error) {
-      const errorMessage = getErrorMessage(error);
-      setMessage(
-        trackWasAdded
-          ? `Track added, but the draft failed: ${errorMessage}`
-          : errorMessage
-      );
+      setMessage(getErrorMessage(error));
       return false;
     } finally {
       setWorkingId("");
     }
   }
 
+  /**
+   * Repair path only. The acceptance normally adds the track itself, so this
+   * runs when the email went out but Spotify refused the insert.
+   */
   async function addSubmissionToPlaylist(submission: Submission) {
     setWorkingId(submission.id);
     setMessage("");
@@ -230,15 +224,15 @@ export default function AdminDashboard() {
       );
 
       if (data.submission) {
+        const added = data.submission;
         setSubmissions((current) =>
-          current.map((item) =>
-            item.id === data.submission?.id ? data.submission : item
-          )
+          statusFilter !== "all" && added.status !== statusFilter
+            ? current.filter((item) => item.id !== added.id)
+            : current.map((item) => (item.id === added.id ? added : item))
         );
       }
 
-      setStatusFilter("added");
-      await generateSubmissionReply(submission, true);
+      setMessage("Track added to the playlist.");
     } catch (error) {
       setMessage(getErrorMessage(error));
     } finally {
@@ -303,6 +297,8 @@ export default function AdminDashboard() {
       const data = await adminFetch<{
         submission?: Submission;
         trainingSaved?: boolean | null;
+        playlistAdded?: boolean | null;
+        submissionSaved?: boolean;
       }>(`/api/admin/submissions/${submission.id}/reply`, {
         method: "POST",
         body: JSON.stringify({
@@ -313,10 +309,13 @@ export default function AdminDashboard() {
       });
 
       if (data.submission) {
+        const sent = data.submission;
+        // Sending an acceptance flips the status to "added", so the row may no
+        // longer belong in the list the curator is currently filtered to.
         setSubmissions((current) =>
-          current.map((item) =>
-            item.id === data.submission?.id ? data.submission : item
-          )
+          statusFilter !== "all" && sent.status !== statusFilter
+            ? current.filter((item) => item.id !== sent.id)
+            : current.map((item) => (item.id === sent.id ? sent : item))
         );
       }
 
@@ -327,9 +326,15 @@ export default function AdminDashboard() {
         aiRating: undefined,
       });
       setMessage(
-        data.trainingSaved === false
-          ? `Reply sent to ${submission.email}, but the training example could not be saved.`
-          : `Reply sent to ${submission.email}.`
+        data.submissionSaved === false
+          ? `Reply sent to ${submission.email}, but the submission could not be updated. Refresh before sending again.`
+          : data.playlistAdded === false
+            ? `Reply sent to ${submission.email}, but the track could not be added to the playlist. Use Add to Playlist to finish.`
+            : data.trainingSaved === false
+              ? `Reply sent to ${submission.email}, but the training example could not be saved.`
+              : data.playlistAdded
+                ? `Reply sent to ${submission.email} and the track is on the playlist.`
+                : `Reply sent to ${submission.email}.`
       );
     } catch (error) {
       setMessage(getErrorMessage(error));

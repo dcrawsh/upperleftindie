@@ -2,6 +2,7 @@
 
 import { FaSpotify } from "react-icons/fa";
 import {
+  FiAlertTriangle,
   FiCheck,
   FiCpu,
   FiExternalLink,
@@ -73,6 +74,12 @@ function SubmissionCard({
   const draftWorkingId = `draft-${submission.id}`;
   const ratingWorkingId = `rating-${submission.id}`;
   const hasReplied = Boolean(submission.replied_at);
+  const isOnPlaylist = Boolean(submission.active_playlist_added_at);
+  const isInReview = submission.status === "pending";
+  const canDraftAcceptance = isInReview && !hasReplied;
+  // The acceptance adds the track itself, so a replied submission that never
+  // reached the playlist is a failed insert waiting to be retried.
+  const needsPlaylistRepair = isInReview && hasReplied && !isOnPlaylist;
   const previewKey = `submission:${submission.id}`;
   const previewState = previewsByKey[previewKey];
   const isPreviewLoading = loadingPreviewKey === previewKey;
@@ -82,7 +89,11 @@ function SubmissionCard({
   return (
     <article
       className={`rounded-md border p-5 shadow-soft ${
-        hasReplied ? "border-moss/40 bg-moss/5" : "border-ink/10 bg-paper"
+        needsPlaylistRepair
+          ? "border-clay/40 bg-clay/5"
+          : hasReplied
+            ? "border-moss/40 bg-moss/5"
+            : "border-ink/10 bg-paper"
       }`}
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -98,7 +109,12 @@ function SubmissionCard({
               <h2 className="text-2xl font-black text-ink">
                 {submission.artist_name}
               </h2>
-              {hasReplied ? (
+              {needsPlaylistRepair ? (
+                <span className="inline-flex items-center gap-1 rounded-full bg-clay px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-paper">
+                  <FiAlertTriangle size={13} />
+                  Replied / Not On Playlist
+                </span>
+              ) : hasReplied ? (
                 <span className="inline-flex items-center gap-1 rounded-full bg-moss px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-paper">
                   <FiMail size={13} />
                   Replied
@@ -197,17 +213,31 @@ function SubmissionCard({
             <FiMail size={16} />
             {hasReplied ? "Replied" : "Reply"}
           </button>
-          <button
-            type="button"
-            onClick={() => onAddToPlaylist(submission)}
-            disabled={
-              workingId === submission.id || workingId === draftWorkingId
-            }
-            className="inline-flex items-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-ink disabled:opacity-60"
-          >
-            <FiCheck size={16} />
-            Add + Draft
-          </button>
+          {needsPlaylistRepair ? (
+            <button
+              type="button"
+              onClick={() => onAddToPlaylist(submission)}
+              disabled={workingId === submission.id}
+              className="inline-flex items-center gap-2 rounded-full bg-clay px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-ink disabled:opacity-60"
+            >
+              <FiCheck size={16} />
+              Add to Playlist
+            </button>
+          ) : canDraftAcceptance ? (
+            <button
+              type="button"
+              onClick={() => onGenerateReply(submission)}
+              disabled={
+                workingId === submission.id || workingId === draftWorkingId
+              }
+              className="inline-flex items-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-ink disabled:opacity-60"
+            >
+              <FiCpu size={16} />
+              {workingId === draftWorkingId
+                ? "Drafting..."
+                : "Draft Acceptance"}
+            </button>
+          ) : null}
           <button
             type="button"
             onClick={() => onReject(submission.id)}
@@ -251,16 +281,14 @@ function SubmissionCard({
             <button
               type="button"
               onClick={() => onGenerateReply(submission)}
-              disabled={
-                submission.status !== "added" || workingId === draftWorkingId
-              }
+              disabled={!isInReview || workingId === draftWorkingId}
               className="inline-flex items-center gap-2 rounded-full border border-clay/40 px-4 py-2 text-sm font-bold text-clay transition hover:border-ink hover:text-ink disabled:opacity-60"
             >
               <FiCpu size={16} />
               {workingId === draftWorkingId
                 ? "Drafting..."
-                : submission.status !== "added"
-                  ? "Add Track to Draft Acceptance"
+                : !isInReview
+                  ? "Acceptance Drafting Unavailable"
                   : replyDraft.aiDraftId
                     ? "Regenerate AI Draft"
                     : "Draft with AI"}
@@ -301,9 +329,11 @@ function SubmissionCard({
               </>
             ) : (
               <span className="text-xs leading-5 text-ink/50">
-                {submission.status === "added"
-                  ? "The result fills the editor but never sends automatically."
-                  : "Acceptance drafting unlocks after the track is added."}
+                {!isInReview
+                  ? "This submission has left the review queue."
+                  : isOnPlaylist
+                    ? "The result fills the editor but never sends automatically."
+                    : "The result fills the editor. Sending it adds the track to the playlist."}
               </span>
             )}
           </div>
@@ -317,7 +347,7 @@ function SubmissionCard({
               className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition hover:bg-clay disabled:opacity-60"
             >
               <FiMail size={16} />
-              Send
+              {canDraftAcceptance ? "Send + Add to Playlist" : "Send"}
             </button>
             <button
               type="button"

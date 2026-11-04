@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
 import {
   AdminAuthError,
   assertAdminRequest,
@@ -6,9 +7,15 @@ import {
 import { completeAiReplyDraft } from "@/lib/ai-reply-drafts";
 import { EmailServiceError, sendSiteEmail } from "@/lib/email";
 import {
+  activePlaylistHasTrack,
+  addTrackToActivePlaylist,
+  getSpotifyTrackFromUrl,
+} from "@/lib/spotify";
+import {
   getSubmission,
   SupabaseRequestError,
   updateSubmission,
+  type Submission,
 } from "@/lib/submissions";
 
 export const runtime = "nodejs";
@@ -56,6 +63,23 @@ export async function POST(
       );
     }
 
+    // Sending the acceptance is what accepts the submission: the email goes
+    // out first, then the track joins the playlist. Replies to rejected or
+    // archived rows are plain correspondence and never add anything.
+    const isAcceptance = submission.status === "pending";
+    const track = isAcceptance
+      ? getSpotifyTrackFromUrl(submission.song_link)
+      : null;
+
+    // Checked before the email leaves, so an unusable link never produces an
+    // acceptance the playlist cannot honour.
+    if (isAcceptance && !track) {
+      return Response.json(
+        { error: "Submission song link is not a Spotify track URL." },
+        { status: 400 }
+      );
+    }
+
     await sendSiteEmail({
       to: submission.email,
       subject,
@@ -63,10 +87,52 @@ export async function POST(
       fromName: "Upper Left Indie",
     });
 
-    const updatedSubmission = await updateSubmission(id, {
+    let playlistAdded: boolean | null = null;
+
+    if (track) {
+      try {
+        if (!(await activePlaylistHasTrack(track.uri))) {
+          await addTrackToActivePlaylist(track.uri);
+        }
+        playlistAdded = true;
+      } catch (error) {
+        // The artist has already been told they are in. Surface the failure
+        // instead of throwing, which would invite a duplicate send.
+        console.error("accepted track could not be added to playlist", error);
+        playlistAdded = false;
+      }
+    }
+
+    const updates = {
+      // Only a track that actually reached the playlist graduates, so a failed
+      // add leaves the row in the queue with a visible repair path.
+      ...(track && playlistAdded
+        ? {
+            status: "added" as const,
+            spotify_track_id: track.id,
+            spotify_track_uri: track.uri,
+            active_playlist_added_at: new Date().toISOString(),
+          }
+        : {}),
       replied_at: new Date().toISOString(),
       reply_subject: subject,
-    });
+    };
+
+    let updatedSubmission: Submission | null = null;
+    let submissionSaved = true;
+
+    try {
+      updatedSubmission = await updateSubmission(id, updates);
+    } catch (error) {
+      // Same reasoning as the training example below: the mail is already
+      // gone, so a bookkeeping failure must not surface as a failed send.
+      console.error("sent reply could not be recorded", error);
+      submissionSaved = false;
+    }
+
+    if (playlistAdded) {
+      revalidatePath("/");
+    }
 
     let trainingSaved: boolean | null = null;
 
@@ -91,6 +157,8 @@ export async function POST(
       success: true,
       submission: updatedSubmission,
       trainingSaved,
+      playlistAdded,
+      submissionSaved,
     });
   } catch (error) {
     console.error("admin submission reply error", error);

@@ -14,6 +14,7 @@ export default {
         paper: "#fffdf6",
         clay: "#b45f3a",
         gold: "#d8a648",
+        moss: "#2f5d3a",
 
         // Semantic surfaces
         page: "#fffdf6",

@@ -17,7 +17,7 @@ The site also publishes a Bandcamp artist directory and a scraped Portland show 
 
 | Term | Meaning |
 | --- | --- |
-| **Submission** | An artist-submitted track row in Supabase. Status flows `pending` → `added` \| `rejected` → `archived`. |
+| **Submission** | An artist-submitted track row in Supabase. Status flows `pending` → `added` \| `rejected` → `archived`. Sending the acceptance email is what adds the track to the playlist and promotes it to `added`. |
 | **Active playlist** | The public, curated Spotify playlist. Accepted tracks are inserted here. |
 | **Archive playlist** | A second Spotify playlist holding tracks rotated out of the active one. |
 | **Reply draft** | An AI-generated acceptance email stored in `ai_reply_drafts`, edited by the curator before sending. |
@@ -145,8 +145,16 @@ These are the patterns agents most often get wrong here.
   bounds before a draft reaches the operator. Keep it in sync with the output schema.
 - **Bump `AI_REPLY_PROMPT_VERSION`** whenever the prompt, schema, or example format
   changes — stored drafts are keyed to it for evaluation and future fine-tuning.
-- **A submission must be `status === "added"` before a reply can be drafted** — the
-  draft-reply route returns 409 otherwise.
+- **Sending the acceptance is what adds the track and promotes `pending` → `added`.**
+  The reply route emails the artist first, then inserts the track into the active
+  playlist. Nothing touches Spotify before the email goes out, so the curator never
+  accepts a track silently. Rejections are never replied to.
+- **A submission is `added` only when both halves are done** — email sent and track on
+  the playlist. If the Spotify insert fails after a successful send, the row stays
+  `pending` with `replied_at` set, and the add-to-playlist route completes the promotion
+  when it is retried. Do not make either route assume the other already ran.
+- **Validate the Spotify track URL before sending an acceptance.** The reply route
+  returns 400 on an unusable `song_link` while the email can still be withheld.
 - **The AI never sends email.** Drafts populate the subject/message fields; only the
   explicit Send action delivers mail.
 - **Only sent drafts with `rating=1` become training examples**, max two, newest first.

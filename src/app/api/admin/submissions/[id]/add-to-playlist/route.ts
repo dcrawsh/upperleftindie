@@ -46,8 +46,15 @@ export async function POST(
       await addTrackToActivePlaylist(track.uri);
     }
 
+    // A submission is "added" only once both halves of an acceptance are done:
+    // the email is sent and the track is on the playlist. Sending normally
+    // completes both, so this only promotes the row when it is repairing an
+    // acceptance whose playlist insert failed earlier.
+    const completesAcceptance =
+      submission.status === "pending" && Boolean(submission.replied_at);
+
     const updatedSubmission = await updateSubmission(id, {
-      status: "added",
+      ...(completesAcceptance ? { status: "added" as const } : {}),
       spotify_track_id: track.id,
       spotify_track_uri: track.uri,
       active_playlist_added_at: new Date().toISOString(),

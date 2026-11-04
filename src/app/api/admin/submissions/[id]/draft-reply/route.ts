@@ -44,11 +44,14 @@ export async function POST(
       return Response.json({ error: "Submission not found." }, { status: 404 });
     }
 
-    if (submission.status !== "added") {
+    // Nothing is on the playlist yet at draft time — the track is added when
+    // the acceptance is sent. Only guard against drafting an acceptance for a
+    // submission that is no longer in review.
+    if (submission.status === "rejected" || submission.status === "archived") {
       return Response.json(
         {
           error:
-            "Add the track to the playlist before drafting an acceptance reply.",
+            "Acceptance replies are only for submissions still in the review queue.",
         },
         { status: 409 }
       );
