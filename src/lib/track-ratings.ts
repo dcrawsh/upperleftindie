@@ -40,7 +40,7 @@ async function trackRatingRequest<T>(
 
       return new TrackRatingStoreError(
         missingTable
-          ? "Track ratings are not installed. Run supabase/track-ratings.sql."
+          ? "Track ratings are not installed. Apply the database migrations with yarn db:push."
           : details || `Track rating storage failed with ${status}`,
         status
       );

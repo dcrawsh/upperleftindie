@@ -43,6 +43,8 @@ export type ReplyDraft = {
   message: string;
   aiDraftId?: string;
   aiRating?: -1 | 0 | 1;
+  /** Playlist rating applied when the acceptance is sent; 2 stars when unset. */
+  trackRating?: TrackRating;
 };
 
 export type PreviewState = {

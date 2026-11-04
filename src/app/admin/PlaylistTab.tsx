@@ -9,6 +9,7 @@ import {
   FiRefreshCw,
   FiStar,
 } from "react-icons/fi";
+import { StarRating } from "./StarRating";
 import { formatDate, formatDaysLive } from "./helpers";
 import type {
   ActivePlaylistTrack,
@@ -16,47 +17,6 @@ import type {
   PreviewState,
   TrackRating,
 } from "./types";
-
-const ratings: TrackRating[] = [1, 2, 3];
-
-function StarRating({
-  track,
-  disabled,
-  onRate,
-}: {
-  track: ActivePlaylistTrack;
-  disabled: boolean;
-  onRate: (track: ActivePlaylistTrack, rating: TrackRating) => void;
-}) {
-  return (
-    <div
-      role="group"
-      aria-label={`Rating for ${track.name}`}
-      className="mt-2 flex items-center gap-0.5"
-    >
-      {ratings.map((rating) => {
-        const isFilled = rating <= track.rating;
-
-        return (
-          <button
-            key={rating}
-            type="button"
-            onClick={() => onRate(track, rating)}
-            disabled={disabled}
-            aria-pressed={rating === track.rating}
-            aria-label={`${rating} ${rating === 1 ? "star" : "stars"}`}
-            title={`${rating} ${rating === 1 ? "star" : "stars"}`}
-            className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition hover:text-gold disabled:cursor-not-allowed disabled:opacity-50 ${
-              isFilled ? "text-gold" : "text-ink/25"
-            }`}
-          >
-            <FiStar size={18} className={isFilled ? "fill-current" : ""} />
-          </button>
-        );
-      })}
-    </div>
-  );
-}
 
 export function PlaylistTab({
   tracks,
@@ -202,15 +162,18 @@ export function PlaylistTab({
                 <p className="truncate text-sm text-ink/65">
                   {track.artistNames} / {track.albumName}
                 </p>
-                <StarRating
-                  track={track}
-                  disabled={
-                    workingId.startsWith("rating:") ||
-                    workingId.startsWith("reorder:") ||
-                    workingId === "sort"
-                  }
-                  onRate={onRate}
-                />
+                <div className="mt-2">
+                  <StarRating
+                    value={track.rating}
+                    label={`Rating for ${track.name}`}
+                    disabled={
+                      workingId.startsWith("rating:") ||
+                      workingId.startsWith("reorder:") ||
+                      workingId === "sort"
+                    }
+                    onChange={(rating) => onRate(track, rating)}
+                  />
+                </div>
               </div>
               <div className="flex shrink-0 flex-wrap gap-2">
                 <button

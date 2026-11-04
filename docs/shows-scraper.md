@@ -14,7 +14,8 @@ at `/shows`.
 
 ## Supabase Setup
 
-Run `supabase/shows.sql` in the Supabase SQL editor for the project. It creates
+Apply the database migrations with `yarn db:push` (the `shows` table is in
+`supabase/migrations/20261104000000_baseline.sql`). It creates
 the `shows` table, adds indexes, and enables public read access through RLS.
 
 ## Environment Variables

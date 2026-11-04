@@ -285,6 +285,7 @@ export default function AdminDashboard() {
         submission?: Submission;
         trainingSaved?: boolean | null;
         playlistAdded?: boolean | null;
+        ratingSaved?: boolean | null;
         submissionSaved?: boolean;
       }>(`/api/admin/submissions/${submission.id}/reply`, {
         method: "POST",
@@ -292,6 +293,7 @@ export default function AdminDashboard() {
           subject: draft.subject,
           message: draft.message,
           draftId: draft.aiDraftId,
+          trackRating: draft.trackRating ?? 2,
         }),
       });
 
@@ -311,17 +313,20 @@ export default function AdminDashboard() {
         message: "",
         aiDraftId: undefined,
         aiRating: undefined,
+        trackRating: undefined,
       });
       setMessage(
         data.submissionSaved === false
           ? `Reply sent to ${submission.email}, but the submission could not be updated. Refresh before sending again.`
           : data.playlistAdded === false
             ? `Reply sent to ${submission.email}, but the track could not be added to the playlist. Use Add to Playlist to finish.`
-            : data.trainingSaved === false
-              ? `Reply sent to ${submission.email}, but the training example could not be saved.`
-              : data.playlistAdded
-                ? `Reply sent to ${submission.email} and the track is on the playlist.`
-                : `Reply sent to ${submission.email}.`
+            : data.ratingSaved === false
+              ? `Reply sent to ${submission.email} and the track is on the playlist, but its rating could not be saved. Set it on the Active Playlist tab.`
+              : data.trainingSaved === false
+                ? `Reply sent to ${submission.email}, but the training example could not be saved.`
+                : data.playlistAdded
+                  ? `Reply sent to ${submission.email} and the track is on the playlist.`
+                  : `Reply sent to ${submission.email}.`
       );
     } catch (error) {
       setMessage(getErrorMessage(error));

@@ -1,9 +1,9 @@
 ---
+name: review-changes
 description: "Review uncommitted changes in this repo against its conventions and invariants before committing — checks secrets, Next 15 route patterns, import depth, Tailwind tokens, and AI prompt safety."
+disable-model-invocation: true
 argument-hint: "optional: a path or area to focus on"
-agent: agent
 ---
-
 # Review Changes
 
 Review the current uncommitted changes$ARGUMENTS against this repo's conventions.
@@ -56,7 +56,7 @@ Skip subjective style nits.
 
 **Consistency**
 - A new env var is documented in `AGENTS.md`, `.env.example`, and `README.md`.
-- A schema change has a matching file in `supabase/` using `if not exists`, RLS, and the
+- A schema change has a new migration in `supabase/migrations/` using `if not exists`, RLS, and the
   shared `set_updated_at()` trigger — and the user is told to run it manually.
 - User-facing error strings are complete, actionable sentences.
 

@@ -9,9 +9,7 @@ The admin page lives at `/admin`.
 
 Required setup:
 
-- Run `supabase/submissions.sql` in Supabase.
-- Run `supabase/track-ratings.sql` in Supabase. It stores the 1-3 star curator ratings that
-  order the active playlist and seeds every accepted track at 2 stars.
+- Apply the database migrations with `yarn db:push` (see [Database migrations](#database-migrations)).
 - Set `ADMIN_PASSWORD` or `ADMIN_API_TOKEN`.
 - Set `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, and `SPOTIFY_REFRESH_TOKEN`.
 - Set `SPOTIFY_ARCHIVE_PLAYLIST_ID`.
@@ -34,6 +32,48 @@ New public submissions are saved to Supabase through `/api/submissions`, then
 the admin page can add pending tracks to Spotify or move active playlist tracks
 to the archive playlist.
 
+## Database migrations
+
+Schema changes live in `supabase/migrations/` as timestamped SQL files and are applied with
+the Supabase CLI, which is a dev dependency. There is one Supabase project and it is
+production.
+
+One-time setup on a machine:
+
+```bash
+npx supabase login                                  # opens the browser, stores a token locally
+npx supabase link --project-ref <project-ref>       # the subdomain of SUPABASE_URL
+```
+
+Everyday use:
+
+```bash
+yarn db:migration add_something   # creates supabase/migrations/<timestamp>_add_something.sql
+yarn db:status                    # local vs. applied migrations
+yarn db:push                      # applies pending migrations to the live database
+```
+
+`20261104000000_baseline.sql` captures the tables that were created by hand before
+migrations existed. On a project where those tables already exist, mark it as applied once
+instead of running it:
+
+```bash
+npx supabase migration repair --status applied 20261104000000
+```
+
+`supabase/seed.sql` holds the Bandcamp source import and only runs against a local database
+on `supabase db reset`; it is never pushed.
+
+Claude Code is configured in `.claude/settings.json` to ask before `db:push` or
+`migration repair` and to refuse `db reset`. `.mcp.json` adds the official Supabase MCP
+server in **read-only** mode so an agent can inspect the live schema and data. It reads two
+variables from the shell that launches Claude Code (not from `.env.local`):
+
+```bash
+export SUPABASE_ACCESS_TOKEN=...   # https://supabase.com/dashboard/account/tokens
+export SUPABASE_PROJECT_REF=...    # the subdomain of SUPABASE_URL
+```
+
 ## AI acceptance drafts
 
 The admin reply editor can draft acceptance emails with an LLM. Drafts are always shown in
@@ -41,7 +81,7 @@ the existing subject and message fields; only the separate Send button delivers 
 
 Setup:
 
-1. Run `supabase/ai-reply-drafts.sql` in the Supabase SQL editor.
+1. Apply the database migrations with `yarn db:push`.
 2. Choose a provider with `AI_PROVIDER` — `ollama` (default), `openai`, or `anthropic`.
 3. For the default local setup: install and start Ollama, then
    `ollama pull qwen3.5:4b-q4_K_M`, and keep both Ollama and the dev server running.

@@ -17,6 +17,11 @@ import {
   updateSubmission,
   type Submission,
 } from "@/lib/submissions";
+import {
+  DEFAULT_TRACK_RATING,
+  isTrackRating,
+  setTrackRating,
+} from "@/lib/track-ratings";
 
 export const runtime = "nodejs";
 
@@ -49,12 +54,16 @@ export async function POST(
       subject?: unknown;
       message?: unknown;
       draftId?: unknown;
+      trackRating?: unknown;
     };
     const subject =
       asTrimmedString(body.subject) ||
       `Re: Upper Left Indie submission from ${submission.artist_name}`;
     const message = asTrimmedString(body.message);
     const draftId = asTrimmedString(body.draftId);
+    const trackRating = isTrackRating(body.trackRating)
+      ? body.trackRating
+      : DEFAULT_TRACK_RATING;
 
     if (!message) {
       return Response.json(
@@ -88,11 +97,22 @@ export async function POST(
     });
 
     let playlistAdded: boolean | null = null;
+    let ratingSaved: boolean | null = null;
 
     if (track) {
+      // Stored before the insert so the Add to Playlist repair path places the
+      // track by the same rating if Spotify refuses it below.
+      try {
+        await setTrackRating(track.uri, trackRating);
+        ratingSaved = true;
+      } catch (error) {
+        console.error("accepted track rating could not be saved", error);
+        ratingSaved = false;
+      }
+
       try {
         if (!(await activePlaylistHasTrack(track.uri))) {
-          await addRatedTrackToActivePlaylist(track.uri);
+          await addRatedTrackToActivePlaylist(track.uri, trackRating);
         }
         playlistAdded = true;
       } catch (error) {
@@ -158,6 +178,7 @@ export async function POST(
       submission: updatedSubmission,
       trainingSaved,
       playlistAdded,
+      ratingSaved,
       submissionSaved,
     });
   } catch (error) {

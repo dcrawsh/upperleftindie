@@ -1,9 +1,9 @@
 ---
+name: new-api-route
 description: "Scaffold a new Next.js API route handler following this repo's conventions: nodejs runtime, async params, admin auth, defensive validation, and instanceof error mapping."
+disable-model-invocation: true
 argument-hint: "e.g. POST /api/admin/submissions/[id]/reject that sets status to rejected"
-agent: agent
 ---
-
 # New API Route
 
 Create a new route handler for: **$ARGUMENTS**

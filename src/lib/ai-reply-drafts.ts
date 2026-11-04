@@ -50,7 +50,7 @@ async function aiReplyDraftRequest<T>(
 
       return new AiReplyDraftStoreError(
         missingTable
-          ? "AI reply training storage is not installed. Run supabase/ai-reply-drafts.sql."
+          ? "AI reply training storage is not installed. Apply the database migrations with yarn db:push."
           : details || `AI reply storage failed with ${status}`,
         status
       );

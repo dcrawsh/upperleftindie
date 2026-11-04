@@ -14,6 +14,7 @@ import {
   FiThumbsUp,
   FiX,
 } from "react-icons/fi";
+import { StarRating } from "./StarRating";
 import { formatDate, getSpotifyAppTrackUrl } from "./helpers";
 import type {
   PreviewState,
@@ -337,6 +338,24 @@ function SubmissionCard({
               </span>
             )}
           </div>
+          {canDraftAcceptance ? (
+            <div className="flex flex-wrap items-center gap-3 rounded-md border border-ink/10 bg-white/60 p-3">
+              <span className="text-xs font-bold uppercase tracking-[0.1em] text-ink/45">
+                Playlist rating
+              </span>
+              <StarRating
+                value={replyDraft.trackRating ?? 2}
+                label={`Playlist rating for ${submission.artist_name}`}
+                disabled={workingId === replyWorkingId}
+                onChange={(trackRating) =>
+                  updateReplyDraft(submission, { trackRating })
+                }
+              />
+              <span className="text-xs leading-5 text-ink/50">
+                Sets where the track lands when it joins the playlist.
+              </span>
+            </div>
+          ) : null}
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"

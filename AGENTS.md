@@ -51,7 +51,8 @@ src/lib/ai/           Provider-agnostic LLM layer; adapters in src/lib/ai/provid
 src/lib/**/*.test.ts  Vitest unit tests, next to the code they cover
 src/data/             Generated data. Do not hand-edit artists.generated.ts.
 scripts/              Standalone Node ESM scripts run by yarn and GitHub Actions
-supabase/             Hand-applied SQL. No migration CLI.
+supabase/migrations/  Timestamped SQL migrations, applied with yarn db:push
+supabase/seed.sql     Local-only seed data (never pushed)
 docs/                 Operational and design documentation
 .github/instructions/ File-scoped agent rules, auto-loaded by applyTo globs
 .github/hooks/        Deterministic PreToolUse guards (e.g. generated-file protection)
@@ -69,6 +70,9 @@ yarn format                     # prettier --write .
 yarn format:check               # prettier --check . (what CI runs against)
 yarn scrape:shows               # populate the shows table
 yarn generate:bandcamp-artists  # regenerate src/data/artists.generated.ts
+yarn db:migration <name>        # create supabase/migrations/<timestamp>_<name>.sql
+yarn db:status                  # compare local migrations with the live database
+yarn db:push                    # apply pending migrations to the live database
 ```
 
 Tests live next to the code as `src/**/*.test.ts` and cover **pure logic only** —
@@ -132,9 +136,14 @@ These are the patterns agents most often get wrong here.
    `border-subtle`, `rounded-card`, `shadow-soft`. The raw `ink`/`paper`/`clay`/`gold`
    tokens are legacy and should only appear in the `/admin` console.
 
-10. **SQL is applied by hand.** Changing a table means editing the file in `supabase/` and
-   telling the user to run it in the Supabase SQL editor. Use `create table if not exists`,
-   enable RLS, and reuse the shared `set_updated_at()` trigger.
+10. **Schema changes are migrations.** Create one with `yarn db:migration <name>`, write
+   idempotent SQL (`create table if not exists`, `add column if not exists`), enable RLS,
+   and reuse the shared `set_updated_at()` trigger. Never edit a migration that has already
+   been pushed; add a new one. Run `yarn db:status` to see what is pending, then
+   `yarn db:push`. There is one Supabase project and it is production, so `db:push`
+   always asks the curator for approval (see `.claude/settings.json`) and `db reset` is
+   denied. The read-only Supabase MCP server in `.mcp.json` is for inspecting the live
+   schema and data before writing a migration; it cannot write.
 
 ## Invariants — do not break these
 
@@ -173,6 +182,7 @@ Server-only unless noted. See the referenced file for usage.
 | --- | --- |
 | `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | all Supabase accessors in `src/lib`, `scripts/` |
 | `SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` *(public)* | `src/app/shows/page.tsx` |
+| `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF` *(shell, not `.env.local`)* | the read-only Supabase MCP server in `.mcp.json` |
 | `ADMIN_API_TOKEN` or `ADMIN_PASSWORD` | `src/lib/admin-auth.ts` |
 | `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN` | `src/lib/spotify.ts` |
 | `SPOTIFY_ACTIVE_PLAYLIST_ID`, `SPOTIFY_ARCHIVE_PLAYLIST_ID`, `SPOTIFY_REDIRECT_URI` | `src/lib/spotify.ts`, `src/lib/spotify-auth.ts` |

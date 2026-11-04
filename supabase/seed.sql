@@ -1,3 +1,7 @@
+-- Local development seed only: runs on `supabase db reset` against a local
+-- database, never on `supabase db push`. These rows were imported into the
+-- live project by hand.
+
 insert into public.bandcamp_sources (bandcamp_url, genre, source, status)
 values
   ('https://killmer.bandcamp.com/', 'Rock', 'legacy-json', 'active'),

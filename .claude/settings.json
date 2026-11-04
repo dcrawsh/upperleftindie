@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(yarn db:push*)",
+      "Bash(npx supabase db push*)",
+      "Bash(supabase db push*)",
+      "Bash(npx supabase migration up*)",
+      "Bash(supabase migration up*)",
+      "Bash(npx supabase migration repair*)",
+      "Bash(supabase migration repair*)"
+    ],
+    "deny": [
+      "Bash(*supabase db reset*)",
+      "Bash(*supabase migration down*)",
+      "Bash(*supabase migration squash*)"
+    ]
+  }
+}

@@ -70,7 +70,7 @@ Before changing which error a helper throws, **check what its callers narrow on*
 Swapping the class silently downgrades a specific message to a generic 500.
 
 Error messages are shown to the operator. Make them specific and actionable, and include
-the fix when configuration is missing ("Run supabase/ai-reply-drafts.sql.").
+the fix when configuration is missing ("Apply the database migrations with yarn db:push.").
 
 ## AI providers
 

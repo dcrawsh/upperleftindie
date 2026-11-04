@@ -59,9 +59,10 @@ export async function listRatedActivePlaylistTracks() {
 /**
  * Placement for a track joining the playlist now. Ratings only steer the
  * position, so a ratings outage must never block an acceptance: unreadable
- * ratings fall back to the default for every track.
+ * ratings fall back to the default for every track. An explicit `rating`
+ * (chosen on the acceptance draft) wins over whatever is stored.
  */
-async function getInsertPosition(trackUri: string) {
+async function getInsertPosition(trackUri: string, rating?: TrackRating) {
   const [tracks, ratings] = await Promise.all([
     listActivePlaylistTracks(),
     listTrackRatings().catch((error) => {
@@ -71,13 +72,19 @@ async function getInsertPosition(trackUri: string) {
   ]);
 
   return getRankedInsertIndex(withRatings(tracks, ratings), {
-    rating: ratings.get(trackUri) ?? DEFAULT_TRACK_RATING,
+    rating: rating ?? ratings.get(trackUri) ?? DEFAULT_TRACK_RATING,
     addedAt: new Date().toISOString(),
   });
 }
 
-export async function addRatedTrackToActivePlaylist(trackUri: string) {
-  await addTrackToActivePlaylist(trackUri, await getInsertPosition(trackUri));
+export async function addRatedTrackToActivePlaylist(
+  trackUri: string,
+  rating?: TrackRating
+) {
+  await addTrackToActivePlaylist(
+    trackUri,
+    await getInsertPosition(trackUri, rating)
+  );
 }
 
 export async function unarchiveRatedTrack(trackUri: string) {
