@@ -1703,6 +1703,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "DEMO",
+        "type": "album",
+        "url": "https://terriblepop.bandcamp.com/album/demo"
+      },
+      {
         "title": "III",
         "type": "album",
         "url": "https://terriblepop.bandcamp.com/album/iii-2"
@@ -2651,7 +2656,7 @@ export const artists: Artist[] = [
     "name": "meredith smith",
     "location": "Seattle, Washington",
     "bandcampUrl": "https://meredithsmith.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0044504370_10.jpg",
+    "image": "https://f4.bcbits.com/img/0048360792_10.jpg",
     "bio": "Female-fronted twee artist from Seattle, WA. Full band shows now in the GSA. One half of Twilight Diners.",
     "submittedGenre": "Indie Rock",
     "tags": [
