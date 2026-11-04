@@ -19,6 +19,7 @@ The site also publishes a Bandcamp artist directory and a scraped Portland show 
 | --- | --- |
 | **Submission** | An artist-submitted track row in Supabase. Status flows `pending` → `added` \| `rejected` → `archived`. Sending the acceptance email is what adds the track to the playlist and promotes it to `added`. |
 | **Active playlist** | The public, curated Spotify playlist. Accepted tracks are inserted here. |
+| **Track rating** | A private 1-3 star curator rating per Spotify track URI in `track_ratings`; unrated tracks count as 2. The active playlist is ordered by rating, then newest added first. New tracks are inserted at their rated position, a rating change moves only that track, manual drags persist, and *Sort by Rating* re-applies the full order. |
 | **Archive playlist** | A second Spotify playlist holding tracks rotated out of the active one. |
 | **Reply draft** | An AI-generated acceptance email stored in `ai_reply_drafts`, edited by the curator before sending. |
 | **Training example** | A draft that was rated Good (`rating=1`) and actually sent. The two most recent become few-shot examples for later generations. |

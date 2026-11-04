@@ -4,6 +4,7 @@ import {
   assertAdminRequest,
   AdminAuthError,
 } from "@/lib/admin-auth";
+import { addRatedTrackToActivePlaylist } from "@/lib/active-playlist";
 import {
   getSubmission,
   SupabaseRequestError,
@@ -11,7 +12,6 @@ import {
 } from "@/lib/submissions";
 import {
   activePlaylistHasTrack,
-  addTrackToActivePlaylist,
   getSpotifyTrackFromUrl,
   SpotifyRequestError,
 } from "@/lib/spotify";
@@ -43,7 +43,7 @@ export async function POST(
     const isAlreadyActive = await activePlaylistHasTrack(track.uri);
 
     if (!isAlreadyActive) {
-      await addTrackToActivePlaylist(track.uri);
+      await addRatedTrackToActivePlaylist(track.uri);
     }
 
     // A submission is "added" only once both halves of an acceptance are done:

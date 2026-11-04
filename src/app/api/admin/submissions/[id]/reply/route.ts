@@ -4,11 +4,11 @@ import {
   AdminAuthError,
   assertAdminRequest,
 } from "@/lib/admin-auth";
+import { addRatedTrackToActivePlaylist } from "@/lib/active-playlist";
 import { completeAiReplyDraft } from "@/lib/ai-reply-drafts";
 import { EmailServiceError, sendSiteEmail } from "@/lib/email";
 import {
   activePlaylistHasTrack,
-  addTrackToActivePlaylist,
   getSpotifyTrackFromUrl,
 } from "@/lib/spotify";
 import {
@@ -92,7 +92,7 @@ export async function POST(
     if (track) {
       try {
         if (!(await activePlaylistHasTrack(track.uri))) {
-          await addTrackToActivePlaylist(track.uri);
+          await addRatedTrackToActivePlaylist(track.uri);
         }
         playlistAdded = true;
       } catch (error) {

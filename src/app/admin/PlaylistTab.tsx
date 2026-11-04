@@ -7,9 +7,56 @@ import {
   FiPause,
   FiPlay,
   FiRefreshCw,
+  FiStar,
 } from "react-icons/fi";
 import { formatDate, formatDaysLive } from "./helpers";
-import type { PlaylistTrack, PreviewState } from "./types";
+import type {
+  ActivePlaylistTrack,
+  PlaylistTrack,
+  PreviewState,
+  TrackRating,
+} from "./types";
+
+const ratings: TrackRating[] = [1, 2, 3];
+
+function StarRating({
+  track,
+  disabled,
+  onRate,
+}: {
+  track: ActivePlaylistTrack;
+  disabled: boolean;
+  onRate: (track: ActivePlaylistTrack, rating: TrackRating) => void;
+}) {
+  return (
+    <div
+      role="group"
+      aria-label={`Rating for ${track.name}`}
+      className="mt-2 flex items-center gap-0.5"
+    >
+      {ratings.map((rating) => {
+        const isFilled = rating <= track.rating;
+
+        return (
+          <button
+            key={rating}
+            type="button"
+            onClick={() => onRate(track, rating)}
+            disabled={disabled}
+            aria-pressed={rating === track.rating}
+            aria-label={`${rating} ${rating === 1 ? "star" : "stars"}`}
+            title={`${rating} ${rating === 1 ? "star" : "stars"}`}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition hover:text-gold disabled:cursor-not-allowed disabled:opacity-50 ${
+              isFilled ? "text-gold" : "text-ink/25"
+            }`}
+          >
+            <FiStar size={18} className={isFilled ? "fill-current" : ""} />
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 export function PlaylistTab({
   tracks,
@@ -20,15 +67,17 @@ export function PlaylistTab({
   setDraggedTrackUri,
   setDragOverTrackUri,
   onRefresh,
+  onSort,
   onTrackDrop,
   onArchive,
+  onRate,
   onTogglePreview,
   currentPreviewTrackUri,
   isPreviewPlaying,
   previewsByKey,
   loadingPreviewKey,
 }: {
-  tracks: PlaylistTrack[];
+  tracks: ActivePlaylistTrack[];
   isLoading: boolean;
   workingId: string;
   draggedTrackUri: string;
@@ -36,8 +85,10 @@ export function PlaylistTab({
   setDraggedTrackUri: (uri: string) => void;
   setDragOverTrackUri: (uri: string) => void;
   onRefresh: () => void;
+  onSort: () => void;
   onTrackDrop: (toIndex: number) => void;
   onArchive: (trackUri: string) => void;
+  onRate: (track: ActivePlaylistTrack, rating: TrackRating) => void;
   onTogglePreview: (track: PlaylistTrack) => void;
   currentPreviewTrackUri: string;
   isPreviewPlaying: boolean;
@@ -46,19 +97,36 @@ export function PlaylistTab({
 }) {
   return (
     <section className="space-y-4">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-sm font-bold text-ink/60">
-          {tracks.length} active tracks
-        </p>
-        <button
-          type="button"
-          onClick={onRefresh}
-          disabled={isLoading}
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
-        >
-          <FiRefreshCw size={16} />
-          Refresh
-        </button>
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="text-sm font-bold text-ink/60">
+            {tracks.length} active tracks
+          </p>
+          <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
+            Ordered 3, 2, 1 stars, newest first within each
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={onSort}
+            disabled={isLoading || Boolean(workingId) || tracks.length === 0}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
+            title="Re-apply the rating order, undoing manual moves"
+          >
+            <FiStar size={16} />
+            {workingId === "sort" ? "Sorting..." : "Sort by Rating"}
+          </button>
+          <button
+            type="button"
+            onClick={onRefresh}
+            disabled={isLoading}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-sm font-bold text-ink transition hover:border-clay hover:text-clay disabled:opacity-60"
+          >
+            <FiRefreshCw size={16} />
+            Refresh
+          </button>
+        </div>
       </div>
 
       <div className="grid gap-3">
@@ -100,7 +168,11 @@ export function PlaylistTab({
                   setDraggedTrackUri(track.uri);
                   setDragOverTrackUri(track.uri);
                 }}
-                disabled={workingId.startsWith("reorder:")}
+                disabled={
+                  workingId.startsWith("reorder:") ||
+                  workingId.startsWith("rating:") ||
+                  workingId === "sort"
+                }
                 className="inline-flex h-10 w-10 shrink-0 cursor-grab items-center justify-center rounded-md border border-ink/10 text-ink/45 transition hover:border-clay hover:text-clay active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-50"
                 aria-label={`Drag ${track.name} to reorder`}
                 title="Drag to reorder"
@@ -130,6 +202,15 @@ export function PlaylistTab({
                 <p className="truncate text-sm text-ink/65">
                   {track.artistNames} / {track.albumName}
                 </p>
+                <StarRating
+                  track={track}
+                  disabled={
+                    workingId.startsWith("rating:") ||
+                    workingId.startsWith("reorder:") ||
+                    workingId === "sort"
+                  }
+                  onRate={onRate}
+                />
               </div>
               <div className="flex shrink-0 flex-wrap gap-2">
                 <button

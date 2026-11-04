@@ -31,6 +31,10 @@ export type PlaylistTrack = {
   addedAt: string;
 };
 
+export type TrackRating = 1 | 2 | 3;
+
+export type ActivePlaylistTrack = PlaylistTrack & { rating: TrackRating };
+
 export type Tab = "submissions" | "playlist" | "archive";
 
 export type ReplyDraft = {

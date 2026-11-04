@@ -35,11 +35,6 @@ export class SpotifyRequestError extends Error {
 
 const spotifyTrackIdPattern = /^[A-Za-z0-9]{22}$/;
 const defaultActivePlaylistId = "3LTI227By7Wt7hGs3mz5hF";
-const activePlaylistInsertionPosition = 5;
-
-type SpotifyPlaylistItemCountResponse = {
-  total: number;
-};
 
 function getSpotifyConfig() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -98,8 +93,12 @@ async function getAccessToken() {
   return token.access_token;
 }
 
-async function spotifyRequest<T>(path: string, init: RequestInit = {}) {
-  const accessToken = await getAccessToken();
+async function spotifyRequest<T>(
+  path: string,
+  init: RequestInit = {},
+  token?: string
+) {
+  const accessToken = token ?? (await getAccessToken());
   const response = await fetch(`https://api.spotify.com/v1/${path}`, {
     ...init,
     headers: {
@@ -148,18 +147,22 @@ export function getSpotifyTrackFromUrl(value: string) {
   }
 }
 
-export async function addTrackToActivePlaylist(trackUri: string) {
+function assertPlaylistPosition(position: number) {
+  if (!Number.isInteger(position) || position < 0) {
+    throw new SpotifyRequestError("A valid playlist position is required.", 400);
+  }
+}
+
+export async function addTrackToActivePlaylist(
+  trackUri: string,
+  position: number
+) {
   const { activePlaylistId } = getSpotifyConfig();
-  const { total } = await spotifyRequest<SpotifyPlaylistItemCountResponse>(
-    `playlists/${activePlaylistId}/items?limit=1&fields=total`
-  );
+  assertPlaylistPosition(position);
 
   await spotifyRequest(`playlists/${activePlaylistId}/items`, {
     method: "POST",
-    body: JSON.stringify({
-      uris: [trackUri],
-      position: Math.min(activePlaylistInsertionPosition, total),
-    }),
+    body: JSON.stringify({ uris: [trackUri], position }),
   });
 }
 
@@ -345,27 +348,52 @@ export async function reorderActivePlaylistTrack(
   fromIndex: number,
   toIndex: number
 ) {
+  await reorderActivePlaylistTracks([{ fromIndex, toIndex }]);
+}
+
+/**
+ * Applies single-track moves in sequence, where `toIndex` is the track's index
+ * after its move. One token covers the whole batch so a full sort does not
+ * mint a token per move.
+ */
+export async function reorderActivePlaylistTracks(
+  moves: Array<{ fromIndex: number; toIndex: number }>
+) {
   const { activePlaylistId } = getSpotifyConfig();
 
-  if (
-    !Number.isInteger(fromIndex) ||
-    !Number.isInteger(toIndex) ||
-    fromIndex < 0 ||
-    toIndex < 0
-  ) {
-    throw new SpotifyRequestError("Valid playlist positions are required.", 400);
+  for (const { fromIndex, toIndex } of moves) {
+    if (
+      !Number.isInteger(fromIndex) ||
+      !Number.isInteger(toIndex) ||
+      fromIndex < 0 ||
+      toIndex < 0
+    ) {
+      throw new SpotifyRequestError(
+        "Valid playlist positions are required.",
+        400
+      );
+    }
   }
 
-  if (fromIndex === toIndex) return;
+  const pending = moves.filter((move) => move.fromIndex !== move.toIndex);
+  if (pending.length === 0) return;
 
-  await spotifyRequest(`playlists/${activePlaylistId}/items`, {
-    method: "PUT",
-    body: JSON.stringify({
-      range_start: fromIndex,
-      insert_before: fromIndex < toIndex ? toIndex + 1 : toIndex,
-      range_length: 1,
-    }),
-  });
+  const accessToken = await getAccessToken();
+
+  for (const { fromIndex, toIndex } of pending) {
+    await spotifyRequest(
+      `playlists/${activePlaylistId}/items`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          range_start: fromIndex,
+          insert_before: fromIndex < toIndex ? toIndex + 1 : toIndex,
+          range_length: 1,
+        }),
+      },
+      accessToken
+    );
+  }
 }
 
 export async function listArchivePlaylistTracks() {
@@ -381,7 +409,7 @@ export async function listArchivePlaylistTracks() {
   return listPlaylistTracks(archivePlaylistId);
 }
 
-export async function unarchiveTrack(trackUri: string) {
+export async function unarchiveTrack(trackUri: string, position: number) {
   const { activePlaylistId, archivePlaylistId } = getSpotifyConfig();
 
   if (!archivePlaylistId) {
@@ -391,16 +419,11 @@ export async function unarchiveTrack(trackUri: string) {
     );
   }
 
-  const { total } = await spotifyRequest<SpotifyPlaylistItemCountResponse>(
-    `playlists/${activePlaylistId}/items?limit=1&fields=total`
-  );
+  assertPlaylistPosition(position);
 
   await spotifyRequest(`playlists/${activePlaylistId}/items`, {
     method: "POST",
-    body: JSON.stringify({
-      uris: [trackUri],
-      position: Math.min(activePlaylistInsertionPosition, total),
-    }),
+    body: JSON.stringify({ uris: [trackUri], position }),
   });
 
   await spotifyRequest(`playlists/${archivePlaylistId}/items`, {

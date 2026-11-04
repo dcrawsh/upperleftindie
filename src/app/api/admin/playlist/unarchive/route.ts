@@ -1,11 +1,12 @@
 import { NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
+import { unarchiveRatedTrack } from "@/lib/active-playlist";
 import { assertAdminRequest, AdminAuthError } from "@/lib/admin-auth";
 import {
   SupabaseRequestError,
   updateSubmissionsByTrackUri,
 } from "@/lib/submissions";
-import { SpotifyRequestError, unarchiveTrack } from "@/lib/spotify";
+import { SpotifyRequestError } from "@/lib/spotify";
 
 export const runtime = "nodejs";
 
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await unarchiveTrack(trackUri);
+    await unarchiveRatedTrack(trackUri);
 
     try {
       await updateSubmissionsByTrackUri(trackUri, {

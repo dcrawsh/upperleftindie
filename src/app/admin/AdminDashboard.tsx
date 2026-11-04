@@ -9,7 +9,6 @@ import {
   getDefaultReplyMessage,
   getDefaultReplySubject,
   getErrorMessage,
-  moveTrackInList,
 } from "./helpers";
 import type {
   PlaylistTrack,
@@ -18,13 +17,15 @@ import type {
   SubmissionStatus,
   Tab,
 } from "./types";
+import { useActivePlaylist } from "./useActivePlaylist";
 import { useAdminSession } from "./useAdminSession";
 import { useTrackPreview } from "./useTrackPreview";
 
 /**
  * Orchestrates the admin console: owns the data for each tab and the actions
- * that mutate it. Session handling lives in useAdminSession, audio previews in
- * useTrackPreview, and all presentation in the per-tab components.
+ * that mutate it. Session handling lives in useAdminSession, the active
+ * playlist in useActivePlaylist, audio previews in useTrackPreview, and all
+ * presentation in the per-tab components.
  */
 export default function AdminDashboard() {
   const [tab, setTab] = useState<Tab>("submissions");
@@ -32,20 +33,16 @@ export default function AdminDashboard() {
     "pending"
   );
   const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [tracks, setTracks] = useState<PlaylistTrack[]>([]);
   const [archiveTracks, setArchiveTracks] = useState<PlaylistTrack[]>([]);
   const [replyDrafts, setReplyDrafts] = useState<Record<string, ReplyDraft>>(
     {}
   );
-  const [draggedTrackUri, setDraggedTrackUri] = useState("");
-  const [dragOverTrackUri, setDragOverTrackUri] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [workingId, setWorkingId] = useState("");
   const [message, setMessage] = useState("");
 
   const resetDashboardData = useCallback(() => {
     setSubmissions([]);
-    setTracks([]);
     setArchiveTracks([]);
     setReplyDrafts({});
   }, []);
@@ -61,6 +58,14 @@ export default function AdminDashboard() {
   } = useAdminSession({
     onReset: resetDashboardData,
     onMessage: setMessage,
+  });
+
+  const playlist = useActivePlaylist({
+    token,
+    adminFetch,
+    setIsLoading,
+    setWorkingId,
+    setMessage,
   });
 
   const {
@@ -84,24 +89,6 @@ export default function AdminDashboard() {
         `/api/admin/submissions?status=${statusFilter}`
       );
       setSubmissions(data.submissions);
-    } catch (error) {
-      setMessage(getErrorMessage(error));
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function loadTracks() {
-    if (!token) return;
-
-    setIsLoading(true);
-    setMessage("");
-
-    try {
-      const data = await adminFetch<{ tracks: PlaylistTrack[] }>(
-        "/api/admin/playlist/active"
-      );
-      setTracks(data.tracks);
     } catch (error) {
       setMessage(getErrorMessage(error));
     } finally {
@@ -133,7 +120,7 @@ export default function AdminDashboard() {
     if (tab === "submissions") {
       loadSubmissions();
     } else if (tab === "playlist") {
-      loadTracks();
+      playlist.loadTracks();
     } else {
       loadArchiveTracks();
     }
@@ -343,24 +330,6 @@ export default function AdminDashboard() {
     }
   }
 
-  async function archiveTrackFromPlaylist(trackUri: string) {
-    setWorkingId(trackUri);
-    setMessage("");
-
-    try {
-      await adminFetch("/api/admin/playlist/archive", {
-        method: "POST",
-        body: JSON.stringify({ trackUri }),
-      });
-      setTracks((current) => current.filter((track) => track.uri !== trackUri));
-      setMessage("Track moved to the archive playlist.");
-    } catch (error) {
-      setMessage(getErrorMessage(error));
-    } finally {
-      setWorkingId("");
-    }
-  }
-
   async function unarchiveTrackToPlaylist(trackUri: string) {
     setWorkingId(trackUri);
     setMessage("");
@@ -379,43 +348,6 @@ export default function AdminDashboard() {
     } finally {
       setWorkingId("");
     }
-  }
-
-  async function reorderActiveTrack(fromIndex: number, toIndex: number) {
-    if (fromIndex === toIndex || fromIndex < 0 || toIndex < 0) return;
-
-    const track = tracks[fromIndex];
-    if (!track) return;
-
-    const previousTracks = tracks;
-
-    setTracks(moveTrackInList(tracks, fromIndex, toIndex));
-    setWorkingId(`reorder:${track.uri}`);
-    setMessage("");
-
-    try {
-      await adminFetch("/api/admin/playlist/reorder", {
-        method: "POST",
-        body: JSON.stringify({ fromIndex, toIndex }),
-      });
-      setMessage(`Moved ${track.name}.`);
-    } catch (error) {
-      setTracks(previousTracks);
-      setMessage(getErrorMessage(error));
-    } finally {
-      setWorkingId("");
-      setDraggedTrackUri("");
-      setDragOverTrackUri("");
-    }
-  }
-
-  function handleTrackDrop(toIndex: number) {
-    if (!draggedTrackUri) return;
-
-    const fromIndex = tracks.findIndex(
-      (track) => track.uri === draggedTrackUri
-    );
-    void reorderActiveTrack(fromIndex, toIndex);
   }
 
   async function toggleTrackPreview(track: PlaylistTrack) {
@@ -550,16 +482,18 @@ export default function AdminDashboard() {
         />
       ) : tab === "playlist" ? (
         <PlaylistTab
-          tracks={tracks}
+          tracks={playlist.tracks}
           isLoading={isLoading}
           workingId={workingId}
-          draggedTrackUri={draggedTrackUri}
-          dragOverTrackUri={dragOverTrackUri}
-          setDraggedTrackUri={setDraggedTrackUri}
-          setDragOverTrackUri={setDragOverTrackUri}
-          onRefresh={loadTracks}
-          onTrackDrop={handleTrackDrop}
-          onArchive={archiveTrackFromPlaylist}
+          draggedTrackUri={playlist.draggedTrackUri}
+          dragOverTrackUri={playlist.dragOverTrackUri}
+          setDraggedTrackUri={playlist.setDraggedTrackUri}
+          setDragOverTrackUri={playlist.setDragOverTrackUri}
+          onRefresh={playlist.loadTracks}
+          onSort={playlist.sortTracks}
+          onTrackDrop={playlist.handleTrackDrop}
+          onArchive={playlist.archiveTrack}
+          onRate={playlist.rateTrack}
           onTogglePreview={toggleTrackPreview}
           currentPreviewTrackUri={currentPreviewTrackUri}
           isPreviewPlaying={isPreviewPlaying}

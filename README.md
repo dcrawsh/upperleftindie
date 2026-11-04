@@ -10,6 +10,8 @@ The admin page lives at `/admin`.
 Required setup:
 
 - Run `supabase/submissions.sql` in Supabase.
+- Run `supabase/track-ratings.sql` in Supabase. It stores the 1-3 star curator ratings that
+  order the active playlist and seeds every accepted track at 2 stars.
 - Set `ADMIN_PASSWORD` or `ADMIN_API_TOKEN`.
 - Set `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, and `SPOTIFY_REFRESH_TOKEN`.
 - Set `SPOTIFY_ARCHIVE_PLAYLIST_ID`.
