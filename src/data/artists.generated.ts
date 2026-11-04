@@ -2101,7 +2101,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0323358368_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0490243961_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2123,9 +2123,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Chew Me Up",
+        "title": "Diamonds of Love",
         "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/chew-me-up/"
+        "url": "https://shayleeband.bandcamp.com/track/diamonds-of-love/"
       }
     ]
   },
@@ -3834,6 +3834,55 @@ export const artists: Artist[] = [
         "title": "Sophomore (Demos)",
         "type": "album",
         "url": "https://hadleyparrishcotton.bandcamp.com/album/sophomore-demos"
+      }
+    ]
+  },
+  {
+    "name": "The Timely Tragedy",
+    "location": "Chelan, Washington",
+    "bandcampUrl": "https://thetimelytragedy.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040265184_10.jpg",
+    "bio": "The Timely Tragedy is an Alternative Rock band out of Central Washington State. Their sound is reminiscent of 90's Alternative Rock with a modern, melodic twist and are known for their intricate instrumentals and thought provoking lyrics. The Timely Tragedy is: Matthew Sherrard - Guitar & Lead Vocals Kevin Morgan - Drums/Backing Vox Chad Duvall - Guitar Nat Heck - Bass ... more",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://thetimelytragedy.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "The Afterglow",
+        "type": "album",
+        "url": "https://thetimelytragedy.bandcamp.com/album/the-afterglow-2"
+      },
+      {
+        "title": "Our Own Advice",
+        "type": "track",
+        "url": "https://thetimelytragedy.bandcamp.com/track/our-own-advice"
+      },
+      {
+        "title": "EGO DEATH",
+        "type": "track",
+        "url": "https://thetimelytragedy.bandcamp.com/track/ego-death-2"
+      },
+      {
+        "title": "The Afterglow",
+        "type": "track",
+        "url": "https://thetimelytragedy.bandcamp.com/track/the-afterglow"
+      },
+      {
+        "title": "Will We Ever See The Truth? (Live Version)",
+        "type": "track",
+        "url": "https://thetimelytragedy.bandcamp.com/track/will-we-ever-see-the-truth-live-version"
+      },
+      {
+        "title": "Social Animals",
+        "type": "track",
+        "url": "https://thetimelytragedy.bandcamp.com/track/social-animals"
       }
     ]
   }
