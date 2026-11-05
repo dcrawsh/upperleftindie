@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
     if (!isTrackRating(body.rating)) {
       return Response.json(
-        { error: "Rating must be 1, 2, or 3 stars." },
+        { error: "Rating must be between 1 and 5 stars." },
         { status: 400 }
       );
     }

@@ -17,6 +17,7 @@ import {
 import { StarRating } from "./StarRating";
 import { formatDate, getSpotifyAppTrackUrl } from "./helpers";
 import type {
+  AiReplyFeedbackTag,
   PreviewState,
   ReplyDraft,
   Submission,
@@ -24,6 +25,30 @@ import type {
 } from "./types";
 
 const STATUS_FILTERS = ["pending", "added", "rejected", "all"] as const;
+
+const POSITIVE_FEEDBACK_TAGS: Array<{
+  value: AiReplyFeedbackTag;
+  label: string;
+}> = [
+  { value: "insightful-specific", label: "Insightful / specific" },
+  { value: "right-tone", label: "Right tone" },
+  { value: "concise", label: "Concise" },
+  { value: "ready-to-send", label: "Ready to send" },
+];
+
+const NEGATIVE_FEEDBACK_TAGS: Array<{
+  value: AiReplyFeedbackTag;
+  label: string;
+}> = [
+  { value: "too-generic", label: "Too generic" },
+  { value: "repeats-submission", label: "Repeats submission" },
+  { value: "invented-details", label: "Invented details" },
+  { value: "missed-detail", label: "Missed key detail" },
+  { value: "wrong-tone", label: "Wrong tone" },
+  { value: "too-promotional", label: "Too promotional" },
+  { value: "too-long", label: "Too long" },
+  { value: "awkward-wording", label: "Awkward wording" },
+];
 
 type SubmissionsTabProps = {
   submissions: Submission[];
@@ -41,7 +66,11 @@ type SubmissionsTabProps = {
   onAddToPlaylist: (submission: Submission) => void;
   onReject: (id: string) => void;
   onGenerateReply: (submission: Submission) => void;
-  onRateDraft: (submission: Submission, rating: -1 | 1) => void;
+  onRateDraft: (
+    submission: Submission,
+    rating: -1 | 1,
+    feedbackTags?: AiReplyFeedbackTag[]
+  ) => void;
   onSendReply: (submission: Submission) => void;
   onTogglePreview: (submission: Submission) => void;
   currentPreviewTrackUri: string;
@@ -86,6 +115,31 @@ function SubmissionCard({
   const isPreviewLoading = loadingPreviewKey === previewKey;
   const isCurrentPreview =
     currentPreviewTrackUri === previewKey && isPreviewPlaying;
+  const feedbackTags =
+    replyDraft.aiRating === 1
+      ? POSITIVE_FEEDBACK_TAGS
+      : replyDraft.aiRating === -1
+        ? NEGATIVE_FEEDBACK_TAGS
+        : [];
+
+  function rateDraft(rating: -1 | 1) {
+    onRateDraft(
+      submission,
+      rating,
+      replyDraft.aiRating === rating ? (replyDraft.aiFeedbackTags ?? []) : []
+    );
+  }
+
+  function toggleFeedbackTag(tag: AiReplyFeedbackTag) {
+    if (replyDraft.aiRating !== 1 && replyDraft.aiRating !== -1) return;
+
+    const current = replyDraft.aiFeedbackTags ?? [];
+    const next = current.includes(tag)
+      ? current.filter((value) => value !== tag)
+      : [...current, tag];
+
+    onRateDraft(submission, replyDraft.aiRating, next);
+  }
 
   return (
     <article
@@ -301,7 +355,7 @@ function SubmissionCard({
                 </span>
                 <button
                   type="button"
-                  onClick={() => onRateDraft(submission, 1)}
+                  onClick={() => rateDraft(1)}
                   disabled={workingId === ratingWorkingId}
                   aria-pressed={replyDraft.aiRating === 1}
                   className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition disabled:opacity-60 ${
@@ -315,7 +369,7 @@ function SubmissionCard({
                 </button>
                 <button
                   type="button"
-                  onClick={() => onRateDraft(submission, -1)}
+                  onClick={() => rateDraft(-1)}
                   disabled={workingId === ratingWorkingId}
                   aria-pressed={replyDraft.aiRating === -1}
                   className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition disabled:opacity-60 ${
@@ -327,6 +381,41 @@ function SubmissionCard({
                   <FiThumbsDown size={15} />
                   Needs Work
                 </button>
+                {feedbackTags.length ? (
+                  <div className="basis-full border-t border-ink/10 pt-3">
+                    <p className="text-xs font-bold uppercase tracking-[0.1em] text-ink/45">
+                      {replyDraft.aiRating === 1
+                        ? "What worked?"
+                        : "What needs work?"}
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {feedbackTags.map((tag) => {
+                        const isSelected = (
+                          replyDraft.aiFeedbackTags ?? []
+                        ).includes(tag.value);
+
+                        return (
+                          <button
+                            key={tag.value}
+                            type="button"
+                            onClick={() => toggleFeedbackTag(tag.value)}
+                            disabled={workingId === ratingWorkingId}
+                            aria-pressed={isSelected}
+                            className={`rounded-full border px-3 py-1.5 text-xs font-bold transition disabled:opacity-60 ${
+                              isSelected
+                                ? replyDraft.aiRating === 1
+                                  ? "border-moss bg-moss/10 text-moss"
+                                  : "border-clay bg-clay/10 text-clay"
+                                : "border-ink/15 text-ink/60 hover:border-ink/40 hover:text-ink"
+                            }`}
+                          >
+                            {tag.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : null}
               </>
             ) : (
               <span className="text-xs leading-5 text-ink/50">
@@ -344,7 +433,7 @@ function SubmissionCard({
                 Playlist rating
               </span>
               <StarRating
-                value={replyDraft.trackRating ?? 2}
+                value={replyDraft.trackRating ?? 3}
                 label={`Playlist rating for ${submission.artist_name}`}
                 disabled={workingId === replyWorkingId}
                 onChange={(trackRating) =>

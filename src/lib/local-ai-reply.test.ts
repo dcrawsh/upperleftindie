@@ -102,8 +102,7 @@ describe("buildAcceptanceMessages", () => {
 });
 
 describe("AI_REPLY_PROMPT_VERSION", () => {
-  it("is a non-empty string stored with every draft", () => {
-    expect(AI_REPLY_PROMPT_VERSION).toBeTruthy();
-    expect(typeof AI_REPLY_PROMPT_VERSION).toBe("string");
+  it("tracks the creative curator-observation prompt", () => {
+    expect(AI_REPLY_PROMPT_VERSION).toBe("acceptance-v3");
   });
 });

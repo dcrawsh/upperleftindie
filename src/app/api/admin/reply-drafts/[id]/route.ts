@@ -1,22 +1,15 @@
 import { NextRequest } from "next/server";
-import {
-  AdminAuthError,
-  assertAdminRequest,
-} from "@/lib/admin-auth";
+import { AdminAuthError, assertAdminRequest } from "@/lib/admin-auth";
 import {
   AiReplyDraftStoreError,
   rateAiReplyDraft,
 } from "@/lib/ai-reply-drafts";
+import {
+  AiReplyFeedbackError,
+  parseAiReplyFeedbackTags,
+} from "@/lib/ai-reply-feedback";
 
 export const runtime = "nodejs";
-
-const allowedFeedbackTags = new Set([
-  "too-long",
-  "wrong-tone",
-  "invented-details",
-  "too-generic",
-  "missed-detail",
-]);
 
 export async function PATCH(
   req: NextRequest,
@@ -26,7 +19,7 @@ export async function PATCH(
     assertAdminRequest(req);
 
     const { id } = await context.params;
-    const body = (await req.json()) as {
+    const body = (await req.json().catch(() => ({}))) as {
       rating?: unknown;
       feedbackTags?: unknown;
     };
@@ -38,12 +31,10 @@ export async function PATCH(
       );
     }
 
-    const feedbackTags = Array.isArray(body.feedbackTags)
-      ? body.feedbackTags.filter(
-          (tag): tag is string =>
-            typeof tag === "string" && allowedFeedbackTags.has(tag)
-        )
-      : [];
+    const feedbackTags = parseAiReplyFeedbackTags(
+      body.rating,
+      body.feedbackTags
+    );
 
     await rateAiReplyDraft({ id, rating: body.rating, feedbackTags });
 
@@ -57,6 +48,10 @@ export async function PATCH(
 
     if (error instanceof AiReplyDraftStoreError) {
       return Response.json({ error: error.message }, { status: error.status });
+    }
+
+    if (error instanceof AiReplyFeedbackError) {
+      return Response.json({ error: error.message }, { status: 400 });
     }
 
     return Response.json(

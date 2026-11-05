@@ -3,13 +3,13 @@
 import { FiStar } from "react-icons/fi";
 import type { TrackRating } from "./types";
 
-const ratings: TrackRating[] = [1, 2, 3];
+const ratings: TrackRating[] = [1, 2, 3, 4, 5];
 
 function starLabel(rating: TrackRating) {
   return `${rating} ${rating === 1 ? "star" : "stars"}`;
 }
 
-/** The 1-3 star curator rating used on the playlist and the acceptance draft. */
+/** The 1-5 star curator rating used on the playlist and the acceptance draft. */
 export function StarRating({
   value,
   label,

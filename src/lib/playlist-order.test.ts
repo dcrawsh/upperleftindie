@@ -6,10 +6,11 @@ import {
   sortRankedTracks,
   type RankedTrack,
 } from "@/lib/playlist-order";
+import type { TrackRating } from "@/lib/track-ratings";
 
 type Track = RankedTrack & { id: string };
 
-function track(id: string, rating: 1 | 2 | 3, addedAt: string): Track {
+function track(id: string, rating: TrackRating, addedAt: string): Track {
   return { id, rating, addedAt };
 }
 
@@ -24,21 +25,25 @@ function applyMoves<T>(
 }
 
 describe("sortRankedTracks", () => {
-  it("puts 3 stars first, then 2, then 1, newest first within each", () => {
+  it("puts 5 stars first through 1 star, newest first within each", () => {
     const tracks = [
-      track("two-old", 2, "2026-01-01T00:00:00Z"),
+      track("three-old", 3, "2026-01-01T00:00:00Z"),
       track("one-new", 1, "2026-10-01T00:00:00Z"),
-      track("three-old", 3, "2026-02-01T00:00:00Z"),
-      track("two-new", 2, "2026-09-01T00:00:00Z"),
-      track("three-new", 3, "2026-08-01T00:00:00Z"),
+      track("five-old", 5, "2026-02-01T00:00:00Z"),
+      track("three-new", 3, "2026-09-01T00:00:00Z"),
+      track("five-new", 5, "2026-08-01T00:00:00Z"),
+      track("four", 4, "2026-04-01T00:00:00Z"),
+      track("two", 2, "2026-05-01T00:00:00Z"),
       track("one-old", 1, "2026-03-01T00:00:00Z"),
     ];
 
     expect(sortRankedTracks(tracks).map((item) => item.id)).toEqual([
+      "five-new",
+      "five-old",
+      "four",
       "three-new",
       "three-old",
-      "two-new",
-      "two-old",
+      "two",
       "one-new",
       "one-old",
     ]);
@@ -47,7 +52,7 @@ describe("sortRankedTracks", () => {
   it("does not mutate the input", () => {
     const tracks = [
       track("a", 1, "2026-01-01T00:00:00Z"),
-      track("b", 3, "2026-01-01T00:00:00Z"),
+      track("b", 5, "2026-01-01T00:00:00Z"),
     ];
     sortRankedTracks(tracks);
     expect(tracks.map((item) => item.id)).toEqual(["a", "b"]);
@@ -67,27 +72,27 @@ describe("sortRankedTracks", () => {
 
 describe("getRankedInsertIndex", () => {
   const playlist = [
-    track("three-a", 3, "2026-05-01T00:00:00Z"),
-    track("three-b", 3, "2026-04-01T00:00:00Z"),
-    track("two-a", 2, "2026-06-01T00:00:00Z"),
+    track("five-a", 5, "2026-05-01T00:00:00Z"),
+    track("five-b", 5, "2026-04-01T00:00:00Z"),
+    track("three-a", 3, "2026-06-01T00:00:00Z"),
     track("one-a", 1, "2026-07-01T00:00:00Z"),
   ];
 
-  it("places a new 2-star track below every 3-star track", () => {
+  it("places a new 3-star track below every higher-rated track", () => {
     expect(
-      getRankedInsertIndex(playlist, track("new", 2, "2026-11-01T00:00:00Z"))
+      getRankedInsertIndex(playlist, track("new", 3, "2026-11-01T00:00:00Z"))
     ).toBe(2);
   });
 
-  it("places a new 3-star track at the top", () => {
+  it("places a new 5-star track at the top", () => {
     expect(
-      getRankedInsertIndex(playlist, track("new", 3, "2026-11-01T00:00:00Z"))
+      getRankedInsertIndex(playlist, track("new", 5, "2026-11-01T00:00:00Z"))
     ).toBe(0);
   });
 
-  it("places an older 3-star track among the 3 stars by date", () => {
+  it("places an older 5-star track among the 5 stars by date", () => {
     expect(
-      getRankedInsertIndex(playlist, track("mid", 3, "2026-04-15T00:00:00Z"))
+      getRankedInsertIndex(playlist, track("mid", 5, "2026-04-15T00:00:00Z"))
     ).toBe(1);
   });
 
@@ -148,8 +153,8 @@ describe("planPlaylistMoves", () => {
 
   it("handles duplicate tracks by item identity", () => {
     const a1 = track("a", 1, "2026-01-01T00:00:00Z");
-    const a2 = track("a", 3, "2026-01-01T00:00:00Z");
-    const b = track("b", 2, "2026-01-01T00:00:00Z");
+    const a2 = track("a", 5, "2026-01-01T00:00:00Z");
+    const b = track("b", 3, "2026-01-01T00:00:00Z");
     const current = [a1, b, a2];
     const target = sortRankedTracks(current);
 

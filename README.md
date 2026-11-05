@@ -14,6 +14,9 @@ Required setup:
 - Set `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, and `SPOTIFY_REFRESH_TOKEN`.
 - Set `SPOTIFY_ARCHIVE_PLAYLIST_ID`.
 - Optional: set `SPOTIFY_ACTIVE_PLAYLIST_ID`; otherwise the current public playlist id is used.
+- Set `EMAIL_USER` and `EMAIL_PASS` to use the Inbox tab. It connects to
+  `EMAIL_HOST` over IMAP on port 993 by default; use the `EMAIL_IMAP_*`
+  overrides in `.env.example` when the incoming mailbox or server differs.
 
 To generate `SPOTIFY_REFRESH_TOKEN` locally:
 
@@ -31,6 +34,12 @@ the active and archive playlists.
 New public submissions are saved to Supabase through `/api/submissions`, then
 the admin page can add pending tracks to Spotify or move active playlist tracks
 to the archive playlist.
+
+The Inbox tab shows the 50 newest messages in the configured mailbox. Opening a
+message marks it read, and replies are sent through the existing SMTP account
+with the original message headers so mail clients keep the conversation
+threaded. Email HTML is converted to plain text in the admin console; attachment
+names are shown, but attachments are not downloaded through the site.
 
 ## Database migrations
 

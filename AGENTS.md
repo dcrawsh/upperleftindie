@@ -19,7 +19,7 @@ The site also publishes a Bandcamp artist directory and a scraped Portland show 
 | --- | --- |
 | **Submission** | An artist-submitted track row in Supabase. Status flows `pending` → `added` \| `rejected` → `archived`. Sending the acceptance email is what adds the track to the playlist and promotes it to `added`. |
 | **Active playlist** | The public, curated Spotify playlist. Accepted tracks are inserted here. |
-| **Track rating** | A private 1-3 star curator rating per Spotify track URI in `track_ratings`; unrated tracks count as 2. The active playlist is ordered by rating, then newest added first. New tracks are inserted at their rated position, a rating change moves only that track, manual drags persist, and *Sort by Rating* re-applies the full order. |
+| **Track rating** | A private 1-5 star curator rating per Spotify track URI in `track_ratings`; unrated tracks count as 3. The active playlist is ordered by rating, then newest added first. New tracks are inserted at their rated position, a rating change moves only that track, manual drags persist, and *Sort by Rating* re-applies the full order. |
 | **Archive playlist** | A second Spotify playlist holding tracks rotated out of the active one. |
 | **Reply draft** | An AI-generated acceptance email stored in `ai_reply_drafts`, edited by the curator before sending. |
 | **Training example** | A draft that was rated Good (`rating=1`) and actually sent. The two most recent become few-shot examples for later generations. |
@@ -187,6 +187,7 @@ Server-only unless noted. See the referenced file for usage.
 | `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN` | `src/lib/spotify.ts` |
 | `SPOTIFY_ACTIVE_PLAYLIST_ID`, `SPOTIFY_ARCHIVE_PLAYLIST_ID`, `SPOTIFY_REDIRECT_URI` | `src/lib/spotify.ts`, `src/lib/spotify-auth.ts` |
 | `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_SECURE`, `RECIPIENT_EMAIL` | `src/lib/email.ts` |
+| `EMAIL_IMAP_USER`, `EMAIL_IMAP_PASS`, `EMAIL_IMAP_HOST`, `EMAIL_IMAP_PORT`, `EMAIL_IMAP_SECURE`, `EMAIL_IMAP_MAILBOX`, `EMAIL_IMAP_TIMEOUT_MS` | `src/lib/mailbox.ts` |
 | `OLLAMA_BASE_URL`, `OLLAMA_MODEL`, `OLLAMA_TIMEOUT_MS` | `src/lib/ai/providers/ollama.ts` |
 | `AI_PROVIDER` (`ollama` \| `openai` \| `anthropic`, default `ollama`) | `src/lib/ai/index.ts` |
 | `OPENAI_API_KEY`, `OPENAI_MODEL`, `OPENAI_BASE_URL` | `src/lib/ai/providers/openai.ts` |

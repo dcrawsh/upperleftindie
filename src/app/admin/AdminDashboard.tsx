@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ArchiveTab } from "./ArchiveTab";
 import { LoginScreen } from "./LoginScreen";
+import { MailTab } from "./MailTab";
 import { PlaylistTab } from "./PlaylistTab";
 import { SubmissionsTab } from "./SubmissionsTab";
 import {
@@ -11,6 +12,7 @@ import {
   getErrorMessage,
 } from "./helpers";
 import type {
+  AiReplyFeedbackTag,
   PlaylistTrack,
   ReplyDraft,
   Submission,
@@ -19,6 +21,7 @@ import type {
 } from "./types";
 import { useActivePlaylist } from "./useActivePlaylist";
 import { useAdminSession } from "./useAdminSession";
+import { useMailbox } from "./useMailbox";
 import { useTrackPreview } from "./useTrackPreview";
 
 /**
@@ -61,6 +64,14 @@ export default function AdminDashboard() {
   });
 
   const playlist = useActivePlaylist({
+    token,
+    adminFetch,
+    setIsLoading,
+    setWorkingId,
+    setMessage,
+  });
+
+  const mailbox = useMailbox({
     token,
     adminFetch,
     setIsLoading,
@@ -119,6 +130,8 @@ export default function AdminDashboard() {
 
     if (tab === "submissions") {
       loadSubmissions();
+    } else if (tab === "mail") {
+      mailbox.loadMessages();
     } else if (tab === "playlist") {
       playlist.loadTracks();
     } else {
@@ -183,6 +196,7 @@ export default function AdminDashboard() {
         message: data.message,
         aiDraftId: data.draftId,
         aiRating: 0,
+        aiFeedbackTags: [],
       });
       setMessage(
         "AI reply drafted. The track joins the playlist when you send it."
@@ -245,7 +259,11 @@ export default function AdminDashboard() {
     }
   }
 
-  async function rateReplyDraft(submission: Submission, rating: -1 | 1) {
+  async function rateReplyDraft(
+    submission: Submission,
+    rating: -1 | 1,
+    feedbackTags: AiReplyFeedbackTag[] = []
+  ) {
     const draft = getReplyDraft(submission);
     if (!draft.aiDraftId) return;
 
@@ -254,9 +272,12 @@ export default function AdminDashboard() {
     try {
       await adminFetch(`/api/admin/reply-drafts/${draft.aiDraftId}`, {
         method: "PATCH",
-        body: JSON.stringify({ rating, feedbackTags: [] }),
+        body: JSON.stringify({ rating, feedbackTags }),
       });
-      updateReplyDraft(submission, { aiRating: rating });
+      updateReplyDraft(submission, {
+        aiRating: rating,
+        aiFeedbackTags: feedbackTags,
+      });
       setMessage(
         rating === 1
           ? "Draft marked as a good example."
@@ -293,7 +314,7 @@ export default function AdminDashboard() {
           subject: draft.subject,
           message: draft.message,
           draftId: draft.aiDraftId,
-          trackRating: draft.trackRating ?? 2,
+          trackRating: draft.trackRating ?? 3,
         }),
       });
 
@@ -313,6 +334,7 @@ export default function AdminDashboard() {
         message: "",
         aiDraftId: undefined,
         aiRating: undefined,
+        aiFeedbackTags: undefined,
         trackRating: undefined,
       });
       setMessage(
@@ -435,6 +457,13 @@ export default function AdminDashboard() {
           </button>
           <button
             type="button"
+            onClick={() => setTab("mail")}
+            className={tabButtonClass("mail")}
+          >
+            Inbox
+          </button>
+          <button
+            type="button"
             onClick={() => setTab("playlist")}
             className={tabButtonClass("playlist")}
           >
@@ -484,6 +513,16 @@ export default function AdminDashboard() {
           isPreviewPlaying={isPreviewPlaying}
           previewsByKey={previewsByKey}
           loadingPreviewKey={loadingPreviewKey}
+        />
+      ) : tab === "mail" ? (
+        <MailTab
+          messages={mailbox.messages}
+          selectedMessage={mailbox.selectedMessage}
+          isLoading={isLoading}
+          workingId={workingId}
+          onRefresh={mailbox.loadMessages}
+          onOpenMessage={mailbox.openMessage}
+          onSendReply={mailbox.sendReply}
         />
       ) : tab === "playlist" ? (
         <PlaylistTab

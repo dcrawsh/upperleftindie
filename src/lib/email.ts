@@ -15,6 +15,8 @@ type SiteEmail = {
   text: string;
   fromName?: string;
   replyTo?: string;
+  inReplyTo?: string;
+  references?: string[];
 };
 
 export class EmailServiceError extends Error {
@@ -73,6 +75,8 @@ export async function sendSiteEmail({
   text,
   fromName = "Upper Left Indie",
   replyTo,
+  inReplyTo,
+  references,
 }: SiteEmail) {
   const config = getEmailConfig();
   const transporter = createEmailTransporter(config);
@@ -82,6 +86,8 @@ export async function sendSiteEmail({
     to,
     subject,
     text,
+    inReplyTo,
+    references,
   });
 
   if (!info.accepted.includes(to)) {

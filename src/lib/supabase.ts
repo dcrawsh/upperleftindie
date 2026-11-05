@@ -122,5 +122,21 @@ export async function supabaseRequest<T>(
     return undefined as T;
   }
 
-  return (await response.json()) as T;
+  // PostgREST may return 200 or 201 with an empty body for successful writes
+  // using Prefer: return=minimal. A status-only check is not sufficient: an
+  // empty success passed to response.json() throws "Unexpected end of JSON".
+  const body = await response.text();
+
+  if (!body.trim()) {
+    return undefined as T;
+  }
+
+  try {
+    return JSON.parse(body) as T;
+  } catch {
+    const details = "Supabase returned an invalid JSON response.";
+    throw mapError
+      ? mapError(502, details)
+      : new SupabaseRequestError(details, 502);
+  }
 }

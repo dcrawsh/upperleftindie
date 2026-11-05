@@ -1,9 +1,9 @@
 import { isSupabaseConfigured, supabaseRequest } from "@/lib/supabase";
 
-export type TrackRating = 1 | 2 | 3;
+export type TrackRating = 1 | 2 | 3 | 4 | 5;
 
 /** Unrated tracks, including every track that predates ratings, rank here. */
-export const DEFAULT_TRACK_RATING: TrackRating = 2;
+export const DEFAULT_TRACK_RATING: TrackRating = 3;
 
 type TrackRatingRow = {
   track_uri: string;
@@ -20,7 +20,9 @@ export class TrackRatingStoreError extends Error {
 }
 
 export function isTrackRating(value: unknown): value is TrackRating {
-  return value === 1 || value === 2 || value === 3;
+  return (
+    value === 1 || value === 2 || value === 3 || value === 4 || value === 5
+  );
 }
 
 async function trackRatingRequest<T>(

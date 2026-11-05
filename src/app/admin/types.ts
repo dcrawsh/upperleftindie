@@ -31,11 +31,52 @@ export type PlaylistTrack = {
   addedAt: string;
 };
 
-export type TrackRating = 1 | 2 | 3;
+export type TrackRating = 1 | 2 | 3 | 4 | 5;
+
+export type AiReplyFeedbackTag =
+  | "insightful-specific"
+  | "right-tone"
+  | "concise"
+  | "ready-to-send"
+  | "too-generic"
+  | "repeats-submission"
+  | "invented-details"
+  | "missed-detail"
+  | "wrong-tone"
+  | "too-promotional"
+  | "too-long"
+  | "awkward-wording";
 
 export type ActivePlaylistTrack = PlaylistTrack & { rating: TrackRating };
 
-export type Tab = "submissions" | "playlist" | "archive";
+export type Tab = "submissions" | "mail" | "playlist" | "archive";
+
+export type MailboxAddress = {
+  name: string;
+  address: string;
+};
+
+export type MailboxMessageSummary = {
+  uid: number;
+  subject: string;
+  from: MailboxAddress | null;
+  date: string;
+  unread: boolean;
+  answered: boolean;
+  hasAttachments: boolean;
+};
+
+export type MailboxMessage = MailboxMessageSummary & {
+  replyTo: MailboxAddress | null;
+  to: MailboxAddress[];
+  text: string;
+  attachments: Array<{
+    filename: string;
+    contentType: string;
+    size: number;
+  }>;
+  isTruncated: boolean;
+};
 
 export type ReplyDraft = {
   isOpen: boolean;
@@ -43,7 +84,8 @@ export type ReplyDraft = {
   message: string;
   aiDraftId?: string;
   aiRating?: -1 | 0 | 1;
-  /** Playlist rating applied when the acceptance is sent; 2 stars when unset. */
+  aiFeedbackTags?: AiReplyFeedbackTag[];
+  /** Playlist rating applied when the acceptance is sent; 3 stars when unset. */
   trackRating?: TrackRating;
 };
 
