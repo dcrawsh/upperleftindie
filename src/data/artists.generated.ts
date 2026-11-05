@@ -2101,7 +2101,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0490243961_10.jpg",
+    "image": "https://f4.bcbits.com/img/a2864533686_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2123,9 +2123,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Diamonds of Love",
+        "title": "Anchored to Air",
         "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/diamonds-of-love/"
+        "url": "https://shayleeband.bandcamp.com/track/anchored-to-air/"
       }
     ]
   },
