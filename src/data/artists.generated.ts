@@ -3041,7 +3041,7 @@ export const artists: Artist[] = [
     "name": "Still Depths",
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://stilldepths.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1341621600_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0661500732_10.jpg",
     "bio": "www.instagram.com/stilldepths/ vancouver bc",
     "submittedGenre": "Experimental",
     "tags": [
@@ -3055,9 +3055,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Like Hell!",
+        "title": "Alike and Unlike",
         "type": "album",
-        "url": "https://stilldepths.bandcamp.com/album/like-hell/"
+        "url": "https://stilldepths.bandcamp.com/album/alike-and-unlike/"
       }
     ]
   },
