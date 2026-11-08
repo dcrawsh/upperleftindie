@@ -2859,6 +2859,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "The Storyteller's Son",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/the-storytellers-son"
+      },
+      {
         "title": "Tigers In The Dark",
         "type": "track",
         "url": "https://mothershout.bandcamp.com/track/tigers-in-the-dark"
@@ -2882,11 +2887,6 @@ export const artists: Artist[] = [
         "title": "Grow Up To Be Cowboys",
         "type": "track",
         "url": "https://mothershout.bandcamp.com/track/grow-up-to-be-cowboys"
-      },
-      {
-        "title": "Gravity",
-        "type": "track",
-        "url": "https://mothershout.bandcamp.com/track/gravity"
       }
     ]
   },
