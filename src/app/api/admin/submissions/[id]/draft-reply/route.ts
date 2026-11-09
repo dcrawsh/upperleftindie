@@ -1,12 +1,10 @@
 import { NextRequest } from "next/server";
-import {
-  AdminAuthError,
-  assertAdminRequest,
-} from "@/lib/admin-auth";
+import { AdminAuthError, assertAdminRequest } from "@/lib/admin-auth";
 import {
   AiReplyDraftStoreError,
   createAiReplyDraft,
   discardAiReplyDraft,
+  getLatestNegativeAiReplyExample,
   listPositiveAiReplyExamples,
   type AiReplyInputSnapshot,
 } from "@/lib/ai-reply-drafts";
@@ -19,10 +17,7 @@ import {
   getSpotifyTrackFromUrl,
   getSpotifyTrackPreviewDetails,
 } from "@/lib/spotify";
-import {
-  getSubmission,
-  SupabaseRequestError,
-} from "@/lib/submissions";
+import { getSubmission, SupabaseRequestError } from "@/lib/submissions";
 
 export const runtime = "nodejs";
 
@@ -61,8 +56,19 @@ export async function POST(
       previousDraftId?: unknown;
     };
     const previousDraftId = asTrimmedString(body.previousDraftId);
+
+    if (!submission.song_link) {
+      return Response.json(
+        {
+          error:
+            "AI acceptance drafting currently requires a Spotify track. Write the radio acceptance manually.",
+        },
+        { status: 409 }
+      );
+    }
+
     const submittedTrack = getSpotifyTrackFromUrl(submission.song_link);
-    let trackTitle = "";
+    let trackTitle = submission.track_title?.trim() ?? "";
 
     if (submittedTrack) {
       try {
@@ -83,8 +89,15 @@ export async function POST(
       submissionNotes: (submission.notes ?? "").trim().slice(0, 4000),
       playlistUrl: ACTIVE_PLAYLIST_URL,
     };
-    const examples = await listPositiveAiReplyExamples(2);
-    const generated = await generateAcceptanceReply(inputSnapshot, examples);
+    const [positiveExamples, negativeExample] = await Promise.all([
+      listPositiveAiReplyExamples(3),
+      getLatestNegativeAiReplyExample(),
+    ]);
+    const generated = await generateAcceptanceReply(
+      inputSnapshot,
+      positiveExamples,
+      negativeExample
+    );
     const draft = await createAiReplyDraft({
       submissionId: submission.id,
       model: generated.model,

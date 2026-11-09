@@ -241,6 +241,36 @@ export default function AdminDashboard() {
     }
   }
 
+  async function publishSubmissionToRadio(submission: Submission) {
+    const radioWorkingId = `radio-${submission.id}`;
+    setWorkingId(radioWorkingId);
+    setMessage("");
+
+    try {
+      const data = await adminFetch<{ submission?: Submission }>(
+        `/api/admin/submissions/${submission.id}/publish-radio`,
+        { method: "POST" }
+      );
+
+      if (data.submission) {
+        const published = data.submission;
+        setSubmissions((current) =>
+          statusFilter !== "all" && published.status !== statusFilter
+            ? current.filter((item) => item.id !== published.id)
+            : current.map((item) =>
+                item.id === published.id ? published : item
+              )
+        );
+      }
+
+      setMessage("Track published to Upper Left Radio.");
+    } catch (error) {
+      setMessage(getErrorMessage(error));
+    } finally {
+      setWorkingId("");
+    }
+  }
+
   async function rejectSubmission(id: string) {
     setWorkingId(id);
     setMessage("");
@@ -306,6 +336,7 @@ export default function AdminDashboard() {
         submission?: Submission;
         trainingSaved?: boolean | null;
         playlistAdded?: boolean | null;
+        radioPublished?: boolean | null;
         ratingSaved?: boolean | null;
         submissionSaved?: boolean;
       }>(`/api/admin/submissions/${submission.id}/reply`, {
@@ -342,13 +373,19 @@ export default function AdminDashboard() {
           ? `Reply sent to ${submission.email}, but the submission could not be updated. Refresh before sending again.`
           : data.playlistAdded === false
             ? `Reply sent to ${submission.email}, but the track could not be added to the playlist. Use Add to Playlist to finish.`
-            : data.ratingSaved === false
-              ? `Reply sent to ${submission.email} and the track is on the playlist, but its rating could not be saved. Set it on the Active Playlist tab.`
-              : data.trainingSaved === false
-                ? `Reply sent to ${submission.email}, but the training example could not be saved.`
-                : data.playlistAdded
-                  ? `Reply sent to ${submission.email} and the track is on the playlist.`
-                  : `Reply sent to ${submission.email}.`
+            : data.radioPublished === false
+              ? `Reply sent to ${submission.email}, but the MP3 could not be published. Use Publish to Radio to finish.`
+              : data.ratingSaved === false
+                ? `Reply sent to ${submission.email} and the track is on the playlist, but its rating could not be saved. Set it on the Active Playlist tab.`
+                : data.trainingSaved === false
+                  ? `Reply sent to ${submission.email}, but the training example could not be saved.`
+                  : data.playlistAdded && data.radioPublished
+                    ? `Reply sent to ${submission.email}; the track is on Spotify and Upper Left Radio.`
+                    : data.playlistAdded
+                      ? `Reply sent to ${submission.email} and the track is on the playlist.`
+                      : data.radioPublished
+                        ? `Reply sent to ${submission.email} and the track is on Upper Left Radio.`
+                        : `Reply sent to ${submission.email}.`
       );
     } catch (error) {
       setMessage(getErrorMessage(error));
@@ -504,6 +541,7 @@ export default function AdminDashboard() {
           updateReplyDraft={updateReplyDraft}
           onToggleReplyDraft={toggleReplyDraft}
           onAddToPlaylist={addSubmissionToPlaylist}
+          onPublishToRadio={publishSubmissionToRadio}
           onReject={rejectSubmission}
           onGenerateReply={generateSubmissionReply}
           onRateDraft={rateReplyDraft}

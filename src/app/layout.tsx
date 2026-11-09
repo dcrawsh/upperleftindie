@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo_Narrow, Public_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
+import RadioPlayer from "./components/RadioPlayer";
 import SiteFooter from "./components/SiteFooter";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
@@ -110,8 +111,12 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <div id="site-shell" className="grid min-h-screen grid-rows-[auto_1fr_auto]">
+        <div
+          id="site-shell"
+          className="grid min-h-screen grid-rows-[auto_auto_1fr_auto]"
+        >
           <Nav />
+          <RadioPlayer />
           {/* min-w-0: as a grid item, main defaults to min-width:auto, which
               lets any wide descendant (a horizontal filter strip, a long
               unbroken string) push the whole page wider than the viewport. */}

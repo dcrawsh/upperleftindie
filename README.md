@@ -35,6 +35,45 @@ New public submissions are saved to Supabase through `/api/submissions`, then
 the admin page can add pending tracks to Spotify or move active playlist tracks
 to the archive playlist.
 
+## Upper Left Radio
+
+Artists may upload one MP3 (12 MB maximum) instead of, or alongside, a Spotify track.
+Uploads go directly to the private `submission-audio` Supabase Storage bucket with a
+short-lived signed URL. They remain private during review. Sending an acceptance publishes
+the MP3 to the continuous `/radio` player; public playback uses a new short-lived signed URL
+for each track.
+
+Set `SUBMISSION_AUDIO_UPLOADS_ENABLED=false` to stop issuing new MP3 upload URLs when
+Storage usage approaches the free-tier ceiling. Existing submissions and radio playback keep
+working. Uploaded objects use date-prefixed paths, and a failed submission save removes its
+object when no saved submission references it.
+
+On Vercel, upload preparation is limited to five attempts per public IP address in a
+24-hour window; the database stores only a keyed hash of the address and removes inactive
+hashes after seven days. Radio responses reuse a track's one-hour signed URL until it has
+less than five minutes remaining, allowing repeated plays of that track to share a Supabase
+CDN cache key.
+
+Submission audio follows a bounded retention policy:
+
+- Published radio tracks remain in private Storage until the curator removes them.
+- Rejected MP3s are hidden immediately, deleted from Storage, and retried by cleanup if the
+  first deletion fails.
+- Unreviewed pending MP3s become cleanup-eligible after 90 days. MP3-only submissions
+  become rejected; submissions that still have a Spotify track remain pending for Spotify
+  review.
+- Direct uploads that never become a submission become cleanup-eligible after 24 hours.
+- Pending rows with a sent acceptance are never expired, preserving the radio repair path.
+
+`yarn cleanup:submission-audio` previews eligible files without changing anything;
+`yarn cleanup:submission-audio --delete` applies the cleanup. The weekly
+`cleanup-submission-audio` GitHub Action applies it automatically, while manually dispatched
+runs default to dry-run mode.
+
+Apply the `add_submission_radio` migration before enabling MP3 submissions. It creates the
+private bucket, upload limiter, retention timestamps, and the audio, rights-consent, and
+radio-publication columns. The app does not create the bucket at runtime.
+
 The Inbox tab shows the 50 newest messages in the configured mailbox. Opening a
 message marks it read, and replies are sent through the existing SMTP account
 with the original message headers so mail clients keep the conversation
@@ -120,5 +159,7 @@ provider-agnostic.
 
 Each generation stores the provider, model, prompt version, input snapshot, generated
 copy, curator rating, and the final edited copy that was sent. Drafts rated
-Good and then sent become the one- or two-shot examples for later generations.
+Good and then sent become the three positive examples for later generations.
+The most recent Needs Work draft is included separately as a labeled negative
+counterexample, giving each generation a four-shot prompt.
 All sent examples remain available for a future fine-tuning export.

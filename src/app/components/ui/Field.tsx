@@ -38,7 +38,10 @@ export function FieldLabel({
   optional?: boolean;
 }) {
   return (
-    <label htmlFor={htmlFor} className="block type-body-s font-semibold text-primary">
+    <label
+      htmlFor={htmlFor}
+      className="block type-body-s font-semibold text-primary"
+    >
       {children}
       {optional ? (
         <span className="ml-1.5 font-normal text-tertiary">(optional)</span>
@@ -47,7 +50,13 @@ export function FieldLabel({
   );
 }
 
-export function HelperText({ id, children }: { id: string; children: ReactNode }) {
+export function HelperText({
+  id,
+  children,
+}: {
+  id: string;
+  children: ReactNode;
+}) {
   return (
     <p id={id} className="type-body-s text-tertiary">
       {children}
@@ -55,7 +64,13 @@ export function HelperText({ id, children }: { id: string; children: ReactNode }
   );
 }
 
-export function ErrorText({ id, children }: { id: string; children: ReactNode }) {
+export function ErrorText({
+  id,
+  children,
+}: {
+  id: string;
+  children: ReactNode;
+}) {
   return (
     <p id={id} className="type-body-s font-medium text-error">
       {children}
@@ -82,7 +97,8 @@ function FieldShell({
 }: FieldShellProps) {
   const helperId = helper ? `${id}-helper` : undefined;
   const errorId = error ? `${id}-error` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(" ") || undefined;
+  const describedBy =
+    [errorId, helperId].filter(Boolean).join(" ") || undefined;
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -91,7 +107,9 @@ function FieldShell({
       </FieldLabel>
       {children(describedBy, Boolean(error))}
       {error && errorId ? <ErrorText id={errorId}>{error}</ErrorText> : null}
-      {helper && helperId ? <HelperText id={helperId}>{helper}</HelperText> : null}
+      {helper && helperId ? (
+        <HelperText id={helperId}>{helper}</HelperText>
+      ) : null}
     </div>
   );
 }
@@ -113,13 +131,60 @@ export function TextField({
   ...rest
 }: TextFieldProps) {
   return (
-    <FieldShell id={id} label={label} helper={helper} error={error} optional={optional}>
+    <FieldShell
+      id={id}
+      label={label}
+      helper={helper}
+      error={error}
+      optional={optional}
+    >
       {(describedBy, hasError) => (
         <input
           id={id}
           aria-describedby={describedBy}
           aria-invalid={hasError || undefined}
           className={controlClasses(hasError)}
+          {...rest}
+        />
+      )}
+    </FieldShell>
+  );
+}
+
+type FileFieldProps = {
+  id: string;
+  label: ReactNode;
+  helper?: ReactNode;
+  error?: string;
+  optional?: boolean;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "id" | "className" | "type">;
+
+export function FileField({
+  id,
+  label,
+  helper,
+  error,
+  optional,
+  ...rest
+}: FileFieldProps) {
+  return (
+    <FieldShell
+      id={id}
+      label={label}
+      helper={helper}
+      error={error}
+      optional={optional}
+    >
+      {(describedBy, hasError) => (
+        <input
+          id={id}
+          type="file"
+          aria-describedby={describedBy}
+          aria-invalid={hasError || undefined}
+          className={controlClasses(
+            hasError,
+            "file:mr-4 file:rounded-full file:border-0 file:bg-inverse file:px-4 file:py-2 file:type-label-s file:text-on-inverse"
+          )}
           {...rest}
         />
       )}
@@ -134,7 +199,10 @@ type SelectFieldProps = {
   error?: string;
   optional?: boolean;
   children: ReactNode;
-} & Omit<SelectHTMLAttributes<HTMLSelectElement>, "id" | "className" | "children">;
+} & Omit<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  "id" | "className" | "children"
+>;
 
 export function SelectField({
   id,
@@ -146,13 +214,22 @@ export function SelectField({
   ...rest
 }: SelectFieldProps) {
   return (
-    <FieldShell id={id} label={label} helper={helper} error={error} optional={optional}>
+    <FieldShell
+      id={id}
+      label={label}
+      helper={helper}
+      error={error}
+      optional={optional}
+    >
       {(describedBy, hasError) => (
         <select
           id={id}
           aria-describedby={describedBy}
           aria-invalid={hasError || undefined}
-          className={controlClasses(hasError, "appearance-none bg-[right_1rem_center] bg-no-repeat pr-10")}
+          className={controlClasses(
+            hasError,
+            "appearance-none bg-[right_1rem_center] bg-no-repeat pr-10"
+          )}
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%23101014' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
@@ -183,7 +260,13 @@ export function TextareaField({
   ...rest
 }: TextareaFieldProps) {
   return (
-    <FieldShell id={id} label={label} helper={helper} error={error} optional={optional}>
+    <FieldShell
+      id={id}
+      label={label}
+      helper={helper}
+      error={error}
+      optional={optional}
+    >
       {(describedBy, hasError) => (
         <textarea
           id={id}

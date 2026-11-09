@@ -4,7 +4,10 @@ import {
   buildAcceptanceMessages,
   AI_REPLY_PROMPT_VERSION,
 } from "@/lib/local-ai-reply";
-import type { AiReplyInputSnapshot } from "@/lib/ai-reply-drafts";
+import type {
+  AiReplyInputSnapshot,
+  AiReplyNegativeExample,
+} from "@/lib/ai-reply-drafts";
 
 const input: AiReplyInputSnapshot = {
   contactName: "Maya",
@@ -85,6 +88,54 @@ describe("buildAcceptanceMessages", () => {
     });
   });
 
+  it("places a labeled negative counterexample before approved examples", () => {
+    const approved = {
+      input,
+      subject: "Harbor Static added",
+      message: "Hi Maya,",
+    };
+    const rejected: AiReplyNegativeExample = {
+      input,
+      subject: "Generic subject",
+      message: "Generic reply",
+      feedbackTags: ["too-generic", "wrong-tone"],
+    };
+
+    const messages = buildAcceptanceMessages(input, [approved], rejected);
+
+    expect(messages.map((message) => message.role)).toEqual([
+      "user",
+      "assistant",
+      "user",
+      "assistant",
+      "user",
+    ]);
+    expect(messages[0].content).toContain("REJECTED COUNTEREXAMPLE");
+    expect(messages[0].content).toContain("Generic reply");
+    expect(messages[0].content).toContain("too-generic");
+    expect(messages[1].content).toContain("avoid the tagged problems");
+    expect(messages[2].content).toContain("APPROVED EXAMPLE");
+  });
+
+  it("puts the newest approved example closest to the real request", () => {
+    const newest = {
+      input,
+      subject: "Newest approved subject",
+      message: "Newest approved reply",
+    };
+    const older = {
+      input,
+      subject: "Older approved subject",
+      message: "Older approved reply",
+    };
+
+    const messages = buildAcceptanceMessages(input, [newest, older]);
+
+    expect(messages[1].content).toContain("Older approved reply");
+    expect(messages[3].content).toContain("Newest approved reply");
+    expect(messages[4].content).toContain("Harbor Static");
+  });
+
   it("serializes submission notes as quoted JSON data, never as instructions", () => {
     const hostile: AiReplyInputSnapshot = {
       ...input,
@@ -102,7 +153,7 @@ describe("buildAcceptanceMessages", () => {
 });
 
 describe("AI_REPLY_PROMPT_VERSION", () => {
-  it("tracks the creative curator-observation prompt", () => {
-    expect(AI_REPLY_PROMPT_VERSION).toBe("acceptance-v3");
+  it("tracks the contrastive four-shot prompt", () => {
+    expect(AI_REPLY_PROMPT_VERSION).toBe("acceptance-v4");
   });
 });

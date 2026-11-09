@@ -6,19 +6,24 @@ import { Button, ButtonLink } from "./ui/Button";
 import ConfirmationPanel from "./ui/ConfirmationPanel";
 import {
   ConsentCheckbox,
+  FileField,
   SelectField,
   TextField,
   TextareaField,
 } from "./ui/Field";
 import { genreOptions, getGenreLabel } from "@/lib/genres";
 import { ACTIVE_PLAYLIST_URL, INSTAGRAM_URL, REGION_SCOPE } from "@/lib/site";
+import {
+  MAX_SUBMISSION_AUDIO_BYTES,
+  MAX_SUBMISSION_AUDIO_MEGABYTES,
+} from "@/lib/submission-audio-constants";
 
 /**
  * Submission form — Figma "Submit · Desktop 1440" (24:76),
  * "Submit · Confirmation" (28:199) and "Submit · Validation error" (28:241).
  *
- * The twelve fields are grouped into Artist / Music / Permissions, validation
- * explains why a Spotify track link is required, every async outcome is
+ * Fields are grouped into Artist / Music / Permissions, validation explains
+ * that a Spotify link or MP3 is required, every async outcome is
  * announced, and success is a confirmation state with a consent recap rather
  * than a paragraph under the button. The Supabase, email, artist-page queue and
  * newsletter calls are unchanged.
@@ -30,11 +35,13 @@ type FormState = {
   city: string;
   region: string;
   genre: string;
+  trackTitle: string;
   songLink: string;
   bandCampLink: string;
   socialLink: string;
   notes: string;
   artistPageConsent: boolean;
+  radioRightsAccepted: boolean;
   subscribeToNewsletter: boolean;
 };
 
@@ -45,11 +52,13 @@ const initialFormState: FormState = {
   city: "",
   region: "",
   genre: "",
+  trackTitle: "",
   songLink: "",
   bandCampLink: "",
   socialLink: "",
   notes: "",
   artistPageConsent: false,
+  radioRightsAccepted: false,
   // Opt-in, not opt-out. The previous default was pre-checked.
   subscribeToNewsletter: false,
 };
@@ -76,7 +85,7 @@ const regionOptions = [
   { label: "Other region", value: "other-region" },
 ];
 
-type FieldErrors = Partial<Record<keyof FormState, string>>;
+type FieldErrors = Partial<Record<keyof FormState | "audioFile", string>>;
 
 type SubmittedSummary = {
   artistName: string;
@@ -85,6 +94,7 @@ type SubmittedSummary = {
   genreLabel: string;
   artistPageConsent: boolean;
   subscribeToNewsletter: boolean;
+  radioSubmitted: boolean;
   followUps: string[];
 };
 
@@ -111,7 +121,8 @@ function isBandcampUrl(value: string) {
     const url = new URL(value.trim());
     return (
       url.protocol === "https:" &&
-      (url.hostname === "bandcamp.com" || url.hostname.endsWith(".bandcamp.com"))
+      (url.hostname === "bandcamp.com" ||
+        url.hostname.endsWith(".bandcamp.com"))
     );
   } catch {
     return false;
@@ -120,6 +131,7 @@ function isBandcampUrl(value: string) {
 
 export default function SubmissionForm() {
   const [formData, setFormData] = useState(initialFormState);
+  const [audioFile, setAudioFile] = useState<File | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -142,7 +154,8 @@ export default function SubmissionForm() {
   ) => {
     const { name, value } = event.target;
     const nextValue =
-      event.target instanceof HTMLInputElement && event.target.type === "checkbox"
+      event.target instanceof HTMLInputElement &&
+      event.target.type === "checkbox"
         ? event.target.checked
         : value;
 
@@ -172,8 +185,33 @@ export default function SubmissionForm() {
   const validate = (): FieldErrors => {
     const errors: FieldErrors = {};
 
-    if (!spotifyTrackUrlPattern.test(formData.songLink.trim())) {
+    if (
+      formData.songLink.trim() &&
+      !spotifyTrackUrlPattern.test(formData.songLink.trim())
+    ) {
       errors.songLink = spotifyTrackLinkError;
+    }
+
+    if (!formData.songLink.trim() && !audioFile) {
+      errors.songLink = "Add a Spotify song link or upload an MP3.";
+      errors.audioFile = "Add an MP3 or provide a Spotify song link.";
+    }
+
+    if (audioFile) {
+      if (!audioFile.name.toLowerCase().endsWith(".mp3")) {
+        errors.audioFile = "Choose an MP3 file.";
+      } else if (audioFile.size > MAX_SUBMISSION_AUDIO_BYTES) {
+        errors.audioFile = `The MP3 must be ${MAX_SUBMISSION_AUDIO_MEGABYTES} MB or smaller.`;
+      }
+
+      if (!formData.trackTitle.trim()) {
+        errors.trackTitle = "Track title is required with an MP3 upload.";
+      }
+
+      if (!formData.radioRightsAccepted) {
+        errors.radioRightsAccepted =
+          "Confirm that you have permission to submit this recording.";
+      }
     }
 
     if (formData.bandCampLink.trim() && !isBandcampUrl(formData.bandCampLink)) {
@@ -216,7 +254,9 @@ Email: ${formData.email}
 City: ${formData.city}
 Region: ${getRegionLabel(formData.region)}
 Genre: ${getGenreLabel(formData.genre)}
-Song link: ${formData.songLink}
+Track title: ${formData.trackTitle || "Not provided"}
+Spotify link: ${formData.songLink || "Not provided"}
+MP3 uploaded: ${audioFile?.name || "No"}
 Bandcamp link: ${formData.bandCampLink || "Not provided"}
 Social link: ${formData.socialLink || "Not provided"}
 Artist page permission: ${formData.artistPageConsent ? "Yes" : "No"}
@@ -234,6 +274,48 @@ ${formData.notes || "Not provided"}`;
     try {
       let submissionSaved = true;
       let emailSent = true;
+      let audioUploadToken = "";
+
+      if (audioFile) {
+        const prepareResponse = await fetch("/api/submission-uploads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fileName: audioFile.name,
+            size: audioFile.size,
+            mimeType: audioFile.type,
+          }),
+        });
+
+        if (!prepareResponse.ok) {
+          throw new Error(
+            await getErrorMessage(prepareResponse, "MP3 upload could not start")
+          );
+        }
+
+        const prepared = (await prepareResponse.json()) as {
+          uploadUrl: string;
+          uploadToken: string;
+        };
+        const uploadBody = new FormData();
+        uploadBody.append("cacheControl", "3600");
+        uploadBody.append(
+          "",
+          audioFile.slice(0, audioFile.size, "audio/mpeg"),
+          audioFile.name
+        );
+        const uploadResponse = await fetch(prepared.uploadUrl, {
+          method: "PUT",
+          headers: { "x-upsert": "false" },
+          body: uploadBody,
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error("The MP3 upload failed. Please try again.");
+        }
+
+        audioUploadToken = prepared.uploadToken;
+      }
 
       try {
         const submissionResponse = await fetch("/api/submissions", {
@@ -241,7 +323,11 @@ ${formData.notes || "Not provided"}`;
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            ...formData,
+            audioUploadToken,
+            audioOriginalFilename: audioFile?.name,
+          }),
         });
 
         submissionSaved = submissionResponse.ok;
@@ -304,7 +390,10 @@ ${formData.notes || "Not provided"}`;
       }
 
       if (formData.subscribeToNewsletter) {
-        const locationFields = getLocationFields(formData.city, formData.region);
+        const locationFields = getLocationFields(
+          formData.city,
+          formData.region
+        );
 
         try {
           const subscribeResponse = await fetch("/api/newsletter/subscribe", {
@@ -334,7 +423,10 @@ ${formData.notes || "Not provided"}`;
 
           if (!subscribeResponse.ok) {
             console.error(
-              await getErrorMessage(subscribeResponse, "Newsletter signup failed")
+              await getErrorMessage(
+                subscribeResponse,
+                "Newsletter signup failed"
+              )
             );
           }
         } catch (error) {
@@ -367,9 +459,11 @@ ${formData.notes || "Not provided"}`;
         genreLabel: getGenreLabel(formData.genre),
         artistPageConsent: formData.artistPageConsent,
         subscribeToNewsletter: formData.subscribeToNewsletter,
+        radioSubmitted: Boolean(audioFile),
         followUps,
       });
       setFormData(initialFormState);
+      setAudioFile(null);
       setFieldErrors({});
     } catch (error) {
       console.error(error);
@@ -392,12 +486,18 @@ ${formData.notes || "Not provided"}`;
         <ConfirmationPanel
           badge="Submission received"
           title="Thanks — it’s in the queue."
-          description="One person listens to everything that comes in. Because of volume I can’t reply to every submission, but if your track fits the playlist you’ll hear from me."
+          description="One person listens to everything that comes in. Because of volume I can’t reply to every submission, but if your track fits the playlist or radio you’ll hear from me."
           recapTitle="What you sent, and what you agreed to"
           recap={[
             { label: "Artist", value: submitted.artistName || "Not provided" },
             { label: "From", value: place || "Not provided" },
             { label: "Genre", value: submitted.genreLabel },
+            {
+              label: "Upper Left Radio",
+              value: submitted.radioSubmitted
+                ? "Yes — you submitted an MP3 for consideration. It will only play if accepted."
+                : "No MP3 submitted.",
+            },
             {
               label: "Artist page",
               value: submitted.artistPageConsent
@@ -413,10 +513,15 @@ ${formData.notes || "Not provided"}`;
           ]}
           actions={
             <>
+              {submitted.radioSubmitted ? (
+                <ButtonLink href="/radio" emphasis="primary" size="md">
+                  Tune in to Upper Left Radio
+                </ButtonLink>
+              ) : null}
               <ButtonLink
                 href={ACTIVE_PLAYLIST_URL}
                 external
-                emphasis="primary"
+                emphasis={submitted.radioSubmitted ? "secondary" : "primary"}
                 size="md"
               >
                 Save the playlist on Spotify
@@ -432,8 +537,8 @@ ${formData.notes || "Not provided"}`;
           }
           footnote={
             <>
-              Saving the playlist genuinely helps — it is the single biggest lever
-              on whether these artists get heard beyond this site.
+              Saving the playlist genuinely helps — it is the single biggest
+              lever on whether these artists get heard beyond this site.
               {submitted.followUps.length > 0 ? (
                 <>
                   {" "}
@@ -449,9 +554,9 @@ ${formData.notes || "Not provided"}`;
     );
   }
 
-  const errorEntries = Object.entries(fieldErrors).filter(
-    ([, message]) => Boolean(message)
-  ) as Array<[keyof FormState, string]>;
+  const errorEntries = Object.entries(fieldErrors).filter(([, message]) =>
+    Boolean(message)
+  ) as Array<[keyof FormState | "audioFile", string]>;
 
   return (
     <form
@@ -505,7 +610,12 @@ ${formData.notes || "Not provided"}`;
             Please send your music through Instagram while the form is offline.
           </p>
           <div>
-            <ButtonLink href={INSTAGRAM_URL} external emphasis="primary" size="md">
+            <ButtonLink
+              href={INSTAGRAM_URL}
+              external
+              emphasis="primary"
+              size="md"
+            >
               Submit on Instagram
             </ButtonLink>
           </div>
@@ -617,16 +727,48 @@ ${formData.notes || "Not provided"}`;
         </legend>
 
         <TextField
+          id="submit-trackTitle"
+          name="trackTitle"
+          type="text"
+          label="Track title"
+          optional={!audioFile}
+          required={Boolean(audioFile)}
+          value={formData.trackTitle}
+          onChange={handleChange}
+          error={fieldErrors.trackTitle}
+          helper="Required when you upload an MP3."
+        />
+
+        <TextField
           id="submit-songLink"
           name="songLink"
           type="url"
           label="Spotify song link"
-          required
+          optional
           value={formData.songLink}
           onChange={handleChange}
           error={fieldErrors.songLink}
           placeholder="https://open.spotify.com/track/…"
-          helper="A Spotify track link is what lets me add your song straight to the playlist, so it is the one link I have to have. Send the track page, not an artist, album, or playlist page."
+          helper="Used for the Spotify playlist. If the track is not on Spotify, upload an MP3 instead."
+        />
+
+        <FileField
+          id="submit-audioFile"
+          name="audioFile"
+          label="MP3 for Upper Left Radio"
+          optional
+          accept=".mp3,audio/mpeg"
+          onChange={(event) => {
+            const file = event.target.files?.[0] ?? null;
+            setAudioFile(file);
+            setFieldErrors((current) => ({
+              ...current,
+              audioFile: undefined,
+              songLink: formData.songLink.trim() ? current.songLink : undefined,
+            }));
+          }}
+          error={fieldErrors.audioFile}
+          helper={`Optional when you have a Spotify link. MP3 only, up to ${MAX_SUBMISSION_AUDIO_MEGABYTES} MB. The file stays private unless the submission is accepted for radio.`}
         />
 
         <TextField
@@ -667,11 +809,27 @@ ${formData.notes || "Not provided"}`;
 
       <fieldset className="flex flex-col gap-4">
         <legend className="flex flex-col gap-1 pb-2">
-          <span className="block type-label-m text-accent">3 · Permissions</span>
+          <span className="block type-label-m text-accent">
+            3 · Permissions
+          </span>
           <span className="block type-body-s text-tertiary">
             Both are optional, and neither affects whether I listen.
           </span>
         </legend>
+
+        <ConsentCheckbox
+          id="submit-radioRightsAccepted"
+          name="radioRightsAccepted"
+          checked={formData.radioRightsAccepted}
+          onChange={handleChange}
+          title="I have permission to submit this recording for Upper Left Radio."
+          description="If I upload an MP3, I confirm I control or have permission for the recording and composition, and give Upper Left Indie nonexclusive permission to store, process, and stream it on this site until I request removal."
+        />
+        {fieldErrors.radioRightsAccepted ? (
+          <p className="type-body-s font-medium text-error">
+            {fieldErrors.radioRightsAccepted}
+          </p>
+        ) : null}
 
         <ConsentCheckbox
           id="submit-artistPageConsent"

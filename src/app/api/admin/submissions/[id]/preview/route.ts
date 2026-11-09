@@ -1,21 +1,16 @@
 import { NextRequest } from "next/server";
-import {
-  AdminAuthError,
-  assertAdminRequest,
-} from "@/lib/admin-auth";
-import {
-  ApplePreviewError,
-  findApplePreview,
-} from "@/lib/apple-preview";
+import { AdminAuthError, assertAdminRequest } from "@/lib/admin-auth";
+import { ApplePreviewError, findApplePreview } from "@/lib/apple-preview";
 import {
   getSpotifyTrackFromUrl,
   getSpotifyTrackPreviewDetails,
   SpotifyRequestError,
 } from "@/lib/spotify";
+import { getSubmission, SupabaseRequestError } from "@/lib/submissions";
 import {
-  getSubmission,
-  SupabaseRequestError,
-} from "@/lib/submissions";
+  createSignedSubmissionAudioUrl,
+  SubmissionAudioError,
+} from "@/lib/submission-audio";
 
 export const runtime = "nodejs";
 
@@ -33,7 +28,25 @@ export async function GET(
       return Response.json({ error: "Submission not found." }, { status: 404 });
     }
 
-    const submittedTrack = getSpotifyTrackFromUrl(submission.song_link);
+    if (
+      submission.audio_storage_path &&
+      (submission.audio_upload_status === "uploaded" ||
+        submission.audio_upload_status === "published")
+    ) {
+      return Response.json({
+        previewUrl: await createSignedSubmissionAudioUrl(
+          submission.audio_storage_path
+        ),
+        source: "uploaded",
+        trackName: submission.track_title ?? "",
+        artistNames: submission.artist_name,
+        albumName: "",
+      });
+    }
+
+    const submittedTrack = submission.song_link
+      ? getSpotifyTrackFromUrl(submission.song_link)
+      : null;
 
     if (!submittedTrack) {
       return Response.json(
@@ -74,17 +87,15 @@ export async function GET(
     }
 
     if (error instanceof SupabaseRequestError) {
-      return Response.json(
-        { error: error.message },
-        { status: error.status }
-      );
+      return Response.json({ error: error.message }, { status: error.status });
+    }
+
+    if (error instanceof SubmissionAudioError) {
+      return Response.json({ error: error.message }, { status: error.status });
     }
 
     if (error instanceof SpotifyRequestError) {
-      return Response.json(
-        { error: error.message },
-        { status: error.status }
-      );
+      return Response.json({ error: error.message }, { status: error.status });
     }
 
     if (error instanceof ApplePreviewError) {

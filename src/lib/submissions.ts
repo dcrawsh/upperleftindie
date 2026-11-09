@@ -1,4 +1,14 @@
-import { supabaseRequest, SupabaseRequestError } from "@/lib/supabase";
+import {
+  supabasePath,
+  supabaseRequest,
+  SupabaseRequestError,
+} from "@/lib/supabase";
+import {
+  RADIO_RIGHTS_VERSION,
+  removeSubmissionAudio,
+  type VerifiedSubmissionAudio,
+} from "@/lib/submission-audio";
+import { SUBMISSION_AUDIO_PENDING_RETENTION_DAYS } from "@/lib/submission-audio-retention";
 
 // Re-exported so existing `instanceof` narrowing in route handlers keeps
 // working against a single class identity.
@@ -19,7 +29,8 @@ export type Submission = {
   city: string;
   region: string;
   genre: string;
-  song_link: string;
+  song_link: string | null;
+  track_title?: string | null;
   bandcamp_link?: string | null;
   social_link?: string | null;
   notes?: string | null;
@@ -32,6 +43,19 @@ export type Submission = {
   replied_at?: string | null;
   reply_subject?: string | null;
   admin_notes?: string | null;
+  audio_storage_path?: string | null;
+  audio_original_filename?: string | null;
+  audio_mime_type?: string | null;
+  audio_size_bytes?: number | null;
+  audio_upload_status?: "uploaded" | "published" | "removed" | null;
+  audio_expires_at?: string | null;
+  audio_deleted_at?: string | null;
+  radio_rights_version?: string | null;
+  radio_rights_accepted_at?: string | null;
+  radio_published_at?: string | null;
+  radio_removed_at?: string | null;
+  radio_playback_url?: string | null;
+  radio_playback_url_expires_at?: string | null;
 };
 
 export type SubmissionPayload = {
@@ -42,6 +66,10 @@ export type SubmissionPayload = {
   region?: unknown;
   genre?: unknown;
   songLink?: unknown;
+  trackTitle?: unknown;
+  audioUploadToken?: unknown;
+  audioOriginalFilename?: unknown;
+  radioRightsAccepted?: unknown;
   bandCampLink?: unknown;
   socialLink?: unknown;
   notes?: unknown;
@@ -53,15 +81,40 @@ function asString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
-export function normalizeSubmissionPayload(payload: SubmissionPayload) {
+export function normalizeSubmissionPayload(
+  payload: SubmissionPayload,
+  audio?: VerifiedSubmissionAudio | null
+) {
   const artistName = asString(payload.artistName);
   const contactName = asString(payload.contactName);
   const email = asString(payload.email);
   const songLink = asString(payload.songLink);
+  const trackTitle = asString(payload.trackTitle);
 
-  if (!artistName || !contactName || !email || !songLink) {
+  if (!artistName || !contactName || !email) {
     throw new SupabaseRequestError(
-      "Artist name, contact name, email, and song link are required.",
+      "Artist name, contact name, and email are required.",
+      400
+    );
+  }
+
+  if (!songLink && !audio) {
+    throw new SupabaseRequestError(
+      "Add a Spotify song link or upload an MP3.",
+      400
+    );
+  }
+
+  if (audio && !trackTitle) {
+    throw new SupabaseRequestError(
+      "Track title is required with an MP3 upload.",
+      400
+    );
+  }
+
+  if (audio && payload.radioRightsAccepted !== true) {
+    throw new SupabaseRequestError(
+      "Confirm that you have permission to submit the MP3 for radio play.",
       400
     );
   }
@@ -73,17 +126,38 @@ export function normalizeSubmissionPayload(payload: SubmissionPayload) {
     city: asString(payload.city),
     region: asString(payload.region),
     genre: asString(payload.genre),
-    song_link: songLink,
+    song_link: songLink || null,
+    track_title: trackTitle || null,
     bandcamp_link: asString(payload.bandCampLink) || null,
     social_link: asString(payload.socialLink) || null,
     notes: asString(payload.notes) || null,
     artist_page_consent: payload.artistPageConsent === true,
     subscribe_to_newsletter: payload.subscribeToNewsletter !== false,
+    ...(audio
+      ? {
+          audio_storage_path: audio.storagePath,
+          audio_original_filename:
+            asString(payload.audioOriginalFilename).slice(0, 255) || null,
+          audio_mime_type: audio.mimeType,
+          audio_size_bytes: audio.size,
+          audio_upload_status: "uploaded" as const,
+          audio_expires_at: new Date(
+            Date.now() +
+              SUBMISSION_AUDIO_PENDING_RETENTION_DAYS * 24 * 60 * 60 * 1000
+          ).toISOString(),
+          audio_deleted_at: null,
+          radio_rights_version: RADIO_RIGHTS_VERSION,
+          radio_rights_accepted_at: new Date().toISOString(),
+        }
+      : {}),
   };
 }
 
-export async function createSubmission(payload: SubmissionPayload) {
-  const submission = normalizeSubmissionPayload(payload);
+export async function createSubmission(
+  payload: SubmissionPayload,
+  audio?: VerifiedSubmissionAudio | null
+) {
+  const submission = normalizeSubmissionPayload(payload, audio);
   const rows = await supabaseRequest<Submission[]>(submissionsTable, {
     method: "POST",
     body: JSON.stringify(submission),
@@ -93,9 +167,27 @@ export async function createSubmission(payload: SubmissionPayload) {
   return rows[0];
 }
 
+export async function discardUnreferencedSubmissionAudio(storagePath: string) {
+  const path = supabasePath(submissionsTable, {
+    select: "id",
+    audio_storage_path: `eq.${storagePath}`,
+    limit: 1,
+  });
+  const rows = await supabaseRequest<Array<{ id: string }>>(path);
+
+  if (rows.length > 0) {
+    return false;
+  }
+
+  await removeSubmissionAudio(storagePath);
+  return true;
+}
+
 export async function listSubmissions(status?: string) {
   const statusFilter =
-    status && status !== "all" ? `&status=eq.${encodeURIComponent(status)}` : "";
+    status && status !== "all"
+      ? `&status=eq.${encodeURIComponent(status)}`
+      : "";
 
   return supabaseRequest<Submission[]>(
     `${submissionsTable}?select=*&order=created_at.desc${statusFilter}`
