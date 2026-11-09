@@ -92,6 +92,13 @@ const regionOptions = [
 
 type FieldErrors = Partial<Record<keyof FormState | "audioFile", string>>;
 
+type SubmissionErrorCode = "RICKROLL_BLOCKED";
+
+type SubmissionErrorDetails = {
+  message: string;
+  code?: SubmissionErrorCode;
+};
+
 type SubmittedSummary = {
   artistName: string;
   city: string;
@@ -141,8 +148,18 @@ export default function SubmissionForm() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [rickRollPunished, setRickRollPunished] = useState(false);
   const [submitted, setSubmitted] = useState<SubmittedSummary | null>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
+
+  function playRickRoll() {
+    const audio = new Audio("/audio/rickroll.mp3");
+
+    audio
+      .play()
+      .then(() => setRickRollPunished(false))
+      .catch(() => setRickRollPunished(true));
+  }
 
   const getErrorMessage = async (response: Response, fallback: string) => {
     try {
@@ -150,6 +167,25 @@ export default function SubmissionForm() {
       return result.error || fallback;
     } catch {
       return fallback;
+    }
+  };
+
+  const getSubmissionError = async (
+    response: Response,
+    fallback: string
+  ): Promise<SubmissionErrorDetails> => {
+    try {
+      const result = (await response.json()) as {
+        error?: unknown;
+        code?: unknown;
+      };
+
+      return {
+        message: typeof result.error === "string" ? result.error : fallback,
+        code: result.code === "RICKROLL_BLOCKED" ? result.code : undefined,
+      };
+    } catch {
+      return { message: fallback };
     }
   };
 
@@ -346,12 +382,17 @@ ${formData.notes || "Not provided"}`;
       });
 
       if (!submissionResponse.ok) {
-        throw new Error(
-          await getErrorMessage(
-            submissionResponse,
-            "Your submission could not be added to the review queue."
-          )
+        const submissionError = await getSubmissionError(
+          submissionResponse,
+          "Your submission could not be added to the review queue."
         );
+
+        if (submissionError.code === "RICKROLL_BLOCKED") {
+          setRickRollPunished(true);
+          playRickRoll();
+        }
+
+        throw new Error(submissionError.message);
       }
 
       const response = await fetch("/api/sendEmail", {
@@ -610,6 +651,17 @@ ${formData.notes || "Not provided"}`;
                   </li>
                 ))}
               </ul>
+            )}
+            {rickRollPunished && (
+              <Button
+                type="button"
+                emphasis="secondary"
+                size="sm"
+                className="self-start"
+                onClick={playRickRoll}
+              >
+                Click to Continue
+              </Button>
             )}
           </div>
         ) : null}
@@ -897,7 +949,9 @@ ${formData.notes || "Not provided"}`;
           emphasis="primary"
           size="lg"
           fullWidth
-          disabled={isSubmitting || emailServiceTemporarilyDown}
+          disabled={
+            isSubmitting || emailServiceTemporarilyDown || rickRollPunished
+          }
         >
           {isSubmitting ? "Sending…" : "Send my track"}
         </Button>
