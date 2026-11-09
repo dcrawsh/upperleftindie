@@ -17,6 +17,7 @@ import {
   MAX_SUBMISSION_AUDIO_BYTES,
   MAX_SUBMISSION_AUDIO_MEGABYTES,
 } from "@/lib/submission-audio-constants";
+import { MAX_ARTIST_BIO_CHARACTERS } from "@/lib/submission-constants";
 
 /**
  * Submission form — Figma "Submit · Desktop 1440" (24:76),
@@ -39,8 +40,10 @@ type FormState = {
   songLink: string;
   bandCampLink: string;
   socialLink: string;
+  artistBio: string;
   notes: string;
   artistPageConsent: boolean;
+  artistBioApproved: boolean;
   radioRightsAccepted: boolean;
   subscribeToNewsletter: boolean;
 };
@@ -56,8 +59,10 @@ const initialFormState: FormState = {
   songLink: "",
   bandCampLink: "",
   socialLink: "",
+  artistBio: "",
   notes: "",
   artistPageConsent: false,
+  artistBioApproved: false,
   radioRightsAccepted: false,
   // Opt-in, not opt-out. The previous default was pre-checked.
   subscribeToNewsletter: false,
@@ -95,6 +100,7 @@ type SubmittedSummary = {
   artistPageConsent: boolean;
   subscribeToNewsletter: boolean;
   radioSubmitted: boolean;
+  bioSubmitted: boolean;
   followUps: string[];
 };
 
@@ -223,6 +229,15 @@ export default function SubmissionForm() {
         "A Bandcamp address is needed before an artist page can be created.";
     }
 
+    if (formData.artistBio.trim().length > MAX_ARTIST_BIO_CHARACTERS) {
+      errors.artistBio = `Keep the artist bio to ${MAX_ARTIST_BIO_CHARACTERS} characters or fewer.`;
+    }
+
+    if (formData.artistBio.trim() && !formData.artistBioApproved) {
+      errors.artistBioApproved =
+        "Confirm that the artist bio may appear publicly.";
+    }
+
     return errors;
   };
 
@@ -260,6 +275,8 @@ MP3 uploaded: ${audioFile?.name || "No"}
 Bandcamp link: ${formData.bandCampLink || "Not provided"}
 Social link: ${formData.socialLink || "Not provided"}
 Artist page permission: ${formData.artistPageConsent ? "Yes" : "No"}
+Artist bio: ${formData.artistBio || "Not provided"}
+Artist bio display permission: ${formData.artistBioApproved ? "Yes" : "No"}
 
 Notes:
 ${formData.notes || "Not provided"}`;
@@ -272,7 +289,6 @@ ${formData.notes || "Not provided"}`;
     emailForm.append("songLink", formData.songLink);
 
     try {
-      let submissionSaved = true;
       let emailSent = true;
       let audioUploadToken = "";
 
@@ -317,29 +333,25 @@ ${formData.notes || "Not provided"}`;
         audioUploadToken = prepared.uploadToken;
       }
 
-      try {
-        const submissionResponse = await fetch("/api/submissions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-            audioUploadToken,
-            audioOriginalFilename: audioFile?.name,
-          }),
-        });
+      const submissionResponse = await fetch("/api/submissions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          audioUploadToken,
+          audioOriginalFilename: audioFile?.name,
+        }),
+      });
 
-        submissionSaved = submissionResponse.ok;
-
-        if (!submissionResponse.ok) {
-          console.error(
-            await getErrorMessage(submissionResponse, "Submission save failed")
-          );
-        }
-      } catch (error) {
-        submissionSaved = false;
-        console.error(error);
+      if (!submissionResponse.ok) {
+        throw new Error(
+          await getErrorMessage(
+            submissionResponse,
+            "Your submission could not be added to the review queue."
+          )
+        );
       }
 
       const response = await fetch("/api/sendEmail", {
@@ -352,10 +364,6 @@ ${formData.notes || "Not provided"}`;
       if (!emailSent) {
         const message = await getErrorMessage(response, "Email request failed");
         console.error(message);
-
-        if (!submissionSaved) {
-          throw new Error(message);
-        }
       }
 
       let newsletterSubscribed = true;
@@ -438,9 +446,6 @@ ${formData.notes || "Not provided"}`;
       // Artist-facing wording. The old messages surfaced internal vocabulary
       // like "Admin queue save could not be completed."
       const followUps = [
-        !submissionSaved
-          ? "Your track reached me by email but not the review queue, so a reply may take longer than usual."
-          : "",
         !emailSent
           ? "Your track is in the review queue, but the notification email did not go out, so a reply may take longer than usual."
           : "",
@@ -460,6 +465,7 @@ ${formData.notes || "Not provided"}`;
         artistPageConsent: formData.artistPageConsent,
         subscribeToNewsletter: formData.subscribeToNewsletter,
         radioSubmitted: Boolean(audioFile),
+        bioSubmitted: Boolean(formData.artistBio.trim()),
         followUps,
       });
       setFormData(initialFormState);
@@ -468,7 +474,9 @@ ${formData.notes || "Not provided"}`;
     } catch (error) {
       console.error(error);
       setFormError(
-        "Something went wrong sending your track. Please try again in a minute."
+        error instanceof Error
+          ? error.message
+          : "Something went wrong sending your track. Please try again in a minute."
       );
       window.requestAnimationFrame(() => summaryRef.current?.focus());
     } finally {
@@ -503,6 +511,12 @@ ${formData.notes || "Not provided"}`;
               value: submitted.artistPageConsent
                 ? "Yes — you asked for this artist to be featured on the site, using public Bandcamp details."
                 : "No — you did not ask for an artist page.",
+            },
+            {
+              label: "Artist bio",
+              value: submitted.bioSubmitted
+                ? "Yes — you approved the submitted bio for display with an accepted radio track."
+                : "No bio submitted.",
             },
             {
               label: "Mailing list",
@@ -797,6 +811,19 @@ ${formData.notes || "Not provided"}`;
         />
 
         <TextareaField
+          id="submit-artistBio"
+          name="artistBio"
+          label="Short artist bio"
+          optional
+          maxLength={MAX_ARTIST_BIO_CHARACTERS}
+          value={formData.artistBio}
+          onChange={handleChange}
+          error={fieldErrors.artistBio}
+          placeholder="A short introduction to the artist, in your own words."
+          helper={`If the MP3 is accepted for radio, this can appear while it plays. ${formData.artistBio.length}/${MAX_ARTIST_BIO_CHARACTERS} characters.`}
+        />
+
+        <TextareaField
           id="submit-notes"
           name="notes"
           label="Anything I should know"
@@ -813,7 +840,7 @@ ${formData.notes || "Not provided"}`;
             3 · Permissions
           </span>
           <span className="block type-body-s text-tertiary">
-            Both are optional, and neither affects whether I listen.
+            These choices do not affect whether I listen.
           </span>
         </legend>
 
@@ -828,6 +855,20 @@ ${formData.notes || "Not provided"}`;
         {fieldErrors.radioRightsAccepted ? (
           <p className="type-body-s font-medium text-error">
             {fieldErrors.radioRightsAccepted}
+          </p>
+        ) : null}
+
+        <ConsentCheckbox
+          id="submit-artistBioApproved"
+          name="artistBioApproved"
+          checked={formData.artistBioApproved}
+          onChange={handleChange}
+          title="The submitted artist bio may appear publicly with this track."
+          description="I wrote or approved this bio and give Upper Left Indie permission to display it with an accepted radio track until I request removal."
+        />
+        {fieldErrors.artistBioApproved ? (
+          <p className="type-body-s font-medium text-error">
+            {fieldErrors.artistBioApproved}
           </p>
         ) : null}
 

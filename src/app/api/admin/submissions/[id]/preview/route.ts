@@ -23,12 +23,22 @@ export async function GET(
 
     const { id } = await context.params;
     const submission = await getSubmission(id);
+    const requestedSource =
+      req.nextUrl.searchParams.get("source")?.trim() || "auto";
+
+    if (requestedSource !== "auto" && requestedSource !== "stream") {
+      return Response.json(
+        { error: "Preview source must be auto or stream." },
+        { status: 400 }
+      );
+    }
 
     if (!submission) {
       return Response.json({ error: "Submission not found." }, { status: 404 });
     }
 
     if (
+      requestedSource !== "stream" &&
       submission.audio_storage_path &&
       (submission.audio_upload_status === "uploaded" ||
         submission.audio_upload_status === "published")

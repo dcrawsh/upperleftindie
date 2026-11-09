@@ -15,6 +15,8 @@ export type Submission = {
   bandcamp_link?: string | null;
   social_link?: string | null;
   notes?: string | null;
+  artist_bio?: string | null;
+  artist_bio_approved_at?: string | null;
   active_playlist_added_at?: string | null;
   replied_at?: string | null;
   reply_subject?: string | null;
@@ -26,6 +28,8 @@ export type Submission = {
   audio_deleted_at?: string | null;
   radio_rights_accepted_at?: string | null;
   radio_published_at?: string | null;
+  radio_removed_at?: string | null;
+  rating?: TrackRating;
 };
 
 export type PlaylistTrack = {
@@ -58,7 +62,7 @@ export type AiReplyFeedbackTag =
 
 export type ActivePlaylistTrack = PlaylistTrack & { rating: TrackRating };
 
-export type Tab = "submissions" | "mail" | "playlist" | "archive";
+export type Tab = "submissions" | "mail" | "playlist" | "radio" | "archive";
 
 export type MailboxAddress = {
   name: string;

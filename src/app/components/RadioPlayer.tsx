@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { FiExternalLink, FiPause, FiPlay, FiRadio } from "react-icons/fi";
 import SiteContainer from "./SiteContainer";
+import ArtistImage from "./ui/ArtistImage";
 
 type RadioTrack = {
   id: string;
@@ -11,6 +12,8 @@ type RadioTrack = {
   trackTitle: string;
   place: string;
   artistUrl: string | null;
+  artistBio: string | null;
+  imageSrc: string | null;
   audioUrl: string;
 };
 
@@ -28,6 +31,7 @@ export default function RadioPlayer() {
   const [track, setTrack] = useState<RadioTrack | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isBioExpanded, setIsBioExpanded] = useState(false);
   const [message, setMessage] = useState("");
 
   async function loadNext() {
@@ -50,6 +54,7 @@ export default function RadioPlayer() {
       const result = (await response.json()) as { track: RadioTrack };
       audio.src = result.track.audioUrl;
       setTrack(result.track);
+      setIsBioExpanded(false);
       await audio.play();
       setIsPlaying(true);
     } catch (error) {
@@ -112,6 +117,14 @@ export default function RadioPlayer() {
           )}
         </button>
 
+        {track ? (
+          <ArtistImage
+            name={track.artistName}
+            src={track.imageSrc ?? undefined}
+            size={56}
+          />
+        ) : null}
+
         <div className="min-w-0 flex-1">
           <p className="type-label-s text-on-inverse/70">
             Upper Left Radio · Continuous artist submissions
@@ -130,12 +143,42 @@ export default function RadioPlayer() {
             <p className="type-body-s text-on-inverse/80" role="status">
               {message}
             </p>
-          ) : track?.place ? (
-            <p className="type-body-s text-on-inverse/70">{track.place}</p>
+          ) : track ? (
+            <div className="flex flex-col gap-0.5">
+              {track.place ? (
+                <p className="type-body-s text-on-inverse/70">{track.place}</p>
+              ) : null}
+              {track.artistBio ? (
+                <p
+                  className="max-w-measure overflow-hidden type-body-s text-on-inverse/80"
+                  style={
+                    isBioExpanded
+                      ? undefined
+                      : {
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                          WebkitLineClamp: 2,
+                        }
+                  }
+                >
+                  {track.artistBio}
+                </p>
+              ) : null}
+            </div>
           ) : null}
         </div>
 
         <div className="ml-auto flex items-center gap-2">
+          {track?.artistBio ? (
+            <button
+              type="button"
+              onClick={() => setIsBioExpanded((current) => !current)}
+              aria-expanded={isBioExpanded}
+              className="inline-flex min-h-11 items-center rounded-full px-3 type-label-s text-on-inverse underline decoration-transparent underline-offset-4 transition hover:decoration-on-inverse"
+            >
+              {isBioExpanded ? "Less" : "Bio"}
+            </button>
+          ) : null}
           {track?.artistUrl ? (
             <a
               href={track.artistUrl}
@@ -164,6 +207,7 @@ export default function RadioPlayer() {
           onError={() => {
             setIsPlaying(false);
             setTrack(null);
+            setIsBioExpanded(false);
             setMessage("That track could not play. Press play to try again.");
           }}
         />

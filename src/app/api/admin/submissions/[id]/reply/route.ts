@@ -17,6 +17,7 @@ import {
 } from "@/lib/submission-audio";
 import {
   DEFAULT_TRACK_RATING,
+  getRadioTrackRatingKey,
   isTrackRating,
   setTrackRating,
 } from "@/lib/track-ratings";
@@ -135,6 +136,19 @@ export async function POST(
         // instead of throwing, which would invite a duplicate send.
         console.error("accepted track could not be added to playlist", error);
         playlistAdded = false;
+      }
+    }
+
+    if (hasRadioAudio && !track) {
+      try {
+        await setTrackRating(
+          getRadioTrackRatingKey(submission.id),
+          trackRating
+        );
+        ratingSaved = true;
+      } catch (error) {
+        console.error("accepted radio track rating could not be saved", error);
+        ratingSaved = false;
       }
     }
 

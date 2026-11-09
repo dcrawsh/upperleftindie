@@ -65,6 +65,13 @@ export function formatDaysLive(value: string) {
   return `Live for ${daysLive} days`;
 }
 
+export function formatFileSize(value: number | null | undefined) {
+  if (!value || value < 1) return "Size unknown";
+
+  const megabytes = value / (1024 * 1024);
+  return `${megabytes < 10 ? megabytes.toFixed(1) : Math.round(megabytes)} MB`;
+}
+
 export function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "Something went wrong.";
 }

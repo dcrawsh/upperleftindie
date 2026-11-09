@@ -1,4 +1,5 @@
 import { randomInt } from "node:crypto";
+import { findArtistByName } from "@/lib/artists";
 import {
   createSignedSubmissionAudioUrl,
   SubmissionAudioError,
@@ -17,6 +18,8 @@ const PUBLIC_RADIO_COLUMNS = [
   "region",
   "bandcamp_link",
   "social_link",
+  "artist_bio",
+  "artist_bio_approved_at",
   "audio_storage_path",
   "radio_playback_url",
   "radio_playback_url_expires_at",
@@ -33,6 +36,8 @@ type RadioTrackRow = {
   region: string | null;
   bandcamp_link: string | null;
   social_link: string | null;
+  artist_bio: string | null;
+  artist_bio_approved_at: string | null;
   audio_storage_path: string;
   radio_playback_url: string | null;
   radio_playback_url_expires_at: string | null;
@@ -44,6 +49,8 @@ export type PublicRadioTrack = {
   trackTitle: string;
   place: string;
   artistUrl: string | null;
+  artistBio: string | null;
+  imageSrc: string | null;
   audioUrl: string;
 };
 
@@ -76,6 +83,13 @@ export function getReusableRadioAudioUrl(
   return Number.isFinite(expiresAt) && expiresAt > now + signedUrlReuseBufferMs
     ? values.url
     : null;
+}
+
+export function getApprovedArtistBio(
+  bio: string | null,
+  approvedAt: string | null
+) {
+  return approvedAt ? bio?.trim() || null : null;
 }
 
 async function getRadioAudioUrl(track: RadioTrackRow) {
@@ -143,6 +157,7 @@ export async function getNextRadioTrack(excludeId = "") {
   }
 
   const selected = candidates[randomInt(candidates.length)];
+  const directoryArtist = findArtistByName(selected.artist_name);
 
   try {
     return {
@@ -151,6 +166,11 @@ export async function getNextRadioTrack(excludeId = "") {
       trackTitle: selected.track_title?.trim() || "Untitled",
       place: formatPlace(selected.city, selected.region),
       artistUrl: selected.bandcamp_link || selected.social_link,
+      artistBio: getApprovedArtistBio(
+        selected.artist_bio,
+        selected.artist_bio_approved_at
+      ),
+      imageSrc: directoryArtist?.image || null,
       audioUrl: await getRadioAudioUrl(selected),
     } satisfies PublicRadioTrack;
   } catch (error) {

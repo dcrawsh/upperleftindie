@@ -5,12 +5,14 @@ import { ArchiveTab } from "./ArchiveTab";
 import { LoginScreen } from "./LoginScreen";
 import { MailTab } from "./MailTab";
 import { PlaylistTab } from "./PlaylistTab";
+import { RadioTab } from "./RadioTab";
 import { SubmissionsTab } from "./SubmissionsTab";
 import {
   getDefaultReplyMessage,
   getDefaultReplySubject,
   getErrorMessage,
 } from "./helpers";
+import { sortRadioTracksByRemovalPriority } from "@/lib/radio-order";
 import type {
   AiReplyFeedbackTag,
   PlaylistTrack,
@@ -18,6 +20,7 @@ import type {
   Submission,
   SubmissionStatus,
   Tab,
+  TrackRating,
 } from "./types";
 import { useActivePlaylist } from "./useActivePlaylist";
 import { useAdminSession } from "./useAdminSession";
@@ -36,6 +39,7 @@ export default function AdminDashboard() {
     "pending"
   );
   const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [radioTracks, setRadioTracks] = useState<Submission[]>([]);
   const [archiveTracks, setArchiveTracks] = useState<PlaylistTrack[]>([]);
   const [replyDrafts, setReplyDrafts] = useState<Record<string, ReplyDraft>>(
     {}
@@ -46,6 +50,7 @@ export default function AdminDashboard() {
 
   const resetDashboardData = useCallback(() => {
     setSubmissions([]);
+    setRadioTracks([]);
     setArchiveTracks([]);
     setReplyDrafts({});
   }, []);
@@ -125,6 +130,24 @@ export default function AdminDashboard() {
     }
   }
 
+  async function loadRadioTracks() {
+    if (!token) return;
+
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      const data = await adminFetch<{ tracks: Submission[] }>(
+        "/api/admin/radio"
+      );
+      setRadioTracks(sortRadioTracksByRemovalPriority(data.tracks));
+    } catch (error) {
+      setMessage(getErrorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   useEffect(() => {
     if (!token) return;
 
@@ -134,6 +157,8 @@ export default function AdminDashboard() {
       mailbox.loadMessages();
     } else if (tab === "playlist") {
       playlist.loadTracks();
+    } else if (tab === "radio") {
+      loadRadioTracks();
     } else {
       loadArchiveTracks();
     }
@@ -282,6 +307,65 @@ export default function AdminDashboard() {
       });
       setMessage("Submission archived from the review queue.");
       await loadSubmissions();
+    } catch (error) {
+      setMessage(getErrorMessage(error));
+    } finally {
+      setWorkingId("");
+    }
+  }
+
+  async function removeRadioTrack(track: Submission) {
+    const removeWorkingId = `radio-remove-${track.id}`;
+    setWorkingId(removeWorkingId);
+    setMessage("");
+
+    try {
+      const data = await adminFetch<{
+        submission?: Submission;
+        cleanupPending?: boolean;
+      }>(`/api/admin/radio/${track.id}`, { method: "DELETE" });
+
+      if (currentPreviewTrackUri === `submission:${track.id}`) {
+        audioRef.current?.pause();
+      }
+
+      setRadioTracks((current) =>
+        current.filter((item) => item.id !== track.id)
+      );
+      setMessage(
+        data.cleanupPending
+          ? "Track removed from radio. Storage cleanup will retry automatically."
+          : "Track removed from Upper Left Radio and its MP3 was deleted."
+      );
+    } catch (error) {
+      setMessage(getErrorMessage(error));
+    } finally {
+      setWorkingId("");
+    }
+  }
+
+  async function rateRadioTrack(track: Submission, rating: TrackRating) {
+    if ((track.rating ?? 3) === rating) return;
+
+    const ratingWorkingId = `radio-rating-${track.id}`;
+    setWorkingId(ratingWorkingId);
+    setMessage("");
+
+    try {
+      await adminFetch(`/api/admin/radio/${track.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ rating }),
+      });
+      setRadioTracks((current) =>
+        sortRadioTracksByRemovalPriority(
+          current.map((item) =>
+            item.id === track.id ? { ...item, rating } : item
+          )
+        )
+      );
+      setMessage(
+        `Rated ${track.track_title || track.artist_name} ${rating} ${rating === 1 ? "star" : "stars"}.`
+      );
     } catch (error) {
       setMessage(getErrorMessage(error));
     } finally {
@@ -449,6 +533,19 @@ export default function AdminDashboard() {
     });
   }
 
+  async function toggleSubmissionStreamingPreview(submission: Submission) {
+    await playPreview({
+      key: `submission-stream:${submission.id}`,
+      loadPreview: async () => {
+        const data = await adminFetch<{ previewUrl: string }>(
+          `/api/admin/submissions/${submission.id}/preview?source=stream`
+        );
+
+        return data.previewUrl;
+      },
+    });
+  }
+
   if (!isUnlocked) {
     return (
       <LoginScreen
@@ -508,6 +605,13 @@ export default function AdminDashboard() {
           </button>
           <button
             type="button"
+            onClick={() => setTab("radio")}
+            className={tabButtonClass("radio")}
+          >
+            Radio
+          </button>
+          <button
+            type="button"
             onClick={() => setTab("archive")}
             className={tabButtonClass("archive")}
           >
@@ -547,6 +651,7 @@ export default function AdminDashboard() {
           onRateDraft={rateReplyDraft}
           onSendReply={sendSubmissionReply}
           onTogglePreview={toggleSubmissionPreview}
+          onToggleStreamingPreview={toggleSubmissionStreamingPreview}
           currentPreviewTrackUri={currentPreviewTrackUri}
           isPreviewPlaying={isPreviewPlaying}
           previewsByKey={previewsByKey}
@@ -577,6 +682,20 @@ export default function AdminDashboard() {
           onArchive={playlist.archiveTrack}
           onRate={playlist.rateTrack}
           onTogglePreview={toggleTrackPreview}
+          currentPreviewTrackUri={currentPreviewTrackUri}
+          isPreviewPlaying={isPreviewPlaying}
+          previewsByKey={previewsByKey}
+          loadingPreviewKey={loadingPreviewKey}
+        />
+      ) : tab === "radio" ? (
+        <RadioTab
+          tracks={radioTracks}
+          isLoading={isLoading}
+          workingId={workingId}
+          onRefresh={loadRadioTracks}
+          onRemove={removeRadioTrack}
+          onRate={rateRadioTrack}
+          onTogglePreview={toggleSubmissionPreview}
           currentPreviewTrackUri={currentPreviewTrackUri}
           isPreviewPlaying={isPreviewPlaying}
           previewsByKey={previewsByKey}

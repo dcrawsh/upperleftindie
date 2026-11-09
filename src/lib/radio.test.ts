@@ -1,5 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { getReusableRadioAudioUrl } from "@/lib/radio";
+import { getApprovedArtistBio, getReusableRadioAudioUrl } from "@/lib/radio";
+
+describe("getApprovedArtistBio", () => {
+  it("publishes a trimmed artist-approved bio", () => {
+    expect(
+      getApprovedArtistBio("  An artist-supplied biography.  ", "2026-11-09")
+    ).toBe("An artist-supplied biography.");
+  });
+
+  it("does not publish an unapproved bio", () => {
+    expect(getApprovedArtistBio("Private draft", null)).toBeNull();
+  });
+});
 
 describe("getReusableRadioAudioUrl", () => {
   const now = Date.parse("2026-11-08T20:00:00.000Z");

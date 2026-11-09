@@ -9,6 +9,7 @@ import {
   type VerifiedSubmissionAudio,
 } from "@/lib/submission-audio";
 import { SUBMISSION_AUDIO_PENDING_RETENTION_DAYS } from "@/lib/submission-audio-retention";
+import { MAX_ARTIST_BIO_CHARACTERS } from "@/lib/submission-constants";
 
 // Re-exported so existing `instanceof` narrowing in route handlers keeps
 // working against a single class identity.
@@ -34,6 +35,8 @@ export type Submission = {
   bandcamp_link?: string | null;
   social_link?: string | null;
   notes?: string | null;
+  artist_bio?: string | null;
+  artist_bio_approved_at?: string | null;
   artist_page_consent: boolean;
   subscribe_to_newsletter: boolean;
   spotify_track_id?: string | null;
@@ -73,6 +76,8 @@ export type SubmissionPayload = {
   bandCampLink?: unknown;
   socialLink?: unknown;
   notes?: unknown;
+  artistBio?: unknown;
+  artistBioApproved?: unknown;
   artistPageConsent?: unknown;
   subscribeToNewsletter?: unknown;
 };
@@ -90,6 +95,7 @@ export function normalizeSubmissionPayload(
   const email = asString(payload.email);
   const songLink = asString(payload.songLink);
   const trackTitle = asString(payload.trackTitle);
+  const artistBio = asString(payload.artistBio);
 
   if (!artistName || !contactName || !email) {
     throw new SupabaseRequestError(
@@ -119,6 +125,20 @@ export function normalizeSubmissionPayload(
     );
   }
 
+  if (artistBio.length > MAX_ARTIST_BIO_CHARACTERS) {
+    throw new SupabaseRequestError(
+      `Artist bio must be ${MAX_ARTIST_BIO_CHARACTERS} characters or fewer.`,
+      400
+    );
+  }
+
+  if (artistBio && payload.artistBioApproved !== true) {
+    throw new SupabaseRequestError(
+      "Confirm that the artist bio may be displayed publicly.",
+      400
+    );
+  }
+
   return {
     artist_name: artistName,
     contact_name: contactName,
@@ -131,6 +151,8 @@ export function normalizeSubmissionPayload(
     bandcamp_link: asString(payload.bandCampLink) || null,
     social_link: asString(payload.socialLink) || null,
     notes: asString(payload.notes) || null,
+    artist_bio: artistBio || null,
+    artist_bio_approved_at: artistBio ? new Date().toISOString() : null,
     artist_page_consent: payload.artistPageConsent === true,
     subscribe_to_newsletter: payload.subscribeToNewsletter !== false,
     ...(audio
@@ -192,6 +214,18 @@ export async function listSubmissions(status?: string) {
   return supabaseRequest<Submission[]>(
     `${submissionsTable}?select=*&order=created_at.desc${statusFilter}`
   );
+}
+
+export async function listPublishedRadioSubmissions() {
+  const path = supabasePath(submissionsTable, {
+    select: "*",
+    audio_upload_status: "eq.published",
+    radio_published_at: "not.is.null",
+    radio_removed_at: "is.null",
+    order: "radio_published_at.desc",
+  });
+
+  return supabaseRequest<Submission[]>(path);
 }
 
 export async function getSubmission(id: string) {

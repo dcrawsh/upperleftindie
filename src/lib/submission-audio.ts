@@ -32,6 +32,9 @@ export type VerifiedSubmissionAudio = {
 };
 
 type StorageObjectInfo = {
+  size?: number | string;
+  content_type?: string;
+  mimetype?: string;
   metadata?: {
     size?: number | string;
     mimetype?: string;
@@ -173,6 +176,18 @@ export function hasMp3FileSignature(bytes: Uint8Array) {
   return hasId3Tag || hasFrameSync;
 }
 
+export function readStorageObjectAudioInfo(info: StorageObjectInfo) {
+  return {
+    size: Number(info.size ?? info.metadata?.size),
+    mimeType: (
+      info.content_type ??
+      info.mimetype ??
+      info.metadata?.mimetype ??
+      ""
+    ).toLowerCase(),
+  };
+}
+
 export async function createSubmissionAudioUpload(
   values: {
     fileName?: unknown;
@@ -266,8 +281,8 @@ export async function verifySubmissionAudioUpload(
     `object/info/${encodedPath}`,
     { mapError: storageError }
   );
-  const storedSize = Number(info.metadata?.size);
-  const storedMimeType = info.metadata?.mimetype?.toLowerCase();
+  const { size: storedSize, mimeType: storedMimeType } =
+    readStorageObjectAudioInfo(info);
 
   if (!Number.isFinite(storedSize) || storedSize !== claims.size) {
     throw new SubmissionAudioError(

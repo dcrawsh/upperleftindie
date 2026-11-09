@@ -74,6 +74,7 @@ type SubmissionsTabProps = {
   ) => void;
   onSendReply: (submission: Submission) => void;
   onTogglePreview: (submission: Submission) => void;
+  onToggleStreamingPreview: (submission: Submission) => void;
   currentPreviewTrackUri: string;
   isPreviewPlaying: boolean;
   previewsByKey: Record<string, PreviewState>;
@@ -93,6 +94,7 @@ function SubmissionCard({
   onRateDraft,
   onSendReply,
   onTogglePreview,
+  onToggleStreamingPreview,
   currentPreviewTrackUri,
   isPreviewPlaying,
   previewsByKey,
@@ -127,6 +129,11 @@ function SubmissionCard({
   const isPreviewLoading = loadingPreviewKey === previewKey;
   const isCurrentPreview =
     currentPreviewTrackUri === previewKey && isPreviewPlaying;
+  const streamingPreviewKey = `submission-stream:${submission.id}`;
+  const streamingPreviewState = previewsByKey[streamingPreviewKey];
+  const isStreamingPreviewLoading = loadingPreviewKey === streamingPreviewKey;
+  const isCurrentStreamingPreview =
+    currentPreviewTrackUri === streamingPreviewKey && isPreviewPlaying;
   const feedbackTags =
     replyDraft.aiRating === 1
       ? POSITIVE_FEEDBACK_TAGS
@@ -213,28 +220,90 @@ function SubmissionCard({
               {submission.notes}
             </p>
           ) : null}
+          {submission.artist_bio ? (
+            <div className="max-w-3xl rounded-md border border-moss/30 bg-moss/5 p-3">
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-moss">
+                Artist-approved radio bio
+              </p>
+              <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-ink/70">
+                {submission.artist_bio}
+              </p>
+            </div>
+          ) : null}
           <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => onTogglePreview(submission)}
-              disabled={isPreviewLoading || previewState?.isMissing}
-              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition ${
-                previewState?.isMissing
-                  ? "border-ink/10 text-ink/35"
-                  : "border-ink/15 text-ink hover:border-moss hover:text-moss"
-              }`}
-            >
-              {isCurrentPreview ? <FiPause size={16} /> : <FiPlay size={16} />}
-              {isPreviewLoading
-                ? "Finding..."
-                : previewState?.isMissing
-                  ? "No Preview"
-                  : isCurrentPreview
-                    ? "Pause"
-                    : previewState?.previewUrl
-                      ? "Preview"
-                      : "Find Preview"}
-            </button>
+            <div className="flex flex-col gap-1">
+              <button
+                type="button"
+                onClick={() => onTogglePreview(submission)}
+                disabled={isPreviewLoading || previewState?.isMissing}
+                title={
+                  hasRadioAudio
+                    ? "Play the full artist-submitted MP3 from private storage"
+                    : "Find and play a Spotify or Apple Music preview"
+                }
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition ${
+                  previewState?.isMissing
+                    ? "border-ink/10 text-ink/35"
+                    : "border-ink/15 text-ink hover:border-moss hover:text-moss"
+                }`}
+              >
+                {isCurrentPreview ? (
+                  <FiPause size={16} />
+                ) : (
+                  <FiPlay size={16} />
+                )}
+                {hasRadioAudio
+                  ? isPreviewLoading
+                    ? "Loading submitted MP3..."
+                    : previewState?.isMissing
+                      ? "MP3 unavailable"
+                      : isCurrentPreview
+                        ? "Pause submitted MP3"
+                        : "Play submitted MP3"
+                  : isPreviewLoading
+                    ? "Finding..."
+                    : previewState?.isMissing
+                      ? "No Preview"
+                      : isCurrentPreview
+                        ? "Pause"
+                        : previewState?.previewUrl
+                          ? "Preview"
+                          : "Find Preview"}
+              </button>
+              {hasRadioAudio ? (
+                <span className="pl-2 text-xs text-ink/45">
+                  Full private upload · review before accepting
+                </span>
+              ) : null}
+            </div>
+            {hasRadioAudio && hasSpotifyLink ? (
+              <button
+                type="button"
+                onClick={() => onToggleStreamingPreview(submission)}
+                disabled={
+                  isStreamingPreviewLoading || streamingPreviewState?.isMissing
+                }
+                title="Play the Spotify preview or its Apple Music fallback"
+                className={`inline-flex items-center gap-2 self-start rounded-full border px-4 py-2 text-sm font-bold transition ${
+                  streamingPreviewState?.isMissing
+                    ? "border-ink/10 text-ink/35"
+                    : "border-ink/15 text-ink hover:border-moss hover:text-moss"
+                }`}
+              >
+                {isCurrentStreamingPreview ? (
+                  <FiPause size={16} />
+                ) : (
+                  <FiPlay size={16} />
+                )}
+                {isStreamingPreviewLoading
+                  ? "Finding streaming preview..."
+                  : streamingPreviewState?.isMissing
+                    ? "No streaming preview"
+                    : isCurrentStreamingPreview
+                      ? "Pause streaming preview"
+                      : "Play streaming preview"}
+              </button>
+            ) : null}
             {submission.song_link ? (
               <a
                 href={getSpotifyAppTrackUrl(submission.song_link)}
@@ -464,18 +533,26 @@ function SubmissionCard({
           {canDraftAcceptance ? (
             <div className="flex flex-wrap items-center gap-3 rounded-md border border-ink/10 bg-white/60 p-3">
               <span className="text-xs font-bold uppercase tracking-[0.1em] text-ink/45">
-                Playlist rating
+                {hasSpotifyLink && hasRadioAudio
+                  ? "Playlist + radio rating"
+                  : hasRadioAudio
+                    ? "Radio rating"
+                    : "Playlist rating"}
               </span>
               <StarRating
                 value={replyDraft.trackRating ?? 3}
-                label={`Playlist rating for ${submission.artist_name}`}
+                label={`Track rating for ${submission.artist_name}`}
                 disabled={workingId === replyWorkingId}
                 onChange={(trackRating) =>
                   updateReplyDraft(submission, { trackRating })
                 }
               />
               <span className="text-xs leading-5 text-ink/50">
-                Sets where the track lands when it joins the playlist.
+                {hasSpotifyLink && hasRadioAudio
+                  ? "One shared rating for the playlist and Upper Left Radio."
+                  : hasRadioAudio
+                    ? "Sets its removal priority on Upper Left Radio."
+                    : "Sets where the track lands when it joins the playlist."}
               </span>
             </div>
           ) : null}

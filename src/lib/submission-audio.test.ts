@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   hasMp3FileSignature,
   MAX_SUBMISSION_AUDIO_BYTES,
+  readStorageObjectAudioInfo,
   SubmissionAudioError,
   validateAudioUploadRequest,
 } from "@/lib/submission-audio";
@@ -39,6 +40,25 @@ describe("validateAudioUploadRequest", () => {
         mimeType: "audio/mpeg",
       })
     ).toThrow("12 MB or smaller");
+  });
+});
+
+describe("readStorageObjectAudioInfo", () => {
+  it("reads the direct object-info response returned by Supabase Storage", () => {
+    expect(
+      readStorageObjectAudioInfo({
+        size: 4096,
+        content_type: "audio/mpeg",
+      })
+    ).toEqual({ size: 4096, mimeType: "audio/mpeg" });
+  });
+
+  it("supports legacy nested metadata", () => {
+    expect(
+      readStorageObjectAudioInfo({
+        metadata: { size: "2048", mimetype: "AUDIO/MPEG" },
+      })
+    ).toEqual({ size: 2048, mimeType: "audio/mpeg" });
   });
 });
 
