@@ -1,5 +1,9 @@
 import { NextRequest } from "next/server";
-import { getSpotifyTrackFromUrl } from "@/lib/spotify";
+import {
+  getSpotifyTrackFromUrl,
+  getSpotifyTrackSummary,
+  SpotifyRequestError,
+} from "@/lib/spotify";
 import {
   type VerifiedSubmissionAudio,
   SubmissionAudioError,
@@ -33,7 +37,9 @@ export async function POST(req: NextRequest) {
       ? await verifySubmissionAudioUpload(audioUploadToken)
       : null;
 
-    if (songLink && !getSpotifyTrackFromUrl(songLink)) {
+    const spotifyTrack = songLink ? getSpotifyTrackFromUrl(songLink) : null;
+
+    if (songLink && !spotifyTrack) {
       throw new SupabaseRequestError(
         "The Spotify song link is not valid.",
         400
@@ -45,6 +51,15 @@ export async function POST(req: NextRequest) {
         { error: "Add a Spotify song link or upload an MP3." },
         { status: 400 }
       );
+    }
+
+    if (spotifyTrack) {
+      const summary = await getSpotifyTrackSummary(spotifyTrack.id);
+      const trackName = summary.name.trim().toLowerCase();
+
+      if (trackName.indexOf("never gonna give you up") !== -1) {
+        throw new SupabaseRequestError("Rickrolls are not allowed.", 400);
+      }
     }
 
     const submission = await createSubmission(payload, audio);
@@ -65,6 +80,10 @@ export async function POST(req: NextRequest) {
     console.error("submission save error", error);
 
     if (error instanceof SupabaseRequestError) {
+      return Response.json({ error: error.message }, { status: error.status });
+    }
+
+    if (error instanceof SpotifyRequestError) {
       return Response.json({ error: error.message }, { status: error.status });
     }
 
