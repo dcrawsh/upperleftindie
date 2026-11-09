@@ -14,6 +14,7 @@ import {
   discardUnreferencedSubmissionAudio,
   SupabaseRequestError,
 } from "@/lib/submissions";
+import { SubmissionPolicyError } from "@/lib/submission-policy";
 
 export const runtime = "nodejs";
 
@@ -58,7 +59,10 @@ export async function POST(req: NextRequest) {
       const trackName = summary.name.trim().toLowerCase();
 
       if (trackName.indexOf("never gonna give you up") !== -1) {
-        throw new SupabaseRequestError("Rickrolls are not allowed.", 400);
+        throw new SubmissionPolicyError(
+          "Rickrolls are not allowed.",
+          "RICKROLL_BLOCKED"
+        );
       }
     }
 
@@ -89,6 +93,13 @@ export async function POST(req: NextRequest) {
 
     if (error instanceof SubmissionAudioError) {
       return Response.json({ error: error.message }, { status: error.status });
+    }
+
+    if (error instanceof SubmissionPolicyError) {
+      return Response.json(
+        { error: error.message, code: error.code },
+        { status: error.status }
+      );
     }
 
     return Response.json(

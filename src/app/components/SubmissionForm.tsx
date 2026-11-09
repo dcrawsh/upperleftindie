@@ -92,6 +92,13 @@ const regionOptions = [
 
 type FieldErrors = Partial<Record<keyof FormState | "audioFile", string>>;
 
+type SubmissionErrorCode = "RICKROLL_BLOCKED";
+
+type SubmissionErrorDetails = {
+  message: string;
+  code?: SubmissionErrorCode;
+};
+
 type SubmittedSummary = {
   artistName: string;
   city: string;
@@ -160,6 +167,25 @@ export default function SubmissionForm() {
       return result.error || fallback;
     } catch {
       return fallback;
+    }
+  };
+
+  const getSubmissionError = async (
+    response: Response,
+    fallback: string
+  ): Promise<SubmissionErrorDetails> => {
+    try {
+      const result = (await response.json()) as {
+        error?: unknown;
+        code?: unknown;
+      };
+
+      return {
+        message: typeof result.error === "string" ? result.error : fallback,
+        code: result.code === "RICKROLL_BLOCKED" ? result.code : undefined,
+      };
+    } catch {
+      return { message: fallback };
     }
   };
 
@@ -356,12 +382,17 @@ ${formData.notes || "Not provided"}`;
       });
 
       if (!submissionResponse.ok) {
-        throw new Error(
-          await getErrorMessage(
-            submissionResponse,
-            "Your submission could not be added to the review queue."
-          )
+        const submissionError = await getSubmissionError(
+          submissionResponse,
+          "Your submission could not be added to the review queue."
         );
+
+        if (submissionError.code === "RICKROLL_BLOCKED") {
+          setRickRollPunished(true);
+          playRickRoll();
+        }
+
+        throw new Error(submissionError.message);
       }
 
       const response = await fetch("/api/sendEmail", {
@@ -483,12 +514,6 @@ ${formData.notes || "Not provided"}`;
       setFieldErrors({});
     } catch (error) {
       console.error(error);
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error";
-      if (errorMessage === "Rickrolls are not allowed.") {
-        setRickRollPunished(true);
-        playRickRoll();
-      }
       setFormError(
         error instanceof Error
           ? error.message
