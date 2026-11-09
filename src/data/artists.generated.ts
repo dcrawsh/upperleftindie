@@ -2098,11 +2098,11 @@ export const artists: Artist[] = [
     ]
   },
   {
-    "name": "Shaylee",
+    "name": "shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2864533686_10.jpg",
-    "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
+    "bio": "post power pop from pdx booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
       "Post-Rock"
@@ -3940,6 +3940,67 @@ export const artists: Artist[] = [
         "title": "Silver Bells",
         "type": "track",
         "url": "https://echoravine.bandcamp.com/track/silver-bells"
+      }
+    ]
+  },
+  {
+    "name": "Antiquated Future Records",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://antiquatedfuture.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0036017383_10.jpg",
+    "bio": "A cassette tape & record label of slightly-skewed pop, indie rock, lo-fi folk, oddball electronic, and soundscape wizardry. A division of the Antiquated Future zine distro & online store. Since 2008.",
+    "submittedGenre": "Indie Pop",
+    "tags": [
+      "Indie Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://antiquatedfuture.bandcamp.com/"
+      },
+      {
+        "label": "antiquatedfuture.com",
+        "url": "http://www.antiquatedfuture.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/antiquatedfuturedistro/"
+      },
+      {
+        "label": "SoundCloud",
+        "url": "http://soundcloud.com/antiquated-future-records"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Home Sick Guidon Bear",
+        "type": "album",
+        "url": "https://antiquatedfuture.bandcamp.com/album/home-sick"
+      },
+      {
+        "title": "Set Up on the Leaves Golden Tiles",
+        "type": "album",
+        "url": "https://antiquatedfuture.bandcamp.com/album/set-up-on-the-leaves"
+      },
+      {
+        "title": "Exploding House Corespondents",
+        "type": "album",
+        "url": "https://antiquatedfuture.bandcamp.com/album/exploding-house"
+      },
+      {
+        "title": "Wind Inside Half Shadow",
+        "type": "album",
+        "url": "https://antiquatedfuture.bandcamp.com/album/wind-inside"
+      },
+      {
+        "title": "Screamin' Inside Your Heart!!! Little Angry & The Sweets",
+        "type": "album",
+        "url": "https://antiquatedfuture.bandcamp.com/album/screamin-inside-your-heart"
+      },
+      {
+        "title": "Tender Revolutions Dao Strom",
+        "type": "album",
+        "url": "https://antiquatedfuture.bandcamp.com/album/tender-revolutions"
       }
     ]
   }
