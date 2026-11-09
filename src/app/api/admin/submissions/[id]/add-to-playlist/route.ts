@@ -1,9 +1,6 @@
 import { NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
-import {
-  assertAdminRequest,
-  AdminAuthError,
-} from "@/lib/admin-auth";
+import { assertAdminRequest, AdminAuthError } from "@/lib/admin-auth";
 import { addRatedTrackToActivePlaylist } from "@/lib/active-playlist";
 import {
   getSubmission,
@@ -32,7 +29,9 @@ export async function POST(
       return Response.json({ error: "Submission not found." }, { status: 404 });
     }
 
-    const track = getSpotifyTrackFromUrl(submission.song_link);
+    const track = submission.song_link
+      ? getSpotifyTrackFromUrl(submission.song_link)
+      : null;
     if (!track) {
       return Response.json(
         { error: "Submission song link is not a Spotify track URL." },
@@ -50,8 +49,12 @@ export async function POST(
     // the email is sent and the track is on the playlist. Sending normally
     // completes both, so this only promotes the row when it is repairing an
     // acceptance whose playlist insert failed earlier.
+    const radioComplete =
+      !submission.audio_storage_path || Boolean(submission.radio_published_at);
     const completesAcceptance =
-      submission.status === "pending" && Boolean(submission.replied_at);
+      submission.status === "pending" &&
+      Boolean(submission.replied_at) &&
+      radioComplete;
 
     const updatedSubmission = await updateSubmission(id, {
       ...(completesAcceptance ? { status: "added" as const } : {}),
@@ -74,11 +77,11 @@ export async function POST(
       return Response.json({ error: error.message }, { status: error.status });
     }
 
-    if (error instanceof SupabaseRequestError || error instanceof SpotifyRequestError) {
-      return Response.json(
-        { error: error.message },
-        { status: error.status }
-      );
+    if (
+      error instanceof SupabaseRequestError ||
+      error instanceof SpotifyRequestError
+    ) {
+      return Response.json({ error: error.message }, { status: error.status });
     }
 
     return Response.json(

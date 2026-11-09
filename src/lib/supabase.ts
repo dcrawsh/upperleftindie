@@ -29,6 +29,10 @@ export type SupabaseRequestInit = RequestInit & {
   mapError?: (status: number, details: string) => Error;
 };
 
+export type SupabaseStorageRequestInit = RequestInit & {
+  mapError?: (status: number, details: string) => Error;
+};
+
 function readConfig() {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -139,4 +143,87 @@ export async function supabaseRequest<T>(
       ? mapError(502, details)
       : new SupabaseRequestError(details, 502);
   }
+}
+
+/**
+ * Shared server-only entry point for Supabase Storage's HTTP API. Database
+ * access stays in supabaseRequest(); this sibling keeps the same configuration,
+ * auth, error shaping, and no-cache behavior for private objects.
+ */
+export async function supabaseStorageRequest<T>(
+  path: string,
+  init: SupabaseStorageRequestInit = {}
+): Promise<T> {
+  const { url, key } = getSupabaseConfig();
+  const { mapError, headers, ...rest } = init;
+  const response = await fetch(`${url}/storage/v1/${path}`, {
+    ...rest,
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+      ...headers,
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+
+    throw mapError
+      ? mapError(response.status, details)
+      : new SupabaseRequestError(
+          details || `Supabase Storage request failed with ${response.status}`,
+          response.status
+        );
+  }
+
+  if (response.status === 204 || rest.method === "HEAD") {
+    return undefined as T;
+  }
+
+  const body = await response.text();
+
+  if (!body.trim()) {
+    return undefined as T;
+  }
+
+  try {
+    return JSON.parse(body) as T;
+  } catch {
+    const details = "Supabase Storage returned an invalid JSON response.";
+    throw mapError
+      ? mapError(502, details)
+      : new SupabaseRequestError(details, 502);
+  }
+}
+
+export async function supabaseStorageBytes(
+  path: string,
+  values: {
+    range?: string;
+    mapError?: (status: number, details: string) => Error;
+  } = {}
+) {
+  const { url, key } = getSupabaseConfig();
+  const response = await fetch(`${url}/storage/v1/${path}`, {
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      ...(values.range ? { Range: values.range } : {}),
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+    throw values.mapError
+      ? values.mapError(response.status, details)
+      : new SupabaseRequestError(
+          details || `Supabase Storage request failed with ${response.status}`,
+          response.status
+        );
+  }
+
+  return new Uint8Array(await response.arrayBuffer());
 }

@@ -10,13 +10,26 @@ export type Submission = {
   city: string;
   region: string;
   genre: string;
-  song_link: string;
+  song_link: string | null;
+  track_title?: string | null;
   bandcamp_link?: string | null;
   social_link?: string | null;
   notes?: string | null;
+  artist_bio?: string | null;
+  artist_bio_approved_at?: string | null;
   active_playlist_added_at?: string | null;
   replied_at?: string | null;
   reply_subject?: string | null;
+  audio_storage_path?: string | null;
+  audio_original_filename?: string | null;
+  audio_size_bytes?: number | null;
+  audio_upload_status?: "uploaded" | "published" | "removed" | null;
+  audio_expires_at?: string | null;
+  audio_deleted_at?: string | null;
+  radio_rights_accepted_at?: string | null;
+  radio_published_at?: string | null;
+  radio_removed_at?: string | null;
+  rating?: TrackRating;
 };
 
 export type PlaylistTrack = {
@@ -49,7 +62,7 @@ export type AiReplyFeedbackTag =
 
 export type ActivePlaylistTrack = PlaylistTrack & { rating: TrackRating };
 
-export type Tab = "submissions" | "mail" | "playlist" | "archive";
+export type Tab = "submissions" | "mail" | "playlist" | "radio" | "archive";
 
 export type MailboxAddress = {
   name: string;

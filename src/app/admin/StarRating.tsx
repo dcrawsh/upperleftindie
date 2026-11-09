@@ -9,7 +9,7 @@ function starLabel(rating: TrackRating) {
   return `${rating} ${rating === 1 ? "star" : "stars"}`;
 }
 
-/** The 1-5 star curator rating used on the playlist and the acceptance draft. */
+/** The shared 1-5 star curator rating used for playlist and radio tracks. */
 export function StarRating({
   value,
   label,

@@ -2101,7 +2101,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0490243961_10.jpg",
+    "image": "https://f4.bcbits.com/img/a2864533686_10.jpg",
     "bio": "Power Pop / Post-Rock from the PNW booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2123,9 +2123,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Diamonds of Love",
+        "title": "Anchored to Air",
         "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/diamonds-of-love/"
+        "url": "https://shayleeband.bandcamp.com/track/anchored-to-air/"
       }
     ]
   },
@@ -2670,12 +2670,17 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Meredith Smith (Live from the Sunset Tavern) Meredith Smith",
+        "type": "album",
+        "url": "https://meredithsmith.bandcamp.com/album/meredith-smith-live-from-the-sunset-tavern"
+      },
+      {
         "title": "More Than a Dream (Single) Meredith Smith",
         "type": "album",
         "url": "https://meredithsmith.bandcamp.com/album/more-than-a-dream-single"
       },
       {
-        "title": "More than a Dream (Full EP)",
+        "title": "More than a Dream (Full EP) Meredith Smith",
         "type": "album",
         "url": "https://meredithsmith.bandcamp.com/album/more-than-a-dream-full-ep-2"
       },
@@ -2854,6 +2859,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "The Storyteller's Son",
+        "type": "track",
+        "url": "https://mothershout.bandcamp.com/track/the-storytellers-son"
+      },
+      {
         "title": "Tigers In The Dark",
         "type": "track",
         "url": "https://mothershout.bandcamp.com/track/tigers-in-the-dark"
@@ -2877,11 +2887,6 @@ export const artists: Artist[] = [
         "title": "Grow Up To Be Cowboys",
         "type": "track",
         "url": "https://mothershout.bandcamp.com/track/grow-up-to-be-cowboys"
-      },
-      {
-        "title": "Gravity",
-        "type": "track",
-        "url": "https://mothershout.bandcamp.com/track/gravity"
       }
     ]
   },
@@ -3036,7 +3041,7 @@ export const artists: Artist[] = [
     "name": "Still Depths",
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://stilldepths.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a1341621600_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0661500732_10.jpg",
     "bio": "www.instagram.com/stilldepths/ vancouver bc",
     "submittedGenre": "Experimental",
     "tags": [
@@ -3050,9 +3055,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Like Hell!",
+        "title": "Alike and Unlike",
         "type": "album",
-        "url": "https://stilldepths.bandcamp.com/album/like-hell/"
+        "url": "https://stilldepths.bandcamp.com/album/alike-and-unlike/"
       }
     ]
   },
@@ -3883,6 +3888,58 @@ export const artists: Artist[] = [
         "title": "Social Animals",
         "type": "track",
         "url": "https://thetimelytragedy.bandcamp.com/track/social-animals"
+      }
+    ]
+  },
+  {
+    "name": "Echo Ravine",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://echoravine.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0036944601_10.jpg",
+    "bio": "Echo Ravine is: Emily Koo: Bass, Vocals Sean Foe: Guitar Tim Meinig: Drums Chris Early: Keys",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://echoravine.bandcamp.com/"
+      },
+      {
+        "label": "echoravine.com",
+        "url": "http://echoravine.com"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/echoravine/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Feign",
+        "type": "album",
+        "url": "https://echoravine.bandcamp.com/album/feign"
+      },
+      {
+        "title": "Echo Ravine",
+        "type": "album",
+        "url": "https://echoravine.bandcamp.com/album/echo-ravine"
+      },
+      {
+        "title": "Urges",
+        "type": "track",
+        "url": "https://echoravine.bandcamp.com/track/urges"
+      },
+      {
+        "title": "Dweller",
+        "type": "album",
+        "url": "https://echoravine.bandcamp.com/album/dweller"
+      },
+      {
+        "title": "Silver Bells",
+        "type": "track",
+        "url": "https://echoravine.bandcamp.com/track/silver-bells"
       }
     ]
   }

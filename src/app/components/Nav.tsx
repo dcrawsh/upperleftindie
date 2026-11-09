@@ -20,6 +20,7 @@ import { INSTAGRAM_URL } from "@/lib/site";
  */
 const navLinks = [
   { href: "/", label: "Listen", section: ["/", "/archive"] },
+  { href: "/radio", label: "Radio", section: ["/radio"] },
   { href: "/artists", label: "Artists", section: ["/artists"] },
   { href: "/shows", label: "Shows", section: ["/shows"] },
   { href: "/about", label: "About", section: ["/about"] },
@@ -28,7 +29,11 @@ const navLinks = [
 const drawerLinks = [
   ...navLinks,
   { href: "/archive", label: "Archive", section: ["/archive"] },
-  { href: "/support-the-project", label: "Support the project", section: ["/support-the-project"] },
+  {
+    href: "/support-the-project",
+    label: "Support the project",
+    section: ["/support-the-project"],
+  },
   { href: "/contact", label: "Contact", section: ["/contact"] },
 ];
 
@@ -95,7 +100,9 @@ export default function Nav() {
         return;
       }
 
-      const focusable = Array.from(drawer.querySelectorAll<HTMLElement>(FOCUSABLE));
+      const focusable = Array.from(
+        drawer.querySelectorAll<HTMLElement>(FOCUSABLE)
+      );
 
       if (focusable.length === 0) {
         return;
@@ -136,7 +143,11 @@ export default function Nav() {
     const isSection = link.section.includes(pathname ?? "");
 
     return {
-      "aria-current": isExact ? ("page" as const) : isSection ? ("true" as const) : undefined,
+      "aria-current": isExact
+        ? ("page" as const)
+        : isSection
+          ? ("true" as const)
+          : undefined,
       isSection,
     };
   };
@@ -227,7 +238,10 @@ export default function Nav() {
                   </button>
                 </div>
 
-                <nav aria-label="Site" className="flex-1 overflow-y-auto px-5 py-4">
+                <nav
+                  aria-label="Site"
+                  className="flex-1 overflow-y-auto px-5 py-4"
+                >
                   <ul className="flex flex-col">
                     {drawerLinks.map((link) => {
                       const state = linkState(link);
@@ -252,7 +266,12 @@ export default function Nav() {
                 </nav>
 
                 <div className="flex flex-col gap-3 border-t border-subtle p-5">
-                  <ButtonLink href="/submit" emphasis="primary" size="md" fullWidth>
+                  <ButtonLink
+                    href="/submit"
+                    emphasis="primary"
+                    size="md"
+                    fullWidth
+                  >
                     Submit music
                   </ButtonLink>
                   <a
