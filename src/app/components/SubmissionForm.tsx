@@ -146,12 +146,13 @@ export default function SubmissionForm() {
   const summaryRef = useRef<HTMLDivElement>(null);
 
   function playRickRoll() {
-  const audio = new Audio("/audio/rickroll.mp3");
+    const audio = new Audio("/audio/rickroll.mp3");
 
-  audio.play()
-    .then(() => setRickRollPunished(true))
-    .catch(() => setRickRollPunished(true));
-}
+    audio
+      .play()
+      .then(() => setRickRollPunished(false))
+      .catch(() => setRickRollPunished(true));
+  }
 
   const getErrorMessage = async (response: Response, fallback: string) => {
     try {
@@ -311,8 +312,6 @@ ${formData.notes || "Not provided"}`;
             mimeType: audioFile.type,
           }),
         });
-
-        console.log("Prepare response:", prepareResponse);
 
         if (!prepareResponse.ok) {
           throw new Error(
@@ -484,7 +483,8 @@ ${formData.notes || "Not provided"}`;
       setFieldErrors({});
     } catch (error) {
       console.error(error);
-      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
       if (errorMessage === "Rickrolls are not allowed.") {
         setRickRollPunished(true);
         playRickRoll();
@@ -628,15 +628,15 @@ ${formData.notes || "Not provided"}`;
               </ul>
             )}
             {rickRollPunished && (
-           <Button
-  type="button"
-  emphasis="secondary"
-  size="sm"
-  className="self-start"
-  onClick={playRickRoll}
->
-  Click to Continue
-</Button>
+              <Button
+                type="button"
+                emphasis="secondary"
+                size="sm"
+                className="self-start"
+                onClick={playRickRoll}
+              >
+                Click to Continue
+              </Button>
             )}
           </div>
         ) : null}
@@ -924,7 +924,9 @@ ${formData.notes || "Not provided"}`;
           emphasis="primary"
           size="lg"
           fullWidth
-          disabled={isSubmitting || emailServiceTemporarilyDown || rickRollPunished}
+          disabled={
+            isSubmitting || emailServiceTemporarilyDown || rickRollPunished
+          }
         >
           {isSubmitting ? "Sending…" : "Send my track"}
         </Button>
