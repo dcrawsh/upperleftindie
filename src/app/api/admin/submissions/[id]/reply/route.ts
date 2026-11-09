@@ -1,16 +1,10 @@
 import { NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
-import {
-  AdminAuthError,
-  assertAdminRequest,
-} from "@/lib/admin-auth";
+import { AdminAuthError, assertAdminRequest } from "@/lib/admin-auth";
 import { addRatedTrackToActivePlaylist } from "@/lib/active-playlist";
 import { completeAiReplyDraft } from "@/lib/ai-reply-drafts";
 import { EmailServiceError, sendSiteEmail } from "@/lib/email";
-import {
-  activePlaylistHasTrack,
-  getSpotifyTrackFromUrl,
-} from "@/lib/spotify";
+import { activePlaylistHasTrack, getSpotifyTrackFromUrl } from "@/lib/spotify";
 import {
   getSubmission,
   SupabaseRequestError,
@@ -18,7 +12,12 @@ import {
   type Submission,
 } from "@/lib/submissions";
 import {
+  assertSubmissionAudioExists,
+  SubmissionAudioError,
+} from "@/lib/submission-audio";
+import {
   DEFAULT_TRACK_RATING,
+  getRadioTrackRatingKey,
   isTrackRating,
   setTrackRating,
 } from "@/lib/track-ratings";
@@ -73,18 +72,34 @@ export async function POST(
     }
 
     // Sending the acceptance is what accepts the submission: the email goes
-    // out first, then the track joins the playlist. Replies to rejected or
-    // archived rows are plain correspondence and never add anything.
+    // out first, then every supplied destination is published. Replies to
+    // rejected or archived rows are plain correspondence and publish nothing.
     const isAcceptance = submission.status === "pending";
-    const track = isAcceptance
-      ? getSpotifyTrackFromUrl(submission.song_link)
-      : null;
+    const track =
+      isAcceptance && submission.song_link
+        ? getSpotifyTrackFromUrl(submission.song_link)
+        : null;
+    const hasRadioAudio = Boolean(
+      isAcceptance &&
+      submission.audio_storage_path &&
+      (submission.audio_upload_status === "uploaded" ||
+        submission.audio_upload_status === "published")
+    );
 
     // Checked before the email leaves, so an unusable link never produces an
     // acceptance the playlist cannot honour.
-    if (isAcceptance && !track) {
+    if (isAcceptance && submission.song_link && !track) {
       return Response.json(
         { error: "Submission song link is not a Spotify track URL." },
+        { status: 400 }
+      );
+    }
+
+    if (isAcceptance && !track && !hasRadioAudio) {
+      return Response.json(
+        {
+          error: "Submission does not have a publishable Spotify track or MP3.",
+        },
         { status: 400 }
       );
     }
@@ -98,6 +113,7 @@ export async function POST(
 
     let playlistAdded: boolean | null = null;
     let ratingSaved: boolean | null = null;
+    let radioPublished: boolean | null = null;
 
     if (track) {
       // Stored before the insert so the Add to Playlist repair path places the
@@ -123,15 +139,56 @@ export async function POST(
       }
     }
 
+    if (hasRadioAudio && !track) {
+      try {
+        await setTrackRating(
+          getRadioTrackRatingKey(submission.id),
+          trackRating
+        );
+        ratingSaved = true;
+      } catch (error) {
+        console.error("accepted radio track rating could not be saved", error);
+        ratingSaved = false;
+      }
+    }
+
+    if (hasRadioAudio && submission.audio_storage_path) {
+      try {
+        await assertSubmissionAudioExists(submission.audio_storage_path);
+        radioPublished = true;
+      } catch (error) {
+        console.error("accepted MP3 could not be published to radio", error);
+        radioPublished = false;
+      }
+    }
+
+    const publicationComplete =
+      (!track || playlistAdded === true) &&
+      (!hasRadioAudio || radioPublished === true);
+
     const updates = {
-      // Only a track that actually reached the playlist graduates, so a failed
-      // add leaves the row in the queue with a visible repair path.
-      ...(track && playlistAdded
+      // Every supplied destination must succeed before the row graduates, so
+      // a partial publication stays in the queue with visible repair actions.
+      ...(isAcceptance && publicationComplete
         ? {
             status: "added" as const,
+          }
+        : {}),
+      ...(track && playlistAdded
+        ? {
             spotify_track_id: track.id,
             spotify_track_uri: track.uri,
             active_playlist_added_at: new Date().toISOString(),
+          }
+        : {}),
+      ...(hasRadioAudio && radioPublished
+        ? {
+            audio_upload_status: "published" as const,
+            audio_expires_at: null,
+            audio_deleted_at: null,
+            radio_published_at:
+              submission.radio_published_at ?? new Date().toISOString(),
+            radio_removed_at: null,
           }
         : {}),
       replied_at: new Date().toISOString(),
@@ -150,8 +207,9 @@ export async function POST(
       submissionSaved = false;
     }
 
-    if (playlistAdded) {
+    if (playlistAdded || radioPublished) {
       revalidatePath("/");
+      revalidatePath("/radio");
     }
 
     let trainingSaved: boolean | null = null;
@@ -178,6 +236,7 @@ export async function POST(
       submission: updatedSubmission,
       trainingSaved,
       playlistAdded,
+      radioPublished,
       ratingSaved,
       submissionSaved,
     });
@@ -189,13 +248,14 @@ export async function POST(
     }
 
     if (error instanceof SupabaseRequestError) {
-      return Response.json(
-        { error: error.message },
-        { status: error.status }
-      );
+      return Response.json({ error: error.message }, { status: error.status });
     }
 
     if (error instanceof EmailServiceError) {
+      return Response.json({ error: error.message }, { status: error.status });
+    }
+
+    if (error instanceof SubmissionAudioError) {
       return Response.json({ error: error.message }, { status: error.status });
     }
 

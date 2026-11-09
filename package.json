@@ -8,6 +8,7 @@
     "dev": "next dev",
     "generate:bandcamp-artists": "node scripts/update-bandcamp-artists.mjs",
     "scrape:shows": "node scripts/scrape-portland-shows.mjs",
+    "cleanup:submission-audio": "node scripts/cleanup-submission-audio.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

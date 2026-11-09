@@ -1,0 +1,1 @@
+export const MAX_ARTIST_BIO_CHARACTERS = 600;

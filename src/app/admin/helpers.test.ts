@@ -4,6 +4,7 @@ import {
   getDefaultReplySubject,
   getErrorMessage,
   getSpotifyAppTrackUrl,
+  formatFileSize,
   moveTrackInList,
 } from "./helpers";
 
@@ -32,6 +33,17 @@ describe("getSpotifyAppTrackUrl", () => {
       "https://example.com/track/1"
     );
     expect(getSpotifyAppTrackUrl("not a url")).toBe("not a url");
+  });
+});
+
+describe("formatFileSize", () => {
+  it("formats stored audio bytes", () => {
+    expect(formatFileSize(5.25 * 1024 * 1024)).toBe("5.3 MB");
+    expect(formatFileSize(12 * 1024 * 1024)).toBe("12 MB");
+  });
+
+  it("handles missing size metadata", () => {
+    expect(formatFileSize(null)).toBe("Size unknown");
   });
 });
 

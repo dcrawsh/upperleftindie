@@ -5,7 +5,7 @@ import { REGION_SCOPE } from "@/lib/site";
 export const metadata = {
   title: "Submit Northwest Music",
   description:
-    "Submit music from a local Northwest independent artist for Upper Left Indie playlist consideration.",
+    "Submit music from a local Northwest independent artist for playlist or Upper Left Radio consideration.",
   alternates: {
     canonical: "/submit",
   },
@@ -19,9 +19,9 @@ export const metadata = {
 
 const steps = [
   "I listen to everything. It is one person, so it can take a couple of weeks.",
-  "If it fits, the track goes on the active playlist.",
+  "If it fits, a Spotify track goes on the active playlist and an approved MP3 joins Upper Left Radio.",
   "If you gave permission, an artist page goes up with links to your Bandcamp.",
-  "After a run on the active playlist, the song moves to the archive and stays findable.",
+  "Spotify tracks later move to the archive; approved radio tracks stay in rotation until removed.",
 ];
 
 export default function SubmitPage() {
@@ -37,8 +37,8 @@ export default function SubmitPage() {
           <div className="flex flex-col gap-2 rounded-field border-[1.5px] border-subtle bg-surface px-5 py-4">
             <h2 className="type-heading-s text-primary">Who can submit</h2>
             <p className="type-body-s text-secondary">
-              Artists based in {REGION_SCOPE}. Any genre. Self-released is welcome
-              and common.
+              Artists based in {REGION_SCOPE}. Any genre. Self-released is
+              welcome and common.
             </p>
           </div>
 
@@ -60,8 +60,8 @@ export default function SubmitPage() {
           </div>
 
           <p className="type-body-s text-tertiary">
-            Because of volume I can’t reply to every submission — but nothing gets
-            deleted unheard.
+            Because of volume I can’t reply to every submission — but nothing
+            gets deleted unheard.
           </p>
         </div>
 

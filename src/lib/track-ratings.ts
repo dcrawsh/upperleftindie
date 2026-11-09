@@ -25,6 +25,17 @@ export function isTrackRating(value: unknown): value is TrackRating {
   );
 }
 
+/**
+ * Spotify-backed radio tracks share their playlist rating. MP3-only tracks use
+ * a namespaced key in the same private ratings table.
+ */
+export function getRadioTrackRatingKey(
+  submissionId: string,
+  spotifyTrackUri?: string | null
+) {
+  return spotifyTrackUri || `radio:submission:${submissionId}`;
+}
+
 async function trackRatingRequest<T>(
   path: string,
   init: RequestInit & { prefer?: string } = {}

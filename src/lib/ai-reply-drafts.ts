@@ -17,11 +17,18 @@ export type AiReplyExample = {
   message: string;
 };
 
+export type AiReplyNegativeExample = AiReplyExample & {
+  feedbackTags: string[];
+};
+
 type AiReplyDraftRow = {
   id: string;
   input_snapshot: AiReplyInputSnapshot;
   final_subject: string | null;
   final_message: string | null;
+  generated_subject?: string;
+  generated_message?: string;
+  feedback_tags?: string[];
 };
 
 export class AiReplyDraftStoreError extends Error {
@@ -46,7 +53,8 @@ async function aiReplyDraftRequest<T>(
   return supabaseRequest<T>(path, {
     ...init,
     mapError: (status, details) => {
-      const missingTable = status === 404 || details.includes("ai_reply_drafts");
+      const missingTable =
+        status === 404 || details.includes("ai_reply_drafts");
 
       return new AiReplyDraftStoreError(
         missingTable
@@ -58,7 +66,7 @@ async function aiReplyDraftRequest<T>(
   });
 }
 
-export async function listPositiveAiReplyExamples(limit = 2) {
+export async function listPositiveAiReplyExamples(limit = 3) {
   const rows = await aiReplyDraftRequest<AiReplyDraftRow[]>(
     `ai_reply_drafts?select=input_snapshot,final_subject,final_message&status=eq.sent&rating=eq.1&final_message=not.is.null&order=sent_at.desc&limit=${limit}`
   );
@@ -76,6 +84,24 @@ export async function listPositiveAiReplyExamples(limit = 2) {
       },
     ];
   });
+}
+
+export async function getLatestNegativeAiReplyExample() {
+  const rows = await aiReplyDraftRequest<AiReplyDraftRow[]>(
+    "ai_reply_drafts?select=input_snapshot,generated_subject,generated_message,feedback_tags&rating=eq.-1&order=updated_at.desc&limit=1"
+  );
+  const row = rows[0];
+
+  if (!row?.generated_subject || !row.generated_message) {
+    return null;
+  }
+
+  return {
+    input: row.input_snapshot,
+    subject: row.generated_subject,
+    message: row.generated_message,
+    feedbackTags: row.feedback_tags ?? [],
+  } satisfies AiReplyNegativeExample;
 }
 
 export async function createAiReplyDraft(values: {

@@ -18,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${SITE_URL}/radio`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       // Present in the footer and on the homepage, but previously missing from
       // the sitemap entirely.
       url: `${SITE_URL}/archive`,

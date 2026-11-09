@@ -1,0 +1,50 @@
+name: Clean up submission audio
+
+on:
+  schedule:
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+    inputs:
+      delete:
+        description: Delete eligible files instead of running a dry run
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cleanup-submission-audio
+  cancel-in-progress: false
+
+jobs:
+  cleanup-submission-audio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Preview cleanup
+        if: github.event_name == 'workflow_dispatch' && inputs.delete != true
+        run: yarn cleanup:submission-audio
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Apply cleanup
+        if: github.event_name == 'schedule' || inputs.delete == true
+        run: yarn cleanup:submission-audio --delete
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
