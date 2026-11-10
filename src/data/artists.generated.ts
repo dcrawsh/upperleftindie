@@ -2098,11 +2098,11 @@ export const artists: Artist[] = [
     ]
   },
   {
-    "name": "shaylee",
+    "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2864533686_10.jpg",
-    "bio": "post power pop from pdx booking: shayleeband@gmail.com",
+    "bio": "post-power pop from pdx booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
       "Post-Rock"
@@ -2973,7 +2973,7 @@ export const artists: Artist[] = [
     "name": "Sara Carbone",
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://saracarbonemusic.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a3826572006_10.jpg",
+    "image": "https://f4.bcbits.com/img/a3736028086_10.jpg",
     "bio": "hi thanks for being here",
     "submittedGenre": "Indie Folk",
     "tags": [
@@ -2991,9 +2991,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "i want to be a farm cat v.2",
+        "title": "Intimate",
         "type": "track",
-        "url": "https://saracarbonemusic.bandcamp.com/track/i-want-to-be-a-farm-cat-v-2/"
+        "url": "https://saracarbonemusic.bandcamp.com/track/intimate/"
       }
     ]
   },
