@@ -948,6 +948,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "practice tape (Andy's tape)",
+        "type": "album",
+        "url": "https://cedarlange.bandcamp.com/album/practice-tape-andys-tape"
+      },
+      {
         "title": "Helvetia covers Helvetia",
         "type": "album",
         "url": "https://cedarlange.bandcamp.com/album/helvetia-covers"
@@ -2101,8 +2106,8 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a2864533686_10.jpg",
-    "bio": "post-power pop from pdx booking: shayleeband@gmail.com",
+    "image": "https://f4.bcbits.com/img/a2079564498_10.jpg",
+    "bio": "pdx post-power pop booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
       "Post-Rock"
@@ -2123,18 +2128,18 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Anchored to Air",
+        "title": "Blessed & Notarized",
         "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/anchored-to-air/"
+        "url": "https://shayleeband.bandcamp.com/track/blessed-notarized/"
       }
     ]
   },
   {
-    "name": "Uncanny Valley Girls",
-    "location": "Portland, Oregon",
+    "name": "uncannyvalleygirlspdx",
+    "location": "",
     "bandcampUrl": "https://uncannyvalleygirlspdx.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0045085164_10.jpg",
-    "bio": "Portland Oregon スケバン rocking roll from Cap Hill in Sea Apple, Washington. Cadence Welles (She/Her) - Vocals, guitar Coree Hogan (They/Them) - Lead guitar May al-Semsem (She/Her) - Bass Ryan Elizabeth Cripps (She/Her) - Drums ... more",
+    "image": "",
+    "bio": "",
     "submittedGenre": "Punk",
     "tags": [
       "Punk"
@@ -2143,28 +2148,9 @@ export const artists: Artist[] = [
       {
         "label": "Bandcamp",
         "url": "https://uncannyvalleygirlspdx.bandcamp.com/"
-      },
-      {
-        "label": "Twitter",
-        "url": "https://twitter.com/uncannyvgirlsOR"
-      },
-      {
-        "label": "Instagram",
-        "url": "https://www.instagram.com/uncannyvalleygirlspdx/"
       }
     ],
-    "releases": [
-      {
-        "title": "Hear Me, Earth Astronaut",
-        "type": "album",
-        "url": "https://uncannyvalleygirlspdx.bandcamp.com/album/hear-me-earth-astronaut"
-      },
-      {
-        "title": "Will to Resign",
-        "type": "track",
-        "url": "https://uncannyvalleygirlspdx.bandcamp.com/track/will-to-resign-3"
-      }
-    ]
+    "releases": []
   },
   {
     "name": "GVTH DVDDY",
@@ -4001,6 +3987,30 @@ export const artists: Artist[] = [
         "title": "Tender Revolutions Dao Strom",
         "type": "album",
         "url": "https://antiquatedfuture.bandcamp.com/album/tender-revolutions"
+      }
+    ]
+  },
+  {
+    "name": "Subvert Savant",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://subvertsavant.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0899874048_10.jpg",
+    "bio": "Dreamscape messages. Bass loops grind and groove. Heavy tone, sparkle and decay.",
+    "submittedGenre": "Psych / Psychedelic",
+    "tags": [
+      "Psych / Psychedelic"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://subvertsavant.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "The New Age",
+        "type": "album",
+        "url": "https://subvertsavant.bandcamp.com/album/the-new-age/"
       }
     ]
   }
