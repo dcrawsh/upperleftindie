@@ -4013,5 +4013,29 @@ export const artists: Artist[] = [
         "url": "https://subvertsavant.bandcamp.com/album/the-new-age/"
       }
     ]
+  },
+  {
+    "name": "Charmed, I'm Sure",
+    "location": "Seattle, Washington",
+    "bandcampUrl": "https://charmedimsureseattle.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a1580649287_10.jpg",
+    "bio": "shoegazey gothy sad gals",
+    "submittedGenre": "Shoegaze / Dream Pop",
+    "tags": [
+      "Shoegaze / Dream Pop"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://charmedimsureseattle.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "when you speak",
+        "type": "track",
+        "url": "https://charmedimsureseattle.bandcamp.com/track/when-you-speak/"
+      }
+    ]
   }
 ];
