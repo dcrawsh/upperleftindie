@@ -2107,7 +2107,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a2079564498_10.jpg",
-    "bio": "pdx post-power pop booking: shayleeband@gmail.com",
+    "bio": "like if elliott smith and pink floyd fucked and had a gay baby booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
       "Post-Rock"
@@ -2643,7 +2643,7 @@ export const artists: Artist[] = [
     "location": "Seattle, Washington",
     "bandcampUrl": "https://meredithsmith.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0048360792_10.jpg",
-    "bio": "Female-fronted twee artist from Seattle, WA. Full band shows now in the GSA. One half of Twilight Diners.",
+    "bio": "Seattle-based twee helmed by Meredith Smith. Full band shows in PNW. See also Twilight Diners.",
     "submittedGenre": "Indie Rock",
     "tags": [
       "Indie Rock"
@@ -3028,7 +3028,7 @@ export const artists: Artist[] = [
     "location": "Vancouver, British Columbia",
     "bandcampUrl": "https://stilldepths.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a0661500732_10.jpg",
-    "bio": "www.instagram.com/stilldepths/ vancouver bc",
+    "bio": "Still Depths is a Vancouver-based trio formed in Calgary in 2019, crafting a volatile blend of noise rock, post-punk, math rock, and experimental electronics.",
     "submittedGenre": "Experimental",
     "tags": [
       "Experimental"
@@ -4035,6 +4035,64 @@ export const artists: Artist[] = [
         "title": "when you speak",
         "type": "track",
         "url": "https://charmedimsureseattle.bandcamp.com/track/when-you-speak/"
+      }
+    ]
+  },
+  {
+    "name": "westhelion",
+    "location": "",
+    "bandcampUrl": "https://westhelion.bandcamp.com/",
+    "image": "",
+    "bio": "",
+    "submittedGenre": "Other",
+    "tags": [
+      "Other"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://westhelion.bandcamp.com/"
+      }
+    ],
+    "releases": []
+  },
+  {
+    "name": "Zerofold",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://zerofold.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0839888634_10.jpg",
+    "bio": "post-genre instrumental music from portland oregon usa",
+    "submittedGenre": "Post-Rock",
+    "tags": [
+      "Post-Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://zerofold.bandcamp.com/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/channel/UChMGY6Crp2INKvJl3kIXNog"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/zerofold.exe/"
+      },
+      {
+        "label": "tiktok.com",
+        "url": "https://www.tiktok.com/@zerofold.exe"
+      },
+      {
+        "label": "SoundCloud",
+        "url": "https://soundcloud.com/zerofold"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Zerofold EP",
+        "type": "album",
+        "url": "https://zerofold.bandcamp.com/album/zerofold-ep/"
       }
     ]
   }
