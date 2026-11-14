@@ -1310,6 +1310,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "From the Tooth to the Cross CRNSWT",
+        "type": "track",
+        "url": "https://etfondle.bandcamp.com/track/from-the-tooth-to-the-cross-2"
+      },
+      {
         "title": "Cow Palace E.T. Fondle",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/cow-palace-2"
@@ -1333,11 +1338,6 @@ export const artists: Artist[] = [
         "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
-      },
-      {
-        "title": "Our Dear Old Wake Forest E.T. Fondle",
-        "type": "album",
-        "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
       }
     ]
   },
