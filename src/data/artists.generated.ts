@@ -53,9 +53,9 @@ export const artists: Artist[] = [
     "bandcampUrl": "https://badquitters.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/0042771447_10.jpg",
     "bio": "",
-    "submittedGenre": "Indie Rock",
+    "submittedGenre": "Post-punk",
     "tags": [
-      "Indie Rock"
+      "Post-punk"
     ],
     "links": [
       {
@@ -4093,6 +4093,42 @@ export const artists: Artist[] = [
         "title": "Zerofold EP",
         "type": "album",
         "url": "https://zerofold.bandcamp.com/album/zerofold-ep/"
+      }
+    ]
+  },
+  {
+    "name": "Woolly Sweaters",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://woollysweaters.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/a0190078303_10.jpg",
+    "bio": "from the weird city, Woolly Sweaters encases stories into a neat little basket, full of love & loss, isolation or an appropriate amount of medication. just a quauple of a band. ya know?",
+    "submittedGenre": "Indie Rock",
+    "tags": [
+      "Indie Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://woollysweaters.bandcamp.com/"
+      },
+      {
+        "label": "bsky.app",
+        "url": "https://bsky.app/profile/woollysweaters.bsky.social"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/woollysweatersmusic/"
+      },
+      {
+        "label": "tiktok.com",
+        "url": "https://www.tiktok.com/@woollysweatersmus"
+      }
+    ],
+    "releases": [
+      {
+        "title": "I Didn't Know It Was Your Birthday",
+        "type": "track",
+        "url": "https://woollysweaters.bandcamp.com/track/i-didnt-know-it-was-your-birthday-2/"
       }
     ]
   }
