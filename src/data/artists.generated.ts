@@ -1296,7 +1296,7 @@ export const artists: Artist[] = [
     "name": "Payne Fulcher",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://etfondle.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/0048340463_10.jpg",
+    "image": "https://f4.bcbits.com/img/blank.gif",
     "bio": "#noloudmusic",
     "submittedGenre": "Singer-songwriter",
     "tags": [
@@ -1309,11 +1309,6 @@ export const artists: Artist[] = [
       }
     ],
     "releases": [
-      {
-        "title": "From the Tooth to the Cross CRNSWT",
-        "type": "track",
-        "url": "https://etfondle.bandcamp.com/track/from-the-tooth-to-the-cross-2"
-      },
       {
         "title": "Cow Palace E.T. Fondle",
         "type": "album",
@@ -1338,6 +1333,11 @@ export const artists: Artist[] = [
         "title": "I Will Take You to the Valley Where the Lily Does Not Toil and the Whirlwind Never Reaps",
         "type": "album",
         "url": "https://etfondle.bandcamp.com/album/i-will-take-you-to-the-valley-where-the-lily-does-not-toil-and-the-whirlwind-never-reaps"
+      },
+      {
+        "title": "Our Dear Old Wake Forest E.T. Fondle",
+        "type": "album",
+        "url": "https://etfondle.bandcamp.com/album/our-dear-old-wake-forest"
       }
     ]
   },
@@ -2106,7 +2106,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a2079564498_10.jpg",
+    "image": "https://f4.bcbits.com/img/a0393913336_10.jpg",
     "bio": "like if elliott smith and pink floyd fucked and had a gay baby booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2128,9 +2128,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "Blessed & Notarized",
+        "title": "One More Kiss",
         "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/blessed-notarized/"
+        "url": "https://shayleeband.bandcamp.com/track/one-more-kiss/"
       }
     ]
   },
@@ -4129,6 +4129,59 @@ export const artists: Artist[] = [
         "title": "I Didn't Know It Was Your Birthday",
         "type": "track",
         "url": "https://woollysweaters.bandcamp.com/track/i-didnt-know-it-was-your-birthday-2/"
+      }
+    ]
+  },
+  {
+    "name": "Jay Alm",
+    "location": "Missoula, montana",
+    "bandcampUrl": "https://jayalmmusic.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0019437990_10.jpg",
+    "bio": "Jay Alm plays a scathing, soulful blend of Acoustic Alternative Psychedelia and Rootsy, Lyrical Meanderings. Expect 6 and 12 string guitar, the occasional mandolin, a capella audio poetry, and intimate scratch-born vocals. Based out of Jackson, Wyoming, Jay radiates a poignant, playful take in his quasi-alternative folk-isms and a head-in-the-clouds-approach to biting acoustic rock. ... more",
+    "submittedGenre": "Alternative",
+    "tags": [
+      "Alternative"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://jayalmmusic.bandcamp.com/"
+      },
+      {
+        "label": "jayalmmusic.com",
+        "url": "http://www.jayalmmusic.com"
+      }
+    ],
+    "releases": [
+      {
+        "title": "To My Friends Through My Pens",
+        "type": "album",
+        "url": "https://jayalmmusic.bandcamp.com/album/to-my-friends-through-my-pens"
+      },
+      {
+        "title": "Tides Of You",
+        "type": "track",
+        "url": "https://jayalmmusic.bandcamp.com/track/tides-of-you-2"
+      },
+      {
+        "title": "In The Magic Of The Mud",
+        "type": "album",
+        "url": "https://jayalmmusic.bandcamp.com/album/in-the-magic-of-the-mud"
+      },
+      {
+        "title": "Luna's Appendix",
+        "type": "album",
+        "url": "https://jayalmmusic.bandcamp.com/album/lunas-appendix"
+      },
+      {
+        "title": "To The Moon In Your Skull",
+        "type": "album",
+        "url": "https://jayalmmusic.bandcamp.com/album/to-the-moon-in-your-skull"
+      },
+      {
+        "title": "All The Birds Get Dizzy",
+        "type": "album",
+        "url": "https://jayalmmusic.bandcamp.com/album/all-the-birds-get-dizzy"
       }
     ]
   }
