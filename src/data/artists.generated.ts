@@ -1772,7 +1772,7 @@ export const artists: Artist[] = [
     "name": "fields of silver",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://fieldsofsilver.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a4172428797_10.jpg",
+    "image": "https://f4.bcbits.com/img/a4280926581_10.jpg",
     "bio": "grunge-y folk from the PNW",
     "submittedGenre": "Folk",
     "tags": [
@@ -1794,9 +1794,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "delicate flowers & bloody teeth",
+        "title": "delicate flowers & bloody demos",
         "type": "album",
-        "url": "https://fieldsofsilver.bandcamp.com/album/delicate-flowers-bloody-teeth/"
+        "url": "https://fieldsofsilver.bandcamp.com/album/delicate-flowers-bloody-demos/"
       }
     ]
   },
@@ -4182,6 +4182,30 @@ export const artists: Artist[] = [
         "title": "All The Birds Get Dizzy",
         "type": "album",
         "url": "https://jayalmmusic.bandcamp.com/album/all-the-birds-get-dizzy"
+      }
+    ]
+  },
+  {
+    "name": "Cory Burnsed",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://coryburnsed.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/blank.gif",
+    "bio": "1 track album",
+    "submittedGenre": "Garage Rock",
+    "tags": [
+      "Garage Rock"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://coryburnsed.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "Acoustically Retarded",
+        "type": "album",
+        "url": "https://coryburnsed.bandcamp.com/album/acoustically-retarded/"
       }
     ]
   }
