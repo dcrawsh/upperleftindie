@@ -2107,7 +2107,7 @@ export const artists: Artist[] = [
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
     "image": "https://f4.bcbits.com/img/a0393913336_10.jpg",
-    "bio": "like if elliott smith and pink floyd fucked and had a gay baby booking: shayleeband@gmail.com",
+    "bio": "elle archer's music is like if elliott smith and pink floyd fucked and had a gay baby booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
       "Post-Rock"
@@ -4206,6 +4206,45 @@ export const artists: Artist[] = [
         "title": "Acoustically Retarded",
         "type": "album",
         "url": "https://coryburnsed.bandcamp.com/album/acoustically-retarded/"
+      }
+    ]
+  },
+  {
+    "name": "Charles & Ritchie",
+    "location": "Portland, Oregon",
+    "bandcampUrl": "https://charlesandritchie.bandcamp.com/",
+    "image": "https://f4.bcbits.com/img/0040633072_10.jpg",
+    "bio": "",
+    "submittedGenre": "Americana",
+    "tags": [
+      "Americana"
+    ],
+    "links": [
+      {
+        "label": "Bandcamp",
+        "url": "https://charlesandritchie.bandcamp.com/"
+      }
+    ],
+    "releases": [
+      {
+        "title": "The Magic",
+        "type": "album",
+        "url": "https://charlesandritchie.bandcamp.com/album/the-magic"
+      },
+      {
+        "title": "Slow Motion Love",
+        "type": "album",
+        "url": "https://charlesandritchie.bandcamp.com/album/slow-motion-love"
+      },
+      {
+        "title": "Western Eagle / Eulogy",
+        "type": "album",
+        "url": "https://charlesandritchie.bandcamp.com/album/western-eagle-eulogy"
+      },
+      {
+        "title": "Kill Your Darlings",
+        "type": "album",
+        "url": "https://charlesandritchie.bandcamp.com/album/kill-your-darlings"
       }
     ]
   }
