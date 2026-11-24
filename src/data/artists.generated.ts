@@ -2106,7 +2106,7 @@ export const artists: Artist[] = [
     "name": "Shaylee",
     "location": "Portland, Oregon",
     "bandcampUrl": "https://shayleeband.bandcamp.com/",
-    "image": "https://f4.bcbits.com/img/a0393913336_10.jpg",
+    "image": "https://f4.bcbits.com/img/a2326805500_10.jpg",
     "bio": "elle archer's music is like if elliott smith and pink floyd fucked and had a gay baby booking: shayleeband@gmail.com",
     "submittedGenre": "Post-Rock",
     "tags": [
@@ -2128,9 +2128,9 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
-        "title": "One More Kiss",
-        "type": "track",
-        "url": "https://shayleeband.bandcamp.com/track/one-more-kiss/"
+        "title": "Inexorable Pull / Katie's Pedals",
+        "type": "album",
+        "url": "https://shayleeband.bandcamp.com/album/inexorable-pull-katies-pedals/"
       }
     ]
   },
