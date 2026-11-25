@@ -2357,6 +2357,11 @@ export const artists: Artist[] = [
     ],
     "releases": [
       {
+        "title": "Quiet Vacation",
+        "type": "album",
+        "url": "https://timetheft.bandcamp.com/album/quiet-vacation"
+      },
+      {
         "title": "All Filler No Killer",
         "type": "album",
         "url": "https://timetheft.bandcamp.com/album/all-filler-no-killer"
