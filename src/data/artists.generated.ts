@@ -2362,11 +2362,6 @@ export const artists: Artist[] = [
         "url": "https://timetheft.bandcamp.com/album/quiet-vacation"
       },
       {
-        "title": "All Filler No Killer",
-        "type": "album",
-        "url": "https://timetheft.bandcamp.com/album/all-filler-no-killer"
-      },
-      {
         "title": "Past Couple Years",
         "type": "album",
         "url": "https://timetheft.bandcamp.com/album/past-couple-years"
